@@ -1,0 +1,6 @@
+framework module Pods_WaterDelivery {
+  umbrella header "Pods-WaterDelivery-umbrella.h"
+
+  export *
+  module * { export * }
+}

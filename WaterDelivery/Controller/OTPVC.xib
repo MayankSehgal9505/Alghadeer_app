@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OTPVC" customModule="WaterDelivery" customModuleProvider="target">
+            <connections>
+                <outlet property="submitButton" destination="mGa-m8-3sH" id="PfR-2a-pKO"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="otpTxtFldViews" destination="rBw-uA-yAO" collectionClass="NSMutableArray" id="8bE-bk-VR6"/>
+                <outletCollection property="otpTxtFldViews" destination="FON-Ff-X4u" collectionClass="NSMutableArray" id="VKe-KI-G53"/>
+                <outletCollection property="otpTxtFldViews" destination="UJH-lE-BAR" collectionClass="NSMutableArray" id="nuZ-qi-AfI"/>
+                <outletCollection property="otpTxtFldViews" destination="9Zr-MQ-gVx" collectionClass="NSMutableArray" id="i22-96-gZC"/>
+                <outletCollection property="otpTxtFldViews" destination="RyL-gW-gyj" collectionClass="NSMutableArray" id="X6S-NM-88m"/>
+                <outletCollection property="otpTxtFldViews" destination="kAT-Hi-gvR" collectionClass="NSMutableArray" id="j9A-ea-usP"/>
+                <outletCollection property="otpTxtFlds" destination="qzJ-Xa-bKr" collectionClass="NSMutableArray" id="024-GK-CTa"/>
+                <outletCollection property="otpTxtFlds" destination="5zx-Lf-ath" collectionClass="NSMutableArray" id="msJ-lN-Qdy"/>
+                <outletCollection property="otpTxtFlds" destination="X5a-os-a5a" collectionClass="NSMutableArray" id="uYm-uM-v55"/>
+                <outletCollection property="otpTxtFlds" destination="7Bu-xA-PXj" collectionClass="NSMutableArray" id="iRs-CD-FEe"/>
+                <outletCollection property="otpTxtFlds" destination="wBr-dz-Lpo" collectionClass="NSMutableArray" id="eCE-66-QGu"/>
+                <outletCollection property="otpTxtFlds" destination="gDM-XU-yQr" collectionClass="NSMutableArray" id="cDr-Hg-aWx"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login" translatesAutoresizingMaskIntoConstraints="NO" id="Hv5-cC-Oxa">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="400" id="IYH-c1-ukj"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter OTP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idt-VR-JTp">
+                    <rect key="frame" x="138.5" y="380" width="98" height="24"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter phone otp number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh0-gy-Ema">
+                    <rect key="frame" x="89.5" y="414" width="196.5" height="21"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="evh-2a-zPI">
+                    <rect key="frame" x="92.5" y="455" width="190" height="40"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wKc-OY-sh7">
+                            <rect key="frame" x="0.0" y="0.0" width="190" height="40"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBw-uA-yAO">
+                                    <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qzJ-Xa-bKr" customClass="OtpTextfield" customModule="WaterDelivery" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="w3Q-vw-SqM"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="qzJ-Xa-bKr" firstAttribute="top" secondItem="rBw-uA-yAO" secondAttribute="top" id="N1G-dq-weH"/>
+                                        <constraint firstItem="qzJ-Xa-bKr" firstAttribute="leading" secondItem="rBw-uA-yAO" secondAttribute="leading" id="Rxi-Du-SKF"/>
+                                        <constraint firstAttribute="bottom" secondItem="qzJ-Xa-bKr" secondAttribute="bottom" id="V9m-xn-2yU"/>
+                                        <constraint firstAttribute="trailing" secondItem="qzJ-Xa-bKr" secondAttribute="trailing" id="rkl-8y-uyh"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FON-Ff-X4u">
+                                    <rect key="frame" x="33" y="0.0" width="25" height="40"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5zx-Lf-ath" customClass="OtpTextfield" customModule="WaterDelivery" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="jtP-2Z-XjQ"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="5zx-Lf-ath" firstAttribute="top" secondItem="FON-Ff-X4u" secondAttribute="top" id="I6r-9p-Geh"/>
+                                        <constraint firstItem="5zx-Lf-ath" firstAttribute="leading" secondItem="FON-Ff-X4u" secondAttribute="leading" id="a7B-x1-33w"/>
+                                        <constraint firstAttribute="bottom" secondItem="5zx-Lf-ath" secondAttribute="bottom" id="n5O-Ed-ubK"/>
+                                        <constraint firstAttribute="trailing" secondItem="5zx-Lf-ath" secondAttribute="trailing" id="nJs-M9-tyb"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJH-lE-BAR">
+                                    <rect key="frame" x="66" y="0.0" width="25" height="40"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X5a-os-a5a" customClass="OtpTextfield" customModule="WaterDelivery" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="vm8-EU-wCK"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="X5a-os-a5a" secondAttribute="bottom" id="E4Z-E0-wYl"/>
+                                        <constraint firstItem="X5a-os-a5a" firstAttribute="top" secondItem="UJH-lE-BAR" secondAttribute="top" id="R8J-Ai-Z4W"/>
+                                        <constraint firstItem="X5a-os-a5a" firstAttribute="leading" secondItem="UJH-lE-BAR" secondAttribute="leading" id="Z6G-WA-Ft1"/>
+                                        <constraint firstAttribute="trailing" secondItem="X5a-os-a5a" secondAttribute="trailing" id="op9-PV-noo"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Zr-MQ-gVx">
+                                    <rect key="frame" x="99" y="0.0" width="25" height="40"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Bu-xA-PXj" customClass="OtpTextfield" customModule="WaterDelivery" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="yha-HZ-L3e"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="7Bu-xA-PXj" firstAttribute="top" secondItem="9Zr-MQ-gVx" secondAttribute="top" id="as2-pe-FPJ"/>
+                                        <constraint firstItem="7Bu-xA-PXj" firstAttribute="leading" secondItem="9Zr-MQ-gVx" secondAttribute="leading" id="dvL-Oq-Uzb"/>
+                                        <constraint firstAttribute="bottom" secondItem="7Bu-xA-PXj" secondAttribute="bottom" id="nNT-WO-qsS"/>
+                                        <constraint firstAttribute="trailing" secondItem="7Bu-xA-PXj" secondAttribute="trailing" id="rW0-11-QsP"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RyL-gW-gyj">
+                                    <rect key="frame" x="132" y="0.0" width="25" height="40"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wBr-dz-Lpo" customClass="OtpTextfield" customModule="WaterDelivery" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="E7O-U7-BbV"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="wBr-dz-Lpo" firstAttribute="top" secondItem="RyL-gW-gyj" secondAttribute="top" id="9Ba-RY-pHt"/>
+                                        <constraint firstAttribute="bottom" secondItem="wBr-dz-Lpo" secondAttribute="bottom" id="h2W-l8-thy"/>
+                                        <constraint firstAttribute="trailing" secondItem="wBr-dz-Lpo" secondAttribute="trailing" id="peI-Hz-2vv"/>
+                                        <constraint firstItem="wBr-dz-Lpo" firstAttribute="leading" secondItem="RyL-gW-gyj" secondAttribute="leading" id="qsX-sS-HVf"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAT-Hi-gvR">
+                                    <rect key="frame" x="165" y="0.0" width="25" height="40"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gDM-XU-yQr" customClass="OtpTextfield" customModule="WaterDelivery" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="TOI-wG-ElE"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="gDM-XU-yQr" firstAttribute="leading" secondItem="kAT-Hi-gvR" secondAttribute="leading" id="9Ow-r0-fbn"/>
+                                        <constraint firstAttribute="trailing" secondItem="gDM-XU-yQr" secondAttribute="trailing" id="KYE-Yo-RCn"/>
+                                        <constraint firstItem="gDM-XU-yQr" firstAttribute="top" secondItem="kAT-Hi-gvR" secondAttribute="top" id="QfU-69-JxA"/>
+                                        <constraint firstAttribute="bottom" secondItem="gDM-XU-yQr" secondAttribute="bottom" id="Yiw-wR-spG"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="wKc-OY-sh7" firstAttribute="leading" secondItem="evh-2a-zPI" secondAttribute="leading" id="CtA-tP-LWr"/>
+                        <constraint firstAttribute="width" constant="190" id="KK2-FS-Cj9"/>
+                        <constraint firstItem="wKc-OY-sh7" firstAttribute="top" secondItem="evh-2a-zPI" secondAttribute="top" id="MAf-pl-rg3"/>
+                        <constraint firstAttribute="trailing" secondItem="wKc-OY-sh7" secondAttribute="trailing" id="Mc4-Dm-Yc1"/>
+                        <constraint firstAttribute="height" constant="40" id="Oxz-W4-vhm"/>
+                        <constraint firstAttribute="bottom" secondItem="wKc-OY-sh7" secondAttribute="bottom" id="iUR-Ue-4jn"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGa-m8-3sH">
+                    <rect key="frame" x="117.5" y="515" width="140" height="50"/>
+                    <color key="backgroundColor" red="0.095193721349999996" green="0.39482504130000001" blue="0.87205499409999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="mmy-BY-6iu"/>
+                        <constraint firstAttribute="width" constant="140" id="xM7-AR-M8j"/>
+                    </constraints>
+                    <state key="normal" title="Submit"/>
+                    <connections>
+                        <action selector="submitBtnClicked:" destination="-1" eventType="touchUpInside" id="Dhp-nG-O9w"/>
+                    </connections>
+                </button>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:15 min(s)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPf-OE-TAX">
+                    <rect key="frame" x="143" y="575" width="89" height="19.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lc5-M8-GlJ">
+                    <rect key="frame" x="142" y="604.5" width="91" height="30.5"/>
+                    <state key="normal">
+                        <attributedString key="attributedTitle">
+                            <fragment content="Resend OTP">
+                                <attributes>
+                                    <color key="NSColor" red="0.1431961954" green="0.28195407989999999" blue="0.4766901731" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </state>
+                    <connections>
+                        <action selector="resendBtnClicked:" destination="-1" eventType="touchUpInside" id="UeF-pG-sFb"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="idt-VR-JTp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="3Ks-Q9-mJZ"/>
+                <constraint firstItem="Lc5-M8-GlJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ACs-3P-m9D"/>
+                <constraint firstItem="Lc5-M8-GlJ" firstAttribute="top" secondItem="JPf-OE-TAX" secondAttribute="bottom" constant="10" id="BUX-lS-PI7"/>
+                <constraint firstItem="evh-2a-zPI" firstAttribute="top" secondItem="yh0-gy-Ema" secondAttribute="bottom" constant="20" id="ETy-o2-jnc"/>
+                <constraint firstItem="yh0-gy-Ema" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="H5p-uk-j8K"/>
+                <constraint firstItem="yh0-gy-Ema" firstAttribute="top" secondItem="idt-VR-JTp" secondAttribute="bottom" constant="10" id="NiQ-z7-e4q"/>
+                <constraint firstItem="JPf-OE-TAX" firstAttribute="top" secondItem="mGa-m8-3sH" secondAttribute="bottom" constant="10" id="Rnf-ON-Jga"/>
+                <constraint firstItem="evh-2a-zPI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WEb-Ia-WvP"/>
+                <constraint firstItem="Hv5-cC-Oxa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="XLg-Gl-hRF"/>
+                <constraint firstItem="idt-VR-JTp" firstAttribute="top" secondItem="Hv5-cC-Oxa" secondAttribute="bottom" constant="-20" id="a9n-Al-Gai"/>
+                <constraint firstItem="mGa-m8-3sH" firstAttribute="top" secondItem="evh-2a-zPI" secondAttribute="bottom" constant="20" id="fLc-sw-u7v"/>
+                <constraint firstItem="mGa-m8-3sH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="j9w-N3-c1m"/>
+                <constraint firstItem="JPf-OE-TAX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="n1i-Da-U4t"/>
+                <constraint firstItem="Hv5-cC-Oxa" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="pdn-ZR-QNN"/>
+                <constraint firstItem="Hv5-cC-Oxa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rHb-1F-PeE"/>
+            </constraints>
+            <point key="canvasLocation" x="68" y="92"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="login" width="562.5" height="689.5"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

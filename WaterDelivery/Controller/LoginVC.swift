@@ -69,17 +69,18 @@ extension LoginVC {
                     }
                     return
                 }
-                print(jsonValue)
+                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     Defaults.setToken(token: jsonValue[APIField.tokenKey]?.stringValue ?? "")
                     if let dataString = jsonValue[APIField.dataKey]?.dictionary {
                         Defaults.setUserPhoneNumber(userNumber: dataString["mobile_number"]?.stringValue ?? "")
                         Defaults.setUserID(userID: dataString["id"]?.stringValue ?? "")
-                    }
-                    DispatchQueue.main.async {
-                        let obj = OTPVC.init(nibName: OTPVC.className(), bundle: nil)
-                        obj.mobile = self.phoneTextField.text!
-                        self.navigationController?.pushViewController(obj, animated: true)
+                        DispatchQueue.main.async {
+                            let obj = OTPVC.init(nibName: OTPVC.className(), bundle: nil)
+                            obj.mobile = self.phoneTextField.text!
+                            obj.otpRecieved = dataString["otp"]?.stringValue ?? ""
+                            self.navigationController?.pushViewController(obj, animated: true)
+                        }
                     }
                 }
                 else {

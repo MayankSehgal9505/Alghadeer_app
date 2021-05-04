@@ -26,6 +26,17 @@ extension UIViewController {
     func dismissHUD(isAnimated:Bool) {
         MBProgressHUD.hide(for: self.view, animated: isAnimated)
     }
+    /// Method to show alert when no internet connection
+    func showSessionExpiredAlert(){
+        let alertView = UIAlertController(title: "Session Expired", message: "Your session has been expired, logging out from app", preferredStyle: .alert)
+        let action = UIAlertAction(title: AlertField.okString, style: .default, handler: { (alert) in
+            //Sign out action
+            Defaults.resetDefaults()
+            Utility.checkIfAlreadyLogin(vc: self)
+        })
+        alertView.addAction(action)
+        self.present(alertView, animated: true, completion: nil)
+    }
     
     /// Method to show alert when no internet connection
     func showNoInternetAlert(){

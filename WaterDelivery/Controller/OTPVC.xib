@@ -51,18 +51,18 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="evh-2a-zPI">
-                    <rect key="frame" x="92.5" y="455" width="190" height="40"/>
+                    <rect key="frame" x="72.5" y="455" width="230" height="40"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wKc-OY-sh7">
-                            <rect key="frame" x="0.0" y="0.0" width="190" height="40"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wKc-OY-sh7">
+                            <rect key="frame" x="0.0" y="0.0" width="230" height="40"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBw-uA-yAO">
-                                    <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="30" height="40"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qzJ-Xa-bKr" customClass="OtpTextfield" customModule="WaterDelivery" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="w3Q-vw-SqM"/>
+                                                <constraint firstAttribute="width" constant="30" id="w3Q-vw-SqM"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -77,12 +77,12 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FON-Ff-X4u">
-                                    <rect key="frame" x="33" y="0.0" width="25" height="40"/>
+                                    <rect key="frame" x="40" y="0.0" width="30" height="40"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5zx-Lf-ath" customClass="OtpTextfield" customModule="WaterDelivery" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="jtP-2Z-XjQ"/>
+                                                <constraint firstAttribute="width" constant="30" id="jtP-2Z-XjQ"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -97,12 +97,12 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJH-lE-BAR">
-                                    <rect key="frame" x="66" y="0.0" width="25" height="40"/>
+                                    <rect key="frame" x="80" y="0.0" width="30" height="40"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X5a-os-a5a" customClass="OtpTextfield" customModule="WaterDelivery" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="vm8-EU-wCK"/>
+                                                <constraint firstAttribute="width" constant="30" id="vm8-EU-wCK"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -117,12 +117,12 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Zr-MQ-gVx">
-                                    <rect key="frame" x="99" y="0.0" width="25" height="40"/>
+                                    <rect key="frame" x="120" y="0.0" width="30" height="40"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Bu-xA-PXj" customClass="OtpTextfield" customModule="WaterDelivery" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="yha-HZ-L3e"/>
+                                                <constraint firstAttribute="width" constant="30" id="yha-HZ-L3e"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -137,12 +137,12 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RyL-gW-gyj">
-                                    <rect key="frame" x="132" y="0.0" width="25" height="40"/>
+                                    <rect key="frame" x="160" y="0.0" width="30" height="40"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wBr-dz-Lpo" customClass="OtpTextfield" customModule="WaterDelivery" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="E7O-U7-BbV"/>
+                                                <constraint firstAttribute="width" constant="30" id="E7O-U7-BbV"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -157,12 +157,12 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAT-Hi-gvR">
-                                    <rect key="frame" x="165" y="0.0" width="25" height="40"/>
+                                    <rect key="frame" x="200" y="0.0" width="30" height="40"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gDM-XU-yQr" customClass="OtpTextfield" customModule="WaterDelivery" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="TOI-wG-ElE"/>
+                                                <constraint firstAttribute="width" constant="30" id="TOI-wG-ElE"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -182,7 +182,7 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="wKc-OY-sh7" firstAttribute="leading" secondItem="evh-2a-zPI" secondAttribute="leading" id="CtA-tP-LWr"/>
-                        <constraint firstAttribute="width" constant="190" id="KK2-FS-Cj9"/>
+                        <constraint firstAttribute="width" constant="230" id="KK2-FS-Cj9"/>
                         <constraint firstItem="wKc-OY-sh7" firstAttribute="top" secondItem="evh-2a-zPI" secondAttribute="top" id="MAf-pl-rg3"/>
                         <constraint firstAttribute="trailing" secondItem="wKc-OY-sh7" secondAttribute="trailing" id="Mc4-Dm-Yc1"/>
                         <constraint firstAttribute="height" constant="40" id="Oxz-W4-vhm"/>

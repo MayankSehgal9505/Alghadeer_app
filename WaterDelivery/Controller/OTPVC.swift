@@ -27,7 +27,7 @@ class OTPVC: UIViewController {
     //MARK:- Variables
     var mobile = ""
     var otp = ""
-    
+    var otpRecieved = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -39,7 +39,7 @@ class OTPVC: UIViewController {
     }
     
     private func setupView(){
-        submitButton.isEnabled = false
+        submitButton.isEnabled = true
         self.submitButton.setCornerRadiusOfView(cornerRadiusValue: 25)
         setupTextfields()
 
@@ -59,6 +59,10 @@ class OTPVC: UIViewController {
             index != 0 ? (otpTxtFlds[index].previousTextField = otpTxtFlds[index-1]) : (otpTxtFlds[index].previousTextField = nil)
             //Adding a marker to next field for the field at index-1
             index != 0 ? (otpTxtFlds[index-1].nextTextField = otpTxtFlds[index]) : ()
+        }
+        
+        for (otpChar,textfield) in zip(otpRecieved, otpTxtFlds) {
+            textfield.text = String.init(otpChar)
         }
     }
     @IBAction func submitBtnClicked(_ sender: Any) {
@@ -149,7 +153,7 @@ extension OTPVC {
                     }
                     return
                 }
-                print(jsonValue)
+                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         let obj = CategoryVC.init(nibName: CategoryVC.className(), bundle: nil)
@@ -182,7 +186,7 @@ extension OTPVC {
                     self.dismissHUD(isAnimated: true)
                     return
                 }
-                print(jsonValue)
+                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.successKey], apiSuccess == "true" {
                     self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
                 }

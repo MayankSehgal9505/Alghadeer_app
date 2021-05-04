@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4E029235263C81CD0092C741 /* OtpTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E029234263C81CD0092C741 /* OtpTextfield.swift */; };
+		4E133925263D2BA70060597E /* CartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E133923263D2BA70060597E /* CartVC.swift */; };
+		4E133926263D2BA70060597E /* CartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E133924263D2BA70060597E /* CartVC.xib */; };
+		4E13392A263D3CB90060597E /* CartTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E133928263D3CB90060597E /* CartTVC.swift */; };
+		4E13392B263D3CB90060597E /* CartTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E133929263D3CB90060597E /* CartTVC.xib */; };
+		4E133930263D79F10060597E /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E13392F263D79F10060597E /* CartModel.swift */; };
 		4E1FEEC22639A259009010A6 /* BannerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1FEEC02639A259009010A6 /* BannerTVC.swift */; };
 		4E1FEEC32639A259009010A6 /* BannerTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E1FEEC12639A259009010A6 /* BannerTVC.xib */; };
 		4E1FEEC82639A4F4009010A6 /* ProductsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1FEEC62639A4F4009010A6 /* ProductsTVC.swift */; };
@@ -63,6 +68,11 @@
 		3AB853FAFCFFDAE95B5DA991 /* Pods-WaterDelivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterDelivery.release.xcconfig"; path = "Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery.release.xcconfig"; sourceTree = "<group>"; };
 		3EAEDCC622514D2CA4606735 /* Pods_WaterDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaterDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E029234263C81CD0092C741 /* OtpTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpTextfield.swift; sourceTree = "<group>"; };
+		4E133923263D2BA70060597E /* CartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
+		4E133924263D2BA70060597E /* CartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartVC.xib; sourceTree = "<group>"; };
+		4E133928263D3CB90060597E /* CartTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTVC.swift; sourceTree = "<group>"; };
+		4E133929263D3CB90060597E /* CartTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartTVC.xib; sourceTree = "<group>"; };
+		4E13392F263D79F10060597E /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
 		4E1FEEC02639A259009010A6 /* BannerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerTVC.swift; sourceTree = "<group>"; };
 		4E1FEEC12639A259009010A6 /* BannerTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BannerTVC.xib; sourceTree = "<group>"; };
 		4E1FEEC62639A4F4009010A6 /* ProductsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTVC.swift; sourceTree = "<group>"; };
@@ -134,6 +144,15 @@
 				3EAEDCC622514D2CA4606735 /* Pods_WaterDelivery.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4E13392D263D3CC10060597E /* CartCells */ = {
+			isa = PBXGroup;
+			children = (
+				4E133928263D3CB90060597E /* CartTVC.swift */,
+				4E133929263D3CB90060597E /* CartTVC.xib */,
+			);
+			path = CartCells;
 			sourceTree = "<group>";
 		};
 		4E3426D72639F1D70007E2C4 /* BannerCells */ = {
@@ -256,6 +275,7 @@
 				4E4C43B726397104002C4609 /* Banner.swift */,
 				4E4C43C0263979C8002C4609 /* CategoryModel.swift */,
 				4E1FEED02639A6B0009010A6 /* ProductModel.swift */,
+				4E13392F263D79F10060597E /* CartModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -275,6 +295,7 @@
 				990A25CD262EA79B00C96165 /* SideMenuTableViewCell.swift */,
 				990A25CE262EA79B00C96165 /* SideMenuHeaderCell.xib */,
 				4E3426DF2639F2280007E2C4 /* DashboardCells */,
+				4E13392D263D3CC10060597E /* CartCells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -296,6 +317,8 @@
 				9965FB5D2631725100946AB6 /* DetailVC.xib */,
 				4EFCF87A263BF65E00F08AA7 /* CategoryProductsVC.swift */,
 				4EFCF87B263BF65E00F08AA7 /* CategoryProductsVC.xib */,
+				4E133923263D2BA70060597E /* CartVC.swift */,
+				4E133924263D2BA70060597E /* CartVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -386,11 +409,13 @@
 				990A25D1262EA79B00C96165 /* SideMenuHeaderCell.xib in Resources */,
 				9965FB272631663800946AB6 /* DashboardVC.xib in Resources */,
 				4E1FEED72639ABC2009010A6 /* CategoryTVC.xib in Resources */,
+				4E133926263D2BA70060597E /* CartVC.xib in Resources */,
 				9965FB292631663800946AB6 /* LoginVC.xib in Resources */,
 				990A255A262E864800C96165 /* Main.storyboard in Resources */,
 				4E4C439D26388AD5002C4609 /* BannerCollectionViewCell.xib in Resources */,
 				9965FB5F2631725100946AB6 /* DetailVC.xib in Resources */,
 				4E1FEEDC2639AC2C009010A6 /* CategoryCollectionCell.xib in Resources */,
+				4E13392B263D3CB90060597E /* CartTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				990A2586262E8D0200C96165 /* CardView.swift in Sources */,
+				4E13392A263D3CB90060597E /* CartTVC.swift in Sources */,
 				4E1FEEDB2639AC2C009010A6 /* CategoryCollectionCell.swift in Sources */,
 				990A2588262E8D0200C96165 /* UIViewController.swift in Sources */,
 				9965FB2F2631665300946AB6 /* AppDelegate.swift in Sources */,
@@ -463,9 +489,11 @@
 				9965FB232631663800946AB6 /* OTPVC.swift in Sources */,
 				990A25CF262EA79B00C96165 /* SideMenuHeaderCell.swift in Sources */,
 				4E1FEEC82639A4F4009010A6 /* ProductsTVC.swift in Sources */,
+				4E133925263D2BA70060597E /* CartVC.swift in Sources */,
 				4E4C43C1263979C8002C4609 /* CategoryModel.swift in Sources */,
 				9965FB282631663800946AB6 /* DashboardVC.swift in Sources */,
 				990A25D0262EA79B00C96165 /* SideMenuTableViewCell.swift in Sources */,
+				4E133930263D79F10060597E /* CartModel.swift in Sources */,
 				4E1FEED62639ABC2009010A6 /* CategoryTVC.swift in Sources */,
 				990A258A262E8D0200C96165 /* LocationManager.swift in Sources */,
 				9965FB242631663800946AB6 /* SideMenuVC.swift in Sources */,

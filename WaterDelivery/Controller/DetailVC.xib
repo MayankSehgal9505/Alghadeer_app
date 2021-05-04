@@ -5,12 +5,16 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
+                <outlet property="addToCartBTn" destination="Pdf-yj-mPi" id="7KD-19-j4o"/>
                 <outlet property="cartButton" destination="Pdf-yj-mPi" id="aCF-KB-mAm"/>
+                <outlet property="cartCountView" destination="PJo-7x-QkT" id="wcf-ag-bFF"/>
+                <outlet property="cartCountlbl" destination="FmL-bm-Fpz" id="tL7-SD-EqC"/>
                 <outlet property="navTitle" destination="CkI-1h-Elt" id="8hg-px-poA"/>
                 <outlet property="productDescription" destination="hu6-Zc-CD4" id="LoG-Q9-CLC"/>
                 <outlet property="productImg" destination="A7e-03-6zT" id="ylt-6C-nl0"/>
@@ -32,18 +36,41 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nai-Ju-5YE">
-                            <rect key="frame" x="345" y="22" width="20" height="20"/>
+                            <rect key="frame" x="330" y="19.5" width="25" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="20" id="LTe-Fl-fVw"/>
-                                <constraint firstAttribute="height" constant="20" id="Z18-Zg-nAH"/>
+                                <constraint firstAttribute="width" constant="25" id="LTe-Fl-fVw"/>
+                                <constraint firstAttribute="height" constant="25" id="Z18-Zg-nAH"/>
                             </constraints>
                             <state key="normal" image="cart"/>
+                            <connections>
+                                <action selector="goToCart:" destination="-1" eventType="touchUpInside" id="kTB-t3-CBZ"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hu3-ts-Pxq">
-                            <rect key="frame" x="305" y="22" width="20" height="20"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJo-7x-QkT">
+                            <rect key="frame" x="340" y="11.5" width="15" height="15"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmL-bm-Fpz">
+                                    <rect key="frame" x="1" y="1" width="13" height="13"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="20" id="J8m-rn-QM9"/>
-                                <constraint firstAttribute="height" constant="20" id="ppL-Yy-OMi"/>
+                                <constraint firstAttribute="width" constant="15" id="KOQ-77-RWa"/>
+                                <constraint firstAttribute="bottom" secondItem="FmL-bm-Fpz" secondAttribute="bottom" constant="1" id="QQU-r5-n5v"/>
+                                <constraint firstAttribute="height" constant="15" id="hsw-xr-KQI"/>
+                                <constraint firstAttribute="trailing" secondItem="FmL-bm-Fpz" secondAttribute="trailing" constant="1" id="oRJ-xC-S6z"/>
+                                <constraint firstItem="FmL-bm-Fpz" firstAttribute="leading" secondItem="PJo-7x-QkT" secondAttribute="leading" constant="1" id="s30-iQ-G8H"/>
+                                <constraint firstItem="FmL-bm-Fpz" firstAttribute="top" secondItem="PJo-7x-QkT" secondAttribute="top" constant="1" id="tsh-nn-4lj"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hu3-ts-Pxq">
+                            <rect key="frame" x="285" y="19.5" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="J8m-rn-QM9"/>
+                                <constraint firstAttribute="height" constant="25" id="ppL-Yy-OMi"/>
                             </constraints>
                             <state key="normal" image="notification"/>
                         </button>
@@ -67,11 +94,13 @@
                     </subviews>
                     <color key="backgroundColor" red="0.10435069349999999" green="0.4151830077" blue="0.66278630500000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="nai-Ju-5YE" secondAttribute="trailing" constant="10" id="7mZ-SA-hss"/>
+                        <constraint firstAttribute="trailing" secondItem="nai-Ju-5YE" secondAttribute="trailing" constant="20" id="7mZ-SA-hss"/>
                         <constraint firstAttribute="height" constant="64" id="AXT-Q9-Geu"/>
                         <constraint firstItem="nai-Ju-5YE" firstAttribute="centerY" secondItem="jRc-7C-BYM" secondAttribute="centerY" id="HEw-i5-nZy"/>
                         <constraint firstItem="CkI-1h-Elt" firstAttribute="centerX" secondItem="jRc-7C-BYM" secondAttribute="centerX" id="JGb-zO-7yG"/>
+                        <constraint firstItem="PJo-7x-QkT" firstAttribute="trailing" secondItem="nai-Ju-5YE" secondAttribute="trailing" id="Pa9-4K-W6P"/>
                         <constraint firstItem="CkI-1h-Elt" firstAttribute="centerY" secondItem="jRc-7C-BYM" secondAttribute="centerY" id="VHn-1y-Xoa"/>
+                        <constraint firstItem="PJo-7x-QkT" firstAttribute="top" secondItem="nai-Ju-5YE" secondAttribute="top" constant="-8" id="VNR-yk-w2i"/>
                         <constraint firstItem="eIX-WF-lg0" firstAttribute="centerY" secondItem="jRc-7C-BYM" secondAttribute="centerY" id="dLp-5U-lp6"/>
                         <constraint firstItem="eIX-WF-lg0" firstAttribute="leading" secondItem="jRc-7C-BYM" secondAttribute="leading" constant="10" id="hNW-2a-F5c"/>
                         <constraint firstItem="nai-Ju-5YE" firstAttribute="leading" secondItem="Hu3-ts-Pxq" secondAttribute="trailing" constant="20" id="lXZ-KK-r53"/>
@@ -128,6 +157,9 @@
                                         <constraint firstAttribute="height" constant="50" id="vFs-N7-nRY"/>
                                     </constraints>
                                     <state key="normal" title="Add To Cart"/>
+                                    <connections>
+                                        <action selector="addToCartBtnTapped:" destination="-1" eventType="touchUpInside" id="Oz2-K4-39d"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -183,5 +215,8 @@
         <image name="back-arrow" width="100" height="100"/>
         <image name="cart" width="100" height="100"/>
         <image name="notification" width="100" height="100"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

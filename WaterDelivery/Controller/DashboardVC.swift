@@ -11,12 +11,14 @@ class DashboardVC: UIViewController {
 
     // MARK: IBOutlets
     @IBOutlet weak var tbView: UITableView!
+    @IBOutlet weak var cartCountView: UIView! {didSet {self.cartCountView.makeViewCircle()}}
+    @IBOutlet weak var cartCountlbl: UILabel!
     var bannerArray = Array<BannerModel>()
     var categoryArray = Array<CategoryModel>()
     var productArray = Array<ProductModel>()
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpTBView()
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,6 +27,7 @@ class DashboardVC: UIViewController {
         getBanneerList()
         getProductsList()
         getCategorysList()
+        getCartCountList()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -33,6 +36,15 @@ class DashboardVC: UIViewController {
         categoryArray.removeAll()
         productArray.removeAll()
         tbView.reloadData()
+    }
+    func setupUI(){
+        setUpTBView()
+        cartView(hidden: true, count: "0")
+    }
+    
+    func cartView(hidden: Bool, count:String) {
+        cartCountView.isHidden = hidden
+        cartCountlbl.text = count
     }
     /// Set Collection View
     func setUpTBView(){
@@ -43,7 +55,13 @@ class DashboardVC: UIViewController {
         self.tbView.register(UINib(nibName: CategoryTVC.className(), bundle: nil), forCellReuseIdentifier: CategoryTVC.className())
 
     }
-    
+    private func moveToCartsVC() {
+        let cartVC = CartVC()
+        self.navigationController?.pushViewController(cartVC, animated: true)
+    }
+    @IBAction func goToCartBtnAction(_ sender: UIButton) {
+        moveToCartsVC()
+    }
     @IBAction func sideMenuButtonPressed(_ sender: Any) {
         self.frostedViewController.presentMenuViewController()
     }
@@ -101,9 +119,9 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 300
+            return bannerArray.count > 0 ? 360 : 0
         case 1:
-            return 360
+            return productArray.count > 0 ? 360 : 0
         default:
             return CGFloat((categoryArray.count/2 + categoryArray.count%2) * 400)
         }
@@ -141,7 +159,7 @@ extension DashboardVC {
                     }
                     return
                 }
-                print(jsonValue)
+                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let bannerlist = jsonValue[APIField.dataKey]?.array {
                         for banner in bannerlist {
@@ -181,7 +199,7 @@ extension DashboardVC {
                     }
                     return
                 }
-                print(jsonValue)
+                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let productList = jsonValue[APIField.dataKey]?.array {
                         for product in productList {
@@ -219,7 +237,7 @@ extension DashboardVC {
                     }
                     return
                 }
-                print(jsonValue)
+                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let categorylist = jsonValue[APIField.dataKey]?.array {
                         for category in categorylist {
@@ -232,8 +250,14 @@ extension DashboardVC {
                     }
                 }
                 else {
-                    DispatchQueue.main.async {
-                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    if let tokenExpire = jsonValue[APIField.statusKey]?.stringValue,tokenExpire == APIField.expiredToken {
+                        DispatchQueue.main.async {
+                        self.showSessionExpiredAlert()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                        self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                        }
                     }
                 }
                 DispatchQueue.main.async {
@@ -242,6 +266,38 @@ extension DashboardVC {
             })
         }else{
             self.showNoInternetAlert()
+        }
+    }
+    
+    func getCartCountList() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let cartCountURL : String = UrlName.baseUrl + UrlName.getCartCountUrl + Defaults.getUserID()
+            let parameters = [
+                "customer_id":Defaults.getUserID(),
+            ] as [String : Any]
+            NetworkManager.sharedInstance.commonApiCall(url: cartCountURL, method: .get, parameters: parameters, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    DispatchQueue.main.async {
+                        if let cartCountString = jsonValue["TotalCount"]?.stringValue, let cartCount = Int(cartCountString), cartCount > 0 {
+                            self.cartView(hidden: false, count: cartCountString)
+                        } else {
+                            self.cartView(hidden: true, count: "0")
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
         }
     }
 }

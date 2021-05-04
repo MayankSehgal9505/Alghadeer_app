@@ -47,7 +47,6 @@ public class NetworkManager {
         }
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-            print(response!)
             do {
                 let json = try JSON.init(data: data!)
                 print(json)
@@ -59,22 +58,6 @@ public class NetworkManager {
         })
 
         task.resume()
-        /* AF.request(URL.init(string: url)!, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: nil).responseJSON { (response) in
-            print("response \(response)")
-            switch response.result {
-            case .success(_):
-                if let data = response.value{
-                    let json = JSON(data)
-                    print(json)
-                    completionHandler(json,nil)
-                    return
-                }
-                break
-            case .failure(let error):
-                completionHandler(nil,error.localizedDescription)
-                break
-            }
-        }*/
     }
 }
 //Class ends here

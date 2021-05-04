@@ -42,7 +42,9 @@ struct UrlName {
     static let getCategoryListUrl = "Category/CategoryList/0"
     static let getCategoryDetailUrl = "Category/categoryDetails/"
     static let getProductListByCategoryID = "Category/ByCcategoryIdGetProductList/"
-
+    static let addToCartUrl = "Cart/addToCart"
+    static let getCartItemsUrl = "Cart/cartList/"
+    static let getCartCountUrl = "Cart/cartTotalCount/"
 }
 
 // MARK:- Web Service Params
@@ -59,6 +61,7 @@ struct APIField {
     static let successKey = "success"
     static let statusKey = "status"
     static let tokenKey = "token"
+    static let expiredToken = "Expired token"
 }
 
 // MARK: - User Defaults

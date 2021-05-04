@@ -23,7 +23,9 @@ struct ProductModel {
     var quantity = ""
     var stockName = ""
     var brandName = ""
-
+    var unitAttributeId = ""
+    var category: CategoryModel = CategoryModel()
+    
     //MARK: Lifecycle
     init() {
     }
@@ -44,6 +46,7 @@ struct ProductModel {
         self.quantity = json["quantity"].stringValue
         self.stockName = json["stock_name"].stringValue
         self.brandName = json["brand_name"].stringValue
-
+        self.unitAttributeId = json["unit_atrributes_id"].stringValue
+        self.category = CategoryModel.init(json: json)
     }
 }

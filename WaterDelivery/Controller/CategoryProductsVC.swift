@@ -9,6 +9,8 @@ import UIKit
 
 class CategoryProductsVC: UIViewController {
 
+    @IBOutlet weak var cartCountLbl: UILabel!
+    @IBOutlet weak var cartCountView: UIView!{didSet {self.cartCountView.makeViewCircle()}}
     @IBOutlet weak var navtitle: UILabel!
     @IBOutlet weak var categoryProductCollectionView: UICollectionView!
     var categoryObj = CategoryModel()
@@ -18,6 +20,8 @@ class CategoryProductsVC: UIViewController {
         navtitle.text = categoryObj.name
         setupColllectiionCell()
         getCategoryProducts()
+        getCartCountList()
+        cartView(hidden: true, count: "0")
     }
 
     
@@ -36,7 +40,10 @@ class CategoryProductsVC: UIViewController {
         collectionViewFlowLayout.scrollDirection = .vertical
         self.categoryProductCollectionView.collectionViewLayout = collectionViewFlowLayout
     }
-    
+    func cartView(hidden: Bool, count:String) {
+        cartCountView.isHidden = hidden
+        cartCountLbl.text = count
+    }
     @objc func productBtnTapped(sender:UIButton) {
         if sender.tag < productArray.count {
             let productDetailVC = DetailVC()
@@ -46,6 +53,13 @@ class CategoryProductsVC: UIViewController {
     }
     @IBAction func backButtonAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func goToCart(_ sender: UIButton) {
+        moveToCartsVC()
+    }
+    private func moveToCartsVC() {
+        let cartVC = CartVC()
+        self.navigationController?.pushViewController(cartVC, animated: true)
     }
 }
 extension CategoryProductsVC {
@@ -61,7 +75,7 @@ extension CategoryProductsVC {
                     }
                     return
                 }
-                print(jsonValue)
+                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let productList = jsonValue[APIField.dataKey]?.array {
                         for product in productList {
@@ -84,6 +98,38 @@ extension CategoryProductsVC {
             })
         }else{
             self.showNoInternetAlert()
+        }
+    }
+    
+    func getCartCountList() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let cartCountURL : String = UrlName.baseUrl + UrlName.getCartCountUrl + Defaults.getUserID()
+            let parameters = [
+                "customer_id":Defaults.getUserID(),
+            ] as [String : Any]
+            NetworkManager.sharedInstance.commonApiCall(url: cartCountURL, method: .get, parameters: parameters, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    DispatchQueue.main.async {
+                        if let cartCountString = jsonValue["TotalCount"]?.stringValue, let cartCount = Int(cartCountString), cartCount > 0 {
+                            self.cartView(hidden: false, count: cartCountString)
+                        } else {
+                            self.cartView(hidden: true, count: "0")
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
         }
     }
 }

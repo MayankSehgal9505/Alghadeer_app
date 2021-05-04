@@ -108,7 +108,7 @@ extension DetailVC {
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         self.view.makeToast("Item added to cart", duration: 3.0, position: .center)
-                        self.addToCartBTn.setTitle("Go To Cart", for: [])
+                        self.addToCartBTn.setTitle("View Cart", for: [])
                         self.actionPerformed = .goToCart
                         self.getCartCountList()
                     }

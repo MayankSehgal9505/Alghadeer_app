@@ -149,7 +149,8 @@ extension CartVC {
                     DispatchQueue.main.async {
                         self.cartEmptyView.isHidden = self.cartModel.cartItems.count > 0
                         self.cartTBView.reloadData()
-                        self.totalItemCount.text = "\(self.cartModel.cartItems.count) Items"
+                        let text = self.cartModel.cartItems.count == 1 ? "Item": "Items"
+                        self.totalItemCount.text = "\(self.cartModel.cartItems.count) \(text)"
                         self.totalAmount.text = "Total AED \(self.cartModel.totalPrice)"
                     }
                 }else {

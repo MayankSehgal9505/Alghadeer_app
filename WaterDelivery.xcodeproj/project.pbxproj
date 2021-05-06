@@ -198,6 +198,87 @@
 			path = DashboardCells;
 			sourceTree = "<group>";
 		};
+		4EDAEAAE26442DF7001D4819 /* CartList */ = {
+			isa = PBXGroup;
+			children = (
+				4E133923263D2BA70060597E /* CartVC.swift */,
+				4E133924263D2BA70060597E /* CartVC.xib */,
+			);
+			path = CartList;
+			sourceTree = "<group>";
+		};
+		4EDAEAAF26442E09001D4819 /* ProductDetail */ = {
+			isa = PBXGroup;
+			children = (
+				9965FB5C2631725100946AB6 /* DetailVC.swift */,
+				9965FB5D2631725100946AB6 /* DetailVC.xib */,
+			);
+			path = ProductDetail;
+			sourceTree = "<group>";
+		};
+		4EDAEAB026442E4A001D4819 /* HomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				9965FB1E2631663800946AB6 /* DashboardVC.swift */,
+				9965FB1D2631663800946AB6 /* DashboardVC.xib */,
+			);
+			path = HomeVC;
+			sourceTree = "<group>";
+		};
+		4EDAEAB326442E65001D4819 /* Category'sProduct */ = {
+			isa = PBXGroup;
+			children = (
+				4EFCF87A263BF65E00F08AA7 /* CategoryProductsVC.swift */,
+				4EFCF87B263BF65E00F08AA7 /* CategoryProductsVC.xib */,
+			);
+			path = "Category'sProduct";
+			sourceTree = "<group>";
+		};
+		4EDAEAB526442E82001D4819 /* OTPVC */ = {
+			isa = PBXGroup;
+			children = (
+				9965FB192631663800946AB6 /* OTPVC.swift */,
+				9965FB202631663800946AB6 /* OTPVC.xib */,
+			);
+			path = OTPVC;
+			sourceTree = "<group>";
+		};
+		4EDAEAB726442E9E001D4819 /* LoginVC */ = {
+			isa = PBXGroup;
+			children = (
+				9965FB1B2631663800946AB6 /* LoginVC.swift */,
+				9965FB1F2631663800946AB6 /* LoginVC.xib */,
+			);
+			path = LoginVC;
+			sourceTree = "<group>";
+		};
+		4EDAEAB926442EB4001D4819 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				9965FB1A2631663800946AB6 /* SideMenuVC.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		4EDAEABA26442EC6001D4819 /* BusinessType */ = {
+			isa = PBXGroup;
+			children = (
+				9965FB212631663800946AB6 /* CategoryVC.swift */,
+				9965FB1C2631663800946AB6 /* CategoryVC.xib */,
+			);
+			path = BusinessType;
+			sourceTree = "<group>";
+		};
+		4EDAEABB26442F71001D4819 /* SideMenuCells */ = {
+			isa = PBXGroup;
+			children = (
+				990A25CC262EA79B00C96165 /* SideMenuHeaderCell.swift */,
+				990A25CD262EA79B00C96165 /* SideMenuTableViewCell.swift */,
+				990A25CE262EA79B00C96165 /* SideMenuHeaderCell.xib */,
+			);
+			path = SideMenuCells;
+			sourceTree = "<group>";
+		};
 		6FAECEE13156F477AD8D6B60 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,9 +372,7 @@
 		990A25CB262EA79B00C96165 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				990A25CC262EA79B00C96165 /* SideMenuHeaderCell.swift */,
-				990A25CD262EA79B00C96165 /* SideMenuTableViewCell.swift */,
-				990A25CE262EA79B00C96165 /* SideMenuHeaderCell.xib */,
+				4EDAEABB26442F71001D4819 /* SideMenuCells */,
 				4E3426DF2639F2280007E2C4 /* DashboardCells */,
 				4E13392D263D3CC10060597E /* CartCells */,
 			);
@@ -303,22 +382,15 @@
 		9965FB172631663800946AB6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9965FB1A2631663800946AB6 /* SideMenuVC.swift */,
+				4EDAEAB926442EB4001D4819 /* SideMenu */,
 				9965FB182631663800946AB6 /* ViewController.swift */,
-				9965FB1B2631663800946AB6 /* LoginVC.swift */,
-				9965FB1F2631663800946AB6 /* LoginVC.xib */,
-				9965FB192631663800946AB6 /* OTPVC.swift */,
-				9965FB202631663800946AB6 /* OTPVC.xib */,
-				9965FB212631663800946AB6 /* CategoryVC.swift */,
-				9965FB1C2631663800946AB6 /* CategoryVC.xib */,
-				9965FB1E2631663800946AB6 /* DashboardVC.swift */,
-				9965FB1D2631663800946AB6 /* DashboardVC.xib */,
-				9965FB5C2631725100946AB6 /* DetailVC.swift */,
-				9965FB5D2631725100946AB6 /* DetailVC.xib */,
-				4EFCF87A263BF65E00F08AA7 /* CategoryProductsVC.swift */,
-				4EFCF87B263BF65E00F08AA7 /* CategoryProductsVC.xib */,
-				4E133923263D2BA70060597E /* CartVC.swift */,
-				4E133924263D2BA70060597E /* CartVC.xib */,
+				4EDAEAB726442E9E001D4819 /* LoginVC */,
+				4EDAEAB526442E82001D4819 /* OTPVC */,
+				4EDAEABA26442EC6001D4819 /* BusinessType */,
+				4EDAEAB026442E4A001D4819 /* HomeVC */,
+				4EDAEAAF26442E09001D4819 /* ProductDetail */,
+				4EDAEAB326442E65001D4819 /* Category'sProduct */,
+				4EDAEAAE26442DF7001D4819 /* CartList */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

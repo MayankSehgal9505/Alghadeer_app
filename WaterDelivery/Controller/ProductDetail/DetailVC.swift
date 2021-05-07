@@ -96,6 +96,7 @@ extension DetailVC {
                 "event":"add"
             ] as [String : Any]
             print(parameters)
+            NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addToCartUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {

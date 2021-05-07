@@ -136,6 +136,7 @@ extension UIViewController {
     
     func makeRootViewController(){
             let homeVcObj = DashboardVC.init(nibName: DashboardVC.className(), bundle: nil)
+            //let homeVcObj = CheckoutVC.init(nibName: CheckoutVC.className(), bundle: nil)
             let centrenav  = UINavigationController(rootViewController:homeVcObj)
             let sideMenuVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: SideMenuVC.className()) as! SideMenuVC
             let container = REFrostedViewController(contentViewController: centrenav, menuViewController: sideMenuVc)

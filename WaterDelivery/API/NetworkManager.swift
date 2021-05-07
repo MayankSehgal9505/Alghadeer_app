@@ -14,7 +14,7 @@ public class NetworkManager {
     
     //MARK: Variable declaration
     static let sharedInstance = NetworkManager()
-    
+    static var viewControler: UIViewController?
     //MARK:- Check Internet Connectivity
     func isInternetAvailable() -> Bool{
         return NetworkReachabilityManager()!.isReachable
@@ -50,8 +50,14 @@ public class NetworkManager {
             do {
                 let json = try JSON.init(data: data!)
                 print(json)
-                //let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                completionHandler(json,nil)
+                if let sessionExpired = json["Authorization"].bool, sessionExpired == false,let vc = NetworkManager.viewControler {
+                    DispatchQueue.main.async {
+                        vc.showSessionExpiredAlert()
+                    }
+                    completionHandler(json,nil)
+                } else {
+                    completionHandler(json,nil)
+                }
             } catch {
                 completionHandler(nil,error.localizedDescription)
             }

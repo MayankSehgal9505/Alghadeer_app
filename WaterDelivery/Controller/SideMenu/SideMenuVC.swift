@@ -82,6 +82,15 @@ class SideMenuVC: UIViewController {
             container?.menuViewSize = CGSize(width: UIScreen.main.bounds.size.width * 0.73 , height: UIScreen.main.bounds.size.height)
         self.navigationController?.pushViewController(container!, animated: true)
     }
+    
+    //MARK:- IBActions
+    @objc func userProfileAction() {
+        
+    }
+    
+    @objc func crossBtnAction() {
+        self.frostedViewController.hideMenuViewController()
+    }
 }
 
 extension SideMenuVC : UITableViewDataSource {
@@ -100,6 +109,8 @@ extension SideMenuVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: SideMenuHeaderCell.className(), for: indexPath) as! SideMenuHeaderCell
+            cell.userProfileBtn.addTarget(self, action: #selector(userProfileAction), for: .touchUpInside)
+            cell.crossBtn.addTarget(self, action:  #selector(crossBtnAction), for: .touchUpInside)
             return cell
         }
         else {
@@ -119,7 +130,9 @@ extension SideMenuVC : UITableViewDelegate {
             controllerToMove = DashboardVC(nibName: DashboardVC.className(), bundle: nil)
             moveToController(controllerToMove)
         case 1:
-            print("My Profile")
+            self.view.makeToast("Unnder Development", duration: 3.0, position: .bottom)
+            //controllerToMove = UserProfileVC(nibName: UserProfileVC.className(), bundle: nil)
+            //moveToController(controllerToMove)
         case 2:
             print("Wallet")
         case 3:

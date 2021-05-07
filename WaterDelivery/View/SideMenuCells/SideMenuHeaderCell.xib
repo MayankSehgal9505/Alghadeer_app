@@ -29,6 +29,14 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1R-sn-gTQ">
+                        <rect key="frame" x="280" y="41" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="Ts9-cM-nKD"/>
+                            <constraint firstAttribute="height" constant="25" id="bOV-lh-Vyc"/>
+                        </constraints>
+                        <state key="normal" image="whiteCross"/>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="971- 21548735" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWg-dX-oIy">
                         <rect key="frame" x="119.5" y="175.5" width="81.5" height="14"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
@@ -49,26 +57,37 @@
                             <constraint firstAttribute="height" constant="20" id="hID-CA-Je3"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKG-GF-oWp">
+                        <rect key="frame" x="94.5" y="41" width="145.5" height="148.5"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" red="0.1448452771" green="0.39565443989999999" blue="0.61089062689999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
+                    <constraint firstItem="mKG-GF-oWp" firstAttribute="trailing" secondItem="6x6-6N-mfu" secondAttribute="trailing" constant="30" id="14D-iP-hc2"/>
                     <constraint firstItem="hoe-xx-wxP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="24n-LY-0gB"/>
+                    <constraint firstItem="mKG-GF-oWp" firstAttribute="top" secondItem="6x6-6N-mfu" secondAttribute="top" id="BQ5-ms-fNt"/>
                     <constraint firstItem="CDh-Zz-Xfn" firstAttribute="centerY" secondItem="HWg-dX-oIy" secondAttribute="centerY" id="GMn-eJ-yff"/>
                     <constraint firstItem="HWg-dX-oIy" firstAttribute="centerX" secondItem="kca-0I-KQM" secondAttribute="centerX" id="HNL-ih-DoA"/>
                     <constraint firstItem="HWg-dX-oIy" firstAttribute="leading" secondItem="CDh-Zz-Xfn" secondAttribute="trailing" constant="5" id="LPz-cZ-w4c"/>
+                    <constraint firstItem="mKG-GF-oWp" firstAttribute="bottom" secondItem="HWg-dX-oIy" secondAttribute="bottom" id="RY7-7D-8A9"/>
                     <constraint firstAttribute="trailing" secondItem="hoe-xx-wxP" secondAttribute="trailing" id="SJd-PL-TyI"/>
                     <constraint firstItem="HWg-dX-oIy" firstAttribute="top" secondItem="kca-0I-KQM" secondAttribute="bottom" constant="5" id="Z8X-Yj-8sS"/>
+                    <constraint firstItem="mKG-GF-oWp" firstAttribute="leading" secondItem="CDh-Zz-Xfn" secondAttribute="leading" id="aHJ-hB-QoU"/>
                     <constraint firstItem="6x6-6N-mfu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="30" id="d2B-Nj-rQJ"/>
                     <constraint firstAttribute="bottom" secondItem="hoe-xx-wxP" secondAttribute="bottom" id="gIH-BK-6X7"/>
+                    <constraint firstItem="D1R-sn-gTQ" firstAttribute="top" secondItem="6x6-6N-mfu" secondAttribute="top" id="nSb-qz-wuU"/>
                     <constraint firstItem="6x6-6N-mfu" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="oDv-2N-yKQ"/>
                     <constraint firstItem="kca-0I-KQM" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="of5-oa-LVM"/>
                     <constraint firstItem="kca-0I-KQM" firstAttribute="top" secondItem="6x6-6N-mfu" secondAttribute="bottom" constant="10" id="sP3-Jd-9M8"/>
+                    <constraint firstAttribute="trailing" secondItem="D1R-sn-gTQ" secondAttribute="trailing" constant="15" id="ycA-hi-RJQ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="crossBtn" destination="D1R-sn-gTQ" id="Wea-Ah-Q5c"/>
                 <outlet property="nameLabel" destination="kca-0I-KQM" id="Sre-HX-IUk"/>
                 <outlet property="profileImageView" destination="6x6-6N-mfu" id="ORo-vo-1ya"/>
                 <outlet property="userMobileNumber" destination="HWg-dX-oIy" id="McO-54-vLg"/>
+                <outlet property="userProfileBtn" destination="mKG-GF-oWp" id="dWg-AF-B0K"/>
             </connections>
             <point key="canvasLocation" x="1.6000000000000001" y="-17.991004497751124"/>
         </tableViewCell>
@@ -76,5 +95,6 @@
     <resources>
         <image name="contact" width="100" height="100"/>
         <image name="profile" width="154.5" height="154.5"/>
+        <image name="whiteCross" width="16" height="16"/>
     </resources>
 </document>

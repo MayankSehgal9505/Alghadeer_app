@@ -14,6 +14,8 @@ class SideMenuHeaderCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var userMobileNumber: UILabel!
+    @IBOutlet weak var crossBtn: UIButton!
+    @IBOutlet weak var userProfileBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,8 +29,8 @@ class SideMenuHeaderCell: UITableViewCell {
 
     //MARK:- Internal methods
     func setUpCell(){
-        profileImageView.makeRounded()
-        userMobileNumber.text = Defaults.getUserPhoneNumber()
+        profileImageView.setCornerRadiusOfView(cornerRadiusValue: 50.0, setBorder: true, borderColor: .white, width: 2.0)
+        userMobileNumber.text = "971 - \(Defaults.getUserPhoneNumber())"
         self.nameLabel.text = "Dummy name"
 //        if let data = UserDefaults.standard.data(forKey: UserDefaultsKey.loginData),
 //            let loginDetails = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserModel {

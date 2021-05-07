@@ -145,6 +145,7 @@ extension OTPVC {
             "otp":getOTP()
             ] as [String : Any]
             print(parameters)
+            NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: loginURL, method: .post, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
@@ -181,6 +182,7 @@ extension OTPVC {
             "mobile_number":self.mobile
             ] as [String : Any]
             print(parameters)
+            NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: loginURL, method: .post, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     self.dismissHUD(isAnimated: true)

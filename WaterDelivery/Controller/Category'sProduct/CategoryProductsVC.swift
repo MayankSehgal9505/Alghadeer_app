@@ -67,6 +67,7 @@ extension CategoryProductsVC {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
             let bannerListURL : String = UrlName.baseUrl + UrlName.getProductListByCategoryID + "\(categoryObj.categoryID)/0"
+            NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {

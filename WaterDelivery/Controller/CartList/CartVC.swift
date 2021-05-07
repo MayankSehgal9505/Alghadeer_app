@@ -73,7 +73,8 @@ class CartVC: UIViewController {
         self.view.makeToast("Under Development", duration: 3.0, position: .bottom)
     }
     @IBAction func checkOutBtnAction(_ sender: UIButton) {
-        self.view.makeToast("Under Development", duration: 3.0, position: .bottom)
+        let checkOutVC = CheckoutVC()
+        self.navigationController?.pushViewController(checkOutVC, animated: true)
     }
     
     @objc func decreaseQuantityBtn(sender:UIButton) {
@@ -127,6 +128,7 @@ extension CartVC {
                 "customer_id":Defaults.getUserID(),
             ] as [String : Any]
             print(parameters)
+            NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: getCartListUrl, method: .get, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
@@ -181,6 +183,7 @@ extension CartVC {
                 "event":eventType == .decreaseQuantity && cartItem.cartQuantity == "1" ?   "remove"   : eventType.eventString
             ] as [String : Any]
             print(parameters)
+            NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addToCartUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {

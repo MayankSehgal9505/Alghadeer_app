@@ -151,6 +151,7 @@ extension DashboardVC {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
             let bannerListURL : String = UrlName.baseUrl + UrlName.getBannerUrl
+            NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
@@ -191,6 +192,7 @@ extension DashboardVC {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
             let bannerListURL : String = UrlName.baseUrl + UrlName.getProductListUrl
+            NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
@@ -229,6 +231,7 @@ extension DashboardVC {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
             let bannerListURL : String = UrlName.baseUrl + UrlName.getCategoryListUrl
+            NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {

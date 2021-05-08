@@ -10,16 +10,146 @@ import UIKit
 class UserProfileVC: UIViewController {
 
     //MARK:- IBOutlets
+    @IBOutlet weak var userImg: UIImageView!
+    @IBOutlet weak var cameraBtn: UIButton!
+    @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var nameTxtfld: UITextField!
+    @IBOutlet weak var emailTxtfld: UITextField!
+    @IBOutlet weak var addressTxtfld: UITextField!
+    @IBOutlet weak var countryTxtfld: UITextField!
+    @IBOutlet weak var userNameLbl: UILabel!
+    @IBOutlet weak var phoneNumberTxtFld: UITextField!
     //MARK:- Local Variables
+    var user = UserModel()
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+        getUserProfile()
     }
     //MARK:- Internal Methods
-
+    func setupUI() {
+        userImg.setCornerRadiusOfView(cornerRadiusValue: 75.00, setBorder: true, borderColor: .white, width: 2.0)
+        saveBtn.setCornerRadiusOfView(cornerRadiusValue:30)
+    }
+    
+    func updateUI() {
+        userNameLbl.text = user.userName
+        nameTxtfld.text = user.userName
+        emailTxtfld.text = user.userEmail
+        addressTxtfld.text = user.userAddress
+        countryTxtfld.text = user.userCountry
+        phoneNumberTxtFld.text = user.userPhoneNumber
+    }
     
     //MARK:- IBActions
+    @IBAction func saveBtnAction(_ sender: UIButton) {
+        if (nameTxtfld.text?.isEmpty ??  true) {
+            self.view.makeToast("Name can't be empty", duration: 3.0, position: .center)
+        } else if (emailTxtfld.text?.isEmpty ??  true) {
+            self.view.makeToast("Email can't be empty", duration: 3.0, position: .center)
+        } else if (!CommonMethods.isValidEmail(emailTxtfld.text!)) {
+            self.view.makeToast("Email should be valid", duration: 3.0, position: .center)
+        }else if (addressTxtfld.text?.isEmpty ??  true) {
+            self.view.makeToast("Address name can't be empty", duration: 3.0, position: .center)
+        } else if (countryTxtfld.text?.isEmpty ??  true) {
+            self.view.makeToast("Country can't be empty", duration: 3.0, position: .center)
+        } else {
+            updateUserPrrofile()
+        }
+    }
+    @IBAction func camerBtnAction(_ sender: UIButton) {
+        ImagePickerManager().pickImage(self){ image in
+               //here is the image
+            self.userImg.image = image
+        }
+    }
     @IBAction func backBtnAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+//MARK:- API call
+extension UserProfileVC {
+    func getUserProfile() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let getUserDetailsUrl : String = UrlName.baseUrl + UrlName.getUserDetailUrl + Defaults.getUserID()
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: getUserDetailsUrl, method: .get, parameters: nil, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    if let userDict = jsonValue[APIField.dataKey] {
+                        self.user = UserModel.init(json: userDict)
+                    }
+                    DispatchQueue.main.async {
+                        self.updateUI()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+    
+    func updateUserPrrofile() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let setUserDetailsUrl : String = UrlName.baseUrl + UrlName.updateUserDetailUrl + Defaults.getUserID()
+            let parameters = [
+                "name":nameTxtfld.text!,
+                "address":addressTxtfld.text!,
+                "gender":user.userGender,
+                "dob":user.userDOB,
+                "country":countryTxtfld.text!,
+                "role_id":user.userRole,
+                "mobile_number":user.userPhoneNumber,
+                "latitude":user.userlatitude,
+                "longitude":user.userlongitude,
+                "customer_id": Defaults.getUserID()
+            ] as [String : Any]
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: setUserDetailsUrl, method: .put, parameters: parameters, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    DispatchQueue.main.async {
+                        self.view.makeToast("Profile updated successfully", duration: 0.5, position: .center)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
     }
 }

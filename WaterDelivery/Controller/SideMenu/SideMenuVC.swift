@@ -130,11 +130,11 @@ extension SideMenuVC : UITableViewDelegate {
             controllerToMove = DashboardVC(nibName: DashboardVC.className(), bundle: nil)
             moveToController(controllerToMove)
         case 1:
-            self.view.makeToast("Unnder Development", duration: 3.0, position: .bottom)
-            //controllerToMove = UserProfileVC(nibName: UserProfileVC.className(), bundle: nil)
-            //moveToController(controllerToMove)
+            controllerToMove = UserProfileVC(nibName: UserProfileVC.className(), bundle: nil)
+            moveToController(controllerToMove)
         case 2:
-            print("Wallet")
+            controllerToMove = AddressListVC(nibName: AddressListVC.className(), bundle: nil)
+            moveToController(controllerToMove)
         case 3:
             print("Subscriptions")
         case 4:
@@ -147,7 +147,8 @@ extension SideMenuVC : UITableViewDelegate {
             print("Scanner ")
         case 8:
             print("Contact Us")
-        case 9:
+        case 9: break
+        case 10:
             self.showLogoutAlert()
         default:
           print("Error in getting VC")

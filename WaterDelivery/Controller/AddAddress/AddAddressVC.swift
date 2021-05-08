@@ -8,7 +8,13 @@
 import UIKit
 
 class AddAddressVC: UIViewController {
+    //MARK:- Enums
+    enum AddressScreenType {
+        case addAddress
+        case updateAddress
+    }
 
+    //MARK:- IBOutlets
     @IBOutlet var roundedViews: [UIView]!
     @IBOutlet weak var fNameTxtFld: UITextField!
     @IBOutlet weak var lNameTxtFld: UITextField!
@@ -19,6 +25,11 @@ class AddAddressVC: UIViewController {
     @IBOutlet weak var phoneNumberTxtFld: UITextField!
     @IBOutlet weak var emailTxtfld: UITextField!
     @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var addressTypeTitle: UILabel!
+    
+    //MARK:- IBOutlets
+    var addressScreenType: AddressScreenType = .addAddress
+    var addressModel = AddressModel()
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +38,24 @@ class AddAddressVC: UIViewController {
     }
     //MARK:- Internal Methods
     func setupUI() {
+        addressTypeTitle.text = addressScreenType == .addAddress ? "Add Address" : "Update Address"
+        switch addressScreenType {
+        case .updateAddress: setUpUIData()
+        default: break
+        }
         roundedViews.forEach{$0.setCornerRadiusOfView(cornerRadiusValue: 20,setBorder: true, borderColor: .lightGray, width: 1.0)}
         saveBtn.setCornerRadiusOfView(cornerRadiusValue:25)
+    }
+    
+    func setUpUIData() {
+        self.fNameTxtFld.text = addressModel.shippingFname
+        self.lNameTxtFld.text = addressModel.shippingLname
+        self.streetTxtFld.text = addressModel.shippingAddress
+        self.townCityTxtFld.text = addressModel.shippingCity
+        self.stateCountryTxtfld.text = addressModel.shippingState
+        self.postCodTxtFld.text = addressModel.shippingPostCode
+        self.phoneNumberTxtFld.text = addressModel.shippingPhoneNumber
+        self.emailTxtfld.text = addressModel.shippingEmail
     }
     
     //MARK:- IBActions
@@ -52,14 +79,138 @@ class AddAddressVC: UIViewController {
         } else if (!CommonMethods.isValidEmail(emailTxtfld.text!)) {
             self.view.makeToast("Email should be valid", duration: 3.0, position: .center)
         } else {
-            self.view.makeToast("Under Development", duration: 3.0, position: .bottom)
+            switch addressScreenType {
+            case .addAddress:
+                addAddress()
+            default:
+                updateAddress()
+            }
         }
     }
     @IBAction func backBtnAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
 }
+//MARK:- API call
+extension AddAddressVC {
+    func updateAddress() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let addAddressUrl : String = UrlName.baseUrl + UrlName.updateAddressUrl + addressModel.addressID
+            let parameters = [
+                "first_name":fNameTxtFld.text!,
+                "last_name":lNameTxtFld.text!,
+                "address":streetTxtFld.text!,
+                "city":townCityTxtFld.text!,
+                "state":stateCountryTxtfld.text!,
+                "country":stateCountryTxtfld.text!,
+                "postcode":postCodTxtFld.text!,
+                "phone_no":phoneNumberTxtFld.text!,
+                "email":emailTxtfld.text!,
+                "latitude":"19.079023",
+                "longitude":"72.908012",
+                "customer_id": Defaults.getUserID()
+            ] as [String : Any]
+            print(parameters)
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: addAddressUrl, method: .put, parameters: parameters, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    DispatchQueue.main.async {
+                        self.view.makeToast("Address Updated successfully", duration: 0.5, position: .center)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        if let errordict = jsonValue["Errors"]?.dictionaryObject {
+                            if errordict.keys.count == 0 {
+                                self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                            } else {
+                                self.view.makeToast(errordict[errordict.keys.first!] as? String ?? "", duration: 3.0, position: .center)
 
+                            }
+                        } else {
+                            self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+    
+    func addAddress() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let addAddressUrl : String = UrlName.baseUrl + UrlName.addAddressUrl
+            let parameters = [
+                "first_name":fNameTxtFld.text!,
+                "last_name":lNameTxtFld.text!,
+                "address":streetTxtFld.text!,
+                "city":townCityTxtFld.text!,
+                "state":stateCountryTxtfld.text!,
+                "country":stateCountryTxtfld.text!,
+                "postcode":postCodTxtFld.text!,
+                "phone_no":phoneNumberTxtFld.text!,
+                "email":emailTxtfld.text!,
+                "latitude":"19.079023",
+                "longitude":"72.908012",
+                "customer_id": Defaults.getUserID()
+            ] as [String : Any]
+            print(parameters)
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: addAddressUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    DispatchQueue.main.async {
+                        self.view.makeToast("Address added successfully", duration: 0.5, position: .center)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        if let errordict = jsonValue["Errors"]?.dictionaryObject {
+                            if errordict.keys.count == 0 {
+                                self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                            } else {
+                                self.view.makeToast(errordict[errordict.keys.first!] as? String ?? "", duration: 3.0, position: .center)
+
+                            }
+                        } else {
+                            self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+}
 
 extension AddAddressVC : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

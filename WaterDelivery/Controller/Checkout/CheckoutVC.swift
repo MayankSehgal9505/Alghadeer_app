@@ -18,12 +18,18 @@ class CheckoutVC: UIViewController {
     //MARK:- Local Variables
     var paymentTypeCart = false
     private var effectView,vibrantView : UIVisualEffectView?
+    var shippingAddressArray = Array<AddressModel>()
 
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getAddressList()
     }
     //MARK:- Internal Methods
     func setUpTBView(){
@@ -68,6 +74,7 @@ class CheckoutVC: UIViewController {
     
     @objc func addAddressBtnTapped() {
         let addAddressVC = AddAddressVC()
+        addAddressVC.addressScreenType = .addAddress
         self.navigationController?.pushViewController(addAddressVC, animated: true)
     }
     @objc func cardOptionChoosen(sender:UIButton) {
@@ -101,6 +108,48 @@ class CheckoutVC: UIViewController {
         
     }
 }
+extension CheckoutVC{
+    func getAddressList() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let addressListURL : String = UrlName.baseUrl + UrlName.getAddressListUrl + Defaults.getUserID()
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: addressListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    if let addresslist = jsonValue[APIField.dataKey]?.array {
+                        var shippingAddress = Array<AddressModel>()
+                        for address in addresslist {
+                            let addressModel = AddressModel.init(json: address)
+                            shippingAddress.append(addressModel)
+                        }
+                        self.shippingAddressArray = shippingAddress
+                    }
+                    DispatchQueue.main.async {
+                        self.checkOutTBView.reloadSections(IndexSet.init(integer: 0), with: .none)
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+}
 extension CheckoutVC: SelectedAmountDelegate{
     func amountSelected(amount: String) {
         if let cell = checkOutTBView.cellForRow(at: IndexPath.init(row: 0, section: 3)) as? PaymentTVC {
@@ -116,7 +165,7 @@ extension CheckoutVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:     return 2
+        case 0:     return 1 + shippingAddressArray.count
         case 1:     return 1
         case 2:     return 1
         case 3:     return 1
@@ -137,7 +186,9 @@ extension CheckoutVC: UITableViewDataSource{
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ShippingAddressTVC.className(), for: indexPath) as! ShippingAddressTVC
-                cell.setupCell()
+                if indexPath.row-1 < shippingAddressArray.count {
+                    cell.setupCell(shipperAddress: shippingAddressArray[indexPath.row-1])
+                }
                 return cell
             }
         case 1:

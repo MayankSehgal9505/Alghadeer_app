@@ -24,10 +24,10 @@ class ShippingAddressTVC: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setupCell() {
+    func setupCell(shipperAddress:AddressModel) {
         greyView.setCornerRadiusOfView(cornerRadiusValue:28)
-        self.shipperName.text = "Mayank Sehgal"
-        self.shipperstreetAddress.text = "100/11 Chakarwarti Maholla, Thanesar"
-        self.shipperName.text = "Kurukshetra, Haryana, India 136118"
+        self.shipperName.text = "\(shipperAddress.shippingFname) \(shipperAddress.shippingLname)"
+        self.shipperstreetAddress.text = "\(shipperAddress.shippingAddress), \(shipperAddress.shippingCity), \(shipperAddress.shippingState) \(shipperAddress.shippingPostCode) \n \(shipperAddress.shippingCountry)"
+        self.shipperCountry.text = "Phone Number: \(shipperAddress.shippingPhoneNumber)"
     }
 }

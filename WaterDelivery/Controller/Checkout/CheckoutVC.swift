@@ -107,8 +107,71 @@ class CheckoutVC: UIViewController {
     @objc func cardChoosen() {
         
     }
+    
+    @objc func shippingAddrress(sender: UIButton) {
+        if !sender.isSelected {
+            sender.isSelected = !sender.isSelected
+            if let _ = checkOutTBView.cellForRow(at: IndexPath.init(row: sender.tag, section: 0)) as? ShippingAddressTVC {
+                for (index,_) in shippingAddressArray.enumerated() {
+                    if index == sender.tag-1 {
+                        shippingAddressArray[index].addressSelected = true
+                    } else {
+                        shippingAddressArray[index].addressSelected = false
+                    }
+                }
+                checkOutTBView.reloadSections(IndexSet.init(integer: 0), with: .none)
+            }
+        }
+    }
+    
+    @objc func editBtnAction(sender: UIButton){
+        if sender.tag-1 < shippingAddressArray.count+1 {
+            let updateAddressVC = AddAddressVC()
+            updateAddressVC.addressScreenType = .updateAddress
+            updateAddressVC.addressModel = shippingAddressArray[sender.tag-1]
+            self.navigationController?.pushViewController(updateAddressVC, animated: true)
+        }
+    }
+    
+    @objc func deleteBtnAction(sender: UIButton){
+        if sender.tag-1 < shippingAddressArray.count {
+            deleteAddress(addressID: shippingAddressArray[sender.tag-1].addressID)
+        }
+    }
 }
 extension CheckoutVC{
+    func deleteAddress(addressID: String) {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let addressListURL : String = UrlName.baseUrl + UrlName.deleteAddressUrl + "\(addressID)"
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: addressListURL, method: .delete, parameters: nil, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    DispatchQueue.main.async {
+                        self.getAddressList()
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
     func getAddressList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
@@ -131,6 +194,9 @@ extension CheckoutVC{
                             shippingAddress.append(addressModel)
                         }
                         self.shippingAddressArray = shippingAddress
+                        if self.shippingAddressArray.count >= 1 {
+                            self.shippingAddressArray[0].addressSelected = true
+                        }
                     }
                     DispatchQueue.main.async {
                         self.checkOutTBView.reloadSections(IndexSet.init(integer: 0), with: .none)
@@ -186,7 +252,14 @@ extension CheckoutVC: UITableViewDataSource{
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ShippingAddressTVC.className(), for: indexPath) as! ShippingAddressTVC
+                cell.editBtn.tag = indexPath.row
+                cell.deleteBtn.tag = indexPath.row
+                cell.editBtn.addTarget(self, action: #selector(editBtnAction(sender:)), for: .touchUpInside)
+                cell.deleteBtn.addTarget(self, action: #selector(deleteBtnAction(sender:)), for: .touchUpInside)
+                cell.adddressSelectionBtn.isHidden = shippingAddressArray.count == 1
                 if indexPath.row-1 < shippingAddressArray.count {
+                    cell.adddressSelectionBtn.tag = indexPath.row
+                    cell.adddressSelectionBtn.addTarget(self, action: #selector(shippingAddrress(sender:)), for: .touchUpInside)
                     cell.setupCell(shipperAddress: shippingAddressArray[indexPath.row-1])
                 }
                 return cell

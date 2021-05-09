@@ -35,7 +35,7 @@ public class NetworkManager {
         switch method {
         case .get:
             break
-        case .post:
+        case .post,.put:
             let postString = self.getPostString(params: parameters!)
             request.httpBody = postString.data(using: .utf8)
         default:

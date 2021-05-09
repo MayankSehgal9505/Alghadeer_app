@@ -24,7 +24,7 @@ struct AddressModel {
     var shippingCustomerID = ""
     var latitude = ""
     var longitude = ""
-    
+    var addressSelected = false
     //MARK: Lifecycle
     init() {
     }

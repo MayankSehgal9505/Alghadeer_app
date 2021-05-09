@@ -113,13 +113,13 @@ extension UserProfileVC {
             let parameters = [
                 "name":nameTxtfld.text!,
                 "address":addressTxtfld.text!,
-                "gender":user.userGender,
-                "dob":user.userDOB,
+                "gender":"M",
+                "dob":"2017-3-2",
                 "country":countryTxtfld.text!,
-                "role_id":user.userRole,
-                "mobile_number":user.userPhoneNumber,
-                "latitude":user.userlatitude,
-                "longitude":user.userlongitude,
+                "role_id":"1",
+                "mobile_number":"7404732588",
+                "latitude":"19.4354",
+                "longitude":"67.45453",
                 "customer_id": Defaults.getUserID()
             ] as [String : Any]
             NetworkManager.viewControler = self

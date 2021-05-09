@@ -72,7 +72,9 @@ class AddAddressVC: UIViewController {
             self.view.makeToast("State/Country can't be empty", duration: 3.0, position: .center)
         } else if (postCodTxtFld.text?.isEmpty ??  true) {
             self.view.makeToast("PostCode/Zip can't be empty", duration: 3.0, position: .center)
-        } else if (phoneNumberTxtFld.text?.isEmpty ??  true) {
+        } else if (postCodTxtFld.text!.count != 6 ) {
+            self.view.makeToast("PostCode/Zip should bee of 6 characters", duration: 3.0, position: .center)
+        }else if (phoneNumberTxtFld.text?.isEmpty ??  true) {
             self.view.makeToast("Phone number can't be empty", duration: 3.0, position: .center)
         } else if (emailTxtfld.text?.isEmpty ??  true) {
             self.view.makeToast("Email can't be empty", duration: 3.0, position: .center)
@@ -109,7 +111,7 @@ extension AddAddressVC {
                 "email":emailTxtfld.text!,
                 "latitude":"19.079023",
                 "longitude":"72.908012",
-                "customer_id": Defaults.getUserID()
+                //"customer_id": Defaults.getUserID()
             ] as [String : Any]
             print(parameters)
             NetworkManager.viewControler = self

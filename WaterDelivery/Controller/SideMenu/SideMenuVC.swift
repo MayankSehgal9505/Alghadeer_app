@@ -27,14 +27,15 @@ class SideMenuVC: UIViewController {
         } else {
             appVersionLabel.isHidden = true
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAccepted(notification:)), name: NSNotification.Name(rawValue: "updateUserInfo"), object: nil)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "updateUserInfo"), object: nil)
+    }
 
+    @objc func updateAccepted(notification: Notification) {
+        sideMenuTableView.reloadSections(IndexSet.init(integer: 0), with: .none)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
         
     func setUpTableView() {
         self.sideMenuTableView.register(UINib.init(nibName: SideMenuHeaderCell.className(), bundle: nil), forCellReuseIdentifier: SideMenuHeaderCell.className())

@@ -56,6 +56,7 @@
 		4E71B9AD264491800094F72B /* SelectAmountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E71B9AB264491800094F72B /* SelectAmountVC.xib */; };
 		4E71B9B2264493A20094F72B /* SelectAmountTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E71B9B0264493A20094F72B /* SelectAmountTVC.swift */; };
 		4E71B9B3264493A20094F72B /* SelectAmountTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E71B9B1264493A20094F72B /* SelectAmountTVC.xib */; };
+		4EF93E6A264BE8E5006DEE83 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF93E69264BE8E5006DEE83 /* UserInfo.swift */; };
 		4EFCF87C263BF65E00F08AA7 /* CategoryProductsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCF87A263BF65E00F08AA7 /* CategoryProductsVC.swift */; };
 		4EFCF87D263BF65E00F08AA7 /* CategoryProductsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCF87B263BF65E00F08AA7 /* CategoryProductsVC.xib */; };
 		4EFCF892263C45C500F08AA7 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCF891263C45C500F08AA7 /* Utility.swift */; };
@@ -143,6 +144,7 @@
 		4E71B9AB264491800094F72B /* SelectAmountVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAmountVC.xib; sourceTree = "<group>"; };
 		4E71B9B0264493A20094F72B /* SelectAmountTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAmountTVC.swift; sourceTree = "<group>"; };
 		4E71B9B1264493A20094F72B /* SelectAmountTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAmountTVC.xib; sourceTree = "<group>"; };
+		4EF93E69264BE8E5006DEE83 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		4EFCF87A263BF65E00F08AA7 /* CategoryProductsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryProductsVC.swift; sourceTree = "<group>"; };
 		4EFCF87B263BF65E00F08AA7 /* CategoryProductsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryProductsVC.xib; sourceTree = "<group>"; };
 		4EFCF891263C45C500F08AA7 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 				4E13392F263D79F10060597E /* CartModel.swift */,
 				4E2373DA2646D01900016451 /* AddressModel.swift */,
 				4E2373E72647207200016451 /* UserModel.swift */,
+				4EF93E69264BE8E5006DEE83 /* UserInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				4E71B98C264477A80094F72B /* ScheduleTimeTVC.swift in Sources */,
 				4E71B99D264481580094F72B /* InfoTVC.swift in Sources */,
 				9965FB2F2631665300946AB6 /* AppDelegate.swift in Sources */,
+				4EF93E6A264BE8E5006DEE83 /* UserInfo.swift in Sources */,
 				4E71B978264430630094F72B /* CheckoutVC.swift in Sources */,
 				4E71B987264473E60094F72B /* SummaryTVC.swift in Sources */,
 				990A2589262E8D0200C96165 /* UIImageview.swift in Sources */,

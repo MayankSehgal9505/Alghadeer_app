@@ -52,7 +52,9 @@ class UserProfileVC: UIViewController {
             self.view.makeToast("Email should be valid", duration: 3.0, position: .center)
         }else if (addressTxtfld.text?.isEmpty ??  true) {
             self.view.makeToast("Address name can't be empty", duration: 3.0, position: .center)
-        } else if (countryTxtfld.text?.isEmpty ??  true) {
+        } else if (phoneNumberTxtFld.text?.isEmpty ??  true) {
+            self.view.makeToast("Phone Number can't be empty", duration: 3.0, position: .center)
+        }else if (countryTxtfld.text?.isEmpty ??  true) {
             self.view.makeToast("Country can't be empty", duration: 3.0, position: .center)
         } else {
             updateUserPrrofile()
@@ -88,6 +90,10 @@ extension UserProfileVC {
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let userDict = jsonValue[APIField.dataKey] {
                         self.user = UserModel.init(json: userDict)
+                        UserData.sharedInstance.userModel = self.user
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUserInfo"), object: self)
+                        }
                     }
                     DispatchQueue.main.async {
                         self.updateUI()
@@ -117,10 +123,11 @@ extension UserProfileVC {
                 "dob":"2017-3-2",
                 "country":countryTxtfld.text!,
                 "role_id":"1",
-                "mobile_number":"7404732588",
+                "mobile_number":phoneNumberTxtFld.text!,
                 "latitude":"19.4354",
                 "longitude":"67.45453",
-                "customer_id": Defaults.getUserID()
+                "customer_id": Defaults.getUserID(),
+                "email":emailTxtfld.text!
             ] as [String : Any]
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: setUserDetailsUrl, method: .put, parameters: parameters, completionHandler: { (json, status) in

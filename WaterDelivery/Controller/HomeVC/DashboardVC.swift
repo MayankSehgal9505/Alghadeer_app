@@ -28,6 +28,7 @@ class DashboardVC: UIViewController {
         getProductsList()
         getCategorysList()
         getCartCountList()
+        getUserProfile()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -299,6 +300,28 @@ extension DashboardVC {
                 }
                 DispatchQueue.main.async {
                     self.dismissHUD(isAnimated: true)
+                }
+            })
+        }
+    }
+    
+    func getUserProfile() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            let getUserDetailsUrl : String = UrlName.baseUrl + UrlName.getUserDetailUrl + Defaults.getUserID()
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: getUserDetailsUrl, method: .get, parameters: nil, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    if let userDict = jsonValue[APIField.dataKey] {
+                        let user = UserModel.init(json: userDict)
+                        UserData.sharedInstance.userModel = user
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUserInfo"), object: self)
+                        }
+                    }
                 }
             })
         }

@@ -31,7 +31,7 @@ class SideMenuHeaderCell: UITableViewCell {
     func setUpCell(){
         profileImageView.setCornerRadiusOfView(cornerRadiusValue: 50.0, setBorder: true, borderColor: .white, width: 2.0)
         userMobileNumber.text = "971 - \(Defaults.getUserPhoneNumber())"
-        self.nameLabel.text = "Dummy name"
+        self.nameLabel.text = UserData.sharedInstance.userModel.userName
 //        if let data = UserDefaults.standard.data(forKey: UserDefaultsKey.loginData),
 //            let loginDetails = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserModel {
 //            self.nameLabel.text = loginDetails.first_name + " " + loginDetails.last_name

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SDWebImage
+import Kingfisher
 class BannerCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var bgView: UIView!
@@ -17,18 +17,11 @@ class BannerCollectionViewCell: UICollectionViewCell {
     }
 
     func setupCell(bannerModel:BannerModel){
-        SDWebImageManager.shared.loadImage(with: URL.init(string: bannerModel.imageUrl), options: .highPriority, progress: nil, completed: { [weak self](image, data, error, cacheType, finished, url) in
-            guard let sself = self else { return }
-            if let _ = error {
-                // Do something with the error
-                return
-            }
-            guard let img = image else {
-                // No image handle this error
-                return
-            }
-            sself.bannerImg.image = img
-        })
+        if let imageURL = URL.init(string: bannerModel.imageUrl) {
+            bannerImg.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
+        } else {
+            bannerImg.image = UIImage(named: "placeholder")
+        }
     }
     
 }

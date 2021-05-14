@@ -56,6 +56,12 @@
 		4E71B9AD264491800094F72B /* SelectAmountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E71B9AB264491800094F72B /* SelectAmountVC.xib */; };
 		4E71B9B2264493A20094F72B /* SelectAmountTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E71B9B0264493A20094F72B /* SelectAmountTVC.swift */; };
 		4E71B9B3264493A20094F72B /* SelectAmountTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E71B9B1264493A20094F72B /* SelectAmountTVC.xib */; };
+		4E9AC58E264DB64400C2B6A8 /* SubscriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AC58C264DB64400C2B6A8 /* SubscriptionVC.swift */; };
+		4E9AC58F264DB64400C2B6A8 /* SubscriptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9AC58D264DB64400C2B6A8 /* SubscriptionVC.xib */; };
+		4EB2CC95264EEF45006BB4C9 /* SubscriptionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB2CC93264EEF45006BB4C9 /* SubscriptionTVC.swift */; };
+		4EB2CC96264EEF45006BB4C9 /* SubscriptionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EB2CC94264EEF45006BB4C9 /* SubscriptionTVC.xib */; };
+		4EB2CC9E264F0830006BB4C9 /* AddSubscriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB2CC9C264F0830006BB4C9 /* AddSubscriptionVC.swift */; };
+		4EB2CC9F264F0830006BB4C9 /* AddSubscriptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EB2CC9D264F0830006BB4C9 /* AddSubscriptionVC.xib */; };
 		4EF93E6A264BE8E5006DEE83 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF93E69264BE8E5006DEE83 /* UserInfo.swift */; };
 		4EFCF87C263BF65E00F08AA7 /* CategoryProductsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCF87A263BF65E00F08AA7 /* CategoryProductsVC.swift */; };
 		4EFCF87D263BF65E00F08AA7 /* CategoryProductsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCF87B263BF65E00F08AA7 /* CategoryProductsVC.xib */; };
@@ -144,6 +150,12 @@
 		4E71B9AB264491800094F72B /* SelectAmountVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAmountVC.xib; sourceTree = "<group>"; };
 		4E71B9B0264493A20094F72B /* SelectAmountTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAmountTVC.swift; sourceTree = "<group>"; };
 		4E71B9B1264493A20094F72B /* SelectAmountTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAmountTVC.xib; sourceTree = "<group>"; };
+		4E9AC58C264DB64400C2B6A8 /* SubscriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionVC.swift; sourceTree = "<group>"; };
+		4E9AC58D264DB64400C2B6A8 /* SubscriptionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubscriptionVC.xib; sourceTree = "<group>"; };
+		4EB2CC93264EEF45006BB4C9 /* SubscriptionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTVC.swift; sourceTree = "<group>"; };
+		4EB2CC94264EEF45006BB4C9 /* SubscriptionTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubscriptionTVC.xib; sourceTree = "<group>"; };
+		4EB2CC9C264F0830006BB4C9 /* AddSubscriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubscriptionVC.swift; sourceTree = "<group>"; };
+		4EB2CC9D264F0830006BB4C9 /* AddSubscriptionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSubscriptionVC.xib; sourceTree = "<group>"; };
 		4EF93E69264BE8E5006DEE83 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		4EFCF87A263BF65E00F08AA7 /* CategoryProductsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryProductsVC.swift; sourceTree = "<group>"; };
 		4EFCF87B263BF65E00F08AA7 /* CategoryProductsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryProductsVC.xib; sourceTree = "<group>"; };
@@ -309,6 +321,33 @@
 				4E71B9A22644823E0094F72B /* AddAddressVC.xib */,
 			);
 			path = AddAddress;
+			sourceTree = "<group>";
+		};
+		4EB2CC98264F07B5006BB4C9 /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				4E9AC58C264DB64400C2B6A8 /* SubscriptionVC.swift */,
+				4E9AC58D264DB64400C2B6A8 /* SubscriptionVC.xib */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
+		4EB2CC99264F07CE006BB4C9 /* SubscriptionCells */ = {
+			isa = PBXGroup;
+			children = (
+				4EB2CC93264EEF45006BB4C9 /* SubscriptionTVC.swift */,
+				4EB2CC94264EEF45006BB4C9 /* SubscriptionTVC.xib */,
+			);
+			path = SubscriptionCells;
+			sourceTree = "<group>";
+		};
+		4EB2CC9A264F07E6006BB4C9 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				4E66980B2645592E008DCA11 /* UserProfileVC.swift */,
+				4E66980C2645592E008DCA11 /* UserProfileVC.xib */,
+			);
+			path = UserProfile;
 			sourceTree = "<group>";
 		};
 		4EDAEAAE26442DF7001D4819 /* CartList */ = {
@@ -494,6 +533,7 @@
 				4E13392D263D3CC10060597E /* CartCells */,
 				4E71B9902644790C0094F72B /* CheckOutVCCells */,
 				4E6697F22645304F008DCA11 /* SelectAmountCells */,
+				4EB2CC99264F07CE006BB4C9 /* SubscriptionCells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -513,8 +553,10 @@
 				4E71B9A0264481DD0094F72B /* Checkout */,
 				4E71B9AF264491860094F72B /* AddAddress */,
 				4E6697F126453038008DCA11 /* SelectAmount */,
-				4E66980B2645592E008DCA11 /* UserProfileVC.swift */,
-				4E66980C2645592E008DCA11 /* UserProfileVC.xib */,
+				4EB2CC9A264F07E6006BB4C9 /* UserProfile */,
+				4EB2CC98264F07B5006BB4C9 /* Subscription */,
+				4EB2CC9C264F0830006BB4C9 /* AddSubscriptionVC.swift */,
+				4EB2CC9D264F0830006BB4C9 /* AddSubscriptionVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -603,6 +645,7 @@
 				4EFCF87D263BF65E00F08AA7 /* CategoryProductsVC.xib in Resources */,
 				990A255C262E864A00C96165 /* Assets.xcassets in Resources */,
 				4E1FEEC32639A259009010A6 /* BannerTVC.xib in Resources */,
+				4EB2CC9F264F0830006BB4C9 /* AddSubscriptionVC.xib in Resources */,
 				4E1FEECE2639A60F009010A6 /* ProductsCollectionCell.xib in Resources */,
 				4E71B99926447E840094F72B /* CardTVC.xib in Resources */,
 				9965FB262631663800946AB6 /* CategoryVC.xib in Resources */,
@@ -616,10 +659,12 @@
 				4E71B9B3264493A20094F72B /* SelectAmountTVC.xib in Resources */,
 				4E133926263D2BA70060597E /* CartVC.xib in Resources */,
 				9965FB292631663800946AB6 /* LoginVC.xib in Resources */,
+				4EB2CC96264EEF45006BB4C9 /* SubscriptionTVC.xib in Resources */,
 				990A255A262E864800C96165 /* Main.storyboard in Resources */,
 				4E71B994264479470094F72B /* PaymentTVC.xib in Resources */,
 				4E4C439D26388AD5002C4609 /* BannerCollectionViewCell.xib in Resources */,
 				4E71B988264473E60094F72B /* SummaryTVC.xib in Resources */,
+				4E9AC58F264DB64400C2B6A8 /* SubscriptionVC.xib in Resources */,
 				9965FB5F2631725100946AB6 /* DetailVC.xib in Resources */,
 				4E1FEEDC2639AC2C009010A6 /* CategoryCollectionCell.xib in Resources */,
 				4E13392B263D3CB90060597E /* CartTVC.xib in Resources */,
@@ -700,8 +745,10 @@
 				990A258B262E8D0200C96165 /* SignupModel.swift in Sources */,
 				990A2584262E8D0200C96165 /* UIView.swift in Sources */,
 				4E71B9A32644823E0094F72B /* AddAddressVC.swift in Sources */,
+				4EB2CC95264EEF45006BB4C9 /* SubscriptionTVC.swift in Sources */,
 				990A2587262E8D0200C96165 /* NSObject.swift in Sources */,
 				990A2585262E8D0200C96165 /* ImagePickerManager.swift in Sources */,
+				4E9AC58E264DB64400C2B6A8 /* SubscriptionVC.swift in Sources */,
 				4E71B9AC264491800094F72B /* SelectAmountVC.swift in Sources */,
 				4EFCF87C263BF65E00F08AA7 /* CategoryProductsVC.swift in Sources */,
 				4E71B97D264435260094F72B /* ShippingTitleTVC.swift in Sources */,
@@ -709,6 +756,7 @@
 				9965FB232631663800946AB6 /* OTPVC.swift in Sources */,
 				4E71B993264479470094F72B /* PaymentTVC.swift in Sources */,
 				990A25CF262EA79B00C96165 /* SideMenuHeaderCell.swift in Sources */,
+				4EB2CC9E264F0830006BB4C9 /* AddSubscriptionVC.swift in Sources */,
 				4E1FEEC82639A4F4009010A6 /* ProductsTVC.swift in Sources */,
 				4E133925263D2BA70060597E /* CartVC.swift in Sources */,
 				4E4C43C1263979C8002C4609 /* CategoryModel.swift in Sources */,

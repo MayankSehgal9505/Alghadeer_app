@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SDWebImage
+import Kingfisher
 
 class ProductsCollectionCell: UICollectionViewCell {
 
@@ -25,18 +25,11 @@ class ProductsCollectionCell: UICollectionViewCell {
         imageBaseView.backgroundColor = .white
         productPriceDtailsView.isHidden = true
         productName.text = productModel.name
-        SDWebImageManager.shared.loadImage(with: URL.init(string: productModel.productImage), options: .highPriority, progress: nil, completed: { [weak self](image, data, error, cacheType, finished, url) in
-            guard let sself = self else { return }
-            if let _ = error {
-                // Do something with the error
-                return
-            }
-            guard let img = image else {
-                // No image handle this error
-                return
-            }
-            sself.productImage.image = img
-        })
+        if let imageURL = URL.init(string: productModel.productImage) {
+            productImage.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
+        } else {
+            productImage.image = UIImage(named: "placeholder")
+        }
     }
     
     func setupCellwithDetails(productModel:ProductModel){
@@ -44,17 +37,10 @@ class ProductsCollectionCell: UICollectionViewCell {
         productPriceDtailsView.isHidden = false
         productprice.text = "AED \(productModel.sellingPrice)"
         productName.text = productModel.name
-        SDWebImageManager.shared.loadImage(with: URL.init(string: productModel.productImage), options: .highPriority, progress: nil, completed: { [weak self](image, data, error, cacheType, finished, url) in
-            guard let sself = self else { return }
-            if let _ = error {
-                // Do something with the error
-                return
-            }
-            guard let img = image else {
-                // No image handle this error
-                return
-            }
-            sself.productImage.image = img
-        })
+        if let imageURL = URL.init(string: productModel.productImage) {
+            productImage.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
+        } else {
+            productImage.image = UIImage(named: "placeholder")
+        }
     }
 }

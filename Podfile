@@ -13,5 +13,4 @@ pod 'SwiftyJSON', '~> 4.0'
 pod 'Kingfisher'
 pod 'Alamofire'
 pod 'REFrostedViewController'
-pod 'SDWebImage'
 end

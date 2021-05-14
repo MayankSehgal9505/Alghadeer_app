@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SDWebImage
+import Kingfisher
 class CartTVC: UITableViewCell {
 
     @IBOutlet weak var productImg: UIImageView!
@@ -46,17 +46,10 @@ class CartTVC: UITableViewCell {
         if let totalPrice = Double(cartItemObj.totalPrice) {
             priceLbl.text = "AED \(totalPrice)"
         }
-        SDWebImageManager.shared.loadImage(with: URL.init(string: cartItemObj.productImage), options: .highPriority, progress: nil, completed: { [weak self](image, data, error, cacheType, finished, url) in
-            guard let sself = self else { return }
-            if let _ = error {
-                // Do something with the error
-                return
-            }
-            guard let img = image else {
-                // No image handle this error
-                return
-            }
-            sself.productImg.image = img
-        })
+        if let imageURL = URL.init(string: cartItemObj.productImage) {
+            productImg.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
+        } else {
+            productImg.image = UIImage(named: "placeholder")
+        }
     }
 }

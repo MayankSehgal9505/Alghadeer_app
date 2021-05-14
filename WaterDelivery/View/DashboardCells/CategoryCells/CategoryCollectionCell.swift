@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SDWebImage
+import Kingfisher
 
 class CategoryCollectionCell: UICollectionViewCell {
 
@@ -21,18 +21,11 @@ class CategoryCollectionCell: UICollectionViewCell {
     func setupCell(categoryModel:CategoryModel){
         categoryName.text = categoryModel.name
         categoryDetail.text = categoryModel.details
-        SDWebImageManager.shared.loadImage(with: URL.init(string: categoryModel.categoryImage), options: .highPriority, progress: nil, completed: { [weak self](image, data, error, cacheType, finished, url) in
-            guard let sself = self else { return }
-            if let _ = error {
-                // Do something with the error
-                return
-            }
-            guard let img = image else {
-                // No image handle this error
-                return
-            }
-            sself.categoryID.image = img
-        })
+        if let imageURL = URL.init(string: categoryModel.categoryImage) {
+            categoryID.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
+        } else {
+            categoryID.image = UIImage(named: "placeholder")
+        }
     }
 
 }

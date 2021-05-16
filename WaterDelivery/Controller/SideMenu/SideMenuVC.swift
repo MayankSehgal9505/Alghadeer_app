@@ -134,19 +134,22 @@ extension SideMenuVC : UITableViewDelegate {
             controllerToMove = UserProfileVC(nibName: UserProfileVC.className(), bundle: nil)
             moveToController(controllerToMove)
         case 2:
-            break
+            print("wallet")
         case 3:
             controllerToMove = SubscriptionVC(nibName: SubscriptionVC.className(), bundle: nil)
             moveToController(controllerToMove)
         case 4:
-            print("Refer a Friend")
+            print("deliverriies")
         case 5:
-            print("FAQ")
+            print("Refer a friend")
         case 6:
-            print("Scanner ")
+            controllerToMove = FAQVC(nibName: FAQVC.className(), bundle: nil)
+            moveToController(controllerToMove)
         case 7:
-            print("Contact Us")
-        case 8: break
+            print("scanner")
+        case 8:
+            controllerToMove = ContactUsVC(nibName: ContactUsVC.className(), bundle: nil)
+            moveToController(controllerToMove)
         case 9:
             self.showLogoutAlert()
         default:

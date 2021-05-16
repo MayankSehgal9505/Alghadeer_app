@@ -1,5 +1,4 @@
 PODS:
-  - Alamofire (5.4.0)
   - IQKeyboardManagerSwift (6.5.6)
   - Kingfisher (5.15.7):
     - Kingfisher/Core (= 5.15.7)
@@ -10,7 +9,6 @@ PODS:
   - Toast-Swift (4.0.1)
 
 DEPENDENCIES:
-  - Alamofire
   - IQKeyboardManagerSwift
   - Kingfisher
   - MBProgressHUD
@@ -20,7 +18,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Alamofire
     - IQKeyboardManagerSwift
     - Kingfisher
     - MBProgressHUD
@@ -29,7 +26,6 @@ SPEC REPOS:
     - Toast-Swift
 
 SPEC CHECKSUMS:
-  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
@@ -37,6 +33,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
 
-PODFILE CHECKSUM: 494656925676640698c6e21e750176a6814f8f61
+PODFILE CHECKSUM: 3fc3efe40b1a552e1c0a380d171e31015e05a2c1
 
 COCOAPODS: 1.10.1

@@ -13,9 +13,7 @@ class Utility {
     /// If user is already logged in
     static func checkIfAlreadyLogin(vc: UIViewController) {
         if Defaults.isUserLoggedIn() {
-            //makeRootViewController(vc: vc)
-            loginRootVC()
-
+            makeRootViewController(vc: vc)
         } else {
             loginRootVC()
         }
@@ -35,9 +33,9 @@ class Utility {
     }
     
     static func loginRootVC() {
-        //let loginVC = LoginVC()
-        let subscription = SubscriptionVC()
-        let rootVC = UINavigationController(rootViewController: subscription)
+        let loginVC = LoginVC()
+        //let subscription = SubscriptionVC()
+        let rootVC = UINavigationController(rootViewController: loginVC)
         appDelegate.window?.rootViewController = rootVC
         appDelegate.window?.makeKeyAndVisible()
     }

@@ -25,7 +25,9 @@ struct ProductModel {
     var brandName = ""
     var unitAttributeId = ""
     var category: CategoryModel = CategoryModel()
-    
+    var productSelected = false
+    var initialQuantity = "1"
+    var addQuantity = "1"
     //MARK: Lifecycle
     init() {
     }

@@ -21,10 +21,10 @@
                         <rect key="frame" x="15" y="10" width="299" height="297"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="FyV-Dh-99u">
-                                <rect key="frame" x="10" y="10" width="279" height="227"/>
+                                <rect key="frame" x="10" y="10" width="279" height="217"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lfe-9K-NbK">
-                                        <rect key="frame" x="0.0" y="101" width="25" height="25"/>
+                                        <rect key="frame" x="0.0" y="96" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="snb-aO-RVz"/>
                                             <constraint firstAttribute="width" constant="25" id="zbR-EF-lWZ"/>
@@ -33,7 +33,7 @@
                                         <state key="selected" image="radioSelected"/>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="TdM-Pv-QWv">
-                                        <rect key="frame" x="30" y="5.5" width="249" height="216"/>
+                                        <rect key="frame" x="30" y="0.5" width="249" height="216"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1X-To-IWl">
                                                 <rect key="frame" x="0.0" y="0.0" width="249" height="50"/>
@@ -116,47 +116,52 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O0D-LR-b8o">
-                                <rect key="frame" x="10" y="247" width="279" height="40"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tpX-O2-ZxS">
+                                <rect key="frame" x="10" y="237" width="279" height="50"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FpB-Za-QzI">
-                                        <rect key="frame" x="10" y="5" width="259" height="30"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O0D-LR-b8o">
+                                        <rect key="frame" x="0.0" y="0.0" width="279" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kwc-i6-Pz4">
-                                                <rect key="frame" x="0.0" y="0.0" width="119.5" height="30"/>
-                                                <color key="backgroundColor" red="0.090196078430000007" green="0.33333333329999998" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" title="Edit">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abe-24-WON">
-                                                <rect key="frame" x="139.5" y="0.0" width="119.5" height="30"/>
-                                                <color key="backgroundColor" red="0.090196078430000007" green="0.33333333329999998" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" title="Delete">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FpB-Za-QzI">
+                                                <rect key="frame" x="10" y="5" width="259" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kwc-i6-Pz4">
+                                                        <rect key="frame" x="0.0" y="0.0" width="119.5" height="40"/>
+                                                        <color key="backgroundColor" red="0.090196078430000007" green="0.33333333329999998" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <state key="normal" title="Edit">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abe-24-WON">
+                                                        <rect key="frame" x="139.5" y="0.0" width="119.5" height="40"/>
+                                                        <color key="backgroundColor" red="0.090196078430000007" green="0.33333333329999998" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <state key="normal" title="Delete">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="FpB-Za-QzI" secondAttribute="bottom" constant="5" id="EmA-H8-xKW"/>
+                                            <constraint firstItem="FpB-Za-QzI" firstAttribute="leading" secondItem="O0D-LR-b8o" secondAttribute="leading" constant="10" id="RjK-Sl-peF"/>
+                                            <constraint firstAttribute="trailing" secondItem="FpB-Za-QzI" secondAttribute="trailing" constant="10" id="UuV-o2-EsG"/>
+                                            <constraint firstItem="FpB-Za-QzI" firstAttribute="top" secondItem="O0D-LR-b8o" secondAttribute="top" constant="5" id="dGG-mZ-pVU"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="FpB-Za-QzI" secondAttribute="bottom" constant="5" id="EmA-H8-xKW"/>
-                                    <constraint firstItem="FpB-Za-QzI" firstAttribute="leading" secondItem="O0D-LR-b8o" secondAttribute="leading" constant="10" id="RjK-Sl-peF"/>
-                                    <constraint firstAttribute="trailing" secondItem="FpB-Za-QzI" secondAttribute="trailing" constant="10" id="UuV-o2-EsG"/>
-                                    <constraint firstItem="FpB-Za-QzI" firstAttribute="top" secondItem="O0D-LR-b8o" secondAttribute="top" constant="5" id="dGG-mZ-pVU"/>
-                                </constraints>
-                            </view>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="O0D-LR-b8o" secondAttribute="trailing" constant="10" id="Eus-ID-Fyz"/>
+                            <constraint firstItem="tpX-O2-ZxS" firstAttribute="top" secondItem="FyV-Dh-99u" secondAttribute="bottom" constant="10" id="9TJ-fj-rZL"/>
+                            <constraint firstItem="tpX-O2-ZxS" firstAttribute="leading" secondItem="o9c-Yo-ShW" secondAttribute="leading" constant="10" id="9ur-ln-QxQ"/>
+                            <constraint firstAttribute="trailing" secondItem="tpX-O2-ZxS" secondAttribute="trailing" constant="10" id="BNd-bZ-701"/>
                             <constraint firstItem="FyV-Dh-99u" firstAttribute="leading" secondItem="o9c-Yo-ShW" secondAttribute="leading" constant="10" id="Iul-2O-Vnd"/>
-                            <constraint firstItem="O0D-LR-b8o" firstAttribute="top" secondItem="FyV-Dh-99u" secondAttribute="bottom" constant="10" id="Lfp-QE-TDx"/>
                             <constraint firstItem="FyV-Dh-99u" firstAttribute="top" secondItem="o9c-Yo-ShW" secondAttribute="top" constant="10" id="OVC-6D-roi"/>
+                            <constraint firstAttribute="bottom" secondItem="tpX-O2-ZxS" secondAttribute="bottom" constant="10" id="PcF-GJ-XfV"/>
                             <constraint firstAttribute="trailing" secondItem="FyV-Dh-99u" secondAttribute="trailing" constant="10" id="Qi7-JM-9ga"/>
-                            <constraint firstAttribute="bottom" secondItem="O0D-LR-b8o" secondAttribute="bottom" constant="10" id="hg0-qi-RTg"/>
-                            <constraint firstItem="O0D-LR-b8o" firstAttribute="leading" secondItem="o9c-Yo-ShW" secondAttribute="leading" constant="10" id="mvd-dc-oGF"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -170,9 +175,10 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="adddressSelectionBtn" destination="Lfe-9K-NbK" id="Af7-cY-OjT"/>
-                <outlet property="deleteBtn" destination="Abe-24-WON" id="RxX-IU-BvN"/>
-                <outlet property="editBtn" destination="Kwc-i6-Pz4" id="i8R-fv-4n6"/>
+                <outlet property="deleteBtn" destination="Abe-24-WON" id="wkC-Lt-kFW"/>
+                <outlet property="editBtn" destination="Kwc-i6-Pz4" id="gVv-Mw-1mD"/>
                 <outlet property="greyView" destination="o9c-Yo-ShW" id="w6Z-gH-mWR"/>
+                <outlet property="manageAddressView" destination="O0D-LR-b8o" id="dyT-JL-6NX"/>
                 <outlet property="shipperCountry" destination="moi-LJ-Cwa" id="L0x-h9-EXG"/>
                 <outlet property="shipperName" destination="MDX-Bn-6cS" id="AUX-qG-o0f"/>
                 <outlet property="shipperstreetAddress" destination="6C8-dE-Xja" id="Wo1-Am-gbW"/>

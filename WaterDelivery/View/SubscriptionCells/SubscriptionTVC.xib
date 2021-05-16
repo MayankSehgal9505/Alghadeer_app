@@ -175,6 +175,8 @@
                 <outlet property="cancelBtn" destination="tM0-hA-FBG" id="1bF-4S-M2M"/>
                 <outlet property="imageBGView" destination="PEu-iY-WeH" id="uV9-vp-gTg"/>
                 <outlet property="pauseReactivateBtn" destination="HuE-OV-6HC" id="Vwd-yo-zE7"/>
+                <outlet property="productName" destination="VBj-u7-Mvh" id="p8f-4K-ONw"/>
+                <outlet property="produuctAddress" destination="dNs-nO-6CF" id="GO9-0c-d7g"/>
                 <outlet property="subscribedProductImg" destination="NK6-e8-ysi" id="bDV-Rp-xwM"/>
             </connections>
             <point key="canvasLocation" x="-62.318840579710148" y="162.72321428571428"/>

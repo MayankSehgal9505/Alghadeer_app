@@ -177,7 +177,7 @@ extension CartVC {
                 "customer_id":Defaults.getUserID(),
                 "product_id":cartItem.productID,
                 "unit_atrributes_id":"",
-                "unit_measure":"",
+                "unit_measure":"litter",
                 "price":cartItem.itemPrice,
                 "quantity": eventType == .removeProduct ? cartItem.cartQuantity : "1",
                 "event":eventType == .decreaseQuantity && cartItem.cartQuantity == "1" ?   "remove"   : eventType.eventString

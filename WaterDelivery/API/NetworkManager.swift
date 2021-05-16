@@ -6,9 +6,19 @@
 //
 
 import Foundation
-import Alamofire
 import SwiftyJSON
 
+ enum HTTPMethod: String {
+    case options = "OPTIONS"
+    case get     = "GET"
+    case head    = "HEAD"
+    case post    = "POST"
+    case put     = "PUT"
+    case patch   = "PATCH"
+    case delete  = "DELETE"
+    case trace   = "TRACE"
+    case connect = "CONNECT"
+}
 /// Class for making Api calls
 public class NetworkManager {
     
@@ -48,15 +58,19 @@ public class NetworkManager {
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
             do {
-                let json = try JSON.init(data: data!)
-                print(json)
-                if let sessionExpired = json["Authorization"].bool, sessionExpired == false,let vc = NetworkManager.viewControler {
-                    DispatchQueue.main.async {
-                        vc.showSessionExpiredAlert()
+                if let dataRecieved = data {
+                    let json = try JSON.init(data: data!)
+                    print(json)
+                    if let sessionExpired = json["Authorization"].bool, sessionExpired == false,let vc = NetworkManager.viewControler {
+                        DispatchQueue.main.async {
+                            vc.showSessionExpiredAlert()
+                        }
+                        completionHandler(json,nil)
+                    } else {
+                        completionHandler(json,nil)
                     }
-                    completionHandler(json,nil)
                 } else {
-                    completionHandler(json,nil)
+                    completionHandler(nil,"error")
                 }
             } catch {
                 completionHandler(nil,error.localizedDescription)

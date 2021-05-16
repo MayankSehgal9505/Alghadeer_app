@@ -33,6 +33,26 @@
 		4E4C43C1263979C8002C4609 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4C43C0263979C8002C4609 /* CategoryModel.swift */; };
 		4E66980D2645592E008DCA11 /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E66980B2645592E008DCA11 /* UserProfileVC.swift */; };
 		4E66980E2645592E008DCA11 /* UserProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E66980C2645592E008DCA11 /* UserProfileVC.xib */; };
+		4E69C4392650025100FF098E /* SubscriptionSlotTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C4372650025100FF098E /* SubscriptionSlotTVC.swift */; };
+		4E69C43A2650025100FF098E /* SubscriptionSlotTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E69C4382650025100FF098E /* SubscriptionSlotTVC.xib */; };
+		4E69C44F26500C7F00FF098E /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C44E26500C7E00FF098E /* NetworkReachabilityManager.swift */; };
+		4E69C453265109BA00FF098E /* SubscriptionProductsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C451265109BA00FF098E /* SubscriptionProductsTVC.swift */; };
+		4E69C454265109BA00FF098E /* SubscriptionProductsTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E69C452265109BA00FF098E /* SubscriptionProductsTVC.xib */; };
+		4E69C45826510B7800FF098E /* SubscriptionProductCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C45626510B7800FF098E /* SubscriptionProductCollectionCell.swift */; };
+		4E69C45926510B7800FF098E /* SubscriptionProductCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E69C45726510B7800FF098E /* SubscriptionProductCollectionCell.xib */; };
+		4E69C46F2651284A00FF098E /* SelectProductTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C46D2651284A00FF098E /* SelectProductTVC.swift */; };
+		4E69C4702651284A00FF098E /* SelectProductTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E69C46E2651284A00FF098E /* SelectProductTVC.xib */; };
+		4E69C47C265158A800FF098E /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C47B265158A800FF098E /* Date.swift */; };
+		4E69C4802651647F00FF098E /* SubscriptionAddressTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C47E2651647F00FF098E /* SubscriptionAddressTVC.swift */; };
+		4E69C4812651647F00FF098E /* SubscriptionAddressTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E69C47F2651647F00FF098E /* SubscriptionAddressTVC.xib */; };
+		4E69C4852651724300FF098E /* FAQVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C4832651724300FF098E /* FAQVC.swift */; };
+		4E69C4862651724300FF098E /* FAQVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E69C4842651724300FF098E /* FAQVC.xib */; };
+		4E69C4892651A66800FF098E /* FAQModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C4882651A66800FF098E /* FAQModel.swift */; };
+		4E69C48E2651A7A500FF098E /* FAQTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C48C2651A7A500FF098E /* FAQTVC.swift */; };
+		4E69C48F2651A7A500FF098E /* FAQTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E69C48D2651A7A500FF098E /* FAQTVC.xib */; };
+		4E69C4942651AF3B00FF098E /* SubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C4932651AF3B00FF098E /* SubscriptionModel.swift */; };
+		4E69C4982651B33900FF098E /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C4962651B33900FF098E /* ContactUsVC.swift */; };
+		4E69C4992651B33900FF098E /* ContactUsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E69C4972651B33900FF098E /* ContactUsVC.xib */; };
 		4E71B978264430630094F72B /* CheckoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E71B976264430620094F72B /* CheckoutVC.swift */; };
 		4E71B979264430630094F72B /* CheckoutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E71B977264430630094F72B /* CheckoutVC.xib */; };
 		4E71B97D264435260094F72B /* ShippingTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E71B97B264435260094F72B /* ShippingTitleTVC.swift */; };
@@ -127,6 +147,26 @@
 		4E4C43C0263979C8002C4609 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		4E66980B2645592E008DCA11 /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
 		4E66980C2645592E008DCA11 /* UserProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileVC.xib; sourceTree = "<group>"; };
+		4E69C4372650025100FF098E /* SubscriptionSlotTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSlotTVC.swift; sourceTree = "<group>"; };
+		4E69C4382650025100FF098E /* SubscriptionSlotTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubscriptionSlotTVC.xib; sourceTree = "<group>"; };
+		4E69C44E26500C7E00FF098E /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
+		4E69C451265109BA00FF098E /* SubscriptionProductsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionProductsTVC.swift; sourceTree = "<group>"; };
+		4E69C452265109BA00FF098E /* SubscriptionProductsTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubscriptionProductsTVC.xib; sourceTree = "<group>"; };
+		4E69C45626510B7800FF098E /* SubscriptionProductCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionProductCollectionCell.swift; sourceTree = "<group>"; };
+		4E69C45726510B7800FF098E /* SubscriptionProductCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubscriptionProductCollectionCell.xib; sourceTree = "<group>"; };
+		4E69C46D2651284A00FF098E /* SelectProductTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProductTVC.swift; sourceTree = "<group>"; };
+		4E69C46E2651284A00FF098E /* SelectProductTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectProductTVC.xib; sourceTree = "<group>"; };
+		4E69C47B265158A800FF098E /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		4E69C47E2651647F00FF098E /* SubscriptionAddressTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAddressTVC.swift; sourceTree = "<group>"; };
+		4E69C47F2651647F00FF098E /* SubscriptionAddressTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubscriptionAddressTVC.xib; sourceTree = "<group>"; };
+		4E69C4832651724300FF098E /* FAQVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQVC.swift; sourceTree = "<group>"; };
+		4E69C4842651724300FF098E /* FAQVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FAQVC.xib; sourceTree = "<group>"; };
+		4E69C4882651A66800FF098E /* FAQModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQModel.swift; sourceTree = "<group>"; };
+		4E69C48C2651A7A500FF098E /* FAQTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQTVC.swift; sourceTree = "<group>"; };
+		4E69C48D2651A7A500FF098E /* FAQTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FAQTVC.xib; sourceTree = "<group>"; };
+		4E69C4932651AF3B00FF098E /* SubscriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionModel.swift; sourceTree = "<group>"; };
+		4E69C4962651B33900FF098E /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
+		4E69C4972651B33900FF098E /* ContactUsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactUsVC.xib; sourceTree = "<group>"; };
 		4E71B976264430620094F72B /* CheckoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutVC.swift; sourceTree = "<group>"; };
 		4E71B977264430630094F72B /* CheckoutVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutVC.xib; sourceTree = "<group>"; };
 		4E71B97B264435260094F72B /* ShippingTitleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingTitleTVC.swift; sourceTree = "<group>"; };
@@ -282,6 +322,91 @@
 				4E71B9B1264493A20094F72B /* SelectAmountTVC.xib */,
 			);
 			path = SelectAmountCells;
+			sourceTree = "<group>";
+		};
+		4E69C4722651285D00FF098E /* SlotCells */ = {
+			isa = PBXGroup;
+			children = (
+				4E69C4372650025100FF098E /* SubscriptionSlotTVC.swift */,
+				4E69C4382650025100FF098E /* SubscriptionSlotTVC.xib */,
+			);
+			path = SlotCells;
+			sourceTree = "<group>";
+		};
+		4E69C4742651287100FF098E /* SubscriptionProductCells */ = {
+			isa = PBXGroup;
+			children = (
+				4E69C451265109BA00FF098E /* SubscriptionProductsTVC.swift */,
+				4E69C452265109BA00FF098E /* SubscriptionProductsTVC.xib */,
+				4E69C45626510B7800FF098E /* SubscriptionProductCollectionCell.swift */,
+				4E69C45726510B7800FF098E /* SubscriptionProductCollectionCell.xib */,
+			);
+			path = SubscriptionProductCells;
+			sourceTree = "<group>";
+		};
+		4E69C4762651288800FF098E /* SelectedProductsCells */ = {
+			isa = PBXGroup;
+			children = (
+				4E69C46D2651284A00FF098E /* SelectProductTVC.swift */,
+				4E69C46E2651284A00FF098E /* SelectProductTVC.xib */,
+			);
+			path = SelectedProductsCells;
+			sourceTree = "<group>";
+		};
+		4E69C4782651289F00FF098E /* AddSubscriptionCells */ = {
+			isa = PBXGroup;
+			children = (
+				4E69C4722651285D00FF098E /* SlotCells */,
+				4E69C4742651287100FF098E /* SubscriptionProductCells */,
+				4E69C4762651288800FF098E /* SelectedProductsCells */,
+				4E69C49D2651B6DF00FF098E /* SubscriptionAddressCells */,
+			);
+			path = AddSubscriptionCells;
+			sourceTree = "<group>";
+		};
+		4E69C479265128C400FF098E /* AddSubscriptionVC */ = {
+			isa = PBXGroup;
+			children = (
+				4EB2CC9C264F0830006BB4C9 /* AddSubscriptionVC.swift */,
+				4EB2CC9D264F0830006BB4C9 /* AddSubscriptionVC.xib */,
+			);
+			path = AddSubscriptionVC;
+			sourceTree = "<group>";
+		};
+		4E69C4912651AED200FF098E /* Faq */ = {
+			isa = PBXGroup;
+			children = (
+				4E69C4832651724300FF098E /* FAQVC.swift */,
+				4E69C4842651724300FF098E /* FAQVC.xib */,
+			);
+			path = Faq;
+			sourceTree = "<group>";
+		};
+		4E69C4922651AEE300FF098E /* FaqCells */ = {
+			isa = PBXGroup;
+			children = (
+				4E69C48C2651A7A500FF098E /* FAQTVC.swift */,
+				4E69C48D2651A7A500FF098E /* FAQTVC.xib */,
+			);
+			path = FaqCells;
+			sourceTree = "<group>";
+		};
+		4E69C49B2651B4E900FF098E /* ContactUs */ = {
+			isa = PBXGroup;
+			children = (
+				4E69C4962651B33900FF098E /* ContactUsVC.swift */,
+				4E69C4972651B33900FF098E /* ContactUsVC.xib */,
+			);
+			path = ContactUs;
+			sourceTree = "<group>";
+		};
+		4E69C49D2651B6DF00FF098E /* SubscriptionAddressCells */ = {
+			isa = PBXGroup;
+			children = (
+				4E69C47E2651647F00FF098E /* SubscriptionAddressTVC.swift */,
+				4E69C47F2651647F00FF098E /* SubscriptionAddressTVC.xib */,
+			);
+			path = SubscriptionAddressCells;
 			sourceTree = "<group>";
 		};
 		4E71B9902644790C0094F72B /* CheckOutVCCells */ = {
@@ -498,6 +623,7 @@
 				990A257D262E8D0200C96165 /* UIViewController.swift */,
 				990A257E262E8D0200C96165 /* UIImageview.swift */,
 				990A257F262E8D0200C96165 /* LocationManager.swift */,
+				4E69C47B265158A800FF098E /* Date.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -513,6 +639,8 @@
 				4E2373DA2646D01900016451 /* AddressModel.swift */,
 				4E2373E72647207200016451 /* UserModel.swift */,
 				4EF93E69264BE8E5006DEE83 /* UserInfo.swift */,
+				4E69C4882651A66800FF098E /* FAQModel.swift */,
+				4E69C4932651AF3B00FF098E /* SubscriptionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -534,6 +662,8 @@
 				4E71B9902644790C0094F72B /* CheckOutVCCells */,
 				4E6697F22645304F008DCA11 /* SelectAmountCells */,
 				4EB2CC99264F07CE006BB4C9 /* SubscriptionCells */,
+				4E69C4782651289F00FF098E /* AddSubscriptionCells */,
+				4E69C4922651AEE300FF098E /* FaqCells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -555,8 +685,9 @@
 				4E6697F126453038008DCA11 /* SelectAmount */,
 				4EB2CC9A264F07E6006BB4C9 /* UserProfile */,
 				4EB2CC98264F07B5006BB4C9 /* Subscription */,
-				4EB2CC9C264F0830006BB4C9 /* AddSubscriptionVC.swift */,
-				4EB2CC9D264F0830006BB4C9 /* AddSubscriptionVC.xib */,
+				4E69C479265128C400FF098E /* AddSubscriptionVC */,
+				4E69C4912651AED200FF098E /* Faq */,
+				4E69C49B2651B4E900FF098E /* ContactUs */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -572,6 +703,7 @@
 		9965FB312631666D00946AB6 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				4E69C44E26500C7E00FF098E /* NetworkReachabilityManager.swift */,
 				9965FB322631666D00946AB6 /* NetworkManager.swift */,
 			);
 			path = API;
@@ -647,11 +779,16 @@
 				4E1FEEC32639A259009010A6 /* BannerTVC.xib in Resources */,
 				4EB2CC9F264F0830006BB4C9 /* AddSubscriptionVC.xib in Resources */,
 				4E1FEECE2639A60F009010A6 /* ProductsCollectionCell.xib in Resources */,
+				4E69C4812651647F00FF098E /* SubscriptionAddressTVC.xib in Resources */,
 				4E71B99926447E840094F72B /* CardTVC.xib in Resources */,
 				9965FB262631663800946AB6 /* CategoryVC.xib in Resources */,
+				4E69C4862651724300FF098E /* FAQVC.xib in Resources */,
 				4E71B9A42644823E0094F72B /* AddAddressVC.xib in Resources */,
+				4E69C454265109BA00FF098E /* SubscriptionProductsTVC.xib in Resources */,
+				4E69C4992651B33900FF098E /* ContactUsVC.xib in Resources */,
 				4E71B9AD264491800094F72B /* SelectAmountVC.xib in Resources */,
 				9965FB2A2631663800946AB6 /* OTPVC.xib in Resources */,
+				4E69C43A2650025100FF098E /* SubscriptionSlotTVC.xib in Resources */,
 				990A25D1262EA79B00C96165 /* SideMenuHeaderCell.xib in Resources */,
 				4E71B979264430630094F72B /* CheckoutVC.xib in Resources */,
 				9965FB272631663800946AB6 /* DashboardVC.xib in Resources */,
@@ -664,10 +801,13 @@
 				4E71B994264479470094F72B /* PaymentTVC.xib in Resources */,
 				4E4C439D26388AD5002C4609 /* BannerCollectionViewCell.xib in Resources */,
 				4E71B988264473E60094F72B /* SummaryTVC.xib in Resources */,
+				4E69C48F2651A7A500FF098E /* FAQTVC.xib in Resources */,
 				4E9AC58F264DB64400C2B6A8 /* SubscriptionVC.xib in Resources */,
 				9965FB5F2631725100946AB6 /* DetailVC.xib in Resources */,
+				4E69C45926510B7800FF098E /* SubscriptionProductCollectionCell.xib in Resources */,
 				4E1FEEDC2639AC2C009010A6 /* CategoryCollectionCell.xib in Resources */,
 				4E13392B263D3CB90060597E /* CartTVC.xib in Resources */,
+				4E69C4702651284A00FF098E /* SelectProductTVC.xib in Resources */,
 				4E71B99E264481580094F72B /* InfoTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -721,9 +861,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E69C48E2651A7A500FF098E /* FAQTVC.swift in Sources */,
 				990A2586262E8D0200C96165 /* CardView.swift in Sources */,
 				4E13392A263D3CB90060597E /* CartTVC.swift in Sources */,
 				4E1FEEDB2639AC2C009010A6 /* CategoryCollectionCell.swift in Sources */,
+				4E69C46F2651284A00FF098E /* SelectProductTVC.swift in Sources */,
 				990A2588262E8D0200C96165 /* UIViewController.swift in Sources */,
 				4E2373DB2646D01900016451 /* AddressModel.swift in Sources */,
 				4E71B98C264477A80094F72B /* ScheduleTimeTVC.swift in Sources */,
@@ -737,11 +879,15 @@
 				9965FB2B2631663800946AB6 /* CategoryVC.swift in Sources */,
 				4E4C439C26388AD5002C4609 /* BannerCollectionViewCell.swift in Sources */,
 				9965FB252631663800946AB6 /* LoginVC.swift in Sources */,
+				4E69C4802651647F00FF098E /* SubscriptionAddressTVC.swift in Sources */,
+				4E69C4392650025100FF098E /* SubscriptionSlotTVC.swift in Sources */,
 				9965FB222631663800946AB6 /* ViewController.swift in Sources */,
 				4E1FEEC22639A259009010A6 /* BannerTVC.swift in Sources */,
+				4E69C4852651724300FF098E /* FAQVC.swift in Sources */,
 				4E66980D2645592E008DCA11 /* UserProfileVC.swift in Sources */,
 				4E71B98226443C220094F72B /* ShippingAddressTVC.swift in Sources */,
 				4E71B9B2264493A20094F72B /* SelectAmountTVC.swift in Sources */,
+				4E69C453265109BA00FF098E /* SubscriptionProductsTVC.swift in Sources */,
 				990A258B262E8D0200C96165 /* SignupModel.swift in Sources */,
 				990A2584262E8D0200C96165 /* UIView.swift in Sources */,
 				4E71B9A32644823E0094F72B /* AddAddressVC.swift in Sources */,
@@ -751,20 +897,24 @@
 				4E9AC58E264DB64400C2B6A8 /* SubscriptionVC.swift in Sources */,
 				4E71B9AC264491800094F72B /* SelectAmountVC.swift in Sources */,
 				4EFCF87C263BF65E00F08AA7 /* CategoryProductsVC.swift in Sources */,
+				4E69C45826510B7800FF098E /* SubscriptionProductCollectionCell.swift in Sources */,
 				4E71B97D264435260094F72B /* ShippingTitleTVC.swift in Sources */,
 				9965FB332631666D00946AB6 /* NetworkManager.swift in Sources */,
 				9965FB232631663800946AB6 /* OTPVC.swift in Sources */,
+				4E69C4942651AF3B00FF098E /* SubscriptionModel.swift in Sources */,
 				4E71B993264479470094F72B /* PaymentTVC.swift in Sources */,
 				990A25CF262EA79B00C96165 /* SideMenuHeaderCell.swift in Sources */,
 				4EB2CC9E264F0830006BB4C9 /* AddSubscriptionVC.swift in Sources */,
 				4E1FEEC82639A4F4009010A6 /* ProductsTVC.swift in Sources */,
 				4E133925263D2BA70060597E /* CartVC.swift in Sources */,
+				4E69C4982651B33900FF098E /* ContactUsVC.swift in Sources */,
 				4E4C43C1263979C8002C4609 /* CategoryModel.swift in Sources */,
 				9965FB282631663800946AB6 /* DashboardVC.swift in Sources */,
 				990A25D0262EA79B00C96165 /* SideMenuTableViewCell.swift in Sources */,
 				4E133930263D79F10060597E /* CartModel.swift in Sources */,
 				4E1FEED62639ABC2009010A6 /* CategoryTVC.swift in Sources */,
 				990A258A262E8D0200C96165 /* LocationManager.swift in Sources */,
+				4E69C4892651A66800FF098E /* FAQModel.swift in Sources */,
 				4E71B99826447E840094F72B /* CardTVC.swift in Sources */,
 				9965FB242631663800946AB6 /* SideMenuVC.swift in Sources */,
 				4E029235263C81CD0092C741 /* OtpTextfield.swift in Sources */,
@@ -772,9 +922,11 @@
 				4E1FEED12639A6B0009010A6 /* ProductModel.swift in Sources */,
 				4EFCF892263C45C500F08AA7 /* Utility.swift in Sources */,
 				4E4C43B826397104002C4609 /* Banner.swift in Sources */,
+				4E69C47C265158A800FF098E /* Date.swift in Sources */,
 				4E4C43932638765C002C4609 /* Defaults.swift in Sources */,
 				4E1FEECD2639A60F009010A6 /* ProductsCollectionCell.swift in Sources */,
 				4E71B9A826448E330094F72B /* CommonMethods.swift in Sources */,
+				4E69C44F26500C7F00FF098E /* NetworkReachabilityManager.swift in Sources */,
 				4E2373E82647207200016451 /* UserModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

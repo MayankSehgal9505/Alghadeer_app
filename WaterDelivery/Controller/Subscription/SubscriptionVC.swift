@@ -32,12 +32,18 @@ class SubscriptionVC: UIViewController {
         }
     }
     
+    var subscriptions = [SubscriptionModel]()
+    var filteredSubscriptions = [SubscriptionModel]()
     //MARK:- Life Cycle Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = true
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getSubscriptionList()
     }
     //MARK:- Internal Methods
     private func setupUI() {
@@ -92,6 +98,7 @@ class SubscriptionVC: UIViewController {
     @IBAction func activeBtnAction(_ sender: UIButton) {
         if selectedSubscriptionTab != .active {
             selectedSubscriptionTab = .active
+            // update filter array here
             setupTabs()
             subscriptionTBView.reloadData()
         }
@@ -100,6 +107,7 @@ class SubscriptionVC: UIViewController {
     @IBAction func pauseBtnAction(_ sender: UIButton) {
         if selectedSubscriptionTab != .paused {
             selectedSubscriptionTab = .paused
+            // update filter array here
             setupTabs()
             subscriptionTBView.reloadData()
         }
@@ -107,13 +115,64 @@ class SubscriptionVC: UIViewController {
     @IBAction func cancelBtnAction(_ sender: UIButton) {
         if selectedSubscriptionTab != .cancelled {
             selectedSubscriptionTab = .cancelled
+            // update filter array here
             setupTabs()
             subscriptionTBView.reloadData()
         }
     }
+    
+    @objc func pauseReactivateAction(sender: UIButton) {
+        
+    }
+    
+    @objc func cancelAction(sender: UIButton) {
+        
+    }
 }
 //MARK:-API Call Methods
 extension SubscriptionVC{
+    func getSubscriptionList() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let faqURL : String = UrlName.baseUrl + UrlName.faqUrl
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: faqURL, method: .get, parameters: nil, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    if let allSubscriptions = jsonValue[APIField.dataKey]?.array {
+                        var subscriptions = Array<SubscriptionModel>()
+                        for subscription in allSubscriptions {
+                            let subscriptionModel = SubscriptionModel.init()
+                            subscriptions.append(subscriptionModel)
+                        }
+                        self.subscriptions = subscriptions
+                        // add active subs in filtered subs
+                    }
+                    DispatchQueue.main.async {
+                        self.subscriptionTBView.reloadData()
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+    
     func getCartCountList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             let cartCountURL : String = UrlName.baseUrl + UrlName.getCartCountUrl + Defaults.getUserID()
@@ -147,7 +206,12 @@ extension SubscriptionVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionTVC.className(), for: indexPath) as! SubscriptionTVC
-        cell.setupCell(tabType: selectedSubscriptionTab)
+        cell.setupCell(index: indexPath.row,tabType: selectedSubscriptionTab)
+        cell.pauseReactivateBtn.addTarget(self, action: #selector(pauseReactivateAction(sender:)), for: .touchUpInside)
+        cell.cancelBtn.addTarget(self, action: #selector(cancelAction(sender:)), for: .touchUpInside)
+        //cell.setupCellData(subscriptionModel:subscriptions[indexPath.row])
+        cell.setupCellData(subscriptionModel:SubscriptionModel())
+        
         return cell
     }
 }

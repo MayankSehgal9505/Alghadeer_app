@@ -11,6 +11,23 @@ enum SubscriptionTab {
     case active
     case paused
     case cancelled
+    
+    var subscriptionName:String {
+        switch self {
+        case .active: return "INI"
+        case .paused: return "PD"
+        default: return "CN"
+        }
+    }
+    
+    var noSubscriptionMsg:String {
+    switch self {
+    case .active: return "No active Subscription"
+    case .paused: return "No paused Subscription"
+    default: return "No cancelled Subscription"
+    }
+}
+
 }
 
 class SubscriptionVC: UIViewController {
@@ -23,6 +40,7 @@ class SubscriptionVC: UIViewController {
     @IBOutlet weak var pausedSubscriptionBtn: UIButton!
     @IBOutlet weak var cancelledSubscriptioBtn: UIButton!
     @IBOutlet weak var subscriptionTBView: UITableView!
+    @IBOutlet weak var noSubscriptionTxt: UILabel!
     //MARK:- Local Variables
     let inactiveTabColor = UIColor.init(red: 153/255, green: 152/255, blue: 155/255, alpha: 1.0)
     let activeTabColor = UIColor.init(red: 23/255, green: 85/255, blue: 152/255, alpha: 1.0)
@@ -100,7 +118,7 @@ class SubscriptionVC: UIViewController {
             selectedSubscriptionTab = .active
             // update filter array here
             setupTabs()
-            subscriptionTBView.reloadData()
+            getSubscriptionList()
         }
     }
     
@@ -109,7 +127,7 @@ class SubscriptionVC: UIViewController {
             selectedSubscriptionTab = .paused
             // update filter array here
             setupTabs()
-            subscriptionTBView.reloadData()
+            getSubscriptionList()
         }
     }
     @IBAction func cancelBtnAction(_ sender: UIButton) {
@@ -117,7 +135,7 @@ class SubscriptionVC: UIViewController {
             selectedSubscriptionTab = .cancelled
             // update filter array here
             setupTabs()
-            subscriptionTBView.reloadData()
+            getSubscriptionList()
         }
     }
     
@@ -134,9 +152,9 @@ extension SubscriptionVC{
     func getSubscriptionList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
-            let faqURL : String = UrlName.baseUrl + UrlName.faqUrl
+            let subscriptionURL : String = UrlName.baseUrl + UrlName.getSubscriptionUrl + Defaults.getUserID() + "/\(selectedSubscriptionTab.subscriptionName)"
             NetworkManager.viewControler = self
-            NetworkManager.sharedInstance.commonApiCall(url: faqURL, method: .get, parameters: nil, completionHandler: { (json, status) in
+            NetworkManager.sharedInstance.commonApiCall(url: subscriptionURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
                         self.dismissHUD(isAnimated: true)
@@ -149,7 +167,7 @@ extension SubscriptionVC{
                     if let allSubscriptions = jsonValue[APIField.dataKey]?.array {
                         var subscriptions = Array<SubscriptionModel>()
                         for subscription in allSubscriptions {
-                            let subscriptionModel = SubscriptionModel.init()
+                            let subscriptionModel = SubscriptionModel.init(json: subscription)
                             subscriptions.append(subscriptionModel)
                         }
                         self.subscriptions = subscriptions
@@ -157,6 +175,9 @@ extension SubscriptionVC{
                     }
                     DispatchQueue.main.async {
                         self.subscriptionTBView.reloadData()
+                        self.subscriptionTBView.isHidden = self.subscriptions.count == 0
+                        self.noSubscriptionTxt.text = self.selectedSubscriptionTab.noSubscriptionMsg
+                        self.noSubscriptionTxt.isHidden = self.subscriptions.count != 0
                     }
                 }
                 else {
@@ -201,7 +222,7 @@ extension SubscriptionVC{
 extension SubscriptionVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return subscriptions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -209,9 +230,7 @@ extension SubscriptionVC: UITableViewDataSource{
         cell.setupCell(index: indexPath.row,tabType: selectedSubscriptionTab)
         cell.pauseReactivateBtn.addTarget(self, action: #selector(pauseReactivateAction(sender:)), for: .touchUpInside)
         cell.cancelBtn.addTarget(self, action: #selector(cancelAction(sender:)), for: .touchUpInside)
-        //cell.setupCellData(subscriptionModel:subscriptions[indexPath.row])
-        cell.setupCellData(subscriptionModel:SubscriptionModel())
-        
+        cell.setupCellData(subscriptionModel:subscriptions[indexPath.row])
         return cell
     }
 }

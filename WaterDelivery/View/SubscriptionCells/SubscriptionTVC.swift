@@ -17,6 +17,9 @@ class SubscriptionTVC: UITableViewCell {
     @IBOutlet weak var pauseReactivateBtn: UIButton!
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var produuctAddress: UILabel!
+    @IBOutlet weak var totalPriceValue: UILabel!
+    @IBOutlet weak var subscriptionDatesValue: UILabel!
+    @IBOutlet weak var unitPriceValue: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -40,12 +43,15 @@ class SubscriptionTVC: UITableViewCell {
     }
     
     func setupCellData(subscriptionModel:SubscriptionModel) {
-        /*if let imageURL = URL.init(string: subsccriptionModel.productImage) {
+        if let imageURL = URL.init(string: subscriptionModel.productImg) {
             subscribedProductImg.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
         } else {
             subscribedProductImg.image = UIImage(named: "placeholder")
         }
-        productName.text = ""
-        produuctAddress.text = ""*/
+        productName.text = subscriptionModel.productName
+        unitPriceValue.text = "price of Unit: \(subscriptionModel.productUnitPrice)"
+        produuctAddress.text = ""
+        subscriptionDatesValue.text = "\(subscriptionModel.subscriptionStartDate) - \(subscriptionModel.subscriptionEndDate)"
+        totalPriceValue.text = "Total AED:\(subscriptionModel.totalAmount)"
     }
 }

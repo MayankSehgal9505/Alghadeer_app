@@ -85,5 +85,83 @@ public class NetworkManager {
 
         task.resume()
     }
+    func API_POST_FORM_DATA(url:String,method:HTTPMethod, parameters : [String:Any]?,imagesDict:[String:Data],completionHandler : @escaping (JSON?,String?)->Void)
+    {
+        let request = NSMutableURLRequest(url: URL(string: url)!)
+        request.httpMethod = "POST"
+
+        let boundary = generateBoundaryString()
+
+        //define the multipart request type
+
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+
+        let body = NSMutableData()
+        let fname = "profile"
+        let mimetype = "image/png"
+
+        //define the data post parameter
+
+        body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
+        body.append("Content-Disposition:form-data; name=\"test\"\r\n\r\n".data(using: String.Encoding.utf8)!)
+        body.append("hi\r\n".data(using: String.Encoding.utf8)!)
+
+        body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
+
+        body.append("Content-Type: \(mimetype)\r\n\r\n".data(using: String.Encoding.utf8)!)
+
+        if let imageRawData = imagesDict[fname]
+        {
+            body.append("Content-Disposition:form-data; name=\"song\"; filename=\"\(fname)\"\r\n".data(using: String.Encoding.utf8)!)
+            body.append(imageRawData)
+        }
+        body.append("\r\n".data(using: String.Encoding.utf8)!)
+
+        body.append("--\(boundary)--\r\n".data(using: String.Encoding.utf8)!)
+
+        for (key, value) in parameters!
+        {
+            body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
+            body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: String.Encoding.utf8)!)
+            body.append("\(value)\r\n".data(using: String.Encoding.utf8)!)
+        }
+
+        request.httpBody = body as Data
+
+        // return body as Data
+        print("Fire....")
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error -> Void in
+            do {
+                if let dataRecieved = data {
+                    let json = try JSON.init(data: dataRecieved,options: .allowFragments)
+                    print(json)
+                    if let sessionExpired = json["Authorization"].bool, sessionExpired == false,let vc = NetworkManager.viewControler {
+                        DispatchQueue.main.async {
+                            vc.showSessionExpiredAlert()
+                        }
+                        completionHandler(json,nil)
+                    } else {
+                        completionHandler(json,nil)
+                    }
+                } else {
+                    completionHandler(nil,"error")
+                }
+            } catch {
+                completionHandler(nil,error.localizedDescription)
+            }
+        })
+        task.resume()
+    }
+
+    func generateBoundaryString() -> String {
+        return "Boundary-\(NSUUID().uuidString)"
+    }
+
+
+  
+
+
 }
 //Class ends here

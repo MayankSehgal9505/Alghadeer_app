@@ -51,10 +51,11 @@ struct UrlName {
     static let deleteAddressUrl = "Address/deleteAddress/"
     static let getUserDetailUrl = "User_registration/getUser/"
     static let updateUserDetailUrl = "User_registration/userUpdate/"
-    static let subscriptionCheckoutUrl = "SubscriptionOrder/checkout"
+    static let updateUserImgUrl = "User_registration/profile"
     static let faqUrl = "Common/faqContact/faq"
     static let contactUrl = "Common/faqContact/contactus"
     static let addSubscriptionUrl = "SubscriptionOrder/addSubscriptionOrder"
+    static let getSubscriptionUrl = "SubscriptionOrder/SubscriptionOrderList/"
 }
 
 // MARK:- Web Service Params
@@ -130,7 +131,7 @@ struct AlertField {
 struct SideMenu {
     //MARK:- SideMenu Controller
     static let sideMenuOptionslabel = ["Home","My Profile","Wallet","Subscriptions","My Deliveries","Refer a Friend","FAQ","Scanner","Contact Us","Logout"]
-    static let sideMenuOptionImage = ["home","watch","wallet","subscription","delivery","refer-friend","faq","scaner","contact-icon","logout"]
+    static let sideMenuOptionImage = ["home","user","wallet","subscription","delivery","refer-friend","faq","scaner","contact-icon","logout"]
 }
 
 

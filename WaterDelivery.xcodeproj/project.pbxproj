@@ -32,6 +32,8 @@
 		4E4C43B826397104002C4609 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4C43B726397104002C4609 /* Banner.swift */; };
 		4E4C43C1263979C8002C4609 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4C43C0263979C8002C4609 /* CategoryModel.swift */; };
 		4E550FF226525366008C0A11 /* ContactUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E550FF126525366008C0A11 /* ContactUsModel.swift */; };
+		4E550FF726527A01008C0A11 /* ShareVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E550FF526527A01008C0A11 /* ShareVC.xib */; };
+		4E550FF826527A01008C0A11 /* ShareVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E550FF626527A01008C0A11 /* ShareVC.swift */; };
 		4E66980D2645592E008DCA11 /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E66980B2645592E008DCA11 /* UserProfileVC.swift */; };
 		4E66980E2645592E008DCA11 /* UserProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E66980C2645592E008DCA11 /* UserProfileVC.xib */; };
 		4E69C4392650025100FF098E /* SubscriptionSlotTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C4372650025100FF098E /* SubscriptionSlotTVC.swift */; };
@@ -147,6 +149,8 @@
 		4E4C43B726397104002C4609 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		4E4C43C0263979C8002C4609 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		4E550FF126525366008C0A11 /* ContactUsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsModel.swift; sourceTree = "<group>"; };
+		4E550FF526527A01008C0A11 /* ShareVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareVC.xib; sourceTree = "<group>"; };
+		4E550FF626527A01008C0A11 /* ShareVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareVC.swift; sourceTree = "<group>"; };
 		4E66980B2645592E008DCA11 /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
 		4E66980C2645592E008DCA11 /* UserProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileVC.xib; sourceTree = "<group>"; };
 		4E69C4372650025100FF098E /* SubscriptionSlotTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSlotTVC.swift; sourceTree = "<group>"; };
@@ -674,6 +678,8 @@
 		9965FB172631663800946AB6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4E550FF626527A01008C0A11 /* ShareVC.swift */,
+				4E550FF526527A01008C0A11 /* ShareVC.xib */,
 				4EDAEAB926442EB4001D4819 /* SideMenu */,
 				9965FB182631663800946AB6 /* ViewController.swift */,
 				4EDAEAB726442E9E001D4819 /* LoginVC */,
@@ -787,6 +793,7 @@
 				9965FB262631663800946AB6 /* CategoryVC.xib in Resources */,
 				4E69C4862651724300FF098E /* FAQVC.xib in Resources */,
 				4E71B9A42644823E0094F72B /* AddAddressVC.xib in Resources */,
+				4E550FF726527A01008C0A11 /* ShareVC.xib in Resources */,
 				4E69C454265109BA00FF098E /* SubscriptionProductsTVC.xib in Resources */,
 				4E69C4992651B33900FF098E /* ContactUsVC.xib in Resources */,
 				4E71B9AD264491800094F72B /* SelectAmountVC.xib in Resources */,
@@ -908,6 +915,7 @@
 				4E69C4942651AF3B00FF098E /* SubscriptionModel.swift in Sources */,
 				4E71B993264479470094F72B /* PaymentTVC.swift in Sources */,
 				990A25CF262EA79B00C96165 /* SideMenuHeaderCell.swift in Sources */,
+				4E550FF826527A01008C0A11 /* ShareVC.swift in Sources */,
 				4EB2CC9E264F0830006BB4C9 /* AddSubscriptionVC.swift in Sources */,
 				4E1FEEC82639A4F4009010A6 /* ProductsTVC.swift in Sources */,
 				4E133925263D2BA70060597E /* CartVC.swift in Sources */,

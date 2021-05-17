@@ -21,11 +21,16 @@ class UserProfileVC: UIViewController {
     @IBOutlet weak var phoneNumberTxtFld: UITextField!
     //MARK:- Local Variables
     var user = UserModel()
+    var imagedict:[String:Data] = [:]
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         getUserProfile()
+        let imageData: Data? = userImg.image?.pngData()
+        if let data = imageData {
+            self.imagedict["profile"] = data
+        }
     }
     //MARK:- Internal Methods
     func setupUI() {
@@ -57,13 +62,19 @@ class UserProfileVC: UIViewController {
         }else if (countryTxtfld.text?.isEmpty ??  true) {
             self.view.makeToast("Country can't be empty", duration: 3.0, position: .center)
         } else {
-            updateUserPrrofile()
+            updateUserProfile()
+            updateUserImg()
         }
     }
     @IBAction func camerBtnAction(_ sender: UIButton) {
         ImagePickerManager().pickImage(self){ image in
                //here is the image
             self.userImg.image = image
+            let imageData: Data? = image.pngData()
+            if let data = imageData {
+                self.imagedict["profile"] = data
+            }
+
         }
     }
     @IBAction func backBtnAction(_ sender: UIButton) {
@@ -111,8 +122,39 @@ extension UserProfileVC {
             self.showNoInternetAlert()
         }
     }
-    
-    func updateUserPrrofile() {
+    func updateUserImg() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let setUserImgUrl : String = UrlName.baseUrl + UrlName.updateUserImgUrl
+            let parameters = [
+                "user_id":Defaults.getUserID()
+            ] as [String : Any]
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.API_POST_FORM_DATA(url: setUserImgUrl, method: .post, parameters: parameters, imagesDict: self.imagedict, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    DispatchQueue.main.async {
+                        self.view.makeToast("Profile Image updated successfully", duration: 0.5, position: .center)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }
+    }
+    func updateUserProfile() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
             let setUserDetailsUrl : String = UrlName.baseUrl + UrlName.updateUserDetailUrl + Defaults.getUserID()

@@ -16,6 +16,7 @@
                 <outlet property="cancelledSubscriptioBtn" destination="ESe-bR-RU0" id="fbJ-Ag-LQK"/>
                 <outlet property="cardCountView" destination="iq7-vB-2oe" id="VC9-J9-dsc"/>
                 <outlet property="cardCountlbl" destination="ooF-aR-OxE" id="vdA-lj-XFx"/>
+                <outlet property="noSubscriptionTxt" destination="4O5-FS-9Ne" id="soV-V9-x0Q"/>
                 <outlet property="pausedSubscriptionBtn" destination="VLe-5D-peS" id="gNM-WX-sRj"/>
                 <outlet property="subscriptionTBView" destination="YrZ-Jd-Yop" id="qjW-1G-ue9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -165,6 +166,12 @@
                         <action selector="addBtnAction:" destination="-1" eventType="touchUpInside" id="3X6-tv-o4J"/>
                     </connections>
                 </button>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4O5-FS-9Ne">
+                    <rect key="frame" x="186.5" y="443" width="41.5" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YrZ-Jd-Yop">
                     <rect key="frame" x="0.0" y="248" width="414" height="614"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -179,6 +186,7 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ss2-Js-Dj2" secondAttribute="trailing" id="0fl-FM-l4L"/>
                 <constraint firstItem="j9H-tr-ZdL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="25n-7O-KWE"/>
+                <constraint firstItem="4O5-FS-9Ne" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="2Xk-rG-mAO"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="YrZ-Jd-Yop" secondAttribute="bottom" id="GZa-9Y-GMO"/>
                 <constraint firstItem="ss2-Js-Dj2" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="JCd-Po-XwD"/>
                 <constraint firstItem="j9H-tr-ZdL" firstAttribute="bottom" secondItem="ss2-Js-Dj2" secondAttribute="bottom" id="JVu-ac-OvN"/>
@@ -192,6 +200,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="WYF-Tu-mQz" secondAttribute="trailing" constant="20" id="mdc-WJ-CAz"/>
                 <constraint firstItem="7Mx-Kz-J5g" firstAttribute="top" secondItem="WYF-Tu-mQz" secondAttribute="bottom" constant="20" id="nYS-F9-Nec"/>
                 <constraint firstItem="YrZ-Jd-Yop" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="rKt-FH-v3s"/>
+                <constraint firstItem="4O5-FS-9Ne" firstAttribute="centerX" secondItem="YrZ-Jd-Yop" secondAttribute="centerX" id="sjx-ib-wr2"/>
                 <constraint firstItem="j9H-tr-ZdL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zqx-pR-xha"/>
             </constraints>
             <point key="canvasLocation" x="70" y="80"/>

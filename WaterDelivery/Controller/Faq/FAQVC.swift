@@ -87,7 +87,7 @@ extension FAQVC {
 }
 
 
-//MARK:- API Calls
+//MARK:- UITableViewDataSource & UITableViewDelegate Methods
 extension FAQVC: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

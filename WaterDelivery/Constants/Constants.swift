@@ -53,7 +53,8 @@ struct UrlName {
     static let updateUserDetailUrl = "User_registration/userUpdate/"
     static let subscriptionCheckoutUrl = "SubscriptionOrder/checkout"
     static let faqUrl = "Common/faqContact/faq"
-    static let contactUrl = "Common/faqContact/contactus"        
+    static let contactUrl = "Common/faqContact/contactus"
+    static let addSubscriptionUrl = "SubscriptionOrder/addSubscriptionOrder"
 }
 
 // MARK:- Web Service Params

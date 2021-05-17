@@ -31,6 +31,7 @@
 		4E4C439D26388AD5002C4609 /* BannerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E4C439B26388AD5002C4609 /* BannerCollectionViewCell.xib */; };
 		4E4C43B826397104002C4609 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4C43B726397104002C4609 /* Banner.swift */; };
 		4E4C43C1263979C8002C4609 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4C43C0263979C8002C4609 /* CategoryModel.swift */; };
+		4E550FF226525366008C0A11 /* ContactUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E550FF126525366008C0A11 /* ContactUsModel.swift */; };
 		4E66980D2645592E008DCA11 /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E66980B2645592E008DCA11 /* UserProfileVC.swift */; };
 		4E66980E2645592E008DCA11 /* UserProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E66980C2645592E008DCA11 /* UserProfileVC.xib */; };
 		4E69C4392650025100FF098E /* SubscriptionSlotTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C4372650025100FF098E /* SubscriptionSlotTVC.swift */; };
@@ -145,6 +146,7 @@
 		4E4C439B26388AD5002C4609 /* BannerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BannerCollectionViewCell.xib; sourceTree = "<group>"; };
 		4E4C43B726397104002C4609 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		4E4C43C0263979C8002C4609 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		4E550FF126525366008C0A11 /* ContactUsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsModel.swift; sourceTree = "<group>"; };
 		4E66980B2645592E008DCA11 /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
 		4E66980C2645592E008DCA11 /* UserProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileVC.xib; sourceTree = "<group>"; };
 		4E69C4372650025100FF098E /* SubscriptionSlotTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSlotTVC.swift; sourceTree = "<group>"; };
@@ -641,6 +643,7 @@
 				4EF93E69264BE8E5006DEE83 /* UserInfo.swift */,
 				4E69C4882651A66800FF098E /* FAQModel.swift */,
 				4E69C4932651AF3B00FF098E /* SubscriptionModel.swift */,
+				4E550FF126525366008C0A11 /* ContactUsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -899,6 +902,7 @@
 				4EFCF87C263BF65E00F08AA7 /* CategoryProductsVC.swift in Sources */,
 				4E69C45826510B7800FF098E /* SubscriptionProductCollectionCell.swift in Sources */,
 				4E71B97D264435260094F72B /* ShippingTitleTVC.swift in Sources */,
+				4E550FF226525366008C0A11 /* ContactUsModel.swift in Sources */,
 				9965FB332631666D00946AB6 /* NetworkManager.swift in Sources */,
 				9965FB232631663800946AB6 /* OTPVC.swift in Sources */,
 				4E69C4942651AF3B00FF098E /* SubscriptionModel.swift in Sources */,

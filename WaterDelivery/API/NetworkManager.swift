@@ -39,15 +39,21 @@ public class NetworkManager {
         return data.map { String($0) }.joined(separator: "&")
     }
     //MARK:- Common Network Service Call
-    func commonApiCall(url:String,method:HTTPMethod,parameters : [String:Any]?,completionHandler:@escaping (JSON?,String?)->Void) {
+    func commonApiCall(url:String,method:HTTPMethod,jsonObject:Bool = false, parameters : [String:Any]?,completionHandler:@escaping (JSON?,String?)->Void) {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = method.rawValue
         switch method {
         case .get:
             break
         case .post,.put:
-            let postString = self.getPostString(params: parameters!)
-            request.httpBody = postString.data(using: .utf8)
+            if jsonObject {
+                let jsonData = try? JSONSerialization.data(withJSONObject: parameters as Any)
+                request.httpBody = jsonData
+                request.addValue("application/json;", forHTTPHeaderField: "Content-Type")
+            } else {
+                let postString = self.getPostString(params: parameters!)
+                request.httpBody = postString.data(using: .utf8)
+            }
         default:
                 break
         }
@@ -59,7 +65,7 @@ public class NetworkManager {
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
             do {
                 if let dataRecieved = data {
-                    let json = try JSON.init(data: data!)
+                    let json = try JSON.init(data: dataRecieved,options: .allowFragments)
                     print(json)
                     if let sessionExpired = json["Authorization"].bool, sessionExpired == false,let vc = NetworkManager.viewControler {
                         DispatchQueue.main.async {

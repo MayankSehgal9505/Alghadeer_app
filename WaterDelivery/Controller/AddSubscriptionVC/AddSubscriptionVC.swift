@@ -179,7 +179,7 @@ class AddSubscriptionVC: UIViewController {
             if let cell = addSubscriptionTBView.cellForRow(at: IndexPath.init(row: sender.tag, section:1)) as? SelectProductTVC {
                 if let currentQuanity = Int(cell.quanittyLbl.text ?? "0"), let productMaxQuantity = Int(selectedProductArray[sender.tag].quantity), currentQuanity < productMaxQuantity{
                     cell.quanittyLbl.text = String(currentQuanity + 1)
-                    selectedProductArray[sender.tag].addQuantity = String(currentQuanity + 1)
+                    selectedProductArray[sender.tag].addQuantity = currentQuanity + 1
                 } else {
                     self.view.makeToast("Product maximum quanity has been reached", duration: 3.0, position: .bottom)
                 }
@@ -192,7 +192,7 @@ class AddSubscriptionVC: UIViewController {
             if let cell = addSubscriptionTBView.cellForRow(at: IndexPath.init(row: sender.tag, section:1)) as? SelectProductTVC {
                 if let currentQuanity = Int(cell.quanittyLbl.text ?? "0"), currentQuanity > 0{
                     cell.quanittyLbl.text = String(currentQuanity - 1)
-                    selectedProductArray[sender.tag].addQuantity = String(currentQuanity - 1)
+                    selectedProductArray[sender.tag].addQuantity = currentQuanity - 1
                     if currentQuanity == 1 {
                         // update element in product array
                         let selectedProduct = productArray.firstIndex { $0.productID == productArray[sender.tag].productID}
@@ -326,20 +326,20 @@ extension AddSubscriptionVC{
     func checkoutSubscription() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
-            let checkOutSubscriptionURL : String = UrlName.baseUrl + UrlName.subscriptionCheckoutUrl
+            let checkOutSubscriptionURL : String = UrlName.baseUrl + UrlName.addSubscriptionUrl
             var products: [[String : Any]] = [[String : Any]]()
             for product in selectedProductArray {
                 let product = [
-                    "product_id": product.productID,
+                    "product_id": Int(product.productID) ?? 0,
                     "unit_measure": "litter",
-                    "price": product.unitPrice,
+                    "price": Int(product.unitPrice) ?? 0,
                     "quantity": product.addQuantity
                 ] as [String : Any]
                 products.append(product)
             }
             let parameters = [
-                "customer_id":Defaults.getUserID(),
-                "address_id":selectedAddress.addressID,
+                "customer_id": Int(Defaults.getUserID()) ?? 0,
+                "address_id":Int(selectedAddress.addressID) ?? 0,
                 "start_date":startDate.convertDate(using: "dd-MM-yyyy"),
                 "end_date":endDate.convertDate(using: "dd-MM-yyyy"),
                 "delivery_time":deliveryTime,
@@ -347,7 +347,7 @@ extension AddSubscriptionVC{
             ] as [String : Any]
             print(parameters)
             NetworkManager.viewControler = self
-            NetworkManager.sharedInstance.commonApiCall(url: checkOutSubscriptionURL, method: .post, parameters: parameters, completionHandler: { (json, status) in
+            NetworkManager.sharedInstance.commonApiCall(url: checkOutSubscriptionURL, method: .post, jsonObject: true,parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
                         self.dismissHUD(isAnimated: true)

@@ -27,7 +27,7 @@ struct ProductModel {
     var category: CategoryModel = CategoryModel()
     var productSelected = false
     var initialQuantity = "1"
-    var addQuantity = "1"
+    var addQuantity = 1
     //MARK: Lifecycle
     init() {
     }

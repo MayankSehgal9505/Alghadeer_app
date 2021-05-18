@@ -61,9 +61,7 @@ class SideMenuVC: UIViewController {
             //Cancel Action
         }))
         alert.addAction(UIAlertAction(title: "Logout",style: .default,handler: {(_: UIAlertAction!) in
-            //Sign out action
-            self.resetData()
-            self.makeInitialViewController()
+            self.callLogOut()
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -93,7 +91,19 @@ class SideMenuVC: UIViewController {
         self.frostedViewController.hideMenuViewController()
     }
 }
-
+extension SideMenuVC {
+    func callLogOut() {
+        self.showHUD(progressLabel: AlertField.loaderString)
+        let addressListURL : String = UrlName.baseUrl + UrlName.logOutUrl
+        NetworkManager.sharedInstance.commonApiCall(url: addressListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
+            //Sign out action
+            DispatchQueue.main.async {
+                self.resetData()
+                self.makeInitialViewController()
+            }
+        })
+    }
+}
 extension SideMenuVC : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -141,7 +151,8 @@ extension SideMenuVC : UITableViewDelegate {
         case 4:
             print("deliverriies")
         case 5:
-            print("Refer a friend")
+            controllerToMove = ShareVC(nibName: ShareVC.className(), bundle: nil)
+            moveToController(controllerToMove)
         case 6:
             controllerToMove = FAQVC(nibName: FAQVC.className(), bundle: nil)
             moveToController(controllerToMove)

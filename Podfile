@@ -11,5 +11,6 @@ pod 'IQKeyboardManagerSwift'
 pod 'Toast-Swift', '~> 4.0.0'
 pod 'SwiftyJSON', '~> 4.0'
 pod 'Kingfisher'
+pod 'Alamofire', '~> 4.9.1'
 pod 'REFrostedViewController'
 end

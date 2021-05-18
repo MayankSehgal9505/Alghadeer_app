@@ -32,11 +32,10 @@ class SideMenuHeaderCell: UITableViewCell {
         profileImageView.setCornerRadiusOfView(cornerRadiusValue: 50.0, setBorder: true, borderColor: .white, width: 2.0)
         userMobileNumber.text = "971 - \(Defaults.getUserPhoneNumber())"
         self.nameLabel.text = UserData.sharedInstance.userModel.userName
-//        if let data = UserDefaults.standard.data(forKey: UserDefaultsKey.loginData),
-//            let loginDetails = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserModel {
-//            self.nameLabel.text = loginDetails.first_name + " " + loginDetails.last_name
-//            self.profileImageView.setImage(with: loginDetails.user_image)
-//
-//        }
+        if let imageURL = URL.init(string: UserData.sharedInstance.userModel.profileImgUrl) {
+            profileImageView.kf.setImage(with: imageURL, placeholder: UIImage(named: "profile"))
+        } else {
+            profileImageView.image = UIImage(named: "profile")
+        }
     }
 }

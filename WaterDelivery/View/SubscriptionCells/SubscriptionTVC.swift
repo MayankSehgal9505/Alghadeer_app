@@ -50,7 +50,7 @@ class SubscriptionTVC: UITableViewCell {
         }
         productName.text = subscriptionModel.productName
         unitPriceValue.text = "price of Unit: \(subscriptionModel.productUnitPrice)"
-        produuctAddress.text = ""
+        produuctAddress.text = "\(subscriptionModel.address.shippingAddress) \(subscriptionModel.address.shippingCity) \(subscriptionModel.address.shippingPostCode) \(subscriptionModel.address.shippingCountry)"
         subscriptionDatesValue.text = "\(subscriptionModel.subscriptionStartDate) - \(subscriptionModel.subscriptionEndDate)"
         totalPriceValue.text = "Total AED:\(subscriptionModel.totalAmount)"
     }

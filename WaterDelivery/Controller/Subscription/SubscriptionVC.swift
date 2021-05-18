@@ -140,11 +140,15 @@ class SubscriptionVC: UIViewController {
     }
     
     @objc func pauseReactivateAction(sender: UIButton) {
-        
+        if sender.tag < subscriptions.count {
+            updateSubscription(subscriptionObj: subscriptions[sender.tag], status: selectedSubscriptionTab == .active ? "PD" : "INI" )
+        }
     }
     
     @objc func cancelAction(sender: UIButton) {
-        
+        if sender.tag < subscriptions.count {
+            updateSubscription(subscriptionObj: subscriptions[sender.tag], status: "CN")
+        }
     }
 }
 //MARK:-API Call Methods
@@ -215,6 +219,42 @@ extension SubscriptionVC{
                     }
                 }
             })
+        }
+    }
+    func updateSubscription(subscriptionObj: SubscriptionModel, status: String) {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let updateSubscriptionURL : String = UrlName.baseUrl + UrlName.updateSubscriptionUrl + subscriptionObj.productOrderID
+            let parameters = [
+                "status":status,
+            ] as [String : Any]
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: updateSubscriptionURL, method: .put, parameters: parameters, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    DispatchQueue.main.async {
+                        self.view.makeToast("Subscription updated", duration: 3.0, position: .bottom)
+                        self.getSubscriptionList()
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
         }
     }
 }

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 class UserProfileVC: UIViewController {
 
     //MARK:- IBOutlets
@@ -27,7 +27,7 @@ class UserProfileVC: UIViewController {
         super.viewDidLoad()
         setupUI()
         getUserProfile()
-        let imageData: Data? = userImg.image?.pngData()
+        let imageData: Data? = userImg.image?.jpegData(compressionQuality: 0)
         if let data = imageData {
             self.imagedict["profile"] = data
         }
@@ -45,6 +45,11 @@ class UserProfileVC: UIViewController {
         addressTxtfld.text = user.userAddress
         countryTxtfld.text = user.userCountry
         phoneNumberTxtFld.text = user.userPhoneNumber
+        if let imageURL = URL.init(string: user.profileImgUrl) {
+            userImg.kf.setImage(with: imageURL, placeholder: UIImage(named: "profile"))
+        } else {
+            userImg.image = UIImage(named: "profile")
+        }
     }
     
     //MARK:- IBActions
@@ -70,7 +75,7 @@ class UserProfileVC: UIViewController {
         ImagePickerManager().pickImage(self){ image in
                //here is the image
             self.userImg.image = image
-            let imageData: Data? = image.pngData()
+            let imageData: Data? = image.jpegData(compressionQuality: 0)
             if let data = imageData {
                 self.imagedict["profile"] = data
             }
@@ -130,7 +135,11 @@ extension UserProfileVC {
                 "user_id":Defaults.getUserID()
             ] as [String : Any]
             NetworkManager.viewControler = self
-            NetworkManager.sharedInstance.API_POST_FORM_DATA(url: setUserImgUrl, method: .post, parameters: parameters, imagesDict: self.imagedict, completionHandler: { (json, status) in
+            let headers = [
+                "Authorization": "Bearer \(Defaults.getToken() ?? "")",
+                "Content-Type" : "multipart/form-data"
+            ]
+            NetworkManager.sharedInstance.uploadDocuments(url: setUserImgUrl, method: .post, imagesDict: self.imagedict, parameters: parameters, headers: headers, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
                         self.dismissHUD(isAnimated: true)
@@ -141,7 +150,7 @@ extension UserProfileVC {
                 //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
-                        self.view.makeToast("Profile Image updated successfully", duration: 0.5, position: .center)
+                        self.view.makeToast("Photo uploaded successfully", duration: 3.0, position: .center)
                     }
                 } else {
                     DispatchQueue.main.async {
@@ -151,8 +160,9 @@ extension UserProfileVC {
                 DispatchQueue.main.async {
                     self.dismissHUD(isAnimated: true)
                 }
-            })
-        }
+            }) }else{
+                self.showNoInternetAlert()
+            }
     }
     func updateUserProfile() {
         if NetworkManager.sharedInstance.isInternetAvailable(){

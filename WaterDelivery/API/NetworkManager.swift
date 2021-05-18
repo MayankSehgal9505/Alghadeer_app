@@ -7,8 +7,9 @@
 
 import Foundation
 import SwiftyJSON
+import Alamofire
 
- enum HTTPMethod: String {
+ enum HTTPSMethod: String {
     case options = "OPTIONS"
     case get     = "GET"
     case head    = "HEAD"
@@ -39,7 +40,7 @@ public class NetworkManager {
         return data.map { String($0) }.joined(separator: "&")
     }
     //MARK:- Common Network Service Call
-    func commonApiCall(url:String,method:HTTPMethod,jsonObject:Bool = false, parameters : [String:Any]?,completionHandler:@escaping (JSON?,String?)->Void) {
+    func commonApiCall(url:String,method:HTTPSMethod,jsonObject:Bool = false, parameters : [String:Any]?,completionHandler:@escaping (JSON?,String?)->Void) {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = method.rawValue
         switch method {
@@ -85,81 +86,40 @@ public class NetworkManager {
 
         task.resume()
     }
-    func API_POST_FORM_DATA(url:String,method:HTTPMethod, parameters : [String:Any]?,imagesDict:[String:Data],completionHandler : @escaping (JSON?,String?)->Void)
-    {
-        let request = NSMutableURLRequest(url: URL(string: url)!)
-        request.httpMethod = "POST"
 
-        let boundary = generateBoundaryString()
-
-        //define the multipart request type
-
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-
-
-        let body = NSMutableData()
-        let fname = "profile"
-        let mimetype = "image/png"
-
-        //define the data post parameter
-
-        body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-        body.append("Content-Disposition:form-data; name=\"test\"\r\n\r\n".data(using: String.Encoding.utf8)!)
-        body.append("hi\r\n".data(using: String.Encoding.utf8)!)
-
-        body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-
-        body.append("Content-Type: \(mimetype)\r\n\r\n".data(using: String.Encoding.utf8)!)
-
-        if let imageRawData = imagesDict[fname]
-        {
-            body.append("Content-Disposition:form-data; name=\"song\"; filename=\"\(fname)\"\r\n".data(using: String.Encoding.utf8)!)
-            body.append(imageRawData)
-        }
-        body.append("\r\n".data(using: String.Encoding.utf8)!)
-
-        body.append("--\(boundary)--\r\n".data(using: String.Encoding.utf8)!)
-
-        for (key, value) in parameters!
-        {
-            body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-            body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: String.Encoding.utf8)!)
-            body.append("\(value)\r\n".data(using: String.Encoding.utf8)!)
-        }
-
-        request.httpBody = body as Data
-
-        // return body as Data
-        print("Fire....")
-        let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error -> Void in
-            do {
-                if let dataRecieved = data {
-                    let json = try JSON.init(data: dataRecieved,options: .allowFragments)
-                    print(json)
-                    if let sessionExpired = json["Authorization"].bool, sessionExpired == false,let vc = NetworkManager.viewControler {
-                        DispatchQueue.main.async {
-                            vc.showSessionExpiredAlert()
-                        }
-                        completionHandler(json,nil)
-                    } else {
-                        completionHandler(json,nil)
-                    }
-                } else {
-                    completionHandler(nil,"error")
+    func uploadDocuments(url:String,method:HTTPMethod,imagesDict:[String:Data],parameters : [String:Any]?,headers: HTTPHeaders? = nil,completionHandler:@escaping (JSON?,String?)->Void) {
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            if let params = parameters {
+                for (key, value) in params {
+                    multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
                 }
-            } catch {
-                completionHandler(nil,error.localizedDescription)
             }
-        })
-        task.resume()
-    }
+                
+            for (key, value) in imagesDict {
+                multipartFormData.append(value, withName: "\(key)", fileName: "\(key).jpg", mimeType: "image/jpg")
+            }
+          }, usingThreshold: UInt64.init(), to: url, method: .post,headers: headers) { (result) in
+              switch result{
+              case .success(let upload, _, _):
+                  upload.responseJSON { response in
+                      print("Succesfully uploaded  = \(response)")
+                      if let err = response.error{
+                        completionHandler(nil,err.localizedDescription)
+                          print(err)
+                          return
+                      }
+                    if let data = response.value{
+                        let json = JSON(data)
+                        completionHandler(json,nil)
+                        return
+                    }
+                  }
+              case .failure(let error):
+                completionHandler(nil,error.localizedDescription)
+              }
+          }
 
-    func generateBoundaryString() -> String {
-        return "Boundary-\(NSUUID().uuidString)"
-    }
-
-
+  }
   
 
 

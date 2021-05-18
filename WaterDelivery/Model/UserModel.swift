@@ -2,7 +2,6 @@ import Foundation
 import SwiftyJSON
 
 struct UserModel {
-    
     //MARK: Variable
     var userID = ""
     var userName = ""
@@ -15,7 +14,7 @@ struct UserModel {
     var userlatitude = ""
     var userlongitude = ""
     var userRole = ""
-    
+    var profileImgUrl = ""
     //MARK: Lifecycle
     init() {
     }
@@ -35,5 +34,6 @@ struct UserModel {
         self.userlatitude = json["latitude"].stringValue
         self.userlongitude = json["longitude"].stringValue
         self.userRole = json["role_name"].stringValue
+        self.profileImgUrl = json["profile"].stringValue
     }
 }

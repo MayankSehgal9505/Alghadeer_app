@@ -43,19 +43,6 @@ class DetailVC: UIViewController {
         productName.text = product.name
         productPrice.text = "AED \(product.sellingPrice)"
         productDescription.text = product.details
-//        SDWebImageManager.shared.loadImage(with: URL.init(string: product.productImage), options: .highPriority, progress: nil, completed: { [weak self](image, data, error, cacheType, finished, url) in
-//            guard let sself = self else { return }
-//            if let _ = error {
-//                // Do something with the error
-//                return
-//            }
-//            guard let img = image else {
-//                // No image handle this error
-//                return
-//            }
-//            sself.productImg.image = img
-//        })
-        
         if let imageURL = URL.init(string: product.productImage) {
             productImg.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
         } else {

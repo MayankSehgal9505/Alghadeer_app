@@ -36,10 +36,13 @@ class AddSubscriptionVC: UIViewController {
         super.viewDidLoad()
         getCartCountList()
         setupUI()
-        getAddressList()
         getProductsList()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getAddressList()
+    }
     //MARK:- Internal Methods
     private func setupUI() {
         cartView(hidden: true, count: "0")
@@ -52,7 +55,7 @@ class AddSubscriptionVC: UIViewController {
         addSubscriptionTBView.register(UINib(nibName: SubscriptionSlotTVC.className(), bundle: nil), forCellReuseIdentifier: SubscriptionSlotTVC.className())
         addSubscriptionTBView.register(UINib(nibName: SubscriptionAddressTVC.className(), bundle: nil), forCellReuseIdentifier: SubscriptionAddressTVC.className())
         addSubscriptionTBView.register(UINib(nibName: SelectProductTVC.className(), bundle: nil), forCellReuseIdentifier: SelectProductTVC.className())
-        
+        addSubscriptionTBView.register(UINib(nibName: SubscriptionHeaderTVC.className(), bundle: nil), forCellReuseIdentifier: SubscriptionHeaderTVC.className())
         addSubscriptionTBView.tableFooterView = UIView()
         addSubscriptionTBView.estimatedRowHeight = 200
         addSubscriptionTBView.rowHeight = UITableView.automaticDimension
@@ -135,6 +138,12 @@ class AddSubscriptionVC: UIViewController {
                 addSubscriptionTBView.reloadSections(IndexSet.init(integer: 2), with: .none)
             }
         }
+    }
+    
+    @objc func addAddressBtnTapped() {
+        let addAddressVC = AddAddressVC()
+        addAddressVC.addressScreenType = .addAddress
+        self.navigationController?.pushViewController(addAddressVC, animated: true)
     }
     //MARK:- IBActions
     @IBAction func pickerDoneAction(_ sender: UIBarButtonItem) {
@@ -252,7 +261,8 @@ extension AddSubscriptionVC: UITableViewDataSource, UITableViewDelegate{
         switch section {
         case 0: return 1
         case 1: return selectedProductArray.count
-        case 2: return shippingAddressArray.count > 1 ? 1 + shippingAddressArray.count : shippingAddressArray.count
+        //case 2: return shippingAddressArray.count > 1 ? 1 + shippingAddressArray.count : shippingAddressArray.count
+        case 2: return 1 + shippingAddressArray.count
         case 3: return 1
         default: return 0
         }
@@ -276,19 +286,10 @@ extension AddSubscriptionVC: UITableViewDataSource, UITableViewDelegate{
         case 2:
             switch indexPath.row {
             case 0:
-                if shippingAddressArray.count == 1 {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionAddressTVC.className(), for: indexPath) as! SubscriptionAddressTVC
-                    cell.addressSelectionBtn.isHidden = shippingAddressArray.count == 1
-                    cell.addressSelectionBtn.tag = indexPath.row
-                    cell.addressSelectionBtn.addTarget(self, action: #selector(shippingAddrress(sender:)), for: .touchUpInside)
-                    cell.setupCell(shipperAddress: shippingAddressArray[indexPath.row])
-                    return cell
-                } else {
-                    let cell = UITableViewCell()
-                    cell.textLabel?.text = "Select Address"
-                    cell.textLabel?.textColor = UIColor.init(red: 21/255, green: 86/255, blue: 155/255, alpha: 1.0)
-                    return cell
-                }
+                let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionHeaderTVC.className(), for: indexPath) as! SubscriptionHeaderTVC
+                cell.addAddressBtn.setCornerRadiusOfView(cornerRadiusValue:13)
+                cell.addAddressBtn.addTarget(self, action: #selector(addAddressBtnTapped), for: .touchUpInside)
+                return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionAddressTVC.className(), for: indexPath) as! SubscriptionAddressTVC
                 cell.addressSelectionBtn.isHidden = shippingAddressArray.count == 1

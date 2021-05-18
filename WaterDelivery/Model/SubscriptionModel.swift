@@ -31,7 +31,7 @@ struct SubscriptionModel {
     var productDeliveryTime = ""
     var subscriptionStartDate = ""
     var subscriptionEndDate = ""
-
+    var address = AddressModel()
     
     //MARK: Lifecycle
     init() {
@@ -62,6 +62,7 @@ struct SubscriptionModel {
         self.productDeliveryTime = json["delivery_time"].stringValue
         self.subscriptionStartDate = json["start_date"].stringValue
         self.subscriptionEndDate = json["end_date"].stringValue
+        self.address = AddressModel.init(json: json["address"])
     }
 }
 

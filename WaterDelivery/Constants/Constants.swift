@@ -58,6 +58,7 @@ struct UrlName {
     static let getSubscriptionUrl = "SubscriptionOrder/SubscriptionOrderList/"
     static let updateSubscriptionUrl = "SubscriptionOrder/subscriptionUpdate/"
     static let logOutUrl = "Auth/logout"
+    static let cartCheckOutUrl = "Order/checkout"
 }
 
 // MARK:- Web Service Params

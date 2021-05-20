@@ -144,12 +144,14 @@ extension SideMenuVC : UITableViewDelegate {
             controllerToMove = UserProfileVC(nibName: UserProfileVC.className(), bundle: nil)
             moveToController(controllerToMove)
         case 2:
-            print("wallet")
+            controllerToMove = WalletVC(nibName: WalletVC.className(), bundle: nil)
+            moveToController(controllerToMove)
         case 3:
             controllerToMove = SubscriptionVC(nibName: SubscriptionVC.className(), bundle: nil)
             moveToController(controllerToMove)
         case 4:
-            print("deliverriies")
+            controllerToMove = DeliveryVC(nibName: DeliveryVC.className(), bundle: nil)
+            moveToController(controllerToMove)
         case 5:
             controllerToMove = ShareVC(nibName: ShareVC.className(), bundle: nil)
             moveToController(controllerToMove)

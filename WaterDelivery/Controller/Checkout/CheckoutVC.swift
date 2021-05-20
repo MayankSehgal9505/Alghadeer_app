@@ -19,7 +19,7 @@ class CheckoutVC: UIViewController {
     var paymentTypeCart = false
     private var effectView,vibrantView : UIVisualEffectView?
     var shippingAddressArray = Array<AddressModel>()
-
+    var selectedAddress = AddressModel()
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -69,7 +69,11 @@ class CheckoutVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func continueToPaymentAction(_ sender: UIButton) {
-        self.view.makeToast("Under Development", duration: 3.0, position: .bottom)
+        if (selectedAddress.addressID.isEmpty) {
+            self.view.makeToast("Select delivery Address", duration: 3.0, position: .center)
+        } else {
+            cartCheckout()
+        }
     }
     
     @objc func addAddressBtnTapped() {
@@ -115,6 +119,7 @@ class CheckoutVC: UIViewController {
                 for (index,_) in shippingAddressArray.enumerated() {
                     if index == sender.tag-1 {
                         shippingAddressArray[index].addressSelected = true
+                        self.selectedAddress = shippingAddressArray[index]
                     } else {
                         shippingAddressArray[index].addressSelected = false
                     }
@@ -194,12 +199,53 @@ extension CheckoutVC{
                             shippingAddress.append(addressModel)
                         }
                         self.shippingAddressArray = shippingAddress
+                        self.selectedAddress = self.shippingAddressArray.first ?? AddressModel()
                         if self.shippingAddressArray.count >= 1 {
                             self.shippingAddressArray[0].addressSelected = true
                         }
                     }
                     DispatchQueue.main.async {
                         self.checkOutTBView.reloadSections(IndexSet.init(integer: 0), with: .none)
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+    func cartCheckout() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let checkOutURL : String = UrlName.baseUrl + UrlName.cartCheckOutUrl
+            let parameters = [
+                "customer_id": Defaults.getUserID(),
+                "address_id":selectedAddress.addressID
+            ] as [String : Any]
+            print(parameters)
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: checkOutURL, method: .post, jsonObject: true,parameters: parameters, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    DispatchQueue.main.async {
+                        self.view.makeToast("Checkout successfull", duration: 0.5, position: .center)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.navigationController?.popViewController(animated: true)
+                        }
                     }
                 }
                 else {

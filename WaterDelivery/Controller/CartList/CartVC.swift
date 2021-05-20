@@ -70,8 +70,11 @@ class CartVC: UIViewController {
         self.view.makeToast("Under Development", duration: 3.0, position: .bottom)
     }
     @IBAction func subscribeBtnAction(_ sender: UIButton) {
-        self.view.makeToast("Under Development", duration: 3.0, position: .bottom)
-    }
+        let addSubscriptionVC = AddSubscriptionVC()
+        addSubscriptionVC.addingSubscriptionType = .singleProduct
+        
+        //addSubscriptionVC.productArray =
+        self.navigationController?.pushViewController(addSubscriptionVC, animated: true)    }
     @IBAction func checkOutBtnAction(_ sender: UIButton) {
         let checkOutVC = CheckoutVC()
         self.navigationController?.pushViewController(checkOutVC, animated: true)

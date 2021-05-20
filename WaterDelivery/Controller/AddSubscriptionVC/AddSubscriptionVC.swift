@@ -14,6 +14,11 @@ class AddSubscriptionVC: UIViewController {
         case startDate
         case endDate
     }
+    
+    enum AddSubscriptionFor {
+        case genericSubscription
+        case singleProduct
+    }
     //MARK:- IBOutlets
     @IBOutlet weak var cartCountView: UIView! {didSet {self.cartCountView.makeViewCircle()}}
     @IBOutlet weak var cartCountLbl: UILabel!
@@ -31,12 +36,15 @@ class AddSubscriptionVC: UIViewController {
     private var startDate = Date()
     private var endDate = Date()
     var deliveryTime = Date().dateStringWith(strFormat: "hh:mm a")
+    var addingSubscriptionType: AddSubscriptionFor = .genericSubscription
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         getCartCountList()
         setupUI()
-        getProductsList()
+        if addingSubscriptionType == .genericSubscription{
+            getProductsList()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

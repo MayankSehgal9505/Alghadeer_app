@@ -25,13 +25,13 @@ class DeliveryTVC: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setupCell() {
+    func setupCell(deliveryProductObj:DeliveredProductsModel) {
         deliveryBaseView.setCornerRadiusOfView(cornerRadiusValue:10)
-        deliveryTypeLbl.text = "One Time Order"
-        orderID.text = "540"
-        deliveryDate.text = "March 12"
-        deliveryAddress.text = "Business Day, Burj khalifa, Shaikh"
-        deliveyPrice.text = "AED 0.00"
-        deliveryStatus.text = "Delivered"
+        deliveryTypeLbl.text = deliveryProductObj.deliveredProductType.deliveredProductStr
+        orderID.text = deliveryProductObj.orderID
+        deliveryDate.text = "\(deliveryProductObj.deliveryTime)"
+        deliveryAddress.text = "\(deliveryProductObj.address.shippingAddress), \(deliveryProductObj.address.shippingCity), \(deliveryProductObj.address.shippingState) \(deliveryProductObj.address.shippingCountry)"
+        deliveyPrice.text = "AED \(deliveryProductObj.totalAmount)"
+        deliveryStatus.text = deliveryProductObj.status
     }
 }

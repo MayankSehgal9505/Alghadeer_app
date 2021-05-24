@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeliveryVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
                 <outlet property="deliveryTBView" destination="LPW-2u-dhJ" id="eyv-5H-0zY"/>
+                <outlet property="noDeliveryProduct" destination="0rw-HD-yqJ" id="mVS-Tw-dgv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -53,6 +54,12 @@
                         <constraint firstItem="upB-OW-JZU" firstAttribute="leading" secondItem="B3k-Br-BSA" secondAttribute="leading" constant="10" id="lzA-1V-G51"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No product has been delivered yet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rw-HD-yqJ">
+                    <rect key="frame" x="76" y="442.5" width="262" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LPW-2u-dhJ">
                     <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -68,9 +75,11 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LPW-2u-dhJ" secondAttribute="trailing" id="8h5-ei-EKh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="LPW-2u-dhJ" secondAttribute="bottom" id="GYu-gq-8ty"/>
                 <constraint firstItem="v2F-4B-WsR" firstAttribute="bottom" secondItem="B3k-Br-BSA" secondAttribute="bottom" id="HDS-1L-qhH"/>
+                <constraint firstItem="0rw-HD-yqJ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="MLK-Sr-4bF"/>
                 <constraint firstItem="v2F-4B-WsR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="PAT-Xj-GVa"/>
                 <constraint firstItem="LPW-2u-dhJ" firstAttribute="top" secondItem="v2F-4B-WsR" secondAttribute="bottom" id="Wvg-T0-4cf"/>
                 <constraint firstItem="B3k-Br-BSA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ZZu-2X-Xvz"/>
+                <constraint firstItem="0rw-HD-yqJ" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="aqD-2p-33k"/>
                 <constraint firstItem="v2F-4B-WsR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eMb-ei-WwF"/>
                 <constraint firstItem="LPW-2u-dhJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="f3B-WI-9ry"/>
                 <constraint firstItem="B3k-Br-BSA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="fh0-5K-Nii"/>

@@ -53,6 +53,7 @@ public class NetworkManager {
                 request.addValue("application/json;", forHTTPHeaderField: "Content-Type")
             } else {
                 let postString = self.getPostString(params: parameters!)
+                request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
                 request.httpBody = postString.data(using: .utf8)
             }
         default:
@@ -62,7 +63,10 @@ public class NetworkManager {
         if let token = Defaults.getToken() {
             request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
-        let session = URLSession.shared
+        let sessionConfig = URLSessionConfiguration.default
+        sessionConfig.timeoutIntervalForRequest = 45.0
+        sessionConfig.timeoutIntervalForResource = 60.0
+        let session = URLSession(configuration: sessionConfig)
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
             do {
                 if let dataRecieved = data {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,20 +28,37 @@
                     <rect key="frame" x="0.0" y="118" width="414" height="744"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WfB-Ga-5LX">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="744"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="679"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="knw-pj-u6W"/>
                                 <outlet property="delegate" destination="-1" id="QiH-du-ymN"/>
                             </connections>
                         </tableView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6W-cp-JIK">
+                            <rect key="frame" x="147" y="699" width="120" height="35"/>
+                            <color key="backgroundColor" red="0.090196078430000007" green="0.33333333329999998" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="120" id="2Wq-7A-WaO"/>
+                                <constraint firstAttribute="height" constant="35" id="UDQ-bh-4c5"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                            <state key="normal" title="Add Money">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="addMoneyToWalletAction:" destination="-1" eventType="touchUpInside" id="UdK-Kt-6uh"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="WfB-Ga-5LX" secondAttribute="bottom" id="5yp-Ap-qFp"/>
                         <constraint firstItem="WfB-Ga-5LX" firstAttribute="top" secondItem="x3l-Y4-wk5" secondAttribute="top" id="Es3-c0-JEX"/>
+                        <constraint firstAttribute="bottom" secondItem="q6W-cp-JIK" secondAttribute="bottom" constant="10" id="Kpa-pi-Yjo"/>
                         <constraint firstItem="WfB-Ga-5LX" firstAttribute="leading" secondItem="x3l-Y4-wk5" secondAttribute="leading" id="Ozl-Nz-vxN"/>
                         <constraint firstAttribute="trailing" secondItem="WfB-Ga-5LX" secondAttribute="trailing" id="W45-EM-6bE"/>
+                        <constraint firstItem="q6W-cp-JIK" firstAttribute="top" secondItem="WfB-Ga-5LX" secondAttribute="bottom" constant="20" id="aEn-JL-uUr"/>
+                        <constraint firstItem="q6W-cp-JIK" firstAttribute="centerX" secondItem="x3l-Y4-wk5" secondAttribute="centerX" id="hbE-Ai-FKP"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sMd-yy-eIX">
@@ -90,7 +107,7 @@
                 <constraint firstItem="CUI-mK-4ma" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vVk-B7-sGb"/>
                 <constraint firstItem="x3l-Y4-wk5" firstAttribute="top" secondItem="CUI-mK-4ma" secondAttribute="bottom" constant="10" id="voT-Nx-qdi"/>
             </constraints>
-            <point key="canvasLocation" x="129" y="92"/>
+            <point key="canvasLocation" x="128.98550724637681" y="91.741071428571431"/>
         </view>
     </objects>
     <resources>

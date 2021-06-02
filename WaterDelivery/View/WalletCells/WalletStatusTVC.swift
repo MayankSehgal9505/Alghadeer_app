@@ -21,8 +21,8 @@ class WalletStatusTVC: UITableViewCell {
 
     }
     
-    func setupCell() {
-        accountBalanceValue.text = "AED 0.00"
-        walletBalance.text = "AED 0.00"
+    func setupCell(walletBalanceObj:WalletBalance) {
+        accountBalanceValue.text = "AED \((walletBalanceObj.walletAmount))"
+        walletBalance.text = "AED \(walletBalanceObj.walletAmount)"
     }
 }

@@ -60,6 +60,22 @@ struct UrlName {
     static let logOutUrl = "Auth/logout"
     static let cartCheckOutUrl = "Order/checkout"
     static let orderListUrl = "Order/OrderList"
+    // businesss urls
+    static let getBusinessUrl = "Master/GetBusinessType"
+    static let setBusinessUrl = "User_registration/businessTypesUpdate/"
+    //wallet urls
+    static let addMoneyInWallet = "Payment/WalletCheckouts"
+    static let walletBalance = "Common/walletBalance/"
+    static let paymentStatusUrl = "Payment/checkouts/"
+
+    
+}
+
+struct WalletCallBacks {
+    static let successURLS = "https://pay.test.pointcheckout.com/hosted/payment-confirmation"
+    static let cancelURLS = "https://pay.test.pointcheckout.com/hosted/cancel"
+    static let completionUrls = [successURLS,cancelURLS]
+
 }
 
 // MARK:- Web Service Params

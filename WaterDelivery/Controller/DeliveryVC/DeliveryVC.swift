@@ -18,7 +18,7 @@ class DeliveryVC: UIViewController {
     @IBOutlet weak var deliveryTBView: UITableView!
     @IBOutlet weak var noDeliveryProduct: UILabel!
     //MARK:- Local Variables
-    var deliveredProducts = [DeliveredProductsModel]()
+    var orderList = [Order]()
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,27 +45,24 @@ class DeliveryVC: UIViewController {
 //MARK:- UITableViewDataSource & UITableViewDelegate Methods
 extension DeliveryVC: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return orderList.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return deliveredProducts.count
+        return 1 + orderList[section].deliveredProducts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DeliveryTVC.className(), for: indexPath) as! DeliveryTVC
-        cell.setupCell(deliveryProductObj: deliveredProducts[indexPath.row])
-        return cell
-        /*let rowType = RowType.init(rawValue: indexPath.row) ?? .deliveryInfo
+        let rowType = RowType.init(rawValue: indexPath.row) ?? .deliveryInfo
         switch rowType {
         case .month:
             let cell = tableView.dequeueReusableCell(withIdentifier: DeliveryHeaderTVC.className(), for: indexPath) as! DeliveryHeaderTVC
-            cell.setupCell()
+            cell.setupCell(monthName:orderList[indexPath.section].orderMonth)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: DeliveryTVC.className(), for: indexPath) as! DeliveryTVC
-            cell.setupCell(deliveryProductObj: deliveredProducts[indexPath.row])
+            cell.setupCell(deliveryProductObj: orderList[indexPath.section].deliveredProducts[indexPath.row-1])
             return cell
-        }*/
+        }
 
     }
 }
@@ -92,16 +89,16 @@ extension DeliveryVC {
                     }
                     //print(jsonValue)
                     if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
-                        if let deliveredProducts = jsonValue[APIField.dataKey]?.array {
-                            var products = Array<DeliveredProductsModel>()
-                            for product in deliveredProducts {
-                                let productModel = DeliveredProductsModel.init(json: product)
-                                products.append(productModel)
+                        if let orders = jsonValue[APIField.dataKey]?.array {
+                            var orderList = Array<Order>()
+                            for order in orders {
+                                let orderModel = Order.init(json: order)
+                                orderList.append(orderModel)
                             }
-                            self.deliveredProducts = products
+                            self.orderList = orderList
                         }
                         DispatchQueue.main.async {
-                            self.deliveryTBView.isHidden = self.deliveredProducts.count <= 0
+                            self.deliveryTBView.isHidden = self.orderList.count <= 0
                             self.noDeliveryProduct.isHidden = !self.deliveryTBView.isHidden
                             self.deliveryTBView.reloadData()
                         }

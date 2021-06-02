@@ -21,7 +21,7 @@ class DeliveryHeaderTVC: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setupCell() {
-        deliveryMonth.text = "March 2021"
+    func setupCell(monthName:String) {
+        deliveryMonth.text = monthName
     }
 }

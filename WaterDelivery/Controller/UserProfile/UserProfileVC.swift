@@ -19,13 +19,23 @@ class UserProfileVC: UIViewController {
     @IBOutlet weak var countryTxtfld: UITextField!
     @IBOutlet weak var userNameLbl: UILabel!
     @IBOutlet weak var phoneNumberTxtFld: UITextField!
+    @IBOutlet weak var categoryBtn: UIButton!
+    @IBOutlet weak var categoryValue: UILabel!
     //MARK:- Local Variables
     var user = UserModel()
     var imagedict:[String:Data] = [:]
+    var businesses = [BusinessModel]()
+    var selectedBusinessType = BusinessModel()
+    var dispatchGroup = DispatchGroup()
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        if UserData.sharedInstance.businessTypes.count < 2 {
+            getBusinessCategory()
+        } else {
+            businesses = UserData.sharedInstance.businessTypes
+        }
         getUserProfile()
         let imageData: Data? = userImg.image?.jpegData(compressionQuality: 0)
         if let data = imageData {
@@ -50,8 +60,26 @@ class UserProfileVC: UIViewController {
         } else {
             userImg.image = UIImage(named: "profile")
         }
+        let business = businesses.filter({ (businessModel) -> Bool in
+            return businessModel.businessID == user.businessID
+        }).first
+        selectedBusinessType = business ?? BusinessModel()
+        categoryValue.text = business?.businessName ?? ""
     }
-    
+    func showOptions(){
+        let alert = UIAlertController(title: "Please select category", message: "", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: self.businesses.first?.businessName ?? "", style: .default , handler:{ (UIAlertAction)in
+            self.selectedBusinessType = self.businesses.first!
+            self.categoryValue.text = self.businesses.first?.businessName ?? ""
+           }))
+           alert.addAction(UIAlertAction(title: self.businesses.last?.businessName ?? "", style: .default , handler:{ (UIAlertAction)in
+            self.selectedBusinessType = self.businesses.last!
+            self.categoryValue.text = self.businesses.last?.businessName ?? ""
+           }))
+           self.present(alert, animated: true, completion: {
+               print("completion block")
+           })
+    }
     //MARK:- IBActions
     @IBAction func saveBtnAction(_ sender: UIButton) {
         if (nameTxtfld.text?.isEmpty ??  true) {
@@ -81,6 +109,9 @@ class UserProfileVC: UIViewController {
             }
 
         }
+    }
+    @IBAction func categoryBtnAction(_ sender: UIButton) {
+        showOptions()
     }
     @IBAction func backBtnAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -179,7 +210,8 @@ extension UserProfileVC {
                 "latitude":"19.4354",
                 "longitude":"67.45453",
                 "customer_id": Defaults.getUserID(),
-                "email":emailTxtfld.text!
+                "email":emailTxtfld.text!,
+                "business_id": selectedBusinessType.businessID
             ] as [String : Any]
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: setUserDetailsUrl, method: .put, parameters: parameters, completionHandler: { (json, status) in
@@ -201,6 +233,45 @@ extension UserProfileVC {
                 } else {
                     DispatchQueue.main.async {
                         self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+    
+    func getBusinessCategory() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let getBBusinessTypeUrl : String = UrlName.baseUrl + UrlName.getBusinessUrl
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: getBBusinessTypeUrl, method: .get, parameters: nil, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    if let businessList = jsonValue[APIField.dataKey]?.array {
+                        var businesses = Array<BusinessModel>()
+                        for business in businessList {
+                            let businessModel = BusinessModel.init(json: business)
+                            businesses.append(businessModel)
+                        }
+                        self.businesses = businesses
+                        UserData.sharedInstance.businessTypes = self.businesses
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
                     }
                 }
                 DispatchQueue.main.async {

@@ -14,9 +14,12 @@ class CategoryVC: UIViewController {
     @IBOutlet weak var categotyTF,emailTF: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     
+    var businesses = [BusinessModel]()
+    var selectedBusinessType = BusinessModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        getBusinessCategory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,9 +52,7 @@ class CategoryVC: UIViewController {
             return
         }
          else {
-            Defaults.setUserLoggedIn(userLoggedIn: true)
-            makeRootViewController()
-         //   loginAPI()
+            setBusinessCategory()
         }
     }
 }
@@ -59,14 +60,97 @@ class CategoryVC: UIViewController {
 extension CategoryVC {
     func showOptions(){
         let alert = UIAlertController(title: "Please select category", message: "", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Business", style: .default , handler:{ (UIAlertAction)in
-                self.categotyTF.text = "Business"
+        alert.addAction(UIAlertAction(title: self.businesses.first?.businessName ?? "", style: .default , handler:{ (UIAlertAction)in
+            self.selectedBusinessType = self.businesses.first!
+            self.categotyTF.text = self.businesses.first?.businessName ?? ""
            }))
-           alert.addAction(UIAlertAction(title: "Individual", style: .default , handler:{ (UIAlertAction)in
-            self.categotyTF.text = "Individual"
+           alert.addAction(UIAlertAction(title: self.businesses.last?.businessName ?? "", style: .default , handler:{ (UIAlertAction)in
+            self.selectedBusinessType = self.businesses.last!
+            self.categotyTF.text = self.businesses.last?.businessName ?? ""
            }))
            self.present(alert, animated: true, completion: {
                print("completion block")
            })
+    }
+}
+
+//MARK:- API Calls
+extension CategoryVC {
+    func setBusinessCategory() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let faqURL : String = UrlName.baseUrl + UrlName.setBusinessUrl + Defaults.getUserID()
+            let parameters = [
+                "email":emailTF.text!,
+                "business_id":selectedBusinessType.businessID
+            ] as [String : Any]
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: faqURL, method: .put, parameters: parameters, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    DispatchQueue.main.async {
+                        Defaults.setUserLoggedIn(userLoggedIn: true)
+                        self.makeRootViewController()
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+
+    
+    func getBusinessCategory() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let getBBusinessTypeUrl : String = UrlName.baseUrl + UrlName.getBusinessUrl
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: getBBusinessTypeUrl, method: .get, parameters: nil, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                //print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    if let businessList = jsonValue[APIField.dataKey]?.array {
+                        var businesses = Array<BusinessModel>()
+                        for business in businessList {
+                            let businessModel = BusinessModel.init(json: business)
+                            businesses.append(businessModel)
+                        }
+                        self.businesses = businesses
+                        UserData.sharedInstance.businessTypes = self.businesses
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
     }
 }

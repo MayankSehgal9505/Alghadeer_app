@@ -16,5 +16,6 @@ final class UserData: NSObject {
     var userName = ""
     var userID = ""
     var userModel = UserModel()
+    var businessTypes = Array<BusinessModel>()
    private override init() { }
 }

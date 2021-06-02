@@ -7,14 +7,19 @@
 
 import UIKit
 import Toast_Swift
-
+enum UserType{
+    case signup
+    case existing
+}
 class LoginVC: UIViewController {
 
+    
     //MARK:- IBOutlet
     @IBOutlet weak var phoneView: UIView!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
+    var userType: UserType = .signup
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -73,12 +78,20 @@ extension LoginVC {
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     Defaults.setToken(token: jsonValue[APIField.tokenKey]?.stringValue ?? "")
                     if let dataString = jsonValue[APIField.dataKey]?.dictionary {
+                        let user = UserModel.init(json: jsonValue[APIField.dataKey]!)
+                        if let _ = user.businessID {
+                            self.userType = .existing
+                        } else {
+                            self.userType = .signup
+                        }
+                        UserData.sharedInstance.userModel = user
                         Defaults.setUserPhoneNumber(userNumber: dataString["mobile_number"]?.stringValue ?? "")
                         Defaults.setUserID(userID: dataString["id"]?.stringValue ?? "")
                         DispatchQueue.main.async {
                             let obj = OTPVC.init(nibName: OTPVC.className(), bundle: nil)
                             obj.mobile = self.phoneTextField.text!
                             obj.otpRecieved = dataString["otp"]?.stringValue ?? ""
+                            obj.userType = self.userType 
                             self.navigationController?.pushViewController(obj, animated: true)
                         }
                     }

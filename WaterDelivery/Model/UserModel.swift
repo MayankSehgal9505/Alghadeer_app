@@ -14,6 +14,7 @@ struct UserModel {
     var userlatitude = ""
     var userlongitude = ""
     var userRole = ""
+    var businessID:String? = ""
     var profileImgUrl = ""
     //MARK: Lifecycle
     init() {
@@ -35,5 +36,6 @@ struct UserModel {
         self.userlongitude = json["longitude"].stringValue
         self.userRole = json["role_name"].stringValue
         self.profileImgUrl = json["profile"].stringValue
+        self.businessID = json["business_id"].string
     }
 }

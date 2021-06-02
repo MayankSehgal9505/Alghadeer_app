@@ -28,6 +28,8 @@ class OTPVC: UIViewController {
     var mobile = ""
     var otp = ""
     var otpRecieved = ""
+    var userType: UserType = .signup
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -157,8 +159,14 @@ extension OTPVC {
                 //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
-                        let obj = CategoryVC.init(nibName: CategoryVC.className(), bundle: nil)
-                        self.navigationController?.pushViewController(obj, animated: true)
+                        switch self.userType {
+                        case .existing:
+                            Defaults.setUserLoggedIn(userLoggedIn: true)
+                            self.makeRootViewController()
+                        case .signup:
+                            let obj = CategoryVC.init(nibName: CategoryVC.className(), bundle: nil)
+                            self.navigationController?.pushViewController(obj, animated: true)
+                        }
                     }
                 }else {
                     DispatchQueue.main.async {

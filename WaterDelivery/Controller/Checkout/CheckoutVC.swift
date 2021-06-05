@@ -8,7 +8,15 @@
 import UIKit
 
 class CheckoutVC: UIViewController {
-    
+    //MARK:- Enums
+    enum SectionType:Int, CaseIterable {
+        case addAddressSelection = 0
+        case addressList,info, scheduleTime, payment, summary
+    }
+    enum PaymentType:Int {
+        case card = 0
+        case wallet
+    }
     //MARK:-IBOutlets
 
     @IBOutlet weak var checkOutTBView: UITableView!
@@ -16,10 +24,15 @@ class CheckoutVC: UIViewController {
     @IBOutlet weak var scheduleTimeView: UIView!
     
     //MARK:- Local Variables
-    var paymentTypeCart = false
+    
+    var paymentType: PaymentType = .wallet
     private var effectView,vibrantView : UIVisualEffectView?
     var shippingAddressArray = Array<AddressModel>()
     var selectedAddress = AddressModel()
+    private var walletBallance = WalletBalance()
+    private var orderSummaryObj = OrderSummary()
+    private var addedMoneyModel = AddMoneyModel()
+    
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -29,7 +42,9 @@ class CheckoutVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getWalletDetails()
         getAddressList()
+        getSummaryData()
     }
     //MARK:- Internal Methods
     func setUpTBView(){
@@ -58,6 +73,12 @@ class CheckoutVC: UIViewController {
         effectView?.removeFromSuperview()
     }
     
+    private func moveToPaymentPage(){
+        let paymentVC = PaymentVC()
+        paymentVC.delegate = self
+        paymentVC.urlString = addedMoneyModel.redirectUrl
+        self.present(paymentVC, animated: true, completion: nil)
+    }
     //MARK:-IBActions
     @IBAction func scheduleTimeCancelBtnActn(_ sender: UIBarButtonItem) {
         hidePickerView()
@@ -76,27 +97,22 @@ class CheckoutVC: UIViewController {
         }
     }
     
-    @objc func addAddressBtnTapped() {
-        let addAddressVC = AddAddressVC()
-        addAddressVC.addressScreenType = .addAddress
-        self.navigationController?.pushViewController(addAddressVC, animated: true)
-    }
+    // Payment Mthods
     @objc func cardOptionChoosen(sender:UIButton) {
         if !sender.isSelected {
-            paymentTypeCart = true
+            paymentType = .card
             sender.isSelected = !sender.isSelected
-            if let cell = checkOutTBView.cellForRow(at: IndexPath.init(row: 0, section: 3)) as? PaymentTVC {
-                checkOutTBView.reloadSections(IndexSet.init(integer: 4), with: .top)
+            if let cell = checkOutTBView.cellForRow(at: IndexPath.init(row: 0, section: SectionType.payment.rawValue)) as? PaymentTVC {
                 cell.walletBtnChoosen.isSelected = !sender.isSelected
             }
         }
     }
+    
     @objc func walletOptionChoosen(sender:UIButton) {
         if !sender.isSelected {
-            paymentTypeCart = false
+            paymentType = .wallet
             sender.isSelected = !sender.isSelected
-            if let cell = checkOutTBView.cellForRow(at: IndexPath.init(row: 0, section: 3)) as? PaymentTVC {
-                checkOutTBView.reloadSections(IndexSet.init(integer: 4), with: .top)
+            if let cell = checkOutTBView.cellForRow(at: IndexPath.init(row: 0, section: SectionType.payment.rawValue)) as? PaymentTVC {
                 cell.cardBtnChoosen.isSelected = !sender.isSelected
             }
         }
@@ -108,130 +124,160 @@ class CheckoutVC: UIViewController {
         self.navigationController?.pushViewController(selectAmountVC, animated: true)
     }
     
-    @objc func cardChoosen() {
-        
+    //Address Methods
+    @objc func addAddressBtnTapped() {
+        let addAddressVC = AddAddressVC()
+        addAddressVC.addressScreenType = .addAddress
+        self.navigationController?.pushViewController(addAddressVC, animated: true)
     }
     
     @objc func shippingAddrress(sender: UIButton) {
         if !sender.isSelected {
             sender.isSelected = !sender.isSelected
-            if let _ = checkOutTBView.cellForRow(at: IndexPath.init(row: sender.tag, section: 0)) as? ShippingAddressTVC {
+            if let _ = checkOutTBView.cellForRow(at: IndexPath.init(row: sender.tag, section: SectionType.addressList.rawValue)) as? ShippingAddressTVC {
                 for (index,_) in shippingAddressArray.enumerated() {
-                    if index == sender.tag-1 {
+                    if index == sender.tag {
                         shippingAddressArray[index].addressSelected = true
                         self.selectedAddress = shippingAddressArray[index]
                     } else {
                         shippingAddressArray[index].addressSelected = false
                     }
                 }
-                checkOutTBView.reloadSections(IndexSet.init(integer: 0), with: .none)
+                self.checkOutTBView.beginUpdates()
+                checkOutTBView.reloadSections(IndexSet.init(integer: SectionType.addressList.rawValue), with: .none)
+                self.checkOutTBView.endUpdates()
             }
         }
     }
     
     @objc func editBtnAction(sender: UIButton){
-        if sender.tag-1 < shippingAddressArray.count+1 {
+        if sender.tag < shippingAddressArray.count {
             let updateAddressVC = AddAddressVC()
             updateAddressVC.addressScreenType = .updateAddress
-            updateAddressVC.addressModel = shippingAddressArray[sender.tag-1]
+            updateAddressVC.addressModel = shippingAddressArray[sender.tag]
             self.navigationController?.pushViewController(updateAddressVC, animated: true)
         }
     }
     
     @objc func deleteBtnAction(sender: UIButton){
-        if sender.tag-1 < shippingAddressArray.count {
-            deleteAddress(addressID: shippingAddressArray[sender.tag-1].addressID)
+        if sender.tag < shippingAddressArray.count {
+            deleteAddress(addressID: shippingAddressArray[sender.tag].addressID)
         }
     }
 }
-extension CheckoutVC{
-    func deleteAddress(addressID: String) {
-        if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
-            let addressListURL : String = UrlName.baseUrl + UrlName.deleteAddressUrl + "\(addressID)"
-            NetworkManager.viewControler = self
-            NetworkManager.sharedInstance.commonApiCall(url: addressListURL, method: .delete, parameters: nil, completionHandler: { (json, status) in
-                guard let jsonValue = json?.dictionaryValue else {
-                    DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
-                        self.view.makeToast(status, duration: 3.0, position: .bottom)
-                    }
-                    return
-                }
-                //print(jsonValue)
-                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
-                    DispatchQueue.main.async {
-                        self.getAddressList()
-                    }
-                }
-                else {
-                    DispatchQueue.main.async {
-                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
-                }
-            })
-        }else{
-            self.showNoInternetAlert()
+
+extension CheckoutVC: SelectedAmountDelegate{
+    func amountSelected(amount: String) {
+        if let cell = checkOutTBView.cellForRow(at: IndexPath.init(row: 0, section: 3)) as? PaymentTVC {
+            cell.walletMoney.setTitle(amount, for: [])
         }
     }
-    func getAddressList() {
-        if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
-            let addressListURL : String = UrlName.baseUrl + UrlName.getAddressListUrl + Defaults.getUserID()
-            NetworkManager.viewControler = self
-            NetworkManager.sharedInstance.commonApiCall(url: addressListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
-                guard let jsonValue = json?.dictionaryValue else {
-                    DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
-                        self.view.makeToast(status, duration: 3.0, position: .bottom)
-                    }
-                    return
-                }
-                //print(jsonValue)
-                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
-                    if let addresslist = jsonValue[APIField.dataKey]?.array {
-                        var shippingAddress = Array<AddressModel>()
-                        for address in addresslist {
-                            let addressModel = AddressModel.init(json: address)
-                            shippingAddress.append(addressModel)
-                        }
-                        self.shippingAddressArray = shippingAddress
-                        self.selectedAddress = self.shippingAddressArray.first ?? AddressModel()
-                        if self.shippingAddressArray.count >= 1 {
-                            self.shippingAddressArray[0].addressSelected = true
-                        }
-                    }
-                    DispatchQueue.main.async {
-                        self.checkOutTBView.reloadSections(IndexSet.init(integer: 0), with: .none)
-                    }
-                }
-                else {
-                    DispatchQueue.main.async {
-                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
-                }
-            })
-        }else{
-            self.showNoInternetAlert()
+}
+//MARK:-UItableViewDataSource & UITableViewDelegate Methods
+extension CheckoutVC: UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return SectionType.allCases.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let sectionType = SectionType.init(rawValue: section) else {return 0}
+        switch sectionType {
+        case .addAddressSelection: return 1
+        case .addressList:      return shippingAddressArray.count
+        case .info:             return 1
+        case .scheduleTime:     return 1
+        case .payment:          return 1
+        case .summary:          return 1
         }
     }
-    func cartCheckout() {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let sectionType = SectionType.init(rawValue: indexPath.section) else {return UITableViewCell()}
+        switch sectionType {
+        case .addAddressSelection:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ShippingTitleTVC.className(), for: indexPath) as! ShippingTitleTVC
+            cell.setupCellUI()
+            cell.addAddressBtn.addTarget(self, action: #selector(addAddressBtnTapped), for: .touchUpInside)
+            return cell
+        case .addressList:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ShippingAddressTVC.className(), for: indexPath) as! ShippingAddressTVC
+            cell.editBtn.tag = indexPath.row
+            cell.deleteBtn.tag = indexPath.row
+            cell.editBtn.addTarget(self, action: #selector(editBtnAction(sender:)), for: .touchUpInside)
+            cell.deleteBtn.addTarget(self, action: #selector(deleteBtnAction(sender:)), for: .touchUpInside)
+            cell.adddressSelectionBtn.isHidden = shippingAddressArray.count == 1
+            if indexPath.row < shippingAddressArray.count {
+                cell.adddressSelectionBtn.tag = indexPath.row
+                cell.adddressSelectionBtn.addTarget(self, action: #selector(shippingAddrress(sender:)), for: .touchUpInside)
+                cell.setupCell(shipperAddress: shippingAddressArray[indexPath.row])
+            }
+            return cell
+        case .info:
+            let cell = tableView.dequeueReusableCell(withIdentifier: InfoTVC.className(), for: indexPath) as! InfoTVC
+            return cell
+        case .scheduleTime:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTVC.className(), for: indexPath) as! ScheduleTimeTVC
+            cell.setupCell()
+            return cell
+        case .payment:
+            let cell = tableView.dequeueReusableCell(withIdentifier: PaymentTVC.className(), for: indexPath) as! PaymentTVC
+            cell.cardBtnChoosen.addTarget(self, action: #selector(cardOptionChoosen), for: .touchUpInside)
+            cell.walletBtnChoosen.addTarget(self, action: #selector(walletOptionChoosen), for: .touchUpInside)
+            cell.walletMoney.addTarget(self, action: #selector(addMoneyToWallet), for: .touchUpInside)
+            cell.setupCell(walletBalanceObj:walletBallance)
+            switch paymentType {
+            case .card:
+                cell.cardBtnChoosen.isSelected = true
+                cell.walletBtnChoosen.isSelected = false
+            default:
+                cell.walletBtnChoosen.isSelected = true
+                cell.cardBtnChoosen.isSelected = false
+            }
+            return cell
+        case .summary:
+            let cell = tableView.dequeueReusableCell(withIdentifier: SummaryTVC.className(), for: indexPath) as! SummaryTVC
+            cell.setupCell(orderSummaryObj: orderSummaryObj)
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let sectionType = SectionType.init(rawValue: indexPath.section) else {return}
+        switch sectionType {
+        case .scheduleTime:
+            let viewArray = CommonMethods.showPopUpWithVibrancyView(on : self)
+            self.view.window?.addSubview(scheduleTimeView)
+            vibrantView = viewArray.first as? UIVisualEffectView
+            effectView = (viewArray.last as? UIVisualEffectView)
+            self.scheduleTimeView.isHidden = false
+            CommonMethods.setPickerConstraintAccordingToDevice(pickerView: scheduleTimeView, view: self.view)
+        default: break
+        }
+    }
+}
+extension CheckoutVC : PaymentVCProtocol{
+    func paymentSccessful(status: Int) {
+        if let paymentStatus = PaymentStatus.init(rawValue: status) {
+            switch paymentStatus {
+            case .success:
+                setPaymentStatus()
+            default:
+                break
+            }
+        } else {
+            
+        }
+    }
+}
+
+//MARK:- API Call Methods
+extension CheckoutVC: WalletAPI{
+    private func setPaymentStatus() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
-            let checkOutURL : String = UrlName.baseUrl + UrlName.cartCheckOutUrl
-            let parameters = [
-                "customer_id": Defaults.getUserID(),
-                "address_id":selectedAddress.addressID
-            ] as [String : Any]
-            print(parameters)
+            let checkOutURL : String = UrlName.baseUrl + UrlName.paymentStatusUrl + "\(self.addedMoneyModel.transactionID)?orderId=\(addedMoneyModel.transactionOrderId)&customer_id=\(Defaults.getUserID())&wallet=\(paymentType.rawValue)"
             NetworkManager.viewControler = self
-            NetworkManager.sharedInstance.commonApiCall(url: checkOutURL, method: .post, jsonObject: true,parameters: parameters, completionHandler: { (json, status) in
+            NetworkManager.sharedInstance.commonApiCall(url: checkOutURL, method: .get, jsonObject: false,parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
                         self.dismissHUD(isAnimated: true)
@@ -239,8 +285,9 @@ extension CheckoutVC{
                     }
                     return
                 }
-                //print(jsonValue)
-                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true , let data = jsonValue[APIField.dataKey]?.dictionaryValue, let _ = data["result"]?.dictionaryValue{
+                    self.addedMoneyModel = AddMoneyModel.init(json:data["result"]!)
                     DispatchQueue.main.async {
                         self.view.makeToast("Checkout successfull", duration: 0.5, position: .center)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -261,97 +308,185 @@ extension CheckoutVC{
             self.showNoInternetAlert()
         }
     }
-}
-extension CheckoutVC: SelectedAmountDelegate{
-    func amountSelected(amount: String) {
-        if let cell = checkOutTBView.cellForRow(at: IndexPath.init(row: 0, section: 3)) as? PaymentTVC {
-            cell.walletMoney.setTitle(amount, for: [])
-        }
-    }
-}
-//MARK:-UItableViewDataSource Methods
-extension CheckoutVC: UITableViewDataSource{
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:     return 1 + shippingAddressArray.count
-        case 1:     return 1
-        case 2:     return 1
-        case 3:     return 1
-        case 4:     return paymentTypeCart ? 1 : 0
-        case 5:     return 1
-        default:    return 0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            switch indexPath.row {
-            case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: ShippingTitleTVC.className(), for: indexPath) as! ShippingTitleTVC
-                cell.setupCellUI()
-                cell.addAddressBtn.addTarget(self, action: #selector(addAddressBtnTapped), for: .touchUpInside)
-                return cell
-            default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: ShippingAddressTVC.className(), for: indexPath) as! ShippingAddressTVC
-                cell.editBtn.tag = indexPath.row
-                cell.deleteBtn.tag = indexPath.row
-                cell.editBtn.addTarget(self, action: #selector(editBtnAction(sender:)), for: .touchUpInside)
-                cell.deleteBtn.addTarget(self, action: #selector(deleteBtnAction(sender:)), for: .touchUpInside)
-                cell.adddressSelectionBtn.isHidden = shippingAddressArray.count == 1
-                if indexPath.row-1 < shippingAddressArray.count {
-                    cell.adddressSelectionBtn.tag = indexPath.row
-                    cell.adddressSelectionBtn.addTarget(self, action: #selector(shippingAddrress(sender:)), for: .touchUpInside)
-                    cell.setupCell(shipperAddress: shippingAddressArray[indexPath.row-1])
-                }
-                return cell
+    private func getWalletDetails() {
+        getWalletDetails { (walletBalance) in
+            self.walletBallance = walletBalance
+            DispatchQueue.main.async {
+                self.checkOutTBView.beginUpdates()
+                self.checkOutTBView.reloadSections(IndexSet.init(integer: SectionType.payment.rawValue), with: .none)
+                self.checkOutTBView.endUpdates()
             }
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: InfoTVC.className(), for: indexPath) as! InfoTVC
-            return cell
-        case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTVC.className(), for: indexPath) as! ScheduleTimeTVC
-            cell.setupCell()
-            return cell
-        case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: PaymentTVC.className(), for: indexPath) as! PaymentTVC
-            cell.cardBtnChoosen.addTarget(self, action: #selector(cardOptionChoosen), for: .touchUpInside)
-            cell.walletBtnChoosen.addTarget(self, action: #selector(walletOptionChoosen), for: .touchUpInside)
-            cell.walletMoney.addTarget(self, action: #selector(addMoneyToWallet), for: .touchUpInside)
-            cell.setupCell()
-            return cell
-        case 4:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CardTVC.className(), for: indexPath) as! CardTVC
-            cell.cardChoosen.addTarget(self, action: #selector(cardChoosen), for: .touchUpInside)
-            cell.setupCell()
-            return cell
-        case 5:
-            let cell = tableView.dequeueReusableCell(withIdentifier: SummaryTVC.className(), for: indexPath) as! SummaryTVC
-            cell.setupCell()
-            return cell
-        default:
-            return UITableViewCell()
+        }
+    }
+    private func deleteAddress(addressID: String) {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let addressListURL : String = UrlName.baseUrl + UrlName.deleteAddressUrl + "\(addressID)"
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: addressListURL, method: .delete, parameters: nil, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    DispatchQueue.main.async {
+                        self.getAddressList()
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+    private func getSummaryData() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let orderTotalUrl : String = UrlName.baseUrl + UrlName.orderTotalUrl
+            let parameters = [
+                "customer_id": Defaults.getUserID(),
+            ] as [String : Any]
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: orderTotalUrl, method: .post, jsonObject: false,parameters: parameters, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    if let _ = jsonValue[APIField.dataKey]?.dictionary {
+                        self.orderSummaryObj = OrderSummary.init(json: jsonValue[APIField.dataKey]!)
+                        DispatchQueue.main.async {
+                            self.checkOutTBView.beginUpdates()
+                            self.checkOutTBView.reloadSections(IndexSet.init(integer: SectionType.summary.rawValue), with: .none)
+                            self.checkOutTBView.endUpdates()
+                        }
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+    
+    private func getAddressList() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let addressListURL : String = UrlName.baseUrl + UrlName.getAddressListUrl + Defaults.getUserID()
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: addressListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    if let addresslist = jsonValue[APIField.dataKey]?.array {
+                        var shippingAddress = Array<AddressModel>()
+                        for address in addresslist {
+                            let addressModel = AddressModel.init(json: address)
+                            shippingAddress.append(addressModel)
+                        }
+                        self.shippingAddressArray = shippingAddress
+                        self.selectedAddress = self.shippingAddressArray.first ?? AddressModel()
+                        if self.shippingAddressArray.count >= 1 {
+                            self.shippingAddressArray[0].addressSelected = true
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        self.checkOutTBView.beginUpdates()
+                        self.checkOutTBView.reloadSections(IndexSet.init(integer: SectionType.addressList.rawValue), with: .none)
+                        self.checkOutTBView.endUpdates()
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+    private func cartCheckout() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let checkOutURL : String = UrlName.baseUrl + UrlName.orderCheckOutUrl
+            let parameters = [
+                "customer_id": Defaults.getUserID(),
+                "address_id":selectedAddress.addressID,
+                "wallet": "\(paymentType.rawValue)",
+                "grandtotal": orderSummaryObj.orderGrandTotal
+            ] as [String : Any]
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: checkOutURL, method: .post, jsonObject: true,parameters: parameters, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    switch self.paymentType {
+                    case .wallet:
+                        DispatchQueue.main.async {
+                            self.view.makeToast("Checkout successfull", duration: 0.5, position: .center)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                Utility.makeRootViewController(vc: self)
+                            }
+                        }
+                    default:
+                        if let data = jsonValue[APIField.dataKey]?.dictionaryValue, let _ = data["result"]?.dictionaryValue{
+                            self.addedMoneyModel = AddMoneyModel.init(json:data["result"]!)
+                            DispatchQueue.main.async {
+                                self.moveToPaymentPage()
+                            }
+                        }
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
         }
     }
 }
 
-//MARK:-UITableViewDelegate Methods
-
-extension CheckoutVC: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 2:
-            let viewArray = CommonMethods.showPopUpWithVibrancyView(on : self)
-            self.view.window?.addSubview(scheduleTimeView)
-            vibrantView = viewArray.first as? UIVisualEffectView
-            effectView = (viewArray.last as? UIVisualEffectView)
-            self.scheduleTimeView.isHidden = false
-            CommonMethods.setPickerConstraintAccordingToDevice(pickerView: scheduleTimeView, view: self.view)
-        default: break
-        }
-    }
-}

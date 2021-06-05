@@ -71,7 +71,6 @@ public class NetworkManager {
             do {
                 if let dataRecieved = data {
                     let json = try JSON.init(data: dataRecieved,options: .allowFragments)
-                    print(json)
                     if let sessionExpired = json["Authorization"].bool, sessionExpired == false,let vc = NetworkManager.viewControler {
                         DispatchQueue.main.async {
                             vc.showSessionExpiredAlert()

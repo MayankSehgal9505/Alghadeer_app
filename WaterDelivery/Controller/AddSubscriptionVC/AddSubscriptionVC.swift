@@ -364,7 +364,6 @@ extension AddSubscriptionVC{
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         self.view.makeToast("Product Subscribed", duration: 0.5, position: .center)
@@ -400,7 +399,7 @@ extension AddSubscriptionVC{
                     }
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let productList = jsonValue[APIField.dataKey]?.array {
                         for product in productList {
@@ -436,7 +435,7 @@ extension AddSubscriptionVC{
                 guard let jsonValue = json?.dictionaryValue else {
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         if let cartCountString = jsonValue["TotalCount"]?.stringValue, let cartCount = Int(cartCountString), cartCount > 0 {
@@ -463,7 +462,7 @@ extension AddSubscriptionVC{
                     }
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let addresslist = jsonValue[APIField.dataKey]?.array {
                         var shippingAddress = Array<AddressModel>()

@@ -68,14 +68,12 @@ extension CategoryVC {
             self.selectedBusinessType = self.businesses.last!
             self.categotyTF.text = self.businesses.last?.businessName ?? ""
            }))
-           self.present(alert, animated: true, completion: {
-               print("completion block")
-           })
+           self.present(alert, animated: true, completion:nil)
     }
 }
 
 //MARK:- API Calls
-extension CategoryVC {
+extension CategoryVC: CategoryAPI {
     func setBusinessCategory() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
@@ -93,7 +91,6 @@ extension CategoryVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         Defaults.setUserLoggedIn(userLoggedIn: true)
@@ -116,6 +113,17 @@ extension CategoryVC {
 
     
     func getBusinessCategory() {
+        getBusinessCategory { (businesses) in
+            self.businesses = businesses
+            UserData.sharedInstance.businessTypes = self.businesses
+        }
+    }
+}
+
+protocol CategoryAPI {
+}
+extension CategoryAPI where Self: UIViewController{
+    func getBusinessCategory(resultObtained: @escaping(Array<BusinessModel>) -> Void) {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
             let getBBusinessTypeUrl : String = UrlName.baseUrl + UrlName.getBusinessUrl
@@ -128,7 +136,6 @@ extension CategoryVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let businessList = jsonValue[APIField.dataKey]?.array {
                         var businesses = Array<BusinessModel>()
@@ -136,8 +143,7 @@ extension CategoryVC {
                             let businessModel = BusinessModel.init(json: business)
                             businesses.append(businessModel)
                         }
-                        self.businesses = businesses
-                        UserData.sharedInstance.businessTypes = self.businesses
+                        resultObtained(businesses)
                     }
                 }
                 else {

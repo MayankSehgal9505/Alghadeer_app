@@ -119,7 +119,7 @@ class UserProfileVC: UIViewController {
 }
 
 //MARK:- API call
-extension UserProfileVC {
+extension UserProfileVC: CategoryAPI {
     func getUserProfile() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
@@ -133,7 +133,7 @@ extension UserProfileVC {
                     }
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let userDict = jsonValue[APIField.dataKey] {
                         self.user = UserModel.init(json: userDict)
@@ -178,7 +178,7 @@ extension UserProfileVC {
                     }
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         self.view.makeToast("Photo uploaded successfully", duration: 3.0, position: .center)
@@ -222,7 +222,7 @@ extension UserProfileVC {
                     }
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         self.view.makeToast("Profile updated successfully", duration: 0.5, position: .center)
@@ -245,41 +245,9 @@ extension UserProfileVC {
     }
     
     func getBusinessCategory() {
-        if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
-            let getBBusinessTypeUrl : String = UrlName.baseUrl + UrlName.getBusinessUrl
-            NetworkManager.viewControler = self
-            NetworkManager.sharedInstance.commonApiCall(url: getBBusinessTypeUrl, method: .get, parameters: nil, completionHandler: { (json, status) in
-                guard let jsonValue = json?.dictionaryValue else {
-                    DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
-                        self.view.makeToast(status, duration: 3.0, position: .bottom)
-                    }
-                    return
-                }
-                //print(jsonValue)
-                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
-                    if let businessList = jsonValue[APIField.dataKey]?.array {
-                        var businesses = Array<BusinessModel>()
-                        for business in businessList {
-                            let businessModel = BusinessModel.init(json: business)
-                            businesses.append(businessModel)
-                        }
-                        self.businesses = businesses
-                        UserData.sharedInstance.businessTypes = self.businesses
-                    }
-                }
-                else {
-                    DispatchQueue.main.async {
-                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
-                }
-            })
-        }else{
-            self.showNoInternetAlert()
+        getBusinessCategory { (businesses) in
+            self.businesses = businesses
+            UserData.sharedInstance.businessTypes = self.businesses
         }
     }
 }

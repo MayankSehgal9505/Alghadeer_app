@@ -31,7 +31,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shop By Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WU9-SL-Pxl">
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shop By Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WU9-SL-Pxl">
                         <rect key="frame" x="15" y="10" width="295" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="TMB-qI-iiN"/>
@@ -55,6 +55,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="collectionView" destination="lxf-xc-h0e" id="t3r-mL-aCT"/>
+                <outlet property="shopByCategoryLbl" destination="WU9-SL-Pxl" id="G58-m7-sDs"/>
             </connections>
             <point key="canvasLocation" x="-174.63768115942031" y="193.52678571428569"/>
         </tableViewCell>

@@ -8,7 +8,10 @@
 import UIKit
 
 class DashboardVC: UIViewController {
-
+    enum DashboardSections :Int, CaseIterable{
+        case banner = 0
+        case products, category
+    }
     // MARK: IBOutlets
     @IBOutlet weak var tbView: UITableView!
     @IBOutlet weak var cartCountView: UIView! {didSet {self.cartCountView.makeViewCircle()}}
@@ -71,16 +74,17 @@ class DashboardVC: UIViewController {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout Method
 extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return DashboardSections.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let section = DashboardSections.init(rawValue: section) else {return 0}
         switch section {
-        case 0:
+        case .banner:
             return 1
-        case 1:
+        case .products:
             return 1
-        default:
+        case .category:
             return 1
         }
     }
@@ -98,6 +102,7 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
 
         case 1:
             if let cell = tableView.dequeueReusableCell(withIdentifier: ProductsTVC.className(), for: indexPath) as? ProductsTVC {
+                cell.favouriteProductsLbl.isHidden = false
                 cell.productArray = self.productArray
                 cell.productDelegate = self
                 cell.updateCellWith()
@@ -106,6 +111,7 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         case 2:
             if let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTVC.className(), for: indexPath) as? CategoryTVC {
+                cell.shopByCategoryLbl.isHidden = false
                 cell.categoryArray = self.categoryArray
                 cell.categoryDelegate = self
                 cell.updateCellWith()
@@ -161,7 +167,6 @@ extension DashboardVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let bannerlist = jsonValue[APIField.dataKey]?.array {
                         for banner in bannerlist {
@@ -170,9 +175,9 @@ extension DashboardVC {
                         }
                     }
                     DispatchQueue.main.async {
-                        //self.tbView.reloadSections(IndexSet.init(integer: 0), with: .none)
-
-                        self.tbView.reloadData()
+                        self.tbView.beginUpdates()
+                        self.tbView.reloadSections(IndexSet.init(integer: DashboardSections.banner.rawValue), with: .none)
+                        self.tbView.endUpdates()
                     }
                 }
                 else {
@@ -202,7 +207,6 @@ extension DashboardVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let productList = jsonValue[APIField.dataKey]?.array {
                         for product in productList {
@@ -211,7 +215,9 @@ extension DashboardVC {
                         }
                     }
                     DispatchQueue.main.async {
-                        self.tbView.reloadSections(IndexSet.init(integer: 1), with: .none)
+                        self.tbView.beginUpdates()
+                        self.tbView.reloadSections(IndexSet.init(integer: DashboardSections.products.rawValue), with: .none)
+                        self.tbView.endUpdates()
                     }
                 }
                 else {
@@ -241,7 +247,6 @@ extension DashboardVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let categorylist = jsonValue[APIField.dataKey]?.array {
                         for category in categorylist {
@@ -250,7 +255,9 @@ extension DashboardVC {
                         }
                     }
                     DispatchQueue.main.async {
-                        self.tbView.reloadSections(IndexSet.init(integer: 2), with: .none)
+                        self.tbView.beginUpdates()
+                        self.tbView.reloadSections(IndexSet.init(integer: DashboardSections.category.rawValue), with: .none)
+                        self.tbView.endUpdates()
                     }
                 }
                 else {
@@ -288,7 +295,6 @@ extension DashboardVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         if let cartCountString = jsonValue["TotalCount"]?.stringValue, let cartCount = Int(cartCountString), cartCount > 0 {
@@ -313,7 +319,6 @@ extension DashboardVC {
                 guard let jsonValue = json?.dictionaryValue else {
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let userDict = jsonValue[APIField.dataKey] {
                         let user = UserModel.init(json: userDict)

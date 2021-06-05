@@ -76,7 +76,6 @@ extension DeliveryVC {
             let parameters = [
             "customer_id":Defaults.getUserID()
             ] as [String : Any]
-            print(parameters)
             NetworkManager.viewControler = self
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 NetworkManager.sharedInstance.commonApiCall(url: orderListUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in
@@ -87,11 +86,11 @@ extension DeliveryVC {
                         }
                         return
                     }
-                    //print(jsonValue)
+                    
                     if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                         if let orders = jsonValue[APIField.dataKey]?.array {
                             var orderList = Array<Order>()
-                            for order in orders {
+                            for order in orders.reversed() {
                                 let orderModel = Order.init(json: order)
                                 orderList.append(orderModel)
                             }

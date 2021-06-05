@@ -57,7 +57,7 @@ extension FAQVC {
                     }
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let faqslist = jsonValue[APIField.dataKey]?.array {
                         var faqs = Array<FAQModel>()

@@ -25,7 +25,8 @@ class PaymentTVC: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setupCell() {
+    func setupCell(walletBalanceObj:WalletBalance) {
+        walletMoney.setTitle(walletBalanceObj.walletAmount, for: [])
         walletMoney.setCornerRadiusOfView(cornerRadiusValue: 0.0, setBorder: true, borderColor: .blue, width: 1.0)
         walletPaymentView.setCornerRadiusOfView(cornerRadiusValue:20)
         cardView.setCornerRadiusOfView(cornerRadiusValue:20)

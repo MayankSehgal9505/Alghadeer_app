@@ -65,7 +65,6 @@ extension LoginVC {
             let parameters = [
             "mobile_number":self.phoneTextField.text!,
             ] as [String : Any]
-            print(parameters)
             NetworkManager.sharedInstance.commonApiCall(url: loginURL, method: .post, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
@@ -74,7 +73,6 @@ extension LoginVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     Defaults.setToken(token: jsonValue[APIField.tokenKey]?.stringValue ?? "")
                     if let dataString = jsonValue[APIField.dataKey]?.dictionary {

@@ -166,7 +166,7 @@ extension SubscriptionVC{
                     }
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let allSubscriptions = jsonValue[APIField.dataKey]?.array {
                         var subscriptions = Array<SubscriptionModel>()
@@ -208,7 +208,7 @@ extension SubscriptionVC{
                 guard let jsonValue = json?.dictionaryValue else {
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         if let cartCountString = jsonValue["TotalCount"]?.stringValue, let cartCount = Int(cartCountString), cartCount > 0 {
@@ -237,7 +237,7 @@ extension SubscriptionVC{
                     }
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         self.view.makeToast("Subscription updated", duration: 3.0, position: .bottom)

@@ -20,7 +20,7 @@ struct Order {
     init(json : JSON) {
         self.orderMonth = json["date"].stringValue
         if let deliveryList = json["deliverylist"].array {
-            for deliveredProduct in deliveryList {
+            for deliveredProduct in deliveryList.reversed() {
                 let deliverProductModel = DeliveredProductsModel.init(json: deliveredProduct)
                 deliveredProducts.append(deliverProductModel)
             }

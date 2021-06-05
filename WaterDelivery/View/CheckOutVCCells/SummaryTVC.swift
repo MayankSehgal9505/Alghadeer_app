@@ -21,14 +21,12 @@ class SummaryTVC: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    func setupCell() {
+    func setupCell(orderSummaryObj: OrderSummary) {
         greyView.setCornerRadiusOfView(cornerRadiusValue:20)
-        subtotal.text = "AED 18.00"
-        vatAmount.text = "AED 0.90"
-        grandTotal.text = "AED 18.90"
+        subtotal.text = "AED \(orderSummaryObj.orderAmount)"
+        vatAmount.text = "AED \(orderSummaryObj.orderVat)"
+        grandTotal.text = "AED \(orderSummaryObj.orderGrandTotal)"
     }
 }

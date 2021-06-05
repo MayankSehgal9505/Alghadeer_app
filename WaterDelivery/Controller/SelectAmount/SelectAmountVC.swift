@@ -102,15 +102,13 @@ extension SelectAmountVC : PaymentVCProtocol{
             
         }
     }
-    
 }
 //MARK:- API Call Methods
 extension SelectAmountVC {
     func setPaymentStatus() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
-            let checkOutURL : String = UrlName.baseUrl + UrlName.paymentStatusUrl + "\(self.addedMoneyModel.transactionID)?orderId=\(addedMoneyModel.transactionOrderId)&customer_id=\(Defaults.getUserID())"
-            print(checkOutURL)
+            let checkOutURL : String = UrlName.baseUrl + UrlName.paymentStatusUrl + "\(self.addedMoneyModel.transactionID)?orderId=\(addedMoneyModel.transactionOrderId)&customer_id=\(Defaults.getUserID())&wallet=1"
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: checkOutURL, method: .get, jsonObject: false,parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
@@ -120,7 +118,7 @@ extension SelectAmountVC {
                     }
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true , let data = jsonValue[APIField.dataKey]?.dictionaryValue, let _ = data["result"]?.dictionaryValue{
                     self.addedMoneyModel = AddMoneyModel.init(json:data["result"]!)
                     DispatchQueue.main.async {
@@ -148,7 +146,6 @@ extension SelectAmountVC {
                 "customer_id": Defaults.getUserID(),
                 "amount": selectedAmount.amount
             ] as [String : Any]
-            print(parameters)
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: checkOutURL, method: .post, jsonObject: false,parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
@@ -158,7 +155,7 @@ extension SelectAmountVC {
                     }
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true , let data = jsonValue[APIField.dataKey]?.dictionaryValue, let _ = data["result"]?.dictionaryValue{
                     self.addedMoneyModel = AddMoneyModel.init(json:data["result"]!)
                     DispatchQueue.main.async {

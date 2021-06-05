@@ -113,7 +113,6 @@ extension AddAddressVC {
                 "longitude":"72.908012",
                 //"customer_id": Defaults.getUserID()
             ] as [String : Any]
-            print(parameters)
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addAddressUrl, method: .put, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
@@ -123,7 +122,7 @@ extension AddAddressVC {
                     }
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         self.view.makeToast("Address Updated successfully", duration: 0.5, position: .center)
@@ -172,7 +171,6 @@ extension AddAddressVC {
                 "longitude":"72.908012",
                 "customer_id": Defaults.getUserID()
             ] as [String : Any]
-            print(parameters)
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addAddressUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
@@ -182,7 +180,7 @@ extension AddAddressVC {
                     }
                     return
                 }
-                //print(jsonValue)
+                
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         self.view.makeToast("Address added successfully", duration: 0.5, position: .center)

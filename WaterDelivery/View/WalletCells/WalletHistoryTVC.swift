@@ -20,10 +20,10 @@ class WalletHistoryTVC: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setupCell() {
-        productItem.text = "Al Ain Bottled Dinking Water"
-        productPurchaseDate.text = "2 March 10:00 AM"
-        productAmount.text = "AED 0.00"
+    func setupCell(walletTransactionObj:WalletTransactionModel) {
+        productItem.text = walletTransactionObj.comment
+        productPurchaseDate.text = ""
+        productAmount.text = "AED \(walletTransactionObj.amt)"
     }
     
 }

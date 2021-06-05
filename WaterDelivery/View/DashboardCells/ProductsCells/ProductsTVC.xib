@@ -30,15 +30,15 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favourite Products" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gei-iT-zFM">
-                        <rect key="frame" x="15" y="10" width="182" height="97"/>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favourite Products" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gei-iT-zFM">
+                        <rect key="frame" x="15" y="10" width="353" height="97"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="gei-iT-zFM" secondAttribute="trailing" constant="191" id="1Ry-5R-I0i"/>
+                    <constraint firstAttribute="trailing" secondItem="gei-iT-zFM" secondAttribute="trailing" constant="20" id="1Ry-5R-I0i"/>
                     <constraint firstAttribute="trailing" secondItem="0gD-gA-vkZ" secondAttribute="trailing" id="3yj-sC-NCT"/>
                     <constraint firstItem="gei-iT-zFM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Cq2-6t-dmN"/>
                     <constraint firstItem="gei-iT-zFM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Ukc-e4-xrg"/>
@@ -50,6 +50,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="collectionView" destination="0gD-gA-vkZ" id="lJC-ye-rbf"/>
+                <outlet property="favouriteProductsLbl" destination="gei-iT-zFM" id="Noh-lf-Dew"/>
             </connections>
             <point key="canvasLocation" x="-4.3478260869565224" y="219.30803571428569"/>
         </tableViewCell>

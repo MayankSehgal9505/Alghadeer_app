@@ -11,6 +11,7 @@ protocol ProductDetailProtocol: class {
 }
 class ProductsTVC: UITableViewCell {
     
+    @IBOutlet weak var favouriteProductsLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     var productArray = Array<ProductModel>()
     weak var productDelegate: ProductDetailProtocol?

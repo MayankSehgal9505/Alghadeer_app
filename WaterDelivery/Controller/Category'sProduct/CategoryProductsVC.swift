@@ -76,7 +76,6 @@ extension CategoryProductsVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let productList = jsonValue[APIField.dataKey]?.array {
                         for product in productList {
@@ -117,7 +116,6 @@ extension CategoryProductsVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         if let cartCountString = jsonValue["TotalCount"]?.stringValue, let cartCount = Int(cartCountString), cartCount > 0 {

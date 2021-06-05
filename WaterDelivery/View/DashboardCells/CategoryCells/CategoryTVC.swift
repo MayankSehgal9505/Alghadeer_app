@@ -11,6 +11,7 @@ protocol CategoryProtocol: class {
 }
 class CategoryTVC: UITableViewCell {
     
+    @IBOutlet weak var shopByCategoryLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     var categoryArray = Array<CategoryModel>()
     weak var categoryDelegate: CategoryProtocol?

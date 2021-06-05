@@ -134,7 +134,6 @@ extension CartVC {
             let parameters = [
                 "customer_id":Defaults.getUserID(),
             ] as [String : Any]
-            print(parameters)
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: getCartListUrl, method: .get, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
@@ -144,7 +143,6 @@ extension CartVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let cartlist = jsonValue[APIField.dataKey]?.array {
                         var cartItems = Array<CartItemModel>()
@@ -189,7 +187,6 @@ extension CartVC {
                 "quantity": eventType == .removeProduct ? cartItem.cartQuantity : "1",
                 "event":eventType == .decreaseQuantity && cartItem.cartQuantity == "1" ?   "remove"   : eventType.eventString
             ] as [String : Any]
-            print(parameters)
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addToCartUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
@@ -199,7 +196,6 @@ extension CartVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         self.getCartList()

@@ -88,7 +88,6 @@ extension DetailVC {
                 "quantity":"1",
                 "event":"add"
             ] as [String : Any]
-            print(parameters)
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addToCartUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
@@ -98,7 +97,6 @@ extension DetailVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         self.view.makeToast("Item added to cart", duration: 3.0, position: .center)
@@ -139,7 +137,6 @@ extension DetailVC {
                 guard let jsonValue = json?.dictionaryValue else {
                     return
                 }
-                print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         if let cartCountString = jsonValue["TotalCount"]?.stringValue, let cartCount = Int(cartCountString), cartCount > 0 {

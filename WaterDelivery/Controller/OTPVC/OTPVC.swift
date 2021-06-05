@@ -146,7 +146,6 @@ extension OTPVC {
             "mobile_number":self.mobile,
             "otp":getOTP()
             ] as [String : Any]
-            print(parameters)
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: loginURL, method: .post, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
@@ -156,7 +155,6 @@ extension OTPVC {
                     }
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
                         switch self.userType {
@@ -189,14 +187,12 @@ extension OTPVC {
             let parameters = [
             "mobile_number":self.mobile
             ] as [String : Any]
-            print(parameters)
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: loginURL, method: .post, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     self.dismissHUD(isAnimated: true)
                     return
                 }
-                //print(jsonValue)
                 if let apiSuccess = jsonValue[APIField.successKey], apiSuccess == "true" {
                     self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
                 }

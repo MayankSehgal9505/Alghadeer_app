@@ -11,15 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SubscriptionVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
-                <outlet property="activeSubscriptionBtn" destination="btC-Iz-Vri" id="OyN-Pc-hgy"/>
                 <outlet property="addBtn" destination="WYF-Tu-mQz" id="SHb-pR-sM9"/>
-                <outlet property="cancelledSubscriptioBtn" destination="ESe-bR-RU0" id="fbJ-Ag-LQK"/>
-                <outlet property="cardCountView" destination="iq7-vB-2oe" id="VC9-J9-dsc"/>
-                <outlet property="cardCountlbl" destination="ooF-aR-OxE" id="vdA-lj-XFx"/>
+                <outlet property="cartCountView" destination="iq7-vB-2oe" id="vLO-qT-a43"/>
+                <outlet property="cartCountlbl" destination="ooF-aR-OxE" id="pap-Wu-nxX"/>
                 <outlet property="noSubscriptionTxt" destination="4O5-FS-9Ne" id="soV-V9-x0Q"/>
-                <outlet property="pausedSubscriptionBtn" destination="VLe-5D-peS" id="gNM-WX-sRj"/>
                 <outlet property="subscriptionTBView" destination="YrZ-Jd-Yop" id="qjW-1G-ue9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="subscriptionBtns" destination="btC-Iz-Vri" collectionClass="NSMutableArray" id="fXI-ah-CM8"/>
+                <outletCollection property="subscriptionBtns" destination="VLe-5D-peS" collectionClass="NSMutableArray" id="cAd-27-gtb"/>
+                <outletCollection property="subscriptionBtns" destination="ESe-bR-RU0" collectionClass="NSMutableArray" id="v0Q-HD-3vF"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -70,7 +70,7 @@
                             </constraints>
                             <state key="normal" image="cart"/>
                             <connections>
-                                <action selector="cartBtnAction:" destination="-1" eventType="touchUpInside" id="P9P-cu-9Od"/>
+                                <action selector="goToCartBtnAction:" destination="-1" eventType="touchUpInside" id="81F-Se-fyU"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iq7-vB-2oe">
@@ -120,7 +120,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="activeBtnAction:" destination="-1" eventType="touchUpInside" id="uVQ-tn-zAC"/>
+                                <action selector="subscriptionAction:" destination="-1" eventType="touchUpInside" id="rtv-D5-aEp"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLe-5D-peS">
@@ -131,7 +131,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="pauseBtnAction:" destination="-1" eventType="touchUpInside" id="S18-vP-T8u"/>
+                                <action selector="subscriptionAction:" destination="-1" eventType="touchUpInside" id="UxU-DU-VIx"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESe-bR-RU0">
@@ -142,7 +142,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="cancelBtnAction:" destination="-1" eventType="touchUpInside" id="u6D-gq-tKu"/>
+                                <action selector="subscriptionAction:" destination="-1" eventType="touchUpInside" id="n3n-UE-YKd"/>
                             </connections>
                         </button>
                     </subviews>

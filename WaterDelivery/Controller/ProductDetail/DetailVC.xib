@@ -12,9 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
                 <outlet property="addToCartBTn" destination="Pdf-yj-mPi" id="7KD-19-j4o"/>
-                <outlet property="cartButton" destination="Pdf-yj-mPi" id="aCF-KB-mAm"/>
-                <outlet property="cartCountView" destination="PJo-7x-QkT" id="wcf-ag-bFF"/>
-                <outlet property="cartCountlbl" destination="FmL-bm-Fpz" id="tL7-SD-EqC"/>
+                <outlet property="cartCountView" destination="PJo-7x-QkT" id="tQd-1P-WMG"/>
+                <outlet property="cartCountlbl" destination="FmL-bm-Fpz" id="BhE-0S-H2o"/>
                 <outlet property="navTitle" destination="CkI-1h-Elt" id="8hg-px-poA"/>
                 <outlet property="productDescription" destination="hu6-Zc-CD4" id="LoG-Q9-CLC"/>
                 <outlet property="productImg" destination="A7e-03-6zT" id="ylt-6C-nl0"/>
@@ -43,7 +42,7 @@
                             </constraints>
                             <state key="normal" image="cart"/>
                             <connections>
-                                <action selector="goToCart:" destination="-1" eventType="touchUpInside" id="kTB-t3-CBZ"/>
+                                <action selector="goToCartBtnAction:" destination="-1" eventType="touchUpInside" id="uHt-Kh-ib7"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJo-7x-QkT">

@@ -98,6 +98,7 @@
 		4E9AC58F264DB64400C2B6A8 /* SubscriptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9AC58D264DB64400C2B6A8 /* SubscriptionVC.xib */; };
 		4EA9B501266BE36F0089E23E /* SummaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9B500266BE36F0089E23E /* SummaryModel.swift */; };
 		4EA9B504266BF3410089E23E /* WalletTransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9B503266BF3410089E23E /* WalletTransactionModel.swift */; };
+		4EA9B508266C126C0089E23E /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9B507266C126C0089E23E /* BaseVC.swift */; };
 		4EB2CC95264EEF45006BB4C9 /* SubscriptionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB2CC93264EEF45006BB4C9 /* SubscriptionTVC.swift */; };
 		4EB2CC96264EEF45006BB4C9 /* SubscriptionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EB2CC94264EEF45006BB4C9 /* SubscriptionTVC.xib */; };
 		4EB2CC9E264F0830006BB4C9 /* AddSubscriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB2CC9C264F0830006BB4C9 /* AddSubscriptionVC.swift */; };
@@ -239,6 +240,7 @@
 		4E9AC58D264DB64400C2B6A8 /* SubscriptionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubscriptionVC.xib; sourceTree = "<group>"; };
 		4EA9B500266BE36F0089E23E /* SummaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryModel.swift; sourceTree = "<group>"; };
 		4EA9B503266BF3410089E23E /* WalletTransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionModel.swift; sourceTree = "<group>"; };
+		4EA9B507266C126C0089E23E /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		4EB2CC93264EEF45006BB4C9 /* SubscriptionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTVC.swift; sourceTree = "<group>"; };
 		4EB2CC94264EEF45006BB4C9 /* SubscriptionTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubscriptionTVC.xib; sourceTree = "<group>"; };
 		4EB2CC9C264F0830006BB4C9 /* AddSubscriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubscriptionVC.swift; sourceTree = "<group>"; };
@@ -788,6 +790,7 @@
 		9965FB172631663800946AB6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4EA9B507266C126C0089E23E /* BaseVC.swift */,
 				4EDAEAB926442EB4001D4819 /* SideMenu */,
 				9965FB182631663800946AB6 /* ViewController.swift */,
 				4EDAEAB726442E9E001D4819 /* LoginVC */,
@@ -1061,6 +1064,7 @@
 				990A258A262E8D0200C96165 /* LocationManager.swift in Sources */,
 				4E3A41252656E68200D4A61A /* DeliveryHeaderTVC.swift in Sources */,
 				4E69C4892651A66800FF098E /* FAQModel.swift in Sources */,
+				4EA9B508266C126C0089E23E /* BaseVC.swift in Sources */,
 				4E71B99826447E840094F72B /* CardTVC.swift in Sources */,
 				9965FB242631663800946AB6 /* SideMenuVC.swift in Sources */,
 				4E029235263C81CD0092C741 /* OtpTextfield.swift in Sources */,

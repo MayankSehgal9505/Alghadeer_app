@@ -7,31 +7,31 @@
 
 import UIKit
 
-class DashboardVC: UIViewController {
-    enum DashboardSections :Int, CaseIterable{
+class DashboardVC: CartBaseVC {
+    
+    // MARK:- Enums
+    private enum DashboardSections :Int, CaseIterable{
         case banner = 0
         case products, category
     }
-    // MARK: IBOutlets
+    // MARK:- IBOutlets
     @IBOutlet weak var tbView: UITableView!
-    @IBOutlet weak var cartCountView: UIView! {didSet {self.cartCountView.makeViewCircle()}}
-    @IBOutlet weak var cartCountlbl: UILabel!
-    var bannerArray = Array<BannerModel>()
-    var categoryArray = Array<CategoryModel>()
-    var productArray = Array<ProductModel>()
+    
+    // MARK:- Local Variables
+    private var bannerArray = Array<BannerModel>()
+    private var categoryArray = Array<CategoryModel>()
+    private var productArray = Array<ProductModel>()
+    private var dispatchGp = DispatchGroup()
+    // MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        setUpTBView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        getBanneerList()
-        getProductsList()
-        getCategorysList()
-        getCartCountList()
-        getUserProfile()
+        apiCalls()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -41,37 +41,40 @@ class DashboardVC: UIViewController {
         productArray.removeAll()
         tbView.reloadData()
     }
-    func setupUI(){
-        setUpTBView()
-        cartView(hidden: true, count: "0")
-    }
     
-    func cartView(hidden: Bool, count:String) {
-        cartCountView.isHidden = hidden
-        cartCountlbl.text = count
-    }
-    /// Set Collection View
-    func setUpTBView(){
+    // MARK:- Internal Methods
+    /// Set Table View
+    private func setUpTBView(){
         /// Register Cells
-
         self.tbView.register(UINib(nibName: BannerTVC.className(), bundle: nil), forCellReuseIdentifier: BannerTVC.className())
         self.tbView.register(UINib(nibName: ProductsTVC.className(), bundle: nil), forCellReuseIdentifier: ProductsTVC.className())
         self.tbView.register(UINib(nibName: CategoryTVC.className(), bundle: nil), forCellReuseIdentifier: CategoryTVC.className())
+    }
 
+    private func apiCalls(){
+        func dispatchGpAPIS() {
+            self.showHUD(progressLabel: AlertField.loaderString)
+            self.dispatchGp.enter()
+            self.dispatchGp.enter()
+            self.dispatchGp.enter()
+            getBannerList()
+            getProductsList()
+            getCategorysList()
+        }
+        getUserProfile()
+        dispatchGpAPIS()
+        dispatchGp.notify(queue: .main) {
+            self.dismissHUD(isAnimated: true)
+            self.tbView.reloadData()
+        }
     }
-    private func moveToCartsVC() {
-        let cartVC = CartVC()
-        self.navigationController?.pushViewController(cartVC, animated: true)
-    }
-    @IBAction func goToCartBtnAction(_ sender: UIButton) {
-        moveToCartsVC()
-    }
+    // MARK:- IBActions
     @IBAction func sideMenuButtonPressed(_ sender: Any) {
         self.frostedViewController.presentMenuViewController()
     }
-
 }
-// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout Method
+
+// MARK: - UITableViewDataSource & UITableViewDelegate Method
 extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return DashboardSections.allCases.count
@@ -80,57 +83,44 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = DashboardSections.init(rawValue: section) else {return 0}
         switch section {
-        case .banner:
-            return 1
-        case .products:
-            return 1
-        case .category:
-            return 1
+        case .banner:       return bannerArray.isEmpty ? 0 : 1
+        case .products:     return productArray.isEmpty ? 0 : 1
+        case .category:     return categoryArray.isEmpty ? 0 : 1
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: BannerTVC.className(), for: indexPath) as? BannerTVC {
-                cell.bannerArray = self.bannerArray
-                cell.pageControl.numberOfPages = self.bannerArray.count
-                cell.updateCellWith()
-                return cell
-            }
-            return UITableViewCell()
-
-        case 1:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: ProductsTVC.className(), for: indexPath) as? ProductsTVC {
-                cell.favouriteProductsLbl.isHidden = false
-                cell.productArray = self.productArray
-                cell.productDelegate = self
-                cell.updateCellWith()
-                return cell
-            }
-            return UITableViewCell()
-        case 2:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTVC.className(), for: indexPath) as? CategoryTVC {
-                cell.shopByCategoryLbl.isHidden = false
-                cell.categoryArray = self.categoryArray
-                cell.categoryDelegate = self
-                cell.updateCellWith()
-                return cell
-            }
-            return UITableViewCell()
-        default:
-            return UITableViewCell()
+        guard let section = DashboardSections.init(rawValue: indexPath.section) else {return UITableViewCell()}
+        switch section {
+        case .banner:
+            let cell = tableView.dequeueReusableCell(withIdentifier: BannerTVC.className(), for: indexPath) as! BannerTVC
+            cell.bannerArray = self.bannerArray
+            cell.pageControl.numberOfPages = self.bannerArray.count
+            cell.updateCellWith()
+            return cell
+        case .products:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ProductsTVC.className(), for: indexPath) as! ProductsTVC
+            cell.favouriteProductsLbl.isHidden = false
+            cell.productArray = self.productArray
+            cell.productDelegate = self
+            cell.updateCellWith()
+            return cell
+        case .category:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTVC.className(), for: indexPath) as! CategoryTVC
+            cell.shopByCategoryLbl.isHidden = false
+            cell.categoryArray = self.categoryArray
+            cell.categoryDelegate = self
+            cell.updateCellWith()
+            return cell
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return bannerArray.count > 0 ? 360 : 0
-        case 1:
-            return productArray.count > 0 ? 360 : 0
-        default:
-            return CGFloat((categoryArray.count/2 + categoryArray.count%2) * 400)
+        guard let section = DashboardSections.init(rawValue: indexPath.section) else {return 0}
+        switch section {
+        case .banner:       return bannerArray.count > 0 ? 360 : 0
+        case .products:     return productArray.count > 0 ? 360 : 0
+        case .category:     return CGFloat((categoryArray.count/2 + categoryArray.count%2) * 400)
         }
     }
 }
@@ -154,15 +144,14 @@ extension DashboardVC: CategoryProtocol{
     }
 }
 extension DashboardVC {
-    func getBanneerList() {
+    func getBannerList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
             let bannerListURL : String = UrlName.baseUrl + UrlName.getBannerUrl
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
+                self.dispatchGp.leave()
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
                     }
                     return
@@ -174,35 +163,27 @@ extension DashboardVC {
                             self.bannerArray.append(bannerModel)
                         }
                     }
-                    DispatchQueue.main.async {
-                        self.tbView.beginUpdates()
-                        self.tbView.reloadSections(IndexSet.init(integer: DashboardSections.banner.rawValue), with: .none)
-                        self.tbView.endUpdates()
-                    }
                 }
                 else {
                     DispatchQueue.main.async {
                     self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
                     }
                 }
-                DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
-                }
             })
         }else{
+            self.dispatchGp.leave()
             self.showNoInternetAlert()
         }
     }
     
     func getProductsList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
             let bannerListURL : String = UrlName.baseUrl + UrlName.getProductListUrl
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
+                self.dispatchGp.leave()
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
                     }
                     return
@@ -214,35 +195,27 @@ extension DashboardVC {
                             self.productArray.append(productModel)
                         }
                     }
-                    DispatchQueue.main.async {
-                        self.tbView.beginUpdates()
-                        self.tbView.reloadSections(IndexSet.init(integer: DashboardSections.products.rawValue), with: .none)
-                        self.tbView.endUpdates()
-                    }
                 }
                 else {
                     DispatchQueue.main.async {
-                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                        self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
                     }
-                }
-                DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
                 }
             })
         }else{
+            self.dispatchGp.leave()
             self.showNoInternetAlert()
         }
     }
     
     func getCategorysList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
             let bannerListURL : String = UrlName.baseUrl + UrlName.getCategoryListUrl
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
+                self.dispatchGp.leave()
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
                     }
                     return
@@ -254,60 +227,16 @@ extension DashboardVC {
                             self.categoryArray.append(category)
                         }
                     }
-                    DispatchQueue.main.async {
-                        self.tbView.beginUpdates()
-                        self.tbView.reloadSections(IndexSet.init(integer: DashboardSections.category.rawValue), with: .none)
-                        self.tbView.endUpdates()
-                    }
                 }
                 else {
-                    if let tokenExpire = jsonValue[APIField.statusKey]?.stringValue,tokenExpire == APIField.expiredToken {
-                        DispatchQueue.main.async {
-                        self.showSessionExpiredAlert()
-                        }
-                    } else {
-                        DispatchQueue.main.async {
+                    DispatchQueue.main.async {
                         self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
-                        }
                     }
-                }
-                DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
                 }
             })
         }else{
+            self.dispatchGp.leave()
             self.showNoInternetAlert()
-        }
-    }
-    
-    func getCartCountList() {
-        if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
-            let cartCountURL : String = UrlName.baseUrl + UrlName.getCartCountUrl + Defaults.getUserID()
-            let parameters = [
-                "customer_id":Defaults.getUserID(),
-            ] as [String : Any]
-            NetworkManager.sharedInstance.commonApiCall(url: cartCountURL, method: .get, parameters: parameters, completionHandler: { (json, status) in
-                guard let jsonValue = json?.dictionaryValue else {
-                    DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
-                        self.view.makeToast(status, duration: 3.0, position: .bottom)
-                    }
-                    return
-                }
-                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
-                    DispatchQueue.main.async {
-                        if let cartCountString = jsonValue["TotalCount"]?.stringValue, let cartCount = Int(cartCountString), cartCount > 0 {
-                            self.cartView(hidden: false, count: cartCountString)
-                        } else {
-                            self.cartView(hidden: true, count: "0")
-                        }
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
-                }
-            })
         }
     }
     

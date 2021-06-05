@@ -11,8 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DashboardVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
-                <outlet property="cartCountView" destination="Jvh-li-B1f" id="l4N-Lo-Fa0"/>
-                <outlet property="cartCountlbl" destination="jjJ-dm-yav" id="dke-eQ-CKz"/>
+                <outlet property="cartCountView" destination="Jvh-li-B1f" id="x2H-Ri-364"/>
+                <outlet property="cartCountlbl" destination="jjJ-dm-yav" id="rMl-yd-P62"/>
                 <outlet property="tbView" destination="4Fx-22-nXY" id="gvf-xf-doL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -33,7 +33,7 @@
                             </constraints>
                             <state key="normal" image="cart"/>
                             <connections>
-                                <action selector="goToCartBtnAction:" destination="-1" eventType="touchUpInside" id="Hsj-WT-PJX"/>
+                                <action selector="goToCartBtnAction:" destination="-1" eventType="touchUpInside" id="WUD-fV-XH1"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jvh-li-B1f">

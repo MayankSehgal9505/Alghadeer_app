@@ -7,39 +7,33 @@
 
 import UIKit
 import Kingfisher
-class DetailVC: UIViewController {
+class DetailVC: CartBaseVC {
     //MARK:-enums
     enum ActionType {
         case addToCart
         case goToCart
     }
     //MARK:- IBOutlet
-    @IBOutlet weak var cartButton: UIButton!
     @IBOutlet weak var productImg: UIImageView!
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productPrice: UILabel!
     @IBOutlet weak var productDescription: UILabel!
     @IBOutlet weak var navTitle: UILabel!
-    @IBOutlet weak var addToCartBTn: UIButton!
-    @IBOutlet weak var cartCountView: UIView! {didSet {self.cartCountView.makeViewCircle()}}
-    @IBOutlet weak var cartCountlbl: UILabel!
+    @IBOutlet weak var addToCartBTn: UIButton! {didSet {addToCartBTn.setCornerRadiusOfView(cornerRadiusValue: 25)}}
     
     //MARK:- Properties
     var product = ProductModel()
     var actionPerformed: ActionType = .addToCart
+    
+    //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        getCartCountList()
-        cartView(hidden: true, count: "0")
-    }
+    //MARK:- Internal Methods
     private func setupView(){
         navTitle.text = product.name
-        self.cartButton.setCornerRadiusOfView(cornerRadiusValue: 25)
         productName.text = product.name
         productPrice.text = "AED \(product.sellingPrice)"
         productDescription.text = product.details
@@ -49,18 +43,8 @@ class DetailVC: UIViewController {
             productImg.image = UIImage(named: "placeholder")
         }
     }
-    
-    func cartView(hidden: Bool, count:String) {
-        cartCountView.isHidden = hidden
-        cartCountlbl.text = count
-    }
-    @IBAction func goToCart(_ sender: UIButton) {
-        moveToCartsVC()
-    }
-    private func moveToCartsVC() {
-        let cartVC = CartVC()
-        self.navigationController?.pushViewController(cartVC, animated: true)
-    }
+
+    //MARK:- IBActions
     @IBAction func backBtnClicked(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -69,13 +53,14 @@ class DetailVC: UIViewController {
         case .addToCart:
             updateProductInCart(product: product)
         case .goToCart:
-            moveToCartsVC()
+            super.goToCartBtnAction(sender)
         }
     }
 }
 
+//MARK:- API Calls
 extension DetailVC {
-    func updateProductInCart(product:ProductModel) {
+    private func updateProductInCart(product:ProductModel) {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
             let addToCartUrl : String = UrlName.baseUrl + UrlName.addToCartUrl
@@ -124,30 +109,6 @@ extension DetailVC {
             })
         }else{
             self.showNoInternetAlert()
-        }
-    }
-    
-    func getCartCountList() {
-        if NetworkManager.sharedInstance.isInternetAvailable(){
-            let cartCountURL : String = UrlName.baseUrl + UrlName.getCartCountUrl + Defaults.getUserID()
-            let parameters = [
-                "customer_id":Defaults.getUserID(),
-            ] as [String : Any]
-            NetworkManager.sharedInstance.commonApiCall(url: cartCountURL, method: .get, parameters: parameters, completionHandler: { (json, status) in
-                guard let jsonValue = json?.dictionaryValue else {
-                    return
-                }
-                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
-                    DispatchQueue.main.async {
-                        if let cartCountString = jsonValue["TotalCount"]?.stringValue, let cartCount = Int(cartCountString), cartCount > 0 {
-                            self.cartView(hidden: false, count: cartCountString)
-                        } else {
-                            self.cartView(hidden: true, count: "0")
-                            self.addToCartBTn.setTitle("Add To Cart", for: [])
-                        }
-                    }
-                }
-            })
         }
     }
 }

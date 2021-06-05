@@ -7,30 +7,31 @@
 
 import UIKit
 
-class CategoryProductsVC: UIViewController {
+class CategoryProductsVC: CartBaseVC {
 
-    @IBOutlet weak var cartCountLbl: UILabel!
-    @IBOutlet weak var cartCountView: UIView!{didSet {self.cartCountView.makeViewCircle()}}
+    //MARK:- IBOutlet
     @IBOutlet weak var navtitle: UILabel!
     @IBOutlet weak var categoryProductCollectionView: UICollectionView!
+    
+    //MARK:- Properties
     var categoryObj = CategoryModel()
     var productArray = Array<ProductModel>()
+    
+    //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         navtitle.text = categoryObj.name
-        setupColllectiionCell()
+        setupColllectionCell()
         getCategoryProducts()
-        getCartCountList()
-        cartView(hidden: true, count: "0")
     }
 
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    func setupColllectiionCell(){
+    //MARK:- Internal Methods
+    private func setupColllectionCell(){
         categoryProductCollectionView.register(UINib.init(nibName: ProductsCollectionCell.className(), bundle: nil), forCellWithReuseIdentifier: ProductsCollectionCell.className())
         self.categoryProductCollectionView.delegate = self
         self.categoryProductCollectionView.dataSource = self
@@ -40,28 +41,22 @@ class CategoryProductsVC: UIViewController {
         collectionViewFlowLayout.scrollDirection = .vertical
         self.categoryProductCollectionView.collectionViewLayout = collectionViewFlowLayout
     }
-    func cartView(hidden: Bool, count:String) {
-        cartCountView.isHidden = hidden
-        cartCountLbl.text = count
-    }
-    @objc func productBtnTapped(sender:UIButton) {
+    
+    //MARK:- IBActions
+    @objc private func productBtnTapped(sender:UIButton) {
         if sender.tag < productArray.count {
             let productDetailVC = DetailVC()
             productDetailVC.product = productArray[sender.tag]
             self.navigationController?.pushViewController(productDetailVC, animated: true)
         }
     }
+    
     @IBAction func backButtonAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    @IBAction func goToCart(_ sender: UIButton) {
-        moveToCartsVC()
-    }
-    private func moveToCartsVC() {
-        let cartVC = CartVC()
-        self.navigationController?.pushViewController(cartVC, animated: true)
-    }
 }
+
+//MARK:- API Call Methods
 extension CategoryProductsVC {
     func getCategoryProducts() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
@@ -100,43 +95,10 @@ extension CategoryProductsVC {
             self.showNoInternetAlert()
         }
     }
-    
-    func getCartCountList() {
-        if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
-            let cartCountURL : String = UrlName.baseUrl + UrlName.getCartCountUrl + Defaults.getUserID()
-            let parameters = [
-                "customer_id":Defaults.getUserID(),
-            ] as [String : Any]
-            NetworkManager.sharedInstance.commonApiCall(url: cartCountURL, method: .get, parameters: parameters, completionHandler: { (json, status) in
-                guard let jsonValue = json?.dictionaryValue else {
-                    DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
-                        self.view.makeToast(status, duration: 3.0, position: .bottom)
-                    }
-                    return
-                }
-                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
-                    DispatchQueue.main.async {
-                        if let cartCountString = jsonValue["TotalCount"]?.stringValue, let cartCount = Int(cartCountString), cartCount > 0 {
-                            self.cartView(hidden: false, count: cartCountString)
-                        } else {
-                            self.cartView(hidden: true, count: "0")
-                        }
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
-                }
-            })
-        }
-    }
 }
-extension CategoryProductsVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
+//MARK:- UICollectionViewDataSource & UICollectionViewDelegateFlowLayout Methods
+
+extension CategoryProductsVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return productArray.count
     }

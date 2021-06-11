@@ -53,6 +53,7 @@ class DashboardVC: CartBaseVC {
 
     private func apiCalls(){
         func dispatchGpAPIS() {
+            getUserProfile()
             self.showHUD(progressLabel: AlertField.loaderString)
             self.dispatchGp.enter()
             self.dispatchGp.enter()
@@ -61,7 +62,6 @@ class DashboardVC: CartBaseVC {
             getProductsList()
             getCategorysList()
         }
-        getUserProfile()
         dispatchGpAPIS()
         dispatchGp.notify(queue: .main) {
             self.dismissHUD(isAnimated: true)
@@ -149,7 +149,6 @@ extension DashboardVC {
             let bannerListURL : String = UrlName.baseUrl + UrlName.getBannerUrl
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
-                self.dispatchGp.leave()
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
@@ -169,6 +168,7 @@ extension DashboardVC {
                     self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
                     }
                 }
+                self.dispatchGp.leave()
             })
         }else{
             self.dispatchGp.leave()
@@ -181,7 +181,6 @@ extension DashboardVC {
             let bannerListURL : String = UrlName.baseUrl + UrlName.getProductListUrl
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
-                self.dispatchGp.leave()
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
@@ -201,6 +200,7 @@ extension DashboardVC {
                         self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
                     }
                 }
+                self.dispatchGp.leave()
             })
         }else{
             self.dispatchGp.leave()
@@ -213,7 +213,6 @@ extension DashboardVC {
             let bannerListURL : String = UrlName.baseUrl + UrlName.getCategoryListUrl
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
-                self.dispatchGp.leave()
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
@@ -233,6 +232,7 @@ extension DashboardVC {
                         self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
                     }
                 }
+                self.dispatchGp.leave()
             })
         }else{
             self.dispatchGp.leave()

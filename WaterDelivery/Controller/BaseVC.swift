@@ -17,8 +17,6 @@ extension CartListAPI where Self : CartBaseVC{
             ] as [String : Any]
             NetworkManager.sharedInstance.commonApiCall(url: cartCountURL, method: .get, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
-                    DispatchQueue.main.async {
-                    }
                     return
                 }
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {

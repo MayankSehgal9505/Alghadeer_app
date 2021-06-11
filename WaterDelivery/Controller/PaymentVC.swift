@@ -71,19 +71,4 @@ class PaymentVC: UIViewController,WKNavigationDelegate {
         print("Error loading url in webview :\(error.localizedDescription)")
         self.dismissHUD(isAnimated: true)
     }
-    
-    /*func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = webView.url {
-            print("url is \(url)")
-            if WalletCallBacks.completionUrls.contains(where: { stringUrls -> Bool in
-                return (webView.url?.absoluteString ?? "").contains(stringUrls)
-            }) {
-                paymentStatus = .success
-                dismissView()
-            }
-            decisionHandler(.allow)
-
-        }
-    }*/
-
 }

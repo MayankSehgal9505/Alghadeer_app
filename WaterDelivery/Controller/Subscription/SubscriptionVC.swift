@@ -6,28 +6,29 @@
 //
 
 import UIKit
-class SubscriptionVC: CartBaseVC{
-    //MARK:- enums
-    enum SubscriptionTab: Int {
-        case active = 0
-        case paused,cancelled
-        
-        var subscriptionName:String {
-            switch self {
-                case .active: return "INI"
-                case .paused: return "PD"
-                default: return "CN"
-            }
-        }
-        
-        var noSubscriptionMsg:String {
-            switch self {
-                case .active: return "No active Subscription"
-                case .paused: return "No paused Subscription"
-                default: return "No cancelled Subscription"
-            }
+//MARK:- enums
+enum SubscriptionTab: Int {
+    case active = 0
+    case paused,cancelled
+    
+    var subscriptionName:String {
+        switch self {
+            case .active: return "INI"
+            case .paused: return "PD"
+            default: return "CN"
         }
     }
+    
+    var noSubscriptionMsg:String {
+        switch self {
+            case .active: return "No active Subscription"
+            case .paused: return "No paused Subscription"
+            default: return "No cancelled Subscription"
+        }
+    }
+}
+class SubscriptionVC: CartBaseVC{
+
     //MARK:- IBOutlets
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var subscriptionTBView: UITableView!

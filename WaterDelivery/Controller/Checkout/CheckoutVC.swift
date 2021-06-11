@@ -43,7 +43,7 @@ class CheckoutVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getWalletDetails()
-        getAddressList()
+        getAddress()
         getSummaryData()
     }
     //MARK:- Internal Methods
@@ -269,7 +269,23 @@ extension CheckoutVC : PaymentVCProtocol{
         }
     }
 }
-
+//MARK:- Get Address List Methods
+extension CheckoutVC: AddressProtocol {
+    private func reloadAddressListSection() {
+        DispatchQueue.main.async {
+            self.checkOutTBView.beginUpdates()
+            self.checkOutTBView.reloadSections(IndexSet.init(integer: SectionType.addressList.rawValue), with: .none)
+            self.checkOutTBView.endUpdates()
+        }
+    }
+    private func getAddress() {
+        getAddressList { [weak self] in  self?.reloadAddressListSection()  }
+    }
+    
+    private func deleteAddress(addressID: String) {
+        deleteAddress(addressID: addressID){ [weak self] in  self?.reloadAddressListSection()  }
+    }
+}
 //MARK:- API Call Methods
 extension CheckoutVC: WalletAPI{
     private func setPaymentStatus() {
@@ -318,38 +334,6 @@ extension CheckoutVC: WalletAPI{
             }
         }
     }
-    private func deleteAddress(addressID: String) {
-        if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
-            let addressListURL : String = UrlName.baseUrl + UrlName.deleteAddressUrl + "\(addressID)"
-            NetworkManager.viewControler = self
-            NetworkManager.sharedInstance.commonApiCall(url: addressListURL, method: .delete, parameters: nil, completionHandler: { (json, status) in
-                guard let jsonValue = json?.dictionaryValue else {
-                    DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
-                        self.view.makeToast(status, duration: 3.0, position: .bottom)
-                    }
-                    return
-                }
-                
-                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
-                    DispatchQueue.main.async {
-                        self.getAddressList()
-                    }
-                }
-                else {
-                    DispatchQueue.main.async {
-                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
-                }
-            })
-        }else{
-            self.showNoInternetAlert()
-        }
-    }
     private func getSummaryData() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
@@ -375,53 +359,6 @@ extension CheckoutVC: WalletAPI{
                             self.checkOutTBView.reloadSections(IndexSet.init(integer: SectionType.summary.rawValue), with: .none)
                             self.checkOutTBView.endUpdates()
                         }
-                    }
-                }
-                else {
-                    DispatchQueue.main.async {
-                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
-                }
-            })
-        }else{
-            self.showNoInternetAlert()
-        }
-    }
-    
-    private func getAddressList() {
-        if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
-            let addressListURL : String = UrlName.baseUrl + UrlName.getAddressListUrl + Defaults.getUserID()
-            NetworkManager.viewControler = self
-            NetworkManager.sharedInstance.commonApiCall(url: addressListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
-                guard let jsonValue = json?.dictionaryValue else {
-                    DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
-                        self.view.makeToast(status, duration: 3.0, position: .bottom)
-                    }
-                    return
-                }
-                
-                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
-                    if let addresslist = jsonValue[APIField.dataKey]?.array {
-                        var shippingAddress = Array<AddressModel>()
-                        for address in addresslist {
-                            let addressModel = AddressModel.init(json: address)
-                            shippingAddress.append(addressModel)
-                        }
-                        self.shippingAddressArray = shippingAddress
-                        self.selectedAddress = self.shippingAddressArray.first ?? AddressModel()
-                        if self.shippingAddressArray.count >= 1 {
-                            self.shippingAddressArray[0].addressSelected = true
-                        }
-                    }
-                    DispatchQueue.main.async {
-                        self.checkOutTBView.beginUpdates()
-                        self.checkOutTBView.reloadSections(IndexSet.init(integer: SectionType.addressList.rawValue), with: .none)
-                        self.checkOutTBView.endUpdates()
                     }
                 }
                 else {

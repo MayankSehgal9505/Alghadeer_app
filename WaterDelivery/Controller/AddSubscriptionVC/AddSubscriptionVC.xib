@@ -17,8 +17,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddSubscriptionVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
                 <outlet property="addSubscriptionTBView" destination="hfx-WK-dMF" id="65D-Zv-7e0"/>
-                <outlet property="cartCountLbl" destination="3P2-qq-Bj3" id="kaf-nW-gUV"/>
-                <outlet property="cartCountView" destination="bcO-u6-rCt" id="FA1-ac-T63"/>
+                <outlet property="cartCountView" destination="bcO-u6-rCt" id="Ien-Ra-jzO"/>
+                <outlet property="cartCountlbl" destination="3P2-qq-Bj3" id="DS2-qe-LpH"/>
                 <outlet property="pickerLbl" destination="LYJ-VS-cUJ" id="FtZ-uA-nYq"/>
                 <outlet property="pickerView" destination="z3b-kQ-hyX" id="dpG-Gg-BnQ"/>
                 <outlet property="timeView" destination="3wD-dX-ECh" id="IGG-Sr-B8x"/>

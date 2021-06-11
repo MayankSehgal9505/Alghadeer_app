@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddSubscriptionVC: UIViewController {
+class AddSubscriptionVC: CartBaseVC {
     //MARK:- Enum
     enum PickerType {
         case time
@@ -20,8 +20,6 @@ class AddSubscriptionVC: UIViewController {
         case singleProduct
     }
     //MARK:- IBOutlets
-    @IBOutlet weak var cartCountView: UIView! {didSet {self.cartCountView.makeViewCircle()}}
-    @IBOutlet weak var cartCountLbl: UILabel!
     @IBOutlet weak var addSubscriptionTBView: UITableView!
     @IBOutlet weak var timeView: UIView!
     @IBOutlet weak var pickerView: UIDatePicker!
@@ -40,7 +38,6 @@ class AddSubscriptionVC: UIViewController {
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        getCartCountList()
         setupUI()
         if addingSubscriptionType == .genericSubscription{
             getProductsList()
@@ -49,11 +46,10 @@ class AddSubscriptionVC: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getAddressList()
+        getAddress()
     }
     //MARK:- Internal Methods
     private func setupUI() {
-        cartView(hidden: true, count: "0")
         setUpTBView()
     }
     
@@ -69,10 +65,6 @@ class AddSubscriptionVC: UIViewController {
         addSubscriptionTBView.rowHeight = UITableView.automaticDimension
     }
     
-    func cartView(hidden: Bool, count:String) {
-        cartCountView.isHidden = hidden
-        cartCountLbl.text = count
-    }
     /// Hiding Picker View
     private func hidePickerView(){
         timeView.isHidden = true
@@ -408,7 +400,7 @@ extension AddSubscriptionVC{
                         }
                     }
                     DispatchQueue.main.async {
-                        self.addSubscriptionTBView.reloadSections(IndexSet.init(integer: 0), with: .none)
+                        self.addSubscriptionTBView.reloadSections(IndexSet.init(integer: 1), with: .none)
                     }
                 }
                 else {
@@ -424,74 +416,17 @@ extension AddSubscriptionVC{
             self.showNoInternetAlert()
         }
     }
-    
-    func getCartCountList() {
-        if NetworkManager.sharedInstance.isInternetAvailable(){
-            let cartCountURL : String = UrlName.baseUrl + UrlName.getCartCountUrl + Defaults.getUserID()
-            let parameters = [
-                "customer_id":Defaults.getUserID(),
-            ] as [String : Any]
-            NetworkManager.sharedInstance.commonApiCall(url: cartCountURL, method: .get, parameters: parameters, completionHandler: { (json, status) in
-                guard let jsonValue = json?.dictionaryValue else {
-                    return
-                }
-                
-                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
-                    DispatchQueue.main.async {
-                        if let cartCountString = jsonValue["TotalCount"]?.stringValue, let cartCount = Int(cartCountString), cartCount > 0 {
-                            self.cartView(hidden: false, count: cartCountString)
-                        } else {
-                            self.cartView(hidden: true, count: "0")
-                        }
-                    }
-                }
-            })
+}
+//MARK:- Get Address List Methods
+extension AddSubscriptionVC: AddressProtocol {
+    private func reloadAddressListSection() {
+        DispatchQueue.main.async {
+            self.addSubscriptionTBView.beginUpdates()
+            self.addSubscriptionTBView.reloadSections(IndexSet.init(integer: 2), with: .none)
+            self.addSubscriptionTBView.endUpdates()
         }
     }
-    
-    func getAddressList() {
-        if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
-            let addressListURL : String = UrlName.baseUrl + UrlName.getAddressListUrl + Defaults.getUserID()
-            NetworkManager.viewControler = self
-            NetworkManager.sharedInstance.commonApiCall(url: addressListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
-                guard let jsonValue = json?.dictionaryValue else {
-                    DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
-                        self.view.makeToast(status, duration: 3.0, position: .bottom)
-                    }
-                    return
-                }
-                
-                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
-                    if let addresslist = jsonValue[APIField.dataKey]?.array {
-                        var shippingAddress = Array<AddressModel>()
-                        for address in addresslist {
-                            let addressModel = AddressModel.init(json: address)
-                            shippingAddress.append(addressModel)
-                        }
-                        self.shippingAddressArray = shippingAddress
-                        if self.shippingAddressArray.count >= 1 {
-                            self.shippingAddressArray[0].addressSelected = true
-                            self.selectedAddress = self.shippingAddressArray[0]
-                        }
-                    }
-                    DispatchQueue.main.async {
-                        self.addSubscriptionTBView.reloadSections(IndexSet.init(integer: 2), with: .none)
-                    }
-                }
-                else {
-                    DispatchQueue.main.async {
-                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
-                }
-            })
-        }else{
-            self.showNoInternetAlert()
-        }
+    private func getAddress() {
+        getAddressList { [weak self] in  self?.reloadAddressListSection()  }
     }
-
 }

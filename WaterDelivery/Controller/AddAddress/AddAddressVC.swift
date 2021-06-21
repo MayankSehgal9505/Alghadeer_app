@@ -6,7 +6,9 @@
 //
 
 import UIKit
-
+protocol AddAddressProtocol: class {
+    func addressAdded()
+}
 class AddAddressVC: UIViewController {
     //MARK:- Enums
     enum AddressScreenType {
@@ -27,9 +29,10 @@ class AddAddressVC: UIViewController {
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var addressTypeTitle: UILabel!
     
-    //MARK:- IBOutlets
+    //MARK:- Properties
     var addressScreenType: AddressScreenType = .addAddress
     var addressModel = AddressModel()
+    weak var delegate : AddAddressProtocol?
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -185,6 +188,7 @@ extension AddAddressVC {
                     DispatchQueue.main.async {
                         self.view.makeToast("Address added successfully", duration: 0.5, position: .center)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.delegate?.addressAdded()
                             self.navigationController?.popViewController(animated: true)
                         }
                     }

@@ -13,4 +13,5 @@ pod 'SwiftyJSON', '~> 4.0'
 pod 'Kingfisher'
 pod 'Alamofire', '~> 4.9.1'
 pod 'REFrostedViewController'
+pod 'GoogleMaps', '5.0.0'
 end

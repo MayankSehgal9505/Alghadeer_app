@@ -47,6 +47,12 @@ class Defaults {
     static func getToken()-> String? {
         defaults.string(forKey: "token")
     }
+    static func setSkipLogin(_ skipLogin:Bool) {
+        defaults.set(skipLogin, forKey: "skippedLogin")
+    }
+    static func getSkipLogin()-> Bool {
+        defaults.bool(forKey: "skippedLogin") 
+    }
     static func resetDefaults() {
         let dictionary = defaults.dictionaryRepresentation()
         dictionary.keys.forEach { key in

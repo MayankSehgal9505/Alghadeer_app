@@ -69,7 +69,18 @@ class SideMenuVC: UIViewController {
     func resetData(){
         Defaults.resetDefaults()
     }
-    
+    private func showLoginPopup() {
+        self.frostedViewController.hideMenuViewController()
+        let alert = UIAlertController(title: "", message: "Please signup/login to continue further", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
+            //Cancel Action
+        }))
+        alert.addAction(UIAlertAction(title: "Signup/login",style: .default,handler: {(_: UIAlertAction!) in
+            Defaults.resetDefaults()
+            Utility.checkIfAlreadyLogin(vc: self)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     func makeInitialViewController(){
            let vcObj = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewController.className()) as! ViewController
             let centrenav  = UINavigationController(rootViewController:vcObj)
@@ -141,17 +152,33 @@ extension SideMenuVC : UITableViewDelegate {
             controllerToMove = DashboardVC(nibName: DashboardVC.className(), bundle: nil)
             moveToController(controllerToMove)
         case 1:
-            controllerToMove = UserProfileVC(nibName: UserProfileVC.className(), bundle: nil)
-            moveToController(controllerToMove)
+            if Defaults.getSkipLogin() {
+                showLoginPopup()
+            } else {
+                controllerToMove = UserProfileVC(nibName: UserProfileVC.className(), bundle: nil)
+                moveToController(controllerToMove)
+            }
         case 2:
-            controllerToMove = WalletVC(nibName: WalletVC.className(), bundle: nil)
-            moveToController(controllerToMove)
+            if Defaults.getSkipLogin() {
+                showLoginPopup()
+            } else {
+                controllerToMove = WalletVC(nibName: WalletVC.className(), bundle: nil)
+                moveToController(controllerToMove)
+            }
         case 3:
-            controllerToMove = SubscriptionVC(nibName: SubscriptionVC.className(), bundle: nil)
-            moveToController(controllerToMove)
+            if Defaults.getSkipLogin() {
+                showLoginPopup()
+            } else {
+                controllerToMove = SubscriptionVC(nibName: SubscriptionVC.className(), bundle: nil)
+                moveToController(controllerToMove)
+            }
         case 4:
-            controllerToMove = DeliveryVC(nibName: DeliveryVC.className(), bundle: nil)
-            moveToController(controllerToMove)
+            if Defaults.getSkipLogin() {
+                showLoginPopup()
+            } else {
+                controllerToMove = DeliveryVC(nibName: DeliveryVC.className(), bundle: nil)
+                moveToController(controllerToMove)
+            }
         case 5:
             controllerToMove = ShareVC(nibName: ShareVC.className(), bundle: nil)
             moveToController(controllerToMove)
@@ -159,14 +186,11 @@ extension SideMenuVC : UITableViewDelegate {
             controllerToMove = FAQVC(nibName: FAQVC.className(), bundle: nil)
             moveToController(controllerToMove)
         case 7:
-            print("scanner")
-        case 8:
             controllerToMove = ContactUsVC(nibName: ContactUsVC.className(), bundle: nil)
             moveToController(controllerToMove)
-        case 9:
+        case 8:
             self.showLogoutAlert()
         default:
-          print("Error in getting VC")
             break
         }
         

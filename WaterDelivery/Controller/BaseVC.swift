@@ -63,6 +63,18 @@ class CartBaseVC: UIViewController,CartListAPI {
     // MARK:- IBActions 
 
     @IBAction func goToCartBtnAction(_ sender: UIButton) {
-        moveToCartsVC()
+        if Defaults.getSkipLogin() {
+            let alert = UIAlertController(title: "", message: "Please signup/login to continue further", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
+                //Cancel Action
+            }))
+            alert.addAction(UIAlertAction(title: "Signup/login",style: .default,handler: {(_: UIAlertAction!) in
+                Defaults.resetDefaults()
+                Utility.checkIfAlreadyLogin(vc: self)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            moveToCartsVC()
+        }
     }
 }

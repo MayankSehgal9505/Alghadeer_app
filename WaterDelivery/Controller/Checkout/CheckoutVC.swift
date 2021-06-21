@@ -54,7 +54,6 @@ class CheckoutVC: UIViewController {
         self.checkOutTBView.register(UINib(nibName: InfoTVC.className(), bundle: nil), forCellReuseIdentifier: InfoTVC.className())
         self.checkOutTBView.register(UINib(nibName: ScheduleTimeTVC.className(), bundle: nil), forCellReuseIdentifier: ScheduleTimeTVC.className())
         self.checkOutTBView.register(UINib(nibName: PaymentTVC.className(), bundle: nil), forCellReuseIdentifier: PaymentTVC.className())
-        self.checkOutTBView.register(UINib(nibName: CardTVC.className(), bundle: nil), forCellReuseIdentifier: CardTVC.className())
         self.checkOutTBView.register(UINib(nibName: SummaryTVC.className(), bundle: nil), forCellReuseIdentifier: SummaryTVC.className())
         
         checkOutTBView.tableFooterView = UIView()

@@ -7,17 +7,19 @@
 
 import UIKit
 
-class AddSubscriptionVC: CartBaseVC {
+class AddSubscriptionVC: CartBaseVC,AddAddressProtocol {
+    
     //MARK:- Enum
+    enum SectionType:Int, CaseIterable {
+        case products = 0
+        case selectProducts,addressList, subscriptionSlot
+    }
     enum PickerType {
-        case time
-        case startDate
-        case endDate
+        case time,startDate,endDate
     }
     
     enum AddSubscriptionFor {
-        case genericSubscription
-        case singleProduct
+        case genericSubscription,singleProduct
     }
     //MARK:- IBOutlets
     @IBOutlet weak var addSubscriptionTBView: UITableView!
@@ -34,21 +36,38 @@ class AddSubscriptionVC: CartBaseVC {
     private var startDate = Date()
     private var endDate = Date()
     var deliveryTime = Date().dateStringWith(strFormat: "hh:mm a")
+    private var dispatchGp = DispatchGroup()
+
+    //MARK:- Properties
     var addingSubscriptionType: AddSubscriptionFor = .genericSubscription
+    var productIDs: [String] = []
+
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        apiCalls()
         setupUI()
-        if addingSubscriptionType == .genericSubscription{
-            getProductsList()
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getAddress()
     }
     //MARK:- Internal Methods
+    private func apiCalls() {
+        func dispatchGpAPIS() {
+            self.showHUD(progressLabel: AlertField.loaderString)
+            self.dispatchGp.enter()
+            getAddress()
+            self.dispatchGp.enter()
+            getProductsList()
+        }
+        dispatchGpAPIS()
+        dispatchGp.notify(queue: .main) {
+            self.dismissHUD(isAnimated: true)
+            self.addSubscriptionTBView.reloadData()
+        }
+    }
+    
     private func setupUI() {
         setUpTBView()
     }
@@ -143,7 +162,11 @@ class AddSubscriptionVC: CartBaseVC {
     @objc func addAddressBtnTapped() {
         let addAddressVC = AddAddressVC()
         addAddressVC.addressScreenType = .addAddress
+        addAddressVC.delegate = self
         self.navigationController?.pushViewController(addAddressVC, animated: true)
+    }
+    func addressAdded() {
+        getAddress(showLoader: true)
     }
     //MARK:- IBActions
     @IBAction func pickerDoneAction(_ sender: UIBarButtonItem) {
@@ -165,11 +188,6 @@ class AddSubscriptionVC: CartBaseVC {
     
     @IBAction func backBtnAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func cartBtnAction(_ sender: UIButton) {
-        let cartVC = CartVC()
-        self.navigationController?.pushViewController(cartVC, animated: true)
     }
 
     @IBAction func datePickerValueChanges(_ sender: UIDatePicker) {
@@ -204,7 +222,7 @@ class AddSubscriptionVC: CartBaseVC {
                     selectedProductArray[sender.tag].addQuantity = currentQuanity - 1
                     if currentQuanity == 1 {
                         // update element in product array
-                        let selectedProduct = productArray.firstIndex { $0.productID == productArray[sender.tag].productID}
+                        let selectedProduct = productArray.firstIndex { $0.productID == selectedProductArray[sender.tag].productID}
                         if let selectedProductIndex = selectedProduct {
                             for (index, _) in productArray.enumerated() {
                                 if index == selectedProductIndex {
@@ -255,16 +273,16 @@ extension AddSubscriptionVC: SubscriptionProductsProtocol{
 //MARK:-UItableViewDataSource & UITableViewDelegate  Methods
 extension AddSubscriptionVC: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return SectionType.allCases.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0: return 1
-        case 1: return selectedProductArray.count
+        guard let sectionType = SectionType.init(rawValue: section) else {return 0}
+        switch sectionType {
+        case .products: return 1
+        case .selectProducts: return selectedProductArray.count
         //case 2: return shippingAddressArray.count > 1 ? 1 + shippingAddressArray.count : shippingAddressArray.count
-        case 2: return 1 + shippingAddressArray.count
-        case 3: return 1
-        default: return 0
+        case .addressList: return 1 + shippingAddressArray.count
+        case .subscriptionSlot: return 1
         }
     }
     
@@ -380,13 +398,11 @@ extension AddSubscriptionVC{
     
     func getProductsList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
             let bannerListURL : String = UrlName.baseUrl + UrlName.getProductListUrl
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
                     }
                     return
@@ -394,13 +410,19 @@ extension AddSubscriptionVC{
                 
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let productList = jsonValue[APIField.dataKey]?.array {
+                        var productArray = Array<ProductModel>()
                         for product in productList {
                             let productModel = ProductModel.init(json: product)
-                            self.productArray.append(productModel)
+                            productArray.append(productModel)
                         }
-                    }
-                    DispatchQueue.main.async {
-                        self.addSubscriptionTBView.reloadSections(IndexSet.init(integer: 1), with: .none)
+                        if self.addingSubscriptionType == .singleProduct {
+                            let filteredproductArray = productArray.filter { productModel -> Bool in
+                                return self.productIDs.contains(productModel.productID)
+                            }
+                            self.productArray = filteredproductArray
+                        } else {
+                            self.productArray = productArray
+                        }
                     }
                 }
                 else {
@@ -408,9 +430,7 @@ extension AddSubscriptionVC{
                     self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
                     }
                 }
-                DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
-                }
+                self.dispatchGp.leave()
             })
         }else{
             self.showNoInternetAlert()
@@ -426,7 +446,16 @@ extension AddSubscriptionVC: AddressProtocol {
             self.addSubscriptionTBView.endUpdates()
         }
     }
-    private func getAddress() {
-        getAddressList { [weak self] in  self?.reloadAddressListSection()  }
+    private func getAddress(showLoader: Bool = false) {
+        getAddressList(loaderRequired: showLoader) { [weak self] in
+            DispatchQueue.main.async{
+                if showLoader {
+                    self?.addSubscriptionTBView.reloadData()
+                } else {
+                    self?.dispatchGp.leave()
+                }
+            }
+        }
+            //self?.reloadAddressListSection()  }
     }
 }

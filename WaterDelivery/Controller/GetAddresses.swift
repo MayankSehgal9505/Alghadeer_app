@@ -12,15 +12,15 @@ protocol AddressProtocol:class {
     var selectedAddress: AddressModel {get set}
 }
 extension AddressProtocol where Self : UIViewController{
-    func getAddressList(completion: @escaping ()->Void) {
+    func getAddressList(loaderRequired: Bool = true,completion: @escaping ()->Void) {
         if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
+            if (loaderRequired) {   self.showHUD(progressLabel: AlertField.loaderString)    }
             let addressListURL : String = UrlName.baseUrl + UrlName.getAddressListUrl + Defaults.getUserID()
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addressListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
+                        if (loaderRequired) { self.dismissHUD(isAnimated: true)   }
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
                     }
                     return
@@ -47,7 +47,7 @@ extension AddressProtocol where Self : UIViewController{
                     }
                 }
                 DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
+                    if (loaderRequired) { self.dismissHUD(isAnimated: true) }
                 }
             })
         }else{

@@ -47,7 +47,8 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func skipBtnClicked(_ sender: Any) {
-        self.view.makeToast("Coming Soon", duration: 3.0, position: .bottom)
+        Defaults.setSkipLogin(true)
+        self.makeRootViewController()
     }
     
     @IBAction func callBtnClicked(_ sender: Any) {

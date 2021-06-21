@@ -20,15 +20,24 @@ class DetailVC: CartBaseVC {
     @IBOutlet weak var productDescription: UILabel!
     @IBOutlet weak var navTitle: UILabel!
     @IBOutlet weak var addToCartBTn: UIButton! {didSet {addToCartBTn.setCornerRadiusOfView(cornerRadiusValue: 25)}}
+    @IBOutlet weak var QuantityView: UIView! {didSet {
+        QuantityView.layer.borderWidth = 1.0
+        QuantityView.layer.borderColor = UIColor.gray.cgColor
+        QuantityView.setCornerRadiusOfView(cornerRadiusValue: 15)}}
     
+    @IBOutlet weak var decreaseQuantityBtn: UIButton!
+    @IBOutlet weak var increaseQuantityBtn: UIButton!
+    @IBOutlet weak var quantityLbl: UILabel!
+    @IBOutlet weak var quantView: UIView!
     //MARK:- Properties
     var product = ProductModel()
     var actionPerformed: ActionType = .addToCart
-    
+    var productCurrentQuantity = 1
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        Defaults.setSkipLogin(true)
     }
     
     //MARK:- Internal Methods
@@ -45,15 +54,49 @@ class DetailVC: CartBaseVC {
     }
 
     //MARK:- IBActions
+    @IBAction func increaseBtnAction(_ sender: UIButton) {
+        if var currentQuantity = Int(quantityLbl.text!),let productMaxQuantity = Int(product.quantity) {
+            if currentQuantity < productMaxQuantity {
+                currentQuantity += 1
+                productCurrentQuantity = currentQuantity
+                self.quantityLbl.text = "\(currentQuantity)"
+            } else {
+                self.view.makeToast("Product maximum quanntity has been reached", duration: 3.0, position: .center)
+            }
+        }
+    }
+    @IBAction func decreaseBtnAction(_ sender: UIButton) {
+        if var currentQuantity = Int(quantityLbl.text!) {
+            if currentQuantity == 1 {
+                self.view.makeToast("Product minimum quanntity has been reached", duration: 3.0, position: .center)
+            } else {
+                currentQuantity -= 1
+                productCurrentQuantity = currentQuantity
+                self.quantityLbl.text = "\(currentQuantity)"
+            }
+        }
+    }
     @IBAction func backBtnClicked(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func addToCartBtnTapped(_ sender: UIButton) {
-        switch actionPerformed {
-        case .addToCart:
-            updateProductInCart(product: product)
-        case .goToCart:
-            super.goToCartBtnAction(sender)
+        if Defaults.getSkipLogin() {
+            let alert = UIAlertController(title: "", message: "Please signup/login to continue further", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
+                //Cancel Action
+            }))
+            alert.addAction(UIAlertAction(title: "Signup/login",style: .default,handler: {(_: UIAlertAction!) in
+                Defaults.resetDefaults()
+                Utility.checkIfAlreadyLogin(vc: self)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            switch actionPerformed {
+            case .addToCart:
+                updateProductInCart(product: product)
+            case .goToCart:
+                super.goToCartBtnAction(sender)
+            }
         }
     }
 }
@@ -70,7 +113,7 @@ extension DetailVC {
                 "unit_atrributes_id":product.unitAttributeId,
                 "unit_measure":product.attributeName,
                 "price":product.unitPrice,
-                "quantity":"1",
+                "quantity":"\(productCurrentQuantity)",
                 "event":"add"
             ] as [String : Any]
             NetworkManager.viewControler = self
@@ -87,6 +130,7 @@ extension DetailVC {
                         self.view.makeToast("Item added to cart", duration: 3.0, position: .center)
                         self.addToCartBTn.setTitle("View Cart", for: [])
                         self.actionPerformed = .goToCart
+                        self.quantView.isHidden = true
                         self.getCartCountList()
                     }
                 } else {

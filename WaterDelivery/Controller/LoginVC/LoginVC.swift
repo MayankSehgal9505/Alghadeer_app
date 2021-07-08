@@ -48,6 +48,7 @@ class LoginVC: UIViewController {
     
     @IBAction func skipBtnClicked(_ sender: Any) {
         Defaults.setSkipLogin(true)
+        Defaults.setToken(token: UserDefaultsKey.defaultToken)
         self.makeRootViewController()
     }
     

@@ -24,6 +24,7 @@ struct ProductModel {
     var stockName = ""
     var brandName = ""
     var unitAttributeId = ""
+    var priceAfterDiscount = ""
     var category: CategoryModel = CategoryModel()
     var productSelected = false
     var initialQuantity = "1"
@@ -45,6 +46,7 @@ struct ProductModel {
         self.unitPrice = json["unit_price"].stringValue
         self.sellingPrice = json["selling_price"].stringValue
         self.document = json["discount"].stringValue
+        self.priceAfterDiscount = json["PriceAfterDiscount"].stringValue
         self.quantity = json["quantity"].stringValue
         self.stockName = json["stock_name"].stringValue
         self.brandName = json["brand_name"].stringValue

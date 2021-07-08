@@ -15,24 +15,34 @@ class AddAddressVC: UIViewController {
         case addAddress
         case updateAddress
     }
-
+    enum PickerType {
+        case state
+        case city
+    }
     //MARK:- IBOutlets
-    @IBOutlet var roundedViews: [UIView]!
-    @IBOutlet weak var fNameTxtFld: UITextField!
-    @IBOutlet weak var lNameTxtFld: UITextField!
-    @IBOutlet weak var streetTxtFld: UITextField!
-    @IBOutlet weak var townCityTxtFld: UITextField!
-    @IBOutlet weak var stateCountryTxtfld: UITextField!
-    @IBOutlet weak var postCodTxtFld: UITextField!
+    @IBOutlet weak var addressTxtFld: UITextField!
     @IBOutlet weak var phoneNumberTxtFld: UITextField!
-    @IBOutlet weak var emailTxtfld: UITextField!
-    @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var stateBtn: UIButton!
+    @IBOutlet weak var saveBtn: UIButton! {didSet{self.saveBtn.setCornerRadiusOfView(cornerRadiusValue: 20)}}
+    @IBOutlet weak var cityBtn: UIButton!
     @IBOutlet weak var addressTypeTitle: UILabel!
+    @IBOutlet weak var pickerLbl: UILabel!
+    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var pickerMainView: UIView!
+    @IBOutlet weak var stateTxtFld: UITextField!
+    @IBOutlet weak var cityTxtFld: UITextField!
+    @IBOutlet weak var locationTxtFld: UITextField!
     
     //MARK:- Properties
     var addressScreenType: AddressScreenType = .addAddress
+    private var pickerType: PickerType = .state
     var addressModel = AddressModel()
     weak var delegate : AddAddressProtocol?
+    private var effectView,vibrantView : UIVisualEffectView?
+    var stateList = Array<StateModel>()
+    var cityList = Array<CityModel>()
+    private var selectedState = StateModel()
+    private var selectedCity = CityModel()
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,48 +51,77 @@ class AddAddressVC: UIViewController {
     }
     //MARK:- Internal Methods
     func setupUI() {
-        addressTypeTitle.text = addressScreenType == .addAddress ? "Add Address" : "Update Address"
+        getStatesCities(cities: false)
+        addressTypeTitle.text = addressScreenType == .addAddress ? "Add new Address" : "Update Address"
         switch addressScreenType {
         case .updateAddress: setUpUIData()
         default: break
         }
-        roundedViews.forEach{$0.setCornerRadiusOfView(cornerRadiusValue: 20,setBorder: true, borderColor: .lightGray, width: 1.0)}
-        saveBtn.setCornerRadiusOfView(cornerRadiusValue:25)
     }
     
     func setUpUIData() {
-        self.fNameTxtFld.text = addressModel.shippingFname
-        self.lNameTxtFld.text = addressModel.shippingLname
-        self.streetTxtFld.text = addressModel.shippingAddress
-        self.townCityTxtFld.text = addressModel.shippingCity
-        self.stateCountryTxtfld.text = addressModel.shippingState
-        self.postCodTxtFld.text = addressModel.shippingPostCode
+        self.addressTxtFld.text = addressModel.shippingAddress
         self.phoneNumberTxtFld.text = addressModel.shippingPhoneNumber
-        self.emailTxtfld.text = addressModel.shippingEmail
+        self.stateTxtFld.text = addressModel.shippingState
+        self.cityTxtFld.text = addressModel.shippingCity
+    }
+    /// Hiding Picker View
+    private func hidePickerView(){
+        pickerMainView.isHidden = true
+        vibrantView?.removeFromSuperview()
+        effectView?.removeFromSuperview()
     }
     
+    /// Hiding Picker View
+    private func showPickerView(){
+        let viewArray = CommonMethods.showPopUpWithVibrancyView(on : self)
+        self.view.window?.addSubview(pickerMainView)
+        vibrantView = viewArray.first as? UIVisualEffectView
+        effectView = (viewArray.last as? UIVisualEffectView)
+        self.pickerMainView.isHidden = false
+        CommonMethods.setPickerConstraintAccordingToDevice(pickerView: pickerMainView, view: self.view)
+        pickerView.reloadAllComponents()
+    }
     //MARK:- IBActions
+    @IBAction func locationBtnTapped(_ sender: UIButton) {
+        let mapVC = MapVC.init()
+        mapVC.modalPresentationStyle = .fullScreen
+        self.present(mapVC, animated: true, completion: nil)
+        
+    }
+    @IBAction func stateBtnAction(_ sender: UIButton) {
+        pickerType = .state
+        showPickerView()
+    }
+    
+    @IBAction func cityBtnAction(_ sender: UIButton) {
+        pickerType = .city
+        showPickerView()
+    }
+    @IBAction func pickerCancelAction(_ sender: UIBarButtonItem) {
+        hidePickerView()
+    }
+    @IBAction func pckerDoneAction(_ sender: UIBarButtonItem) {
+        hidePickerView()
+        switch pickerType {
+        case .state:
+            stateTxtFld.text = selectedState.stateName
+            getStatesCities(cities: true,state: selectedState.stateName)
+        default:
+            cityTxtFld.text = selectedCity.cityName
+        }
+    }
     @IBAction func saveBtnAction(_ sender: UIButton) {
-        if (fNameTxtFld.text?.isEmpty ??  true) {
-            self.view.makeToast("First name can't be empty", duration: 3.0, position: .center)
-        } else if (lNameTxtFld.text?.isEmpty ??  true) {
-            self.view.makeToast("Last name can't be empty", duration: 3.0, position: .center)
-        } else if (streetTxtFld.text?.isEmpty ??  true) {
-            self.view.makeToast("Street name can't be empty", duration: 3.0, position: .center)
-        } else if (townCityTxtFld.text?.isEmpty ??  true) {
-            self.view.makeToast("Town/City can't be empty", duration: 3.0, position: .center)
-        } else if (stateCountryTxtfld.text?.isEmpty ??  true) {
-            self.view.makeToast("State/Country can't be empty", duration: 3.0, position: .center)
-        } else if (postCodTxtFld.text?.isEmpty ??  true) {
-            self.view.makeToast("PostCode/Zip can't be empty", duration: 3.0, position: .center)
-        } else if (postCodTxtFld.text!.count != 6 ) {
-            self.view.makeToast("PostCode/Zip should bee of 6 characters", duration: 3.0, position: .center)
-        }else if (phoneNumberTxtFld.text?.isEmpty ??  true) {
+        if (addressTxtFld.text?.isEmpty ??  true) {
+            self.view.makeToast("Address can't be empty", duration: 3.0, position: .center)
+        } else if (phoneNumberTxtFld.text?.isEmpty ??  true) {
             self.view.makeToast("Phone number can't be empty", duration: 3.0, position: .center)
-        } else if (emailTxtfld.text?.isEmpty ??  true) {
-            self.view.makeToast("Email can't be empty", duration: 3.0, position: .center)
-        } else if (!CommonMethods.isValidEmail(emailTxtfld.text!)) {
-            self.view.makeToast("Email should be valid", duration: 3.0, position: .center)
+        } /*else if (locationTxtFld.text?.isEmpty ??  true) {
+            self.view.makeToast("Location can't be empty", duration: 3.0, position: .center)
+        }*/ else if (stateTxtFld.text?.isEmpty ??  true) {
+            self.view.makeToast("State can't be empty", duration: 3.0, position: .center)
+        } else if (cityTxtFld.text?.isEmpty ??  true) {
+            self.view.makeToast("City can't be empty", duration: 3.0, position: .center)
         } else {
             switch addressScreenType {
             case .addAddress:
@@ -98,20 +137,86 @@ class AddAddressVC: UIViewController {
 }
 //MARK:- API call
 extension AddAddressVC {
+    private func getStatesCities(cities:Bool,state:String = "") {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let getStatesCityUrl = UrlName.baseUrl + (cities ? UrlName.getCities : UrlName.getStates)
+            var parameters = [String : Any]()
+            if (cities) {
+                parameters = [      "state":state      ]
+            } else {
+                parameters = [      "countryName":"United Arab Emirates"    ]
+            }
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: getStatesCityUrl, method: .post, parameters: parameters, completionHandler: {
+                (json, status) in
+                    guard let jsonValue = json?.dictionaryValue else {
+                        DispatchQueue.main.async {
+                            self.dismissHUD(isAnimated: true)
+                            self.view.makeToast(status, duration: 3.0, position: .bottom)
+                        }
+                        return
+                    }
+                    
+                    if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                        if let stateCitieslist = jsonValue[APIField.dataKey]?.array {
+                            if cities {
+                                var cities = Array<CityModel>()
+                                for city in stateCitieslist {
+                                    let cityModel = CityModel.init(json: city)
+                                    cities.append(cityModel)
+                                }
+                                self.cityList = cities
+                                self.selectedCity = self.cityList.first ?? CityModel()
+
+                            } else {
+                                var states = Array<StateModel>()
+                                for state in stateCitieslist {
+                                    let stateModel = StateModel.init(json: state)
+                                    states.append(stateModel)
+                                }
+                                self.stateList = states
+                                self.selectedState = self.stateList.first ?? StateModel()
+                            }
+                            DispatchQueue.main.async {
+                                self.pickerView.reloadAllComponents()
+                            }
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            if let errordict = jsonValue["Errors"]?.dictionaryObject {
+                                if errordict.keys.count == 0 {
+                                    self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                                } else {
+                                    self.view.makeToast(errordict[errordict.keys.first!] as? String ?? "", duration: 3.0, position: .center)
+
+                                }
+                            } else {
+                                self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                            }
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                    }
+            })
+
+        }
+    }
     func updateAddress() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
             let addAddressUrl : String = UrlName.baseUrl + UrlName.updateAddressUrl + addressModel.addressID
             let parameters = [
-                "first_name":fNameTxtFld.text!,
-                "last_name":lNameTxtFld.text!,
-                "address":streetTxtFld.text!,
-                "city":townCityTxtFld.text!,
-                "state":stateCountryTxtfld.text!,
-                "country":stateCountryTxtfld.text!,
-                "postcode":postCodTxtFld.text!,
-                "phone_no":phoneNumberTxtFld.text!,
-                "email":emailTxtfld.text!,
+//                "first_name":fNameTxtFld.text!,
+//                "last_name":lNameTxtFld.text!,
+//                "address":streetTxtFld.text!,
+//                "city":townCityTxtFld.text!,
+//                "state":stateCountryTxtfld.text!,
+//                "country":stateCountryTxtfld.text!,
+//                "postcode":postCodTxtFld.text!,
+//                "phone_no":phoneNumberTxtFld.text!,
+//                "email":emailTxtfld.text!,
                 "latitude":"19.079023",
                 "longitude":"72.908012",
                 //"customer_id": Defaults.getUserID()
@@ -161,18 +266,13 @@ extension AddAddressVC {
             self.showHUD(progressLabel: AlertField.loaderString)
             let addAddressUrl : String = UrlName.baseUrl + UrlName.addAddressUrl
             let parameters = [
-                "first_name":fNameTxtFld.text!,
-                "last_name":lNameTxtFld.text!,
-                "address":streetTxtFld.text!,
-                "city":townCityTxtFld.text!,
-                "state":stateCountryTxtfld.text!,
-                "country":stateCountryTxtfld.text!,
-                "postcode":postCodTxtFld.text!,
+                "address":addressTxtFld.text!,
+                "city":cityTxtFld.text!,
+                "district":stateTxtFld.text!,
                 "phone_no":phoneNumberTxtFld.text!,
-                "email":emailTxtfld.text!,
                 "latitude":"19.079023",
                 "longitude":"72.908012",
-                "customer_id": Defaults.getUserID()
+                "customer_id":Defaults.getUserID()
             ] as [String : Any]
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addAddressUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in
@@ -215,33 +315,42 @@ extension AddAddressVC {
         }
     }
 }
-
+extension AddAddressVC : UIPickerViewDataSource,UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch pickerType {
+        case .state:
+            return stateList.count
+        default:
+            return cityList.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch pickerType {
+        case .state:
+            return stateList[row].stateName
+        default:
+            return cityList[row].cityName
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch pickerType {
+        case .state:
+            selectedState = stateList[row]
+        default:
+            selectedCity = cityList[row]
+        }
+    }
+    
+}
 extension AddAddressVC : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == fNameTxtFld {
-            textField.resignFirstResponder()
-            lNameTxtFld.becomeFirstResponder()
-        } else if textField == lNameTxtFld {
-            textField.resignFirstResponder()
-            streetTxtFld.becomeFirstResponder()
-        } else if textField == streetTxtFld {
-            textField.resignFirstResponder()
-            townCityTxtFld.becomeFirstResponder()
-        } else if textField == townCityTxtFld {
-            textField.resignFirstResponder()
-            stateCountryTxtfld.becomeFirstResponder()
-        } else if textField == stateCountryTxtfld {
-            textField.resignFirstResponder()
-            postCodTxtFld.becomeFirstResponder()
-        } else if textField == postCodTxtFld {
-            textField.resignFirstResponder()
-            phoneNumberTxtFld.becomeFirstResponder()
-        } else if textField == phoneNumberTxtFld {
-            textField.resignFirstResponder()
-            emailTxtfld.becomeFirstResponder()
-        } else{
-            textField.resignFirstResponder()
-        }
+        textField.resignFirstResponder()
         return true
     }
 }

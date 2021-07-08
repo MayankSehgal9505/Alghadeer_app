@@ -36,6 +36,15 @@ extension UIView {
         rightAnchor.constraint(equalTo: parentView.rightAnchor).isActive = true
     }
     
+    /// Make View Circular with passed border color
+    ///
+    /// - Parameter borderColor: border color of circle
+    /// - Parameter borderWidth: border width of circle
+    func makeCircularView(withBorderColor color: UIColor, withBorderWidth borderWidth: CGFloat = 1.0, withCustomCornerRadiusRequired cornerRadiusRequired:Bool = false, withCustomCornerRadius cornerRadius: CGFloat = 6.0) {
+        self.layer.cornerRadius = cornerRadiusRequired ? cornerRadius : (self.frame.size.width / 2)
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = color.cgColor
+    }
 }
 
 extension UIButton {

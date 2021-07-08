@@ -38,7 +38,7 @@ struct AddressModel {
         self.shippingLname = json["last_name"].stringValue
         self.shippingAddress = json["address"].stringValue
         self.shippingCity = json["city"].stringValue
-        self.shippingState = json["state"].stringValue
+        self.shippingState = json["district"].stringValue
         self.shippingCountry = json["country"].stringValue
         self.shippingPostCode = json["postcode"].stringValue
         self.shippingPhoneNumber = json["phone_no"].stringValue

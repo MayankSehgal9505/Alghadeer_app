@@ -129,6 +129,7 @@ extension DashboardVC: ProductDetailProtocol{
         if selectedIndex < productArray.count {
             let productDetailVC = DetailVC()
             productDetailVC.product = productArray[selectedIndex]
+            productDetailVC.productID = productArray[selectedIndex].productID
             self.navigationController?.pushViewController(productDetailVC, animated: true)
         }
     }

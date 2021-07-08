@@ -47,6 +47,7 @@ class CategoryProductsVC: CartBaseVC {
         if sender.tag < productArray.count {
             let productDetailVC = DetailVC()
             productDetailVC.product = productArray[sender.tag]
+            productDetailVC.productID = productArray[sender.tag].productID
             self.navigationController?.pushViewController(productDetailVC, animated: true)
         }
     }

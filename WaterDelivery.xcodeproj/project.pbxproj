@@ -27,6 +27,7 @@
 		4E1FEEDC2639AC2C009010A6 /* CategoryCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E1FEEDA2639AC2B009010A6 /* CategoryCollectionCell.xib */; };
 		4E2373DB2646D01900016451 /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2373DA2646D01900016451 /* AddressModel.swift */; };
 		4E2373E82647207200016451 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2373E72647207200016451 /* UserModel.swift */; };
+		4E34CC22268210C600383187 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E34CC21268210C600383187 /* StateModel.swift */; };
 		4E3A41232656E68200D4A61A /* DeliveryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A411F2656E68200D4A61A /* DeliveryTVC.swift */; };
 		4E3A41242656E68200D4A61A /* DeliveryHeaderTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3A41202656E68200D4A61A /* DeliveryHeaderTVC.xib */; };
 		4E3A41252656E68200D4A61A /* DeliveryHeaderTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A41212656E68200D4A61A /* DeliveryHeaderTVC.swift */; };
@@ -46,6 +47,8 @@
 		4E5B283B26564ECE00F15E68 /* WalletHistoryTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E5B283926564ECE00F15E68 /* WalletHistoryTVC.xib */; };
 		4E5B28432656609C00F15E68 /* DeliveryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5B28412656609C00F15E68 /* DeliveryVC.swift */; };
 		4E5B28442656609C00F15E68 /* DeliveryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E5B28422656609C00F15E68 /* DeliveryVC.xib */; };
+		4E6134852682887E004C6CB4 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6134832682887D004C6CB4 /* MapVC.swift */; };
+		4E6134862682887E004C6CB4 /* MapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6134842682887D004C6CB4 /* MapVC.xib */; };
 		4E66980D2645592E008DCA11 /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E66980B2645592E008DCA11 /* UserProfileVC.swift */; };
 		4E66980E2645592E008DCA11 /* UserProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E66980C2645592E008DCA11 /* UserProfileVC.xib */; };
 		4E69C4392650025100FF098E /* SubscriptionSlotTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C4372650025100FF098E /* SubscriptionSlotTVC.swift */; };
@@ -111,6 +114,8 @@
 		4EE7839E2667EEEB0055EF91 /* WalletAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE7839D2667EEEB0055EF91 /* WalletAmount.swift */; };
 		4EE783A12667F75D0055EF91 /* WalletBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE783A02667F75D0055EF91 /* WalletBalance.swift */; };
 		4EE783A42667FFC30055EF91 /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE783A32667FFC20055EF91 /* BusinessModel.swift */; };
+		4EF5A2532683487F001C256A /* PlaceAutoComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5A2512683487F001C256A /* PlaceAutoComplete.swift */; };
+		4EF5A2542683487F001C256A /* PlaceAutoComplete.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EF5A2522683487F001C256A /* PlaceAutoComplete.xib */; };
 		4EF93E6A264BE8E5006DEE83 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF93E69264BE8E5006DEE83 /* UserInfo.swift */; };
 		4EFCF87C263BF65E00F08AA7 /* CategoryProductsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCF87A263BF65E00F08AA7 /* CategoryProductsVC.swift */; };
 		4EFCF87D263BF65E00F08AA7 /* CategoryProductsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCF87B263BF65E00F08AA7 /* CategoryProductsVC.xib */; };
@@ -170,6 +175,7 @@
 		4E1FEEDA2639AC2B009010A6 /* CategoryCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionCell.xib; sourceTree = "<group>"; };
 		4E2373DA2646D01900016451 /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
 		4E2373E72647207200016451 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		4E34CC21268210C600383187 /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		4E3A411F2656E68200D4A61A /* DeliveryTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryTVC.swift; sourceTree = "<group>"; };
 		4E3A41202656E68200D4A61A /* DeliveryHeaderTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliveryHeaderTVC.xib; sourceTree = "<group>"; };
 		4E3A41212656E68200D4A61A /* DeliveryHeaderTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryHeaderTVC.swift; sourceTree = "<group>"; };
@@ -189,6 +195,8 @@
 		4E5B283926564ECE00F15E68 /* WalletHistoryTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletHistoryTVC.xib; sourceTree = "<group>"; };
 		4E5B28412656609C00F15E68 /* DeliveryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryVC.swift; sourceTree = "<group>"; };
 		4E5B28422656609C00F15E68 /* DeliveryVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeliveryVC.xib; sourceTree = "<group>"; };
+		4E6134832682887D004C6CB4 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		4E6134842682887D004C6CB4 /* MapVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapVC.xib; sourceTree = "<group>"; };
 		4E66980B2645592E008DCA11 /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
 		4E66980C2645592E008DCA11 /* UserProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileVC.xib; sourceTree = "<group>"; };
 		4E69C4372650025100FF098E /* SubscriptionSlotTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSlotTVC.swift; sourceTree = "<group>"; };
@@ -254,6 +262,8 @@
 		4EE7839D2667EEEB0055EF91 /* WalletAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAmount.swift; sourceTree = "<group>"; };
 		4EE783A02667F75D0055EF91 /* WalletBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBalance.swift; sourceTree = "<group>"; };
 		4EE783A32667FFC20055EF91 /* BusinessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessModel.swift; sourceTree = "<group>"; };
+		4EF5A2512683487F001C256A /* PlaceAutoComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAutoComplete.swift; sourceTree = "<group>"; };
+		4EF5A2522683487F001C256A /* PlaceAutoComplete.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceAutoComplete.xib; sourceTree = "<group>"; };
 		4EF93E69264BE8E5006DEE83 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		4EFCF87A263BF65E00F08AA7 /* CategoryProductsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryProductsVC.swift; sourceTree = "<group>"; };
 		4EFCF87B263BF65E00F08AA7 /* CategoryProductsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryProductsVC.xib; sourceTree = "<group>"; };
@@ -760,6 +770,7 @@
 				4EE783A32667FFC20055EF91 /* BusinessModel.swift */,
 				4EA9B500266BE36F0089E23E /* SummaryModel.swift */,
 				4EA9B503266BF3410089E23E /* WalletTransactionModel.swift */,
+				4E34CC21268210C600383187 /* StateModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -816,6 +827,10 @@
 				4EE783942667D5250055EF91 /* PaymentVC.swift */,
 				4EE783952667D5250055EF91 /* PaymentVC.xib */,
 				4E46FA2D2673784C00B6C036 /* GetAddresses.swift */,
+				4E6134832682887D004C6CB4 /* MapVC.swift */,
+				4E6134842682887D004C6CB4 /* MapVC.xib */,
+				4EF5A2512683487F001C256A /* PlaceAutoComplete.swift */,
+				4EF5A2522683487F001C256A /* PlaceAutoComplete.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -849,6 +864,7 @@
 				990A254C262E864800C96165 /* Frameworks */,
 				990A254D262E864800C96165 /* Resources */,
 				82DC13F2D75984A3708FC494 /* [CP] Embed Pods Frameworks */,
+				FD126AE4D76C0D51FA12DF59 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -937,6 +953,7 @@
 				4E71B994264479470094F72B /* PaymentTVC.xib in Resources */,
 				4E4C439D26388AD5002C4609 /* BannerCollectionViewCell.xib in Resources */,
 				4E71B988264473E60094F72B /* SummaryTVC.xib in Resources */,
+				4EF5A2542683487F001C256A /* PlaceAutoComplete.xib in Resources */,
 				4E5B283B26564ECE00F15E68 /* WalletHistoryTVC.xib in Resources */,
 				4E69C48F2651A7A500FF098E /* FAQTVC.xib in Resources */,
 				4E9AC58F264DB64400C2B6A8 /* SubscriptionVC.xib in Resources */,
@@ -945,6 +962,7 @@
 				4E1FEEDC2639AC2C009010A6 /* CategoryCollectionCell.xib in Resources */,
 				4E13392B263D3CB90060597E /* CartTVC.xib in Resources */,
 				4E69C4702651284A00FF098E /* SelectProductTVC.xib in Resources */,
+				4E6134862682887E004C6CB4 /* MapVC.xib in Resources */,
 				4E71B99E264481580094F72B /* InfoTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -991,6 +1009,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FD126AE4D76C0D51FA12DF59 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1003,6 +1038,7 @@
 				4E13392A263D3CB90060597E /* CartTVC.swift in Sources */,
 				4E1FEEDB2639AC2C009010A6 /* CategoryCollectionCell.swift in Sources */,
 				4E69C46F2651284A00FF098E /* SelectProductTVC.swift in Sources */,
+				4E6134852682887E004C6CB4 /* MapVC.swift in Sources */,
 				990A2588262E8D0200C96165 /* UIViewController.swift in Sources */,
 				4E2373DB2646D01900016451 /* AddressModel.swift in Sources */,
 				4E71B98C264477A80094F72B /* ScheduleTimeTVC.swift in Sources */,
@@ -1032,6 +1068,7 @@
 				4E71B9B2264493A20094F72B /* SelectAmountTVC.swift in Sources */,
 				4E69C453265109BA00FF098E /* SubscriptionProductsTVC.swift in Sources */,
 				4E5B283A26564ECE00F15E68 /* WalletHistoryTVC.swift in Sources */,
+				4E34CC22268210C600383187 /* StateModel.swift in Sources */,
 				990A258B262E8D0200C96165 /* SignupModel.swift in Sources */,
 				990A2584262E8D0200C96165 /* UIView.swift in Sources */,
 				4E5B28432656609C00F15E68 /* DeliveryVC.swift in Sources */,
@@ -1046,6 +1083,7 @@
 				4E71B97D264435260094F72B /* ShippingTitleTVC.swift in Sources */,
 				4E550FF226525366008C0A11 /* ContactUsModel.swift in Sources */,
 				4EA9B504266BF3410089E23E /* WalletTransactionModel.swift in Sources */,
+				4EF5A2532683487F001C256A /* PlaceAutoComplete.swift in Sources */,
 				4E3A41232656E68200D4A61A /* DeliveryTVC.swift in Sources */,
 				9965FB332631666D00946AB6 /* NetworkManager.swift in Sources */,
 				9965FB232631663800946AB6 /* OTPVC.swift in Sources */,
@@ -1235,13 +1273,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZE38D2D95S;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = WaterDelivery/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.1;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ei.waterdel.WaterDelivery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1270,7 +1309,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.1;
+				MARKETING_VERSION = 2.0.1;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ei.waterdel.WaterDelivery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

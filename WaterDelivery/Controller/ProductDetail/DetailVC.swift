@@ -32,19 +32,20 @@ class DetailVC: CartBaseVC {
     //MARK:- Properties
     var product = ProductModel()
     var actionPerformed: ActionType = .addToCart
-    var productCurrentQuantity = 1
+    var productCurrentQuantity = 0
+    var productID = ""
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        Defaults.setSkipLogin(true)
+        getProductDetail()
+        quantView.isHidden = true
     }
     
     //MARK:- Internal Methods
     private func setupView(){
         navTitle.text = product.name
         productName.text = product.name
-        productPrice.text = "AED \(product.sellingPrice)"
+        productPrice.text = "AED \(product.unitPrice)"
         productDescription.text = product.details
         if let imageURL = URL.init(string: product.productImage) {
             productImg.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
@@ -55,26 +56,10 @@ class DetailVC: CartBaseVC {
 
     //MARK:- IBActions
     @IBAction func increaseBtnAction(_ sender: UIButton) {
-        if var currentQuantity = Int(quantityLbl.text!),let productMaxQuantity = Int(product.quantity) {
-            if currentQuantity < productMaxQuantity {
-                currentQuantity += 1
-                productCurrentQuantity = currentQuantity
-                self.quantityLbl.text = "\(currentQuantity)"
-            } else {
-                self.view.makeToast("Product maximum quanntity has been reached", duration: 3.0, position: .center)
-            }
-        }
+        updateProductInCart(product: product, str: "add")
     }
     @IBAction func decreaseBtnAction(_ sender: UIButton) {
-        if var currentQuantity = Int(quantityLbl.text!) {
-            if currentQuantity == 1 {
-                self.view.makeToast("Product minimum quanntity has been reached", duration: 3.0, position: .center)
-            } else {
-                currentQuantity -= 1
-                productCurrentQuantity = currentQuantity
-                self.quantityLbl.text = "\(currentQuantity)"
-            }
-        }
+        updateProductInCart(product: product, str: productCurrentQuantity == 1 ? "remove" : "delete")
     }
     @IBAction func backBtnClicked(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -93,7 +78,7 @@ class DetailVC: CartBaseVC {
         } else {
             switch actionPerformed {
             case .addToCart:
-                updateProductInCart(product: product)
+                updateProductInCart(product: product, str: "add")
             case .goToCart:
                 super.goToCartBtnAction(sender)
             }
@@ -103,7 +88,101 @@ class DetailVC: CartBaseVC {
 
 //MARK:- API Calls
 extension DetailVC {
-    private func updateProductInCart(product:ProductModel) {
+    private func getProductQuantity(){
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let productQuantityUrl : String = UrlName.baseUrl + UrlName.getCartQuantityUrl
+            let parameters = [
+                "customer_id":Defaults.getUserID(),
+                "product_id":productID,
+            ] as [String : Any]
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: productQuantityUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true, let data = jsonValue["Quantity"], let quant = Int(data.string ?? "0") {
+                    self.productCurrentQuantity = quant
+                    DispatchQueue.main.async {
+                        self.quantView.isHidden = self.productCurrentQuantity == 0
+                        self.addToCartBTn.isHidden = !self.quantView.isHidden
+                        self.quantityLbl.text = "\(self.productCurrentQuantity)"
+                        self.addToCartBTn.setTitle(self.productCurrentQuantity == 0 ? "Add to Cart" : "view Cart", for: [])
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        if let errordict = jsonValue["Errors"]?.dictionaryObject {
+                            if errordict.keys.count == 0 {
+                                self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                            } else {
+                                self.view.makeToast(errordict[errordict.keys.first!] as? String ?? "", duration: 3.0, position: .center)
+
+                            }
+                        } else {
+                            self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+
+
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+
+    private func getProductDetail(){
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let productDetailUrl : String = UrlName.baseUrl + UrlName.getProductDetailUrl + productID
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: productDetailUrl, method: .get, parameters: nil, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true, let data = jsonValue[APIField.dataKey] {
+                    self.product = ProductModel.init(json: data)
+                    DispatchQueue.main.async {
+                        self.setupView()
+                        self.getProductQuantity()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        if let errordict = jsonValue["Errors"]?.dictionaryObject {
+                            if errordict.keys.count == 0 {
+                                self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                            } else {
+                                self.view.makeToast(errordict[errordict.keys.first!] as? String ?? "", duration: 3.0, position: .center)
+
+                            }
+                        } else {
+                            self.view.makeToast("Something went wrong, try again later", duration: 3.0, position: .center)
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+
+
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
+
+    private func updateProductInCart(product:ProductModel,str: String) {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
             let addToCartUrl : String = UrlName.baseUrl + UrlName.addToCartUrl
@@ -113,8 +192,8 @@ extension DetailVC {
                 "unit_atrributes_id":product.unitAttributeId,
                 "unit_measure":product.attributeName,
                 "price":product.unitPrice,
-                "quantity":"\(productCurrentQuantity)",
-                "event":"add"
+                "quantity":"1",
+                "event":str
             ] as [String : Any]
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addToCartUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in
@@ -127,11 +206,10 @@ extension DetailVC {
                 }
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
-                        self.view.makeToast("Item added to cart", duration: 3.0, position: .center)
-                        self.addToCartBTn.setTitle("View Cart", for: [])
+                        self.view.makeToast("Item added to cart", duration: 0.5, position: .bottom)
                         self.actionPerformed = .goToCart
-                        self.quantView.isHidden = true
                         self.getCartCountList()
+                        self.getProductQuantity()
                     }
                 } else {
                     DispatchQueue.main.async {

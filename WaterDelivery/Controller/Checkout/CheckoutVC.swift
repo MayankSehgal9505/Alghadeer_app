@@ -76,6 +76,7 @@ class CheckoutVC: UIViewController {
         let paymentVC = PaymentVC()
         paymentVC.delegate = self
         paymentVC.urlString = addedMoneyModel.redirectUrl
+        paymentVC.modalPresentationStyle = .fullScreen
         self.present(paymentVC, animated: true, completion: nil)
     }
     //MARK:-IBActions

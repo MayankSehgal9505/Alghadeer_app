@@ -43,6 +43,7 @@ struct UrlName {
     static let getCategoryListUrl = "Category/CategoryList/0"
     static let getProductListUrl = "Product/productList/0"
     static let getProductDetailUrl = "Product/productDetails/"
+    static let getCartQuantityUrl = "cart/getquantity"
     static let getCategoryDetailUrl = "Category/categoryDetails/"   // Un used api
     static let getProductListByCategoryID = "Category/ByCcategoryIdGetProductList/"
 
@@ -54,9 +55,12 @@ struct UrlName {
     // Address URLs
     static let getAddressListUrl = "Address/getAddressList/"
     static let addAddressUrl = "Address/add"
+    static let addAddressNewUrl = "Address/addAddress_post"
     static let updateAddressUrl = "Address/update/"
     static let deleteAddressUrl = "Address/deleteAddress/"
-    
+    static let getStates = "customer/getStateByCountry"
+    static let getCities = "customer/getCityByState"
+
     // User Profile URLS
     static let getUserDetailUrl = "User_registration/getUser/"
     static let updateUserDetailUrl = "User_registration/userUpdate/"
@@ -70,7 +74,7 @@ struct UrlName {
     
     // CONTACT US URL
     static let contactUrl = "Common/faqContact/contactus"
-    
+    static let enquiryUrl = "Address/contactus"
     // LogOut Url
     static let logOutUrl = "Auth/logout"
 
@@ -121,6 +125,7 @@ struct UserDefaultsKey {
     static let isAlreadyLoginString = "isAlreadyLogin"
     static let loginData = "loginData"
     static let userId = "userId"
+    static let defaultToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIzMCIsImVtYWlsIjoic3ByYiIsImlhdCI6MTYyNDI4MTY4MiwiZXhwIjo0Nzc3ODgxNjgyfQ.32Gv4qxC6dttp4sbMKmFh1i-Ku69WUgsAoDVzQcRIyg"
 }
 
 // MARK: - AlertField Names

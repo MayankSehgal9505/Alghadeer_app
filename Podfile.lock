@@ -1,5 +1,11 @@
 PODS:
   - Alamofire (4.9.1)
+  - GoogleMaps (5.0.0):
+    - GoogleMaps/Maps (= 5.0.0)
+  - GoogleMaps/Base (5.0.0)
+  - GoogleMaps/Maps (5.0.0):
+    - GoogleMaps/Base
+  - GooglePlaces (5.0.0)
   - IQKeyboardManagerSwift (6.5.6)
   - Kingfisher (5.15.7):
     - Kingfisher/Core (= 5.15.7)
@@ -11,6 +17,8 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.9.1)
+  - GoogleMaps (= 5.0.0)
+  - GooglePlaces
   - IQKeyboardManagerSwift
   - Kingfisher
   - MBProgressHUD
@@ -21,6 +29,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - GoogleMaps
+    - GooglePlaces
     - IQKeyboardManagerSwift
     - Kingfisher
     - MBProgressHUD
@@ -30,6 +40,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  GoogleMaps: 600e5e69bdf7f4ed7cac4d6aa96c7ec08a5aa254
+  GooglePlaces: 5d87ca13ed98b7a937e0d8bc7026f718c7263271
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
@@ -37,6 +49,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
 
-PODFILE CHECKSUM: e6c95a4c3d23420892ac83f37745b9246235d1e7
+PODFILE CHECKSUM: 63472ced762cf03a441376635e9fd3692185db46
 
 COCOAPODS: 1.10.1

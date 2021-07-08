@@ -16,17 +16,23 @@ class UserProfileVC: UIViewController {
     @IBOutlet weak var nameTxtfld: UITextField!
     @IBOutlet weak var emailTxtfld: UITextField!
     @IBOutlet weak var addressTxtfld: UITextField!
-    @IBOutlet weak var countryTxtfld: UITextField!
     @IBOutlet weak var userNameLbl: UILabel!
     @IBOutlet weak var phoneNumberTxtFld: UITextField!
     @IBOutlet weak var categoryBtn: UIButton!
     @IBOutlet weak var categoryValue: UILabel!
+    @IBOutlet weak var pickerMainView: UIView!
+    @IBOutlet weak var addressPickerView: UIPickerView!
+    @IBOutlet weak var cusstomerID: UILabel!
     //MARK:- Local Variables
     var user = UserModel()
     var imagedict:[String:Data] = [:]
     var businesses = [BusinessModel]()
     var selectedBusinessType = BusinessModel()
     var dispatchGroup = DispatchGroup()
+    var shippingAddressArray = Array<AddressModel>()
+    var selectedAddress = AddressModel()
+    private var effectView,vibrantView : UIVisualEffectView?
+
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +48,10 @@ class UserProfileVC: UIViewController {
             self.imagedict["profile"] = data
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getAddress()
+    }
     //MARK:- Internal Methods
     func setupUI() {
         userImg.setCornerRadiusOfView(cornerRadiusValue: 75.00, setBorder: true, borderColor: .white, width: 2.0)
@@ -53,7 +63,6 @@ class UserProfileVC: UIViewController {
         nameTxtfld.text = user.userName
         emailTxtfld.text = user.userEmail
         addressTxtfld.text = user.userAddress
-        countryTxtfld.text = user.userCountry
         phoneNumberTxtFld.text = user.userPhoneNumber
         if let imageURL = URL.init(string: user.profileImgUrl) {
             userImg.kf.setImage(with: imageURL, placeholder: UIImage(named: "profile"))
@@ -65,6 +74,7 @@ class UserProfileVC: UIViewController {
         }).first
         selectedBusinessType = business ?? BusinessModel()
         categoryValue.text = business?.businessName ?? ""
+        cusstomerID.text = "Customer ID: \(Defaults.getUserID() + "jvryur")"
     }
     func showOptions(){
         let alert = UIAlertController(title: "Please select category", message: "", preferredStyle: .actionSheet)
@@ -80,6 +90,23 @@ class UserProfileVC: UIViewController {
                print("completion block")
            })
     }
+    /// Hiding Picker View
+    private func showPickerView(){
+        let viewArray = CommonMethods.showPopUpWithVibrancyView(on : self)
+        self.view.window?.addSubview(pickerMainView)
+        vibrantView = viewArray.first as? UIVisualEffectView
+        effectView = (viewArray.last as? UIVisualEffectView)
+        self.pickerMainView.isHidden = false
+        CommonMethods.setPickerConstraintAccordingToDevice(pickerView: pickerMainView, view: self.view)
+        addressPickerView.reloadAllComponents()
+    }
+    
+    /// Hiding Picker View
+    private func hidePickerView(){
+        pickerMainView.isHidden = true
+        vibrantView?.removeFromSuperview()
+        effectView?.removeFromSuperview()
+    }
     //MARK:- IBActions
     @IBAction func saveBtnAction(_ sender: UIButton) {
         if (nameTxtfld.text?.isEmpty ??  true) {
@@ -92,8 +119,6 @@ class UserProfileVC: UIViewController {
             self.view.makeToast("Address name can't be empty", duration: 3.0, position: .center)
         } else if (phoneNumberTxtFld.text?.isEmpty ??  true) {
             self.view.makeToast("Phone Number can't be empty", duration: 3.0, position: .center)
-        }else if (countryTxtfld.text?.isEmpty ??  true) {
-            self.view.makeToast("Country can't be empty", duration: 3.0, position: .center)
         } else {
             updateUserProfile()
             updateUserImg()
@@ -115,6 +140,21 @@ class UserProfileVC: UIViewController {
     }
     @IBAction func backBtnAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func openAddress(_ sender: UIButton) {
+        showPickerView()
+    }
+    @IBAction func addAddressBtn(_ sender: UIButton) {
+        let addAddressVC = AddAddressVC()
+        addAddressVC.addressScreenType = .addAddress
+        self.navigationController?.pushViewController(addAddressVC, animated: true)
+    }
+    @IBAction func donePickerBtn(_ sender: UIBarButtonItem) {
+        hidePickerView()
+        self.addressTxtfld.text =  "\(selectedAddress.shippingAddress), \(selectedAddress.shippingPhoneNumber), \(selectedAddress.shippingCity), \(selectedAddress.shippingState)"
+    }
+    @IBAction func cancelPickerAction(_ sender: UIBarButtonItem) {
+        hidePickerView()
     }
 }
 
@@ -204,7 +244,7 @@ extension UserProfileVC: CategoryAPI {
                 "address":addressTxtfld.text!,
                 "gender":"M",
                 "dob":"2017-3-2",
-                "country":countryTxtfld.text!,
+                "country":"",
                 "role_id":"1",
                 "mobile_number":phoneNumberTxtFld.text!,
                 "latitude":"19.4354",
@@ -250,4 +290,35 @@ extension UserProfileVC: CategoryAPI {
             UserData.sharedInstance.businessTypes = self.businesses
         }
     }
+}
+
+extension UserProfileVC: AddressProtocol{
+    private func getAddress() {
+        getAddressList(loaderRequired: false){ [weak self] in  self?.reloadAddressListSection()  }
+    }
+    private func reloadAddressListSection() {
+        DispatchQueue.main.async {
+            print(self.shippingAddressArray.count)
+            self.addressPickerView.reloadAllComponents()
+        }
+    }
+}
+
+extension UserProfileVC : UIPickerViewDataSource,UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.shippingAddressArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.shippingAddressArray[row].shippingAddress
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedAddress = shippingAddressArray[row]
+    }
+    
 }

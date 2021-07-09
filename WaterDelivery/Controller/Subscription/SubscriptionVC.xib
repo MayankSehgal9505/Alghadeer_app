@@ -153,7 +153,7 @@
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYF-Tu-mQz">
                     <rect key="frame" x="274" y="133" width="120" height="40"/>
-                    <color key="backgroundColor" red="0.090196078430000007" green="0.33333333329999998" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.090196078431372548" green="0.24313725490196078" blue="0.46274509803921571" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="D9k-Fu-rS6"/>
                         <constraint firstAttribute="height" constant="40" id="uZC-yL-wsb"/>
@@ -182,7 +182,7 @@
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.86274509803921573" green="0.94901960784313721" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ss2-Js-Dj2" secondAttribute="trailing" id="0fl-FM-l4L"/>
                 <constraint firstItem="j9H-tr-ZdL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="25n-7O-KWE"/>

@@ -25,10 +25,12 @@ class AddSubscriptionVC: CartBaseVC,AddAddressProtocol {
     @IBOutlet weak var addSubscriptionTBView: UITableView!
     @IBOutlet weak var timeView: UIView!
     @IBOutlet weak var pickerView: UIDatePicker!
+    @IBOutlet weak var timePickerView: UIPickerView!
     @IBOutlet weak var pickerLbl: UILabel!
     //MARK:- Local Variables
     var shippingAddressArray = Array<AddressModel>()
     var productArray = Array<ProductModel>()
+    var timeArray = Array<TimeModel>()
     var selectedProductArray = Array<ProductModel>()
     var pickerType: PickerType = .startDate
     var selectedAddress = AddressModel()
@@ -60,6 +62,8 @@ class AddSubscriptionVC: CartBaseVC,AddAddressProtocol {
             getAddress()
             self.dispatchGp.enter()
             getProductsList()
+            self.dispatchGp.enter()
+            getTimeList()
         }
         dispatchGpAPIS()
         dispatchGp.notify(queue: .main) {
@@ -113,7 +117,8 @@ class AddSubscriptionVC: CartBaseVC,AddAddressProtocol {
     @objc private func selectTimeAction() {
         pickerType = .time
         pickerLbl.text = "Select Delivery Time"
-        pickerView.datePickerMode = .time
+        pickerView.isHidden = true
+        timePickerView.isHidden = false
         commonPickerCode()
     }
     
@@ -122,6 +127,8 @@ class AddSubscriptionVC: CartBaseVC,AddAddressProtocol {
         pickerLbl.text = "Select Start Date"
         pickerView.datePickerMode = .date
         pickerView.minimumDate = Date()
+        pickerView.isHidden = false
+        timePickerView.isHidden = true
         commonPickerCode()
     }
     
@@ -130,6 +137,8 @@ class AddSubscriptionVC: CartBaseVC,AddAddressProtocol {
         pickerLbl.text = "Select End Date"
         pickerView.datePickerMode = .date
         pickerView.minimumDate = Date()
+        pickerView.isHidden = false
+        timePickerView.isHidden = true
         commonPickerCode()
     }
     
@@ -197,7 +206,8 @@ class AddSubscriptionVC: CartBaseVC,AddAddressProtocol {
         case .endDate:
             endDate = sender.date
         default:
-            deliveryTime = sender.date.dateStringWith(strFormat: "hh:mm a")
+            break
+            //deliveryTime = sender.date.dateStringWith(strFormat: "hh:mm a")
         }
     }
     // MARK:- Selected product cell Method
@@ -351,7 +361,7 @@ extension AddSubscriptionVC{
                 let product = [
                     "product_id": Int(product.productID) ?? 0,
                     "unit_measure": "litter",
-                    "price": Int(product.unitPrice) ?? 0,
+                    "price": Double(product.unitPrice) ?? 0,
                     "quantity": product.addQuantity
                 ] as [String : Any]
                 products.append(product)
@@ -395,7 +405,45 @@ extension AddSubscriptionVC{
             self.showNoInternetAlert()
         }
     }
-    
+    func getTimeList() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            let bannerListURL : String = UrlName.baseUrl + UrlName.deliveryTimeUrl
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dispatchGp.leave()
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    if let timeList = jsonValue[APIField.dataKey]?.array {
+                        var timesArray = Array<TimeModel>()
+                        for time in timeList {
+                            let timeModel = TimeModel.init(json: time)
+                            timesArray.append(timeModel)
+                        }
+                        self.timeArray = timesArray
+                        DispatchQueue.main.async {
+                            self.timePickerView.reloadAllComponents()
+                        }
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                self.dispatchGp.leave()
+            })
+        }else{
+            self.dispatchGp.leave()
+            self.showNoInternetAlert()
+        }
+    }
+
     func getProductsList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             let bannerListURL : String = UrlName.baseUrl + UrlName.getProductListUrl
@@ -403,6 +451,7 @@ extension AddSubscriptionVC{
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
+                        self.dispatchGp.leave()
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
                     }
                     return
@@ -433,6 +482,7 @@ extension AddSubscriptionVC{
                 self.dispatchGp.leave()
             })
         }else{
+            self.dispatchGp.leave()
             self.showNoInternetAlert()
         }
     }
@@ -459,3 +509,22 @@ extension AddSubscriptionVC: AddressProtocol {
             //self?.reloadAddressListSection()  }
     }
 }
+//MARK:- Get Address List Methods
+extension AddSubscriptionVC: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.timeArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.timeArray[row].deliveryTime
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        deliveryTime = timeArray[row].deliveryTime
+    }
+}
+

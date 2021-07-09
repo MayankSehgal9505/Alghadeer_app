@@ -20,6 +20,8 @@ class SubscriptionTVC: UITableViewCell {
     @IBOutlet weak var totalPriceValue: UILabel!
     @IBOutlet weak var subscriptionDatesValue: UILabel!
     @IBOutlet weak var unitPriceValue: UILabel!
+    @IBOutlet weak var deliveryTime: UILabel!
+    @IBOutlet weak var quantityLbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -52,6 +54,8 @@ class SubscriptionTVC: UITableViewCell {
         unitPriceValue.text = "price of Unit: \(subscriptionModel.productUnitPrice)"
         produuctAddress.text = "\(subscriptionModel.address.shippingAddress) \(subscriptionModel.address.shippingCity) \(subscriptionModel.address.shippingPostCode) \(subscriptionModel.address.shippingCountry)"
         subscriptionDatesValue.text = "\(subscriptionModel.subscriptionStartDate) - \(subscriptionModel.subscriptionEndDate)"
+        deliveryTime.text = subscriptionModel.productDeliveryTime
         totalPriceValue.text = "Total AED:\(subscriptionModel.totalAmount)"
+        quantityLbl.text = "QTY +\(subscriptionModel.productQuantity)"
     }
 }

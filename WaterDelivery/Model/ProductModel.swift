@@ -54,3 +54,20 @@ struct ProductModel {
         self.category = CategoryModel.init(json: json)
     }
 }
+
+struct TimeModel {
+
+    //MARK: Variable
+    var deliveryTime = ""
+
+    //MARK: Lifecycle
+    init() {
+    }
+
+    /// Init method of model
+    ///
+    /// - Parameter json: Json object
+    init(json : JSON) {
+        self.deliveryTime = json["delivery_time"].stringValue
+    }
+}

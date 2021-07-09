@@ -21,22 +21,31 @@ enum SubscriptionTab: Int {
     
     var noSubscriptionMsg:String {
         switch self {
-            case .active: return "No active Subscription"
-            case .paused: return "No paused Subscription"
-            default: return "No cancelled Subscription"
+            case .active: return "No Data found"
+            case .paused: return "No Data found"
+            default: return "No Data found"
         }
     }
 }
 class SubscriptionVC: CartBaseVC{
 
     //MARK:- IBOutlets
-    @IBOutlet weak var addBtn: UIButton!
+    @IBOutlet weak var addBtn: UIButton! {
+        didSet {
+            addBtn.setCornerRadiusOfView(cornerRadiusValue: 7)
+        }
+    }
     @IBOutlet weak var subscriptionTBView: UITableView!
     @IBOutlet weak var noSubscriptionTxt: UILabel!
-    @IBOutlet var subscriptionBtns: [UIButton]!
+    @IBOutlet var subscriptionBtns: [UIButton]! {
+        didSet {
+            subscriptionBtns.forEach { $0.setCornerRadiusOfView(cornerRadiusValue: 10)
+            }
+        }
+    }
     //MARK:- Local Variables
-    private let inactiveTabColor = UIColor.init(red: 153/255, green: 152/255, blue: 155/255, alpha: 1.0)
-    private let activeTabColor = UIColor.init(red: 23/255, green: 85/255, blue: 152/255, alpha: 1.0)
+    private let inactiveTabColor = UIColor.init(red: 83/255, green: 116/255, blue: 159/255, alpha: 1.0)
+    private let activeTabColor = UIColor.init(red: 23/255, green: 62/255, blue: 118/255, alpha: 1.0)
     private var selectedSubscriptionTab:SubscriptionTab = .active {
         didSet {
             setupTabs()

@@ -9,7 +9,7 @@ import UIKit
 
 class FAQTVC: UITableViewCell {
 
-    @IBOutlet weak var indexLbl: UILabel!
+    @IBOutlet weak var ParentView: UIView!
     @IBOutlet weak var faqQuesLbl: UILabel!
     @IBOutlet weak var faqAnswerLbl: UILabel!
     @IBOutlet weak var answerView: UIView!
@@ -26,9 +26,9 @@ class FAQTVC: UITableViewCell {
     }
     
     func setupCell(faqModel:FAQModel) {
-        indexLbl.text = "\(faqModel.faqID)."
-        faqQuesLbl.text = faqModel.faqQues
-        faqAnswerLbl.text = faqModel.faqAnswer
+        ParentView.setCornerRadiusOfView(cornerRadiusValue: 15)
+        faqQuesLbl.text = "Q\(faqModel.faqID). \(faqModel.faqQues)"
+        faqAnswerLbl.text = "A\(faqModel.faqID). \(faqModel.faqAnswer)"
         viewAnswerBtn.isSelected = faqModel.faqAnswerVisible
         answerView.isHidden = !faqModel.faqAnswerVisible
     }

@@ -16,6 +16,7 @@ class DeliveryTVC: UITableViewCell {
     @IBOutlet weak var deliveyPrice: UILabel!
     @IBOutlet weak var deliveryBaseView: UIView!
     @IBOutlet weak var deliveryStatus: UILabel!
+    @IBOutlet weak var deliveryView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,9 +30,24 @@ class DeliveryTVC: UITableViewCell {
         deliveryBaseView.setCornerRadiusOfView(cornerRadiusValue:10)
         deliveryTypeLbl.text = deliveryProductObj.deliveredProductType.deliveredProductStr
         orderID.text = deliveryProductObj.orderID
-        deliveryDate.text = "\(deliveryProductObj.deliveryTime)"
+        deliveryDate.text = convertDateFormater(deliveryProductObj.created_date)
+        
+        if deliveryProductObj.address.shippingAddress != "" {
+            deliveryView.isHidden = false
+        } else {
+            deliveryView.isHidden = true
+        }
         deliveryAddress.text = "\(deliveryProductObj.address.shippingAddress), \(deliveryProductObj.address.shippingCity), \(deliveryProductObj.address.shippingState) \(deliveryProductObj.address.shippingCountry)"
         deliveyPrice.text = "AED \(deliveryProductObj.totalAmount)"
         deliveryStatus.text = deliveryProductObj.status
     }
+    func convertDateFormater(_ date: String) -> String
+        {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let date = dateFormatter.date(from: date)
+            dateFormatter.dateFormat = "MMM dd"
+            return  dateFormatter.string(from: date!)
+
+        }
 }

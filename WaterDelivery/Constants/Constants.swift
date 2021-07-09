@@ -60,7 +60,6 @@ struct UrlName {
     static let deleteAddressUrl = "Address/deleteAddress/"
     static let getStates = "customer/getStateByCountry"
     static let getCities = "customer/getCityByState"
-
     // User Profile URLS
     static let getUserDetailUrl = "User_registration/getUser/"
     static let updateUserDetailUrl = "User_registration/userUpdate/"
@@ -82,6 +81,8 @@ struct UrlName {
     static let addSubscriptionUrl = "SubscriptionOrder/addSubscriptionOrder"
     static let getSubscriptionUrl = "SubscriptionOrder/SubscriptionOrderList/"
     static let updateSubscriptionUrl = "SubscriptionOrder/subscriptionUpdate/"
+    static let deliveryTimeUrl = "SubscriptionOrder/DeliveryTimeslot"
+
     
     // My Deliveries Urls
     static let orderListUrl = "Order/OrderList"

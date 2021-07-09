@@ -20,7 +20,7 @@ struct Order {
     init(json : JSON) {
         self.orderMonth = json["date"].stringValue
         if let deliveryList = json["deliverylist"].array {
-            for deliveredProduct in deliveryList.reversed() {
+            for deliveredProduct in deliveryList {
                 let deliverProductModel = DeliveredProductsModel.init(json: deliveredProduct)
                 deliveredProducts.append(deliverProductModel)
             }
@@ -42,6 +42,7 @@ struct DeliveredProductsModel {
         }
     }
     var orderID = ""
+    var created_date = ""
     var status = ""
     var deliveryTime = ""
     var deliveryDate = ""
@@ -66,6 +67,8 @@ struct DeliveredProductsModel {
         }
         self.totalAmount = json["total_amt"].stringValue
         self.address = AddressModel.init(json: json["address"])
+        self.created_date = json["created_date"].stringValue
+
     }
 }
 

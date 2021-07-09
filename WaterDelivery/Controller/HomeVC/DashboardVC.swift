@@ -151,6 +151,7 @@ extension DashboardVC {
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
+                    self.dispatchGp.leave()
                     DispatchQueue.main.async {
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
                     }
@@ -183,6 +184,7 @@ extension DashboardVC {
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
+                    self.dispatchGp.leave()
                     DispatchQueue.main.async {
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
                     }
@@ -215,6 +217,7 @@ extension DashboardVC {
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
+                    self.dispatchGp.leave()
                     DispatchQueue.main.async {
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
                     }

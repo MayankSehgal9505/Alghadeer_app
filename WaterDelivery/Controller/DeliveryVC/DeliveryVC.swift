@@ -90,7 +90,7 @@ extension DeliveryVC {
                     if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                         if let orders = jsonValue[APIField.dataKey]?.array {
                             var orderList = Array<Order>()
-                            for order in orders.reversed() {
+                            for order in orders{
                                 let orderModel = Order.init(json: order)
                                 orderList.append(orderModel)
                             }

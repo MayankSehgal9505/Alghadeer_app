@@ -9,7 +9,9 @@ import UIKit
 protocol AddAddressProtocol: class {
     func addressAdded()
 }
-class AddAddressVC: UIViewController {
+class AddAddressVC: UIViewController,SelectedLoc {
+
+    
     //MARK:- Enums
     enum AddressScreenType {
         case addAddress
@@ -20,6 +22,7 @@ class AddAddressVC: UIViewController {
         case city
     }
     //MARK:- IBOutlets
+    @IBOutlet var circularViews: [UIView]! {didSet {circularViews.forEach{$0.setCornerRadiusOfView(cornerRadiusValue: 15)}}}
     @IBOutlet weak var addressTxtFld: UITextField!
     @IBOutlet weak var phoneNumberTxtFld: UITextField!
     @IBOutlet weak var stateBtn: UIButton!
@@ -43,6 +46,8 @@ class AddAddressVC: UIViewController {
     var cityList = Array<CityModel>()
     private var selectedState = StateModel()
     private var selectedCity = CityModel()
+    private var lat = Double()
+    private var long = Double()
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +69,7 @@ class AddAddressVC: UIViewController {
         self.phoneNumberTxtFld.text = addressModel.shippingPhoneNumber
         self.stateTxtFld.text = addressModel.shippingState
         self.cityTxtFld.text = addressModel.shippingCity
+        self.locationTxtFld.text = addressModel.shippingAddress
     }
     /// Hiding Picker View
     private func hidePickerView(){
@@ -81,6 +87,12 @@ class AddAddressVC: UIViewController {
         self.pickerMainView.isHidden = false
         CommonMethods.setPickerConstraintAccordingToDevice(pickerView: pickerMainView, view: self.view)
         pickerView.reloadAllComponents()
+    }
+    
+    func locationData(locString: String, lat: Double, long: Double) {
+        self.locationTxtFld.text = locString
+        self.lat = lat
+        self.long = long
     }
     //MARK:- IBActions
     @IBAction func locationBtnTapped(_ sender: UIButton) {
@@ -106,7 +118,7 @@ class AddAddressVC: UIViewController {
         switch pickerType {
         case .state:
             stateTxtFld.text = selectedState.stateName
-            getStatesCities(cities: true,state: selectedState.stateName)
+            getStatesCities(cities: true,state: selectedState.stateID)
         default:
             cityTxtFld.text = selectedCity.cityName
         }
@@ -140,15 +152,9 @@ extension AddAddressVC {
     private func getStatesCities(cities:Bool,state:String = "") {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
-            let getStatesCityUrl = UrlName.baseUrl + (cities ? UrlName.getCities : UrlName.getStates)
-            var parameters = [String : Any]()
-            if (cities) {
-                parameters = [      "state":state      ]
-            } else {
-                parameters = [      "countryName":"United Arab Emirates"    ]
-            }
+            let getStatesCityUrl = UrlName.baseUrl + (cities ? "\(UrlName.getCities)\(state)" : UrlName.getStates)
             NetworkManager.viewControler = self
-            NetworkManager.sharedInstance.commonApiCall(url: getStatesCityUrl, method: .post, parameters: parameters, completionHandler: {
+            NetworkManager.sharedInstance.commonApiCall(url: getStatesCityUrl, method: .get, parameters: nil, completionHandler: {
                 (json, status) in
                     guard let jsonValue = json?.dictionaryValue else {
                         DispatchQueue.main.async {
@@ -208,18 +214,13 @@ extension AddAddressVC {
             self.showHUD(progressLabel: AlertField.loaderString)
             let addAddressUrl : String = UrlName.baseUrl + UrlName.updateAddressUrl + addressModel.addressID
             let parameters = [
-//                "first_name":fNameTxtFld.text!,
-//                "last_name":lNameTxtFld.text!,
-//                "address":streetTxtFld.text!,
-//                "city":townCityTxtFld.text!,
-//                "state":stateCountryTxtfld.text!,
-//                "country":stateCountryTxtfld.text!,
-//                "postcode":postCodTxtFld.text!,
-//                "phone_no":phoneNumberTxtFld.text!,
-//                "email":emailTxtfld.text!,
-                "latitude":"19.079023",
-                "longitude":"72.908012",
-                //"customer_id": Defaults.getUserID()
+                "address":addressTxtFld.text!,
+                "city":cityTxtFld.text!,
+                "district":stateTxtFld.text!,
+                "phone_no":phoneNumberTxtFld.text!,
+                "latitude":self.lat,
+                "longitude":self.long,
+                "customer_id":Defaults.getUserID()
             ] as [String : Any]
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addAddressUrl, method: .put, parameters: parameters, completionHandler: { (json, status) in
@@ -270,8 +271,8 @@ extension AddAddressVC {
                 "city":cityTxtFld.text!,
                 "district":stateTxtFld.text!,
                 "phone_no":phoneNumberTxtFld.text!,
-                "latitude":"19.079023",
-                "longitude":"72.908012",
+                "latitude":self.lat,
+                "longitude":self.long,
                 "customer_id":Defaults.getUserID()
             ] as [String : Any]
             NetworkManager.viewControler = self

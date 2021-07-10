@@ -361,8 +361,8 @@ extension AddSubscriptionVC{
                 let product = [
                     "product_id": Int(product.productID) ?? 0,
                     "unit_measure": "litter",
-                    "price": Double(product.unitPrice) ?? 0,
-                    "quantity": product.addQuantity
+                    "price": Double(product.unitPrice) ?? 0.0,
+                    "tempQuantity": product.addQuantity
                 ] as [String : Any]
                 products.append(product)
             }

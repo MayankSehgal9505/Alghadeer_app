@@ -58,8 +58,8 @@ struct UrlName {
     static let addAddressNewUrl = "Address/addAddress_post"
     static let updateAddressUrl = "Address/update/"
     static let deleteAddressUrl = "Address/deleteAddress/"
-    static let getStates = "customer/getStateByCountry"
-    static let getCities = "customer/getCityByState"
+    static let getStates = "Address/getCityList"
+    static let getCities = "Address/getDistrictList/40"
     // User Profile URLS
     static let getUserDetailUrl = "User_registration/getUser/"
     static let updateUserDetailUrl = "User_registration/userUpdate/"

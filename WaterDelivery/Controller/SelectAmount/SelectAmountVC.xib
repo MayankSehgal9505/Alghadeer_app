@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectAmountVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
+                <outlet property="addMoneyBtn" destination="2mb-9m-dNu" id="crw-81-Ccd"/>
                 <outlet property="selectAmountTBView" destination="WfB-Ga-5LX" id="XPp-3M-UFo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,37 +29,36 @@
                     <rect key="frame" x="0.0" y="118" width="414" height="744"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WfB-Ga-5LX">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="679"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="674"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="knw-pj-u6W"/>
                                 <outlet property="delegate" destination="-1" id="QiH-du-ymN"/>
                             </connections>
                         </tableView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6W-cp-JIK">
-                            <rect key="frame" x="147" y="699" width="120" height="35"/>
-                            <color key="backgroundColor" red="0.090196078430000007" green="0.33333333329999998" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2mb-9m-dNu">
+                            <rect key="frame" x="142" y="684" width="130" height="50"/>
+                            <color key="backgroundColor" red="0.098039215686274508" green="0.23921568627450979" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="120" id="2Wq-7A-WaO"/>
-                                <constraint firstAttribute="height" constant="35" id="UDQ-bh-4c5"/>
+                                <constraint firstAttribute="width" constant="130" id="Pz7-gi-k6n"/>
+                                <constraint firstAttribute="height" constant="50" id="paM-00-J5f"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <state key="normal" title="Add Money">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="addMoneyToWalletAction:" destination="-1" eventType="touchUpInside" id="UdK-Kt-6uh"/>
+                                <action selector="addMooneyBtnAction:" destination="-1" eventType="touchUpInside" id="fvA-6N-PJJ"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstItem="2mb-9m-dNu" firstAttribute="top" secondItem="WfB-Ga-5LX" secondAttribute="bottom" constant="10" id="9JM-In-Ii8"/>
+                        <constraint firstItem="2mb-9m-dNu" firstAttribute="centerX" secondItem="x3l-Y4-wk5" secondAttribute="centerX" id="9TE-DC-vDp"/>
                         <constraint firstItem="WfB-Ga-5LX" firstAttribute="top" secondItem="x3l-Y4-wk5" secondAttribute="top" id="Es3-c0-JEX"/>
-                        <constraint firstAttribute="bottom" secondItem="q6W-cp-JIK" secondAttribute="bottom" constant="10" id="Kpa-pi-Yjo"/>
                         <constraint firstItem="WfB-Ga-5LX" firstAttribute="leading" secondItem="x3l-Y4-wk5" secondAttribute="leading" id="Ozl-Nz-vxN"/>
                         <constraint firstAttribute="trailing" secondItem="WfB-Ga-5LX" secondAttribute="trailing" id="W45-EM-6bE"/>
-                        <constraint firstItem="q6W-cp-JIK" firstAttribute="top" secondItem="WfB-Ga-5LX" secondAttribute="bottom" constant="20" id="aEn-JL-uUr"/>
-                        <constraint firstItem="q6W-cp-JIK" firstAttribute="centerX" secondItem="x3l-Y4-wk5" secondAttribute="centerX" id="hbE-Ai-FKP"/>
+                        <constraint firstAttribute="bottom" secondItem="2mb-9m-dNu" secondAttribute="bottom" constant="10" id="wft-Ov-jYj"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sMd-yy-eIX">
@@ -76,8 +76,8 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jqj-mx-Ics">
-                            <rect key="frame" x="154.5" y="22.5" width="105.5" height="19"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <rect key="frame" x="145" y="21.5" width="124" height="21"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>

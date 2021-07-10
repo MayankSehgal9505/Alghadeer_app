@@ -9,6 +9,9 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import CoreLocation
+protocol SelectedLoc: class {
+    func locationData(locString:String,lat:Double,long:Double)
+}
 class MapVC: UIViewController {
     //MARK:- IBOutlet
     @IBOutlet weak var mapView: GMSMapView!
@@ -21,7 +24,8 @@ class MapVC: UIViewController {
     private var tableView: UITableView!
     private var tableDataSource: GMSAutocompleteTableDataSource!
     var searchResults = [String]()
-
+    var marker = GMSMarker()
+    weak var locationDelegate: SelectedLoc?
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +72,10 @@ class MapVC: UIViewController {
         gmsView?.removeFromSuperview()
         gmsView = setupMapView(masterLat: currentLocation.latitude, masterLong: currentLocation.longitude
             , zoom: Float(17.0), width: self.mapView.frame.size.width, height: self.mapView.frame.size.height)
-        setAnimatedSingleMarker(mapViewObject: gmsView!,coordinates:currentLocation)
+        gmsView?.delegate = self
+        marker.position = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+        marker.icon = UIImage(named: "map")
+        marker.map = gmsView!
         self.mapView.addSubview(gmsView!)
     }
 
@@ -121,6 +128,35 @@ class MapVC: UIViewController {
         marker.map = mapViewObject
         marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
     }
+    func latLong(lat: Double,long: Double)  -> String {
+        var address = ""
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let geoCoder = CLGeocoder()
+            let location = CLLocation(latitude: lat , longitude: long)
+            geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+
+                print("Response GeoLocation : \(placemarks)")
+                var placeMark : CLPlacemark?
+                placeMark = placemarks?.first
+
+                // Country
+                if let subThoroughfareValue = placeMark?.subThoroughfare {
+                    address = address + subThoroughfareValue
+                    // City
+                    if let thoroughfareValue = placeMark?.thoroughfare {
+                        address = address + thoroughfareValue
+                        // State
+                        if let localityValue = placeMark?.locality{
+                            address = address + localityValue
+                            }
+                        }
+                    }
+                self.dismissHUD(isAnimated: false)
+            })
+        }
+        return address
+    }
     //MARK:- IBActions
     @IBAction func location(_ sender: UIButton) {
         let placeVC = PlaceAutoComplete.init()
@@ -128,11 +164,14 @@ class MapVC: UIViewController {
         self.present(placeVC, animated: true, completion: nil)
 
     }
+    @IBAction func saveBtnAction(_ sender: UIButton) {
+        locationDelegate?.locationData(locString: latLong(lat: marker.position.latitude, long: marker.position.longitude), lat: marker.position.latitude, long: marker.position.longitude)
+    }
+    
     @IBAction func backAction(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
 }
-
 // MARK: - CoreLocation Delegate Methods
 extension MapVC:CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -152,6 +191,12 @@ extension MapVC:CLLocationManagerDelegate {
         setupMapView(currentLocation: currentLocation)
     }
 }
+// MARK: - CoreLocation Delegate Methods
+extension MapVC:GMSMapViewDelegate {
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+        marker.position = position.target
+    }
+}
 
 // MARK: - CoreLocation Delegate Methods
 extension MapVC:UITableViewDataSource,UITableViewDelegate {
@@ -169,7 +214,6 @@ extension MapVC:UITableViewDataSource,UITableViewDelegate {
         cell.textLabel?.text = searchResults[indexPath.row]
         cell.textLabel?.lineBreakMode = .byWordWrapping
         cell.textLabel?.numberOfLines = 0
-        
 
         return cell
     }

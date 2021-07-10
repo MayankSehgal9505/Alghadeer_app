@@ -11,7 +11,6 @@ class SelectAmountTVC: UITableViewCell {
 
     @IBOutlet weak var selectedAmountBtn: UIButton!
     @IBOutlet weak var Amount: UILabel!
-    @IBOutlet weak var manualAmount: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,6 +25,5 @@ class SelectAmountTVC: UITableViewCell {
     func setupCell(wallet: WalletAmount) {
         Amount.text = wallet.amount
         selectedAmountBtn.isSelected = wallet.amountSelected
-        manualAmount.text = wallet.amount
     }
 }

@@ -49,8 +49,8 @@ public class NetworkManager {
         case .post,.put:
             if jsonObject {
                 let jsonData = try? JSONSerialization.data(withJSONObject: parameters as Any)
-                request.httpBody = jsonData
                 request.addValue("application/json;", forHTTPHeaderField: "Content-Type")
+                request.httpBody = jsonData
             } else {
                 let postString = self.getPostString(params: parameters!)
                 request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")

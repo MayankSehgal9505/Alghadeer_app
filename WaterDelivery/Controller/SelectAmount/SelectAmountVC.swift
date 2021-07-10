@@ -10,9 +10,13 @@ protocol SelectedAmountDelegate: class {
     func amountSelected(amount:String)
 }
 class SelectAmountVC: UIViewController {
+    enum SectionTypes:Int, CaseIterable {
+        case automatically = 0
+        case manual
+    }
     //MARK:-IBOutlets
     @IBOutlet weak var selectAmountTBView: UITableView!
-    
+    @IBOutlet weak var addMoneyBtn: UIButton! {didSet {addMoneyBtn.setCornerRadiusOfView(cornerRadiusValue: 25.0)}}
     //MARK:- Local Variables
     var availableAmounts = [WalletAmount(amount: "100", amountSelected: false),WalletAmount(amount: "200", amountSelected: false),WalletAmount(amount: "400", amountSelected: false),WalletAmount(amount: "600", amountSelected: false),WalletAmount(amount: "700", amountSelected: false),WalletAmount(amount: "1000", amountSelected: false),WalletAmount(amount: "1200", amountSelected: false),WalletAmount(amount: "1300", amountSelected: false), WalletAmount(amount: "", amountSelected: false)]
     var delegate: SelectedAmountDelegate?
@@ -28,6 +32,7 @@ class SelectAmountVC: UIViewController {
     //MARK:- Internal Methods
     func setUpTBView(){
         /// Register Cells
+        self.selectAmountTBView.register(UINib(nibName: AddAmountManuallyTVC.className(), bundle: nil), forCellReuseIdentifier: AddAmountManuallyTVC.className())
         self.selectAmountTBView.register(UINib(nibName: SelectAmountTVC.className(), bundle: nil), forCellReuseIdentifier: SelectAmountTVC.className())
         selectAmountTBView.tableFooterView = UIView()
         selectAmountTBView.estimatedRowHeight = 60
@@ -44,18 +49,21 @@ class SelectAmountVC: UIViewController {
         self.present(paymentVC, animated: true, completion: nil)
     }
     //MARK:-IBActions
+    @IBAction func addMooneyBtnAction(_ sender: UIButton) {
+        addMoneyInWallet()
+    }
+    
     @IBAction func backBtnAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    
-    @IBAction func addMoneyToWalletAction(_ sender: UIButton) {
+
+    @objc func addMmoneyAct(sender:UIButton) {
         if selectedAmount.amount.isEmpty {
             self.view.makeToast("Please select/ enter amount which you want to add in you wallet", duration: 3.0, position: .center)
         } else {
             addMoneyInWallet()
         }
     }
-    
     @objc func amountChoosen(sender:UIButton) {
         if !sender.isSelected {
             sender.isSelected = !sender.isSelected
@@ -74,10 +82,10 @@ class SelectAmountVC: UIViewController {
     }
     
     @objc func enteringAmount(sender:UITextField) {
-        if let cell = selectAmountTBView.cellForRow(at: IndexPath.init(row: sender.tag, section: 0)) as? SelectAmountTVC {
+        if let cell = selectAmountTBView.cellForRow(at: IndexPath.init(row: sender.tag, section: SectionTypes.manual.rawValue)) as? AddAmountManuallyTVC {
             for (index,_) in availableAmounts.enumerated() {
-                if index == sender.tag {
-                    cell.manualAmount.text = sender.text!
+                if index == availableAmounts.count - 1 {
+                    cell.amountTxtFld.text = sender.text!
                     availableAmounts[index].amount = sender.text!
                     availableAmounts[index].amountSelected = true
                     self.selectedAmount = availableAmounts[index]
@@ -85,7 +93,7 @@ class SelectAmountVC: UIViewController {
                     availableAmounts[index].amountSelected = false
                 }
             }
-            selectAmountTBView.reloadSections(IndexSet.init(integer: 0), with: .none)
+            selectAmountTBView.reloadData()
         }
     }
 }
@@ -179,20 +187,39 @@ extension SelectAmountVC {
 
 //MARK:-UItableViewDataSource Methods
 extension SelectAmountVC: UITableViewDataSource{
-    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return SectionTypes.allCases.count
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return availableAmounts.count
+        guard let section = SectionTypes.init(rawValue: section) else {
+            return 0
+        }
+        switch section {
+            case .automatically: return availableAmounts.count - 1
+            case .manual: return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SelectAmountTVC.className(), for: indexPath) as! SelectAmountTVC
-        cell.manualAmount.isHidden = indexPath.row != availableAmounts.count-1
-        cell.Amount.isHidden = !cell.manualAmount.isHidden
-        cell.setupCell(wallet: availableAmounts[indexPath.row])
-        cell.selectedAmountBtn.tag = indexPath.row
-        cell.manualAmount.tag = indexPath.row
-        cell.selectedAmountBtn.addTarget(self, action: #selector(amountChoosen(sender:)), for: .touchUpInside)
-        cell.manualAmount.addTarget(self, action: #selector(enteringAmount(sender:)), for: .editingChanged)
-        return cell
+        guard let section = SectionTypes.init(rawValue: indexPath.section) else {
+            return UITableViewCell()
+        }
+        switch section {
+        
+            case .automatically:
+                let cell = tableView.dequeueReusableCell(withIdentifier: SelectAmountTVC.className(), for: indexPath) as! SelectAmountTVC
+                cell.selectedAmountBtn.tag = indexPath.row
+                cell.selectedAmountBtn.addTarget(self, action: #selector(amountChoosen(sender:)), for: .touchUpInside)
+                cell.setupCell(wallet: availableAmounts[indexPath.row])
+                return cell
+            case .manual:
+                let cell = tableView.dequeueReusableCell(withIdentifier: AddAmountManuallyTVC.className(), for: indexPath) as! AddAmountManuallyTVC
+                cell.manualParentView.setCornerRadiusOfView(cornerRadiusValue: 15.0)
+                cell.addMoneyBtn.setCornerRadiusOfView(cornerRadiusValue: 15.0)
+                cell.amountTxtFld.tag = indexPath.row
+                cell.amountTxtFld.addTarget(self, action: #selector(enteringAmount(sender:)), for: .editingChanged)
+                cell.addMoneyBtn.addTarget(self, action: #selector(addMmoneyAct(sender:)), for: .touchUpInside)
+                return cell
+        }
     }
 }

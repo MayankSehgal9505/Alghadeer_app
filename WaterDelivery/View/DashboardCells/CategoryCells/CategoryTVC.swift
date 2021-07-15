@@ -11,6 +11,8 @@ protocol CategoryProtocol: class {
 }
 class CategoryTVC: UITableViewCell {
     
+    @IBOutlet weak var parentView: UIView!
+    @IBOutlet weak var shopByCategoryView: UIView!
     @IBOutlet weak var shopByCategoryLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     var categoryArray = Array<CategoryModel>()
@@ -28,8 +30,10 @@ class CategoryTVC: UITableViewCell {
     }
 
     
-    func setupCell(categoryList: Array<CategoryModel>) {
-        categoryArray = categoryList
+    func setupCell() {
+        shopByCategoryView.setCornerRadiusOfView(cornerRadiusValue:6)
+        parentView.setCornerRadiusOfView(cornerRadiusValue:15)
+        parentView.setShadow()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -63,7 +67,7 @@ extension CategoryTVC: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        let size = CGSize(width: self.contentView.frame.width/2-20, height: 340)
+        let size = CGSize(width: self.contentView.frame.width/2-60, height: 280)
         return size
     }
 }

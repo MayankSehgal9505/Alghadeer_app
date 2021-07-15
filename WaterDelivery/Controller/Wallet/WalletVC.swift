@@ -9,15 +9,19 @@ import UIKit
 //MARK:- Wallet API Protocol
 protocol WalletAPI {}
 extension WalletAPI where Self: UIViewController {
-    func getWalletDetails(obtainedResult: @escaping(WalletBalance) -> Void) {
+    func getWalletDetails(dismissHud:Bool = true,obtainedResult: @escaping(WalletBalance) -> Void) {
         if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
+            if (dismissHud) {
+                self.showHUD(progressLabel: AlertField.loaderString)
+            }
             let walletBalanceUrl : String = UrlName.baseUrl + UrlName.walletBalance + Defaults.getUserID()
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: walletBalanceUrl, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     obtainedResult(WalletBalance())
-                    self.dismissHUD(isAnimated: true)
+                    if (dismissHud) {
+                        self.dismissHUD(isAnimated: true)
+                    }
                     return
                 }
                 
@@ -28,7 +32,9 @@ extension WalletAPI where Self: UIViewController {
                     }
                 }
                 DispatchQueue.main.async {
-                    self.dismissHUD(isAnimated: true)
+                    if (dismissHud) {
+                        self.dismissHUD(isAnimated: true)
+                    }
                 }
             })
         }else{

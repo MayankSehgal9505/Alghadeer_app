@@ -110,6 +110,7 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
         case .products:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProductsTVC.className(), for: indexPath) as! ProductsTVC
             cell.favouriteProductsLbl.isHidden = false
+            cell.setupCell()
             cell.productArray = self.productArray
             cell.productDelegate = self
             cell.updateCellWith()
@@ -117,6 +118,7 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
         case .category:
             let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTVC.className(), for: indexPath) as! CategoryTVC
             cell.shopByCategoryLbl.isHidden = false
+            cell.setupCell()
             cell.categoryArray = self.categoryArray
             cell.categoryDelegate = self
             cell.updateCellWith()
@@ -129,8 +131,8 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
         switch section {
         case .banner:       return bannerArray.count > 0 ? 290 : 0
         case .cartBalance:  return 100
-        case .products:     return productArray.count > 0 ? 360 : 0
-        case .category:     return CGFloat((categoryArray.count/2 + categoryArray.count%2) * 400)
+        case .products:     return productArray.count > 0 ? 320 : 0
+        case .category:     return CGFloat((categoryArray.count/2 + categoryArray.count%2) * 300)
         }
     }
 }
@@ -156,8 +158,7 @@ extension DashboardVC: CategoryProtocol{
 }
 extension DashboardVC: WalletAPI {
     private func getWalletDetails() {
-        dispatchGp.enter()
-        getWalletDetails { (walletBalance) in
+        getWalletDetails(dismissHud: false) { (walletBalance) in
             self.dispatchGp.leave()
             self.walletBallance = walletBalance
         }

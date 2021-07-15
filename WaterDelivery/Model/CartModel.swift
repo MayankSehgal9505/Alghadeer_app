@@ -40,7 +40,7 @@ struct CartItemModel {
     var productImage = ""
     var discount = ""
     var totalPrice = ""
-
+    var price = ""
     //MARK: Lifecycle
     init() {
     }
@@ -58,5 +58,6 @@ struct CartItemModel {
         self.productDetails = json["product_details"].stringValue
         self.discount = json["discount"].stringValue
         self.totalPrice = json["total_price"].stringValue
+        self.price = json["price"].stringValue
     }
 }

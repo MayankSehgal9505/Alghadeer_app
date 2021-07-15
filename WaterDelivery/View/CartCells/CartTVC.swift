@@ -9,11 +9,11 @@ import UIKit
 import Kingfisher
 class CartTVC: UITableViewCell {
 
+    @IBOutlet weak var parentView: UIView!
     @IBOutlet weak var productImg: UIImageView!
     @IBOutlet weak var quantityView: UIView!
     @IBOutlet weak var productname: UILabel!
     @IBOutlet weak var quantitylbl: UILabel!
-    @IBOutlet weak var capacityLbl: UILabel!
     @IBOutlet weak var priceLbl: UILabel!
     @IBOutlet weak var decreasequantitybtn: UIButton!
     @IBOutlet weak var addquantityBtn: UIButton!
@@ -30,6 +30,7 @@ class CartTVC: UITableViewCell {
     }
     
     func setupCellUI(index: Int){
+        parentView.setCornerRadiusOfView(cornerRadiusValue: 15.0)
         crossBtn.makeViewCircle()
         quantityView.setCornerRadiusOfView(cornerRadiusValue: 15)
         quantityView.layer.borderWidth = 1.0
@@ -42,10 +43,7 @@ class CartTVC: UITableViewCell {
     func setUpCellData(cartItemObj:CartItemModel) {
         productname.text = cartItemObj.productName
         quantitylbl.text = cartItemObj.cartQuantity
-        capacityLbl.text = cartItemObj.productDetails
-        if let totalPrice = Double(cartItemObj.totalPrice) {
-            priceLbl.text = "AED \(totalPrice)"
-        }
+        priceLbl.text = "AED \(cartItemObj.price) (incl. VAT)"
         if let imageURL = URL.init(string: cartItemObj.productImage) {
             productImg.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
         } else {

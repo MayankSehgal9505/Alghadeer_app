@@ -51,7 +51,8 @@ struct UrlName {
     static let addToCartUrl = "Cart/addToCart"
     static let getCartItemsUrl = "Cart/cartList/"
     static let getCartCountUrl = "Cart/cartTotalCount/"
-    
+    static let promoCodeUrl = "Coupon/couponCode"
+
     // Address URLs
     static let getAddressListUrl = "Address/getAddressList/"
     static let addAddressUrl = "Address/add"

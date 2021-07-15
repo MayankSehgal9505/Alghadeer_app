@@ -25,12 +25,14 @@ class CartVC: UIViewController {
         }
     }
     //MARK:- IBOutlets
+    @IBOutlet weak var promocodeView: UIView!{    didSet {    self.promocodeView.setCornerRadiusOfView(cornerRadiusValue: 15)  }   }
+    @IBOutlet weak var totalPriceView: UIView! {    didSet {    self.totalPriceView.setCornerRadiusOfView(cornerRadiusValue: 15)  }   }
     @IBOutlet weak var cartTBView: UITableView!
     @IBOutlet weak var promoTxtFld: UITextField!
     @IBOutlet weak var totalItemCount: UILabel!
     @IBOutlet weak var totalAmount: UILabel!
-    @IBOutlet weak var subscribeBtn: UIButton! {    didSet {    self.subscribeBtn.setCornerRadiusOfView(cornerRadiusValue: 25)  }   }
-    @IBOutlet weak var checkOutBtn: UIButton! {    didSet {    self.checkOutBtn.setCornerRadiusOfView(cornerRadiusValue: 25)  }   }
+    @IBOutlet weak var subscribeBtn: UIButton! {    didSet {    self.subscribeBtn.setCornerRadiusOfView(cornerRadiusValue: 15)  }   }
+    @IBOutlet weak var checkOutBtn: UIButton! {    didSet {    self.checkOutBtn.setCornerRadiusOfView(cornerRadiusValue: 15)  }   }
     @IBOutlet weak var cartEmptyView: UIView!
     
     //MARK:- Local Variables
@@ -51,7 +53,6 @@ class CartVC: UIViewController {
     
     private func setupTextfields() {
         setPadding(textField: promoTxtFld)
-        promoTxtFld.delegate = self
     }
     
     func setUpTBView(){
@@ -59,7 +60,7 @@ class CartVC: UIViewController {
         self.cartTBView.register(UINib(nibName: CartTVC.className(), bundle: nil), forCellReuseIdentifier: CartTVC.className())
         cartTBView.tableFooterView = UIView()
         cartTBView.estimatedRowHeight = 150
-        cartTBView.rowHeight = 240
+        cartTBView.rowHeight = UITableView.automaticDimension
     }
     //MARK:- IBActions
     @IBAction func backBtnAction(_ sender: UIButton) {
@@ -67,7 +68,11 @@ class CartVC: UIViewController {
     }
     
     @IBAction func applyBtnAction(_ sender: UIButton) {
-        self.view.makeToast("Under Development", duration: 3.0, position: .bottom)
+        if ((self.promoTxtFld.text?.isEmpty)!) {
+            self.view.makeToast("Enter your Coupon", duration: 3.0, position: .bottom)
+        } else {
+            applyPromoCode()
+        }
     }
     @IBAction func subscribeBtnAction(_ sender: UIButton) {
         let addSubscriptionVC = AddSubscriptionVC()
@@ -103,10 +108,6 @@ class CartVC: UIViewController {
     }
 }
 
-extension CartVC: UITextFieldDelegate {
-}
-
-
 extension CartVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cartModel.cartItems.count
@@ -124,6 +125,39 @@ extension CartVC: UITableViewDataSource {
 }
 
 extension CartVC {
+    func applyPromoCode() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let promoCodeUrl : String = UrlName.baseUrl + UrlName.promoCodeUrl
+            let parameters = [
+                "amount": Double(self.totalAmount.text!) ?? 0.0,
+                "couponcode":self.promoTxtFld.text!,
+                "customer_id":Defaults.getUserID(),
+            ] as [String : Any]
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: promoCodeUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                print(jsonValue)
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                }else {
+                    DispatchQueue.main.async {
+                        self.view.makeToast("Coupon code not valid", duration: 3.0, position: .bottom)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
     func getCartList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)

@@ -72,7 +72,8 @@ class UserProfileVC: UIViewController {
          
          
          //if above tableView.contentSize.height   not zero and giving acurate value then proceed further and update our parent scroll view contentsize height for height.
-         print(addressTBView.contentSize.height)  
+         print(addressTBView.contentSize.height)
+        self.taableHeight.constant = self.addressTBView.contentSize.height
     }
     //MARK:- Internal Methods
     func setupUI() {

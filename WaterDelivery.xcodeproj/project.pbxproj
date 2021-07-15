@@ -103,6 +103,8 @@
 		4EA9B501266BE36F0089E23E /* SummaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9B500266BE36F0089E23E /* SummaryModel.swift */; };
 		4EA9B504266BF3410089E23E /* WalletTransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9B503266BF3410089E23E /* WalletTransactionModel.swift */; };
 		4EA9B508266C126C0089E23E /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9B507266C126C0089E23E /* BaseVC.swift */; };
+		4EB1A20D26A0A361001CED57 /* CurrentBalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1A20B26A0A361001CED57 /* CurrentBalanceCell.swift */; };
+		4EB1A20E26A0A361001CED57 /* CurrentBalanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EB1A20C26A0A361001CED57 /* CurrentBalanceCell.xib */; };
 		4EB2CC95264EEF45006BB4C9 /* SubscriptionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB2CC93264EEF45006BB4C9 /* SubscriptionTVC.swift */; };
 		4EB2CC96264EEF45006BB4C9 /* SubscriptionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EB2CC94264EEF45006BB4C9 /* SubscriptionTVC.xib */; };
 		4EB2CC9E264F0830006BB4C9 /* AddSubscriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB2CC9C264F0830006BB4C9 /* AddSubscriptionVC.swift */; };
@@ -251,6 +253,8 @@
 		4EA9B500266BE36F0089E23E /* SummaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryModel.swift; sourceTree = "<group>"; };
 		4EA9B503266BF3410089E23E /* WalletTransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionModel.swift; sourceTree = "<group>"; };
 		4EA9B507266C126C0089E23E /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
+		4EB1A20B26A0A361001CED57 /* CurrentBalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentBalanceCell.swift; sourceTree = "<group>"; };
+		4EB1A20C26A0A361001CED57 /* CurrentBalanceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentBalanceCell.xib; sourceTree = "<group>"; };
 		4EB2CC93264EEF45006BB4C9 /* SubscriptionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTVC.swift; sourceTree = "<group>"; };
 		4EB2CC94264EEF45006BB4C9 /* SubscriptionTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubscriptionTVC.xib; sourceTree = "<group>"; };
 		4EB2CC9C264F0830006BB4C9 /* AddSubscriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubscriptionVC.swift; sourceTree = "<group>"; };
@@ -372,6 +376,8 @@
 				4E3426D72639F1D70007E2C4 /* BannerCells */,
 				4E3426D92639F1ED0007E2C4 /* ProductsCells */,
 				4E3426DC2639F2070007E2C4 /* CategoryCells */,
+				4EB1A20B26A0A361001CED57 /* CurrentBalanceCell.swift */,
+				4EB1A20C26A0A361001CED57 /* CurrentBalanceCell.xib */,
 			);
 			path = DashboardCells;
 			sourceTree = "<group>";
@@ -938,6 +944,7 @@
 				4E69C4992651B33900FF098E /* ContactUsVC.xib in Resources */,
 				4E71B9AD264491800094F72B /* SelectAmountVC.xib in Resources */,
 				4E8FF6532653E3D800C8FCAA /* ShareVC.xib in Resources */,
+				4EB1A20E26A0A361001CED57 /* CurrentBalanceCell.xib in Resources */,
 				9965FB2A2631663800946AB6 /* OTPVC.xib in Resources */,
 				4E69C43A2650025100FF098E /* SubscriptionSlotTVC.xib in Resources */,
 				4E5B282F2656382600F15E68 /* WalletVC.xib in Resources */,
@@ -1042,6 +1049,7 @@
 				4E1FEEDB2639AC2C009010A6 /* CategoryCollectionCell.swift in Sources */,
 				4E69C46F2651284A00FF098E /* SelectProductTVC.swift in Sources */,
 				4E6134852682887E004C6CB4 /* MapVC.swift in Sources */,
+				4EB1A20D26A0A361001CED57 /* CurrentBalanceCell.swift in Sources */,
 				990A2588262E8D0200C96165 /* UIViewController.swift in Sources */,
 				4E2373DB2646D01900016451 /* AddressModel.swift in Sources */,
 				4E71B98C264477A80094F72B /* ScheduleTimeTVC.swift in Sources */,

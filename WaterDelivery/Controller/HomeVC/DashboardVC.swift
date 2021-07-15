@@ -12,7 +12,7 @@ class DashboardVC: CartBaseVC {
     // MARK:- Enums
     private enum DashboardSections :Int, CaseIterable{
         case banner = 0
-        case products, category
+        case cartBalance,products, category
     }
     // MARK:- IBOutlets
     @IBOutlet weak var tbView: UITableView!
@@ -22,6 +22,7 @@ class DashboardVC: CartBaseVC {
     private var categoryArray = Array<CategoryModel>()
     private var productArray = Array<ProductModel>()
     private var dispatchGp = DispatchGroup()
+    private var walletBallance = WalletBalance()
     // MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,7 @@ class DashboardVC: CartBaseVC {
     private func setUpTBView(){
         /// Register Cells
         self.tbView.register(UINib(nibName: BannerTVC.className(), bundle: nil), forCellReuseIdentifier: BannerTVC.className())
+        self.tbView.register(UINib(nibName: CurrentBalanceCell.className(), bundle: nil), forCellReuseIdentifier: CurrentBalanceCell.className())
         self.tbView.register(UINib(nibName: ProductsTVC.className(), bundle: nil), forCellReuseIdentifier: ProductsTVC.className())
         self.tbView.register(UINib(nibName: CategoryTVC.className(), bundle: nil), forCellReuseIdentifier: CategoryTVC.className())
     }
@@ -58,6 +60,8 @@ class DashboardVC: CartBaseVC {
             self.dispatchGp.enter()
             self.dispatchGp.enter()
             self.dispatchGp.enter()
+            self.dispatchGp.enter()
+            getWalletDetails()
             getBannerList()
             getProductsList()
             getCategorysList()
@@ -84,6 +88,7 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
         guard let section = DashboardSections.init(rawValue: section) else {return 0}
         switch section {
         case .banner:       return bannerArray.isEmpty ? 0 : 1
+        case .cartBalance:  return 1
         case .products:     return productArray.isEmpty ? 0 : 1
         case .category:     return categoryArray.isEmpty ? 0 : 1
         }
@@ -97,6 +102,10 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
             cell.bannerArray = self.bannerArray
             cell.pageControl.numberOfPages = self.bannerArray.count
             cell.updateCellWith()
+            return cell
+        case .cartBalance:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CurrentBalanceCell.className(), for: indexPath) as! CurrentBalanceCell
+            cell.price.text = "AED \(self.walletBallance.walletAmount)"
             return cell
         case .products:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProductsTVC.className(), for: indexPath) as! ProductsTVC
@@ -118,7 +127,8 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let section = DashboardSections.init(rawValue: indexPath.section) else {return 0}
         switch section {
-        case .banner:       return bannerArray.count > 0 ? 360 : 0
+        case .banner:       return bannerArray.count > 0 ? 290 : 0
+        case .cartBalance:  return 100
         case .products:     return productArray.count > 0 ? 360 : 0
         case .category:     return CGFloat((categoryArray.count/2 + categoryArray.count%2) * 400)
         }
@@ -144,7 +154,14 @@ extension DashboardVC: CategoryProtocol{
         }
     }
 }
-extension DashboardVC {
+extension DashboardVC: WalletAPI {
+    private func getWalletDetails() {
+        dispatchGp.enter()
+        getWalletDetails { (walletBalance) in
+            self.dispatchGp.leave()
+            self.walletBallance = walletBalance
+        }
+    }
     func getBannerList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             let bannerListURL : String = UrlName.baseUrl + UrlName.getBannerUrl

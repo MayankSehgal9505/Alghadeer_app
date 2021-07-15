@@ -20,9 +20,19 @@ class UserProfileVC: UIViewController {
     @IBOutlet weak var phoneNumberTxtFld: UITextField!
     @IBOutlet weak var categoryBtn: UIButton!
     @IBOutlet weak var categoryValue: UILabel!
-    @IBOutlet weak var pickerMainView: UIView!
-    @IBOutlet weak var addressPickerView: UIPickerView!
     @IBOutlet weak var cusstomerID: UILabel!
+    @IBOutlet weak var addressTBView: UITableView!
+    @IBOutlet weak var taableHeight: NSLayoutConstraint!
+    @IBOutlet weak var addresssParentView: UIView!{
+        didSet {
+            addresssParentView.setCornerRadiusOfView(cornerRadiusValue:15)
+        }
+    }
+    @IBOutlet weak var generalnfoView: UIView!{
+        didSet {
+            generalnfoView.setCornerRadiusOfView(cornerRadiusValue:15)
+        }
+    }
     //MARK:- Local Variables
     var user = UserModel()
     var imagedict:[String:Data] = [:]
@@ -31,7 +41,6 @@ class UserProfileVC: UIViewController {
     var dispatchGroup = DispatchGroup()
     var shippingAddressArray = Array<AddressModel>()
     var selectedAddress = AddressModel()
-    private var effectView,vibrantView : UIVisualEffectView?
 
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
@@ -52,12 +61,32 @@ class UserProfileVC: UIViewController {
         super.viewWillAppear(animated)
         getAddress()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        addresssParentView.setShadow()
+        generalnfoView.setShadow()
+         
+         //isScrollEnabled of table view  should be dissable because our table is inside scrollview.
+        addressTBView.isScrollEnabled = false
+         
+         
+         //if above tableView.contentSize.height   not zero and giving acurate value then proceed further and update our parent scroll view contentsize height for height.
+         print(addressTBView.contentSize.height)  
+    }
     //MARK:- Internal Methods
     func setupUI() {
         userImg.setCornerRadiusOfView(cornerRadiusValue: 75.00, setBorder: true, borderColor: .white, width: 2.0)
         saveBtn.setCornerRadiusOfView(cornerRadiusValue:30)
+        setUpTBView()
     }
-    
+    func setUpTBView(){
+        /// Register Cells
+        self.addressTBView.register(UINib(nibName: ShippingAddressTVC.className(), bundle: nil), forCellReuseIdentifier: ShippingAddressTVC.className())
+        addressTBView.tableFooterView = UIView()
+        addressTBView.estimatedRowHeight = 80
+        addressTBView.rowHeight = UITableView.automaticDimension
+    }
     func updateUI() {
         userNameLbl.text = user.userName
         nameTxtfld.text = user.userName
@@ -74,7 +103,7 @@ class UserProfileVC: UIViewController {
         }).first
         selectedBusinessType = business ?? BusinessModel()
         categoryValue.text = business?.businessName ?? ""
-        cusstomerID.text = "Customer ID: \(Defaults.getUserID() + "jvryur")"
+        cusstomerID.text = "\(Defaults.getUserID())"
     }
     func showOptions(){
         let alert = UIAlertController(title: "Please select category", message: "", preferredStyle: .actionSheet)
@@ -90,23 +119,39 @@ class UserProfileVC: UIViewController {
                print("completion block")
            })
     }
-    /// Hiding Picker View
-    private func showPickerView(){
-        let viewArray = CommonMethods.showPopUpWithVibrancyView(on : self)
-        self.view.window?.addSubview(pickerMainView)
-        vibrantView = viewArray.first as? UIVisualEffectView
-        effectView = (viewArray.last as? UIVisualEffectView)
-        self.pickerMainView.isHidden = false
-        CommonMethods.setPickerConstraintAccordingToDevice(pickerView: pickerMainView, view: self.view)
-        addressPickerView.reloadAllComponents()
+
+    @objc func shippingAddrress(sender: UIButton) {
+        if !sender.isSelected {
+            sender.isSelected = !sender.isSelected
+            if let _ = addressTBView.cellForRow(at: IndexPath.init(row: sender.tag, section: 0)) as? ShippingAddressTVC {
+                for (index,_) in shippingAddressArray.enumerated() {
+                    if index == sender.tag {
+                        shippingAddressArray[index].addressSelected = true
+                        self.selectedAddress = shippingAddressArray[index]
+                    } else {
+                        shippingAddressArray[index].addressSelected = false
+                    }
+                }
+                addressTBView.reloadData()
+            }
+        }
     }
     
-    /// Hiding Picker View
-    private func hidePickerView(){
-        pickerMainView.isHidden = true
-        vibrantView?.removeFromSuperview()
-        effectView?.removeFromSuperview()
+    @objc func editBtnAction(sender: UIButton){
+        if sender.tag < shippingAddressArray.count {
+            let updateAddressVC = AddAddressVC()
+            updateAddressVC.addressScreenType = .updateAddress
+            updateAddressVC.addressModel = shippingAddressArray[sender.tag]
+            self.navigationController?.pushViewController(updateAddressVC, animated: true)
+        }
     }
+    
+    @objc func deleteBtnAction(sender: UIButton){
+        if sender.tag < shippingAddressArray.count {
+            deleteAddress(addressID: shippingAddressArray[sender.tag].addressID)
+        }
+    }
+    
     //MARK:- IBActions
     @IBAction func saveBtnAction(_ sender: UIButton) {
         if (nameTxtfld.text?.isEmpty ??  true) {
@@ -142,19 +187,11 @@ class UserProfileVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func openAddress(_ sender: UIButton) {
-        showPickerView()
     }
     @IBAction func addAddressBtn(_ sender: UIButton) {
         let addAddressVC = AddAddressVC()
         addAddressVC.addressScreenType = .addAddress
         self.navigationController?.pushViewController(addAddressVC, animated: true)
-    }
-    @IBAction func donePickerBtn(_ sender: UIBarButtonItem) {
-        hidePickerView()
-        self.addressTxtfld.text =  "\(selectedAddress.shippingAddress), \(selectedAddress.shippingPhoneNumber), \(selectedAddress.shippingCity), \(selectedAddress.shippingState)"
-    }
-    @IBAction func cancelPickerAction(_ sender: UIBarButtonItem) {
-        hidePickerView()
     }
 }
 
@@ -298,27 +335,36 @@ extension UserProfileVC: AddressProtocol{
     }
     private func reloadAddressListSection() {
         DispatchQueue.main.async {
-            print(self.shippingAddressArray.count)
-            self.addressPickerView.reloadAllComponents()
+            self.addressTBView.reloadData()
+            self.taableHeight.constant = self.addressTBView.contentSize.height
         }
+    }
+    
+    private func deleteAddress(addressID: String) {
+        deleteAddress(addressID: addressID){ [weak self] in  self?.reloadAddressListSection()  }
     }
 }
 
-extension UserProfileVC : UIPickerViewDataSource,UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+//MARK:-UItableViewDataSource & UITableViewDelegate Methods
+extension UserProfileVC: UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.shippingAddressArray.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.shippingAddressArray.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.shippingAddressArray[row].shippingAddress
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedAddress = shippingAddressArray[row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ShippingAddressTVC.className(), for: indexPath) as! ShippingAddressTVC
+        cell.editBtn.tag = indexPath.row
+        cell.deleteBtn.tag = indexPath.row
+        cell.editBtn.addTarget(self, action: #selector(editBtnAction(sender:)), for: .touchUpInside)
+        cell.deleteBtn.addTarget(self, action: #selector(deleteBtnAction(sender:)), for: .touchUpInside)
+        cell.adddressSelectionBtn.isHidden = shippingAddressArray.count == 1
+        if indexPath.row < shippingAddressArray.count {
+            cell.adddressSelectionBtn.tag = indexPath.row
+            cell.adddressSelectionBtn.addTarget(self, action: #selector(shippingAddrress(sender:)), for: .touchUpInside)
+            cell.setupCell(shipperAddress: shippingAddressArray[indexPath.row])
+        }
+        return cell
     }
     
 }

@@ -17,6 +17,7 @@ class ContactUsVC: UIViewController {
     @IBOutlet weak var titleTxtFld: UITextField!
     @IBOutlet weak var msgTxtFld: UITextView!
     @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var greyView: UIView!
     
     //MARK:- Local Variables
     var contactUsModel = ContactUsModel()
@@ -26,7 +27,10 @@ class ContactUsVC: UIViewController {
         self.submitBtn.setCornerRadiusOfView(cornerRadiusValue: 20)
         getContactUs()
     }
-
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        greyView.roundCorners(corners: [.topLeft, .topRight], radius: 30)
+    }
     //MARK:- Internal Methods
     private func updateUI(){
         emailValue.text = contactUsModel.contactUsEmail

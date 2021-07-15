@@ -14,6 +14,13 @@ class DetailVC: CartBaseVC {
         case goToCart
     }
     //MARK:- IBOutlet
+    @IBOutlet var curveViews: [UIView]! {
+        didSet {
+            curveViews.forEach { view in
+                view.setCornerRadiusOfView(cornerRadiusValue:15)
+            }
+        }
+    }
     @IBOutlet weak var productImg: UIImageView!
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productPrice: UILabel!
@@ -24,11 +31,12 @@ class DetailVC: CartBaseVC {
         QuantityView.layer.borderWidth = 1.0
         QuantityView.layer.borderColor = UIColor.gray.cgColor
         QuantityView.setCornerRadiusOfView(cornerRadiusValue: 15)}}
-    
     @IBOutlet weak var decreaseQuantityBtn: UIButton!
     @IBOutlet weak var increaseQuantityBtn: UIButton!
     @IBOutlet weak var quantityLbl: UILabel!
-    @IBOutlet weak var quantView: UIView!
+    @IBOutlet weak var totalPriceLbl: UILabel!
+    @IBOutlet weak var quantityParentView: UIView!
+    
     //MARK:- Properties
     var product = ProductModel()
     var actionPerformed: ActionType = .addToCart
@@ -38,9 +46,12 @@ class DetailVC: CartBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         getProductDetail()
-        quantView.isHidden = true
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        curveViews.forEach { $0.setShadow() }
+    }
     //MARK:- Internal Methods
     private func setupView(){
         navTitle.text = product.name
@@ -59,7 +70,9 @@ class DetailVC: CartBaseVC {
         updateProductInCart(product: product, str: "add")
     }
     @IBAction func decreaseBtnAction(_ sender: UIButton) {
-        updateProductInCart(product: product, str: productCurrentQuantity == 1 ? "remove" : "delete")
+        if let lbl = Int(quantityLbl.text!), lbl > 0{
+            updateProductInCart(product: product, str: productCurrentQuantity == 1 ? "remove" : "delete")
+        }
     }
     @IBAction func backBtnClicked(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -108,9 +121,9 @@ extension DetailVC {
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true, let data = jsonValue["Quantity"], let quant = Int(data.string ?? "0") {
                     self.productCurrentQuantity = quant
                     DispatchQueue.main.async {
-                        self.quantView.isHidden = self.productCurrentQuantity == 0
-                        self.addToCartBTn.isHidden = !self.quantView.isHidden
+                        self.quantityParentView.isHidden = self.productCurrentQuantity == 0
                         self.quantityLbl.text = "\(self.productCurrentQuantity)"
+                        self.totalPriceLbl.text = self.productCurrentQuantity == 0 ? "AED \(Double(self.product.sellingPrice) ?? 0.0)" : "AED \(Double(self.productCurrentQuantity) * (Double(self.product.sellingPrice) ?? 0.0))"
                         self.addToCartBTn.setTitle(self.productCurrentQuantity == 0 ? "Add to Cart" : "view Cart", for: [])
                     }
                 } else {
@@ -206,10 +219,14 @@ extension DetailVC {
                 }
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
-                        self.view.makeToast("Item added to cart", duration: 0.5, position: .bottom)
-                        self.actionPerformed = .goToCart
+                        self.productCurrentQuantity = str == "add" ? self.productCurrentQuantity + 1: self.productCurrentQuantity - 1
+                        self.view.makeToast(str == "add" ? "Item added successfully into cart" :"Item removed successfully from cart", duration: 0.5, position: .bottom)
                         self.getCartCountList()
                         self.getProductQuantity()
+                        self.quantityLbl.text = "\(self.productCurrentQuantity)"
+                        self.totalPriceLbl.text = "AED \(Double(self.productCurrentQuantity) * (Double(self.product.sellingPrice) ?? 0.0))"
+                        self.addToCartBTn.setTitle(self.productCurrentQuantity == 0 ? "Add to Cart" : "view Cart", for: [])
+                        self.actionPerformed = self.productCurrentQuantity == 0 ? .addToCart : .goToCart
                     }
                 } else {
                     DispatchQueue.main.async {

@@ -10,7 +10,23 @@ import Foundation
 import UIKit
 
 extension UIView {
-
+    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+    }
+    func setShadow() {
+        let shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: self.layer.cornerRadius)
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.darkGray.cgColor
+        let shadowOffsetWidth: Int = 1
+        let shadowOffsetHeight: Int = 1
+        let shadowOpacity: Float = 0.6
+        self.layer.shadowOffset = CGSize(width: shadowOffsetWidth, height: shadowOffsetHeight);
+        self.layer.shadowOpacity = shadowOpacity
+        self.layer.shadowPath = shadowPath.cgPath
+    }
     // set cornerRadius Of view
     func setCornerRadiusOfView(cornerRadiusValue : CGFloat,setBorder: Bool = false, borderColor: UIColor = .clear, width: CGFloat = 0.0) {
         self.layer.cornerRadius = cornerRadiusValue

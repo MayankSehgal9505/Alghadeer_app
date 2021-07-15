@@ -39,6 +39,7 @@ class SubscriptionTVC: UITableViewCell {
         pauseReactivateBtn.setTitle(tabType == .active ? "Pause" : "Reactivate", for: [])
         baseView.setCornerRadiusOfView(cornerRadiusValue:10)
         imageBGView.setCornerRadiusOfView(cornerRadiusValue:10)
+        imageBGView.setShadow()
         cancelBtn.setCornerRadiusOfView(cornerRadiusValue:20)
         pauseReactivateBtn.setCornerRadiusOfView(cornerRadiusValue:20)
         buttonsView.isHidden = tabType == .cancelled

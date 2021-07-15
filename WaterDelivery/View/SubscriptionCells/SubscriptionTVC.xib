@@ -138,16 +138,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xI6-FY-VQ2" userLabel="SubscriptionAddressView">
-                                <rect key="frame" x="15" y="165" width="540.5" height="73"/>
+                                <rect key="frame" x="15" y="165" width="540.5" height="108"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Delivery Address -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yhu-9n-kDm">
-                                        <rect key="frame" x="0.0" y="0.0" width="124.5" height="73"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="124.5" height="108"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="100" text="66 AI Marsa St - Dubai Marina - Dubai United Arab Emirates" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNs-nO-6CF">
-                                        <rect key="frame" x="139.5" y="5" width="401" height="63"/>
+                                        <rect key="frame" x="139.5" y="5" width="401" height="98"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -165,7 +165,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Jq-IA-jYM" userLabel="SubscriptionDateView">
-                                <rect key="frame" x="15" y="248" width="540.5" height="30"/>
+                                <rect key="frame" x="15" y="283" width="540.5" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="300" horizontalCompressionResistancePriority="1000" text="Subscription Dates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="125-OM-PVN">
                                         <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
@@ -192,7 +192,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0X-l8-cvA" userLabel="SubscriptionTimeView">
-                                <rect key="frame" x="15" y="288" width="540.5" height="30"/>
+                                <rect key="frame" x="15" y="323" width="540.5" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" horizontalCompressionResistancePriority="1000" text="Delivery Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q42-hH-2Ai">
                                         <rect key="frame" x="0.0" y="0.0" width="82.5" height="30"/>
@@ -219,10 +219,10 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vdc-3M-Zh3" userLabel="TotalAmountView">
-                                <rect key="frame" x="15" y="333" width="540.5" height="20"/>
+                                <rect key="frame" x="15" y="353" width="540.5" height="0.0"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" text="Total AED :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eja-ju-DRu">
-                                        <rect key="frame" x="0.0" y="0.0" width="540.5" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="540.5" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                         <color key="textColor" red="0.074509803920000006" green="0.33725490200000002" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -230,7 +230,7 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="5Yo-pp-Y8b"/>
+                                    <constraint firstAttribute="height" id="5Yo-pp-Y8b"/>
                                     <constraint firstAttribute="trailing" secondItem="eja-ju-DRu" secondAttribute="trailing" id="BgD-6S-AJX"/>
                                     <constraint firstItem="eja-ju-DRu" firstAttribute="top" secondItem="Vdc-3M-Zh3" secondAttribute="top" id="Ruh-rq-Vog"/>
                                     <constraint firstAttribute="bottom" secondItem="eja-ju-DRu" secondAttribute="bottom" id="Wi8-ES-KPv"/>
@@ -267,7 +267,7 @@
                             <constraint firstItem="F1Q-4L-Gc0" firstAttribute="top" secondItem="n2b-ND-ToK" secondAttribute="bottom" constant="5" id="mDE-PJ-LXr"/>
                             <constraint firstAttribute="trailing" secondItem="ms9-62-32q" secondAttribute="trailing" constant="10" id="qVB-GN-Fd1"/>
                             <constraint firstAttribute="trailing" secondItem="Vdc-3M-Zh3" secondAttribute="trailing" constant="15" id="rIK-Ef-0WU"/>
-                            <constraint firstItem="Vdc-3M-Zh3" firstAttribute="top" secondItem="G0X-l8-cvA" secondAttribute="bottom" constant="15" id="ssH-8B-Div"/>
+                            <constraint firstItem="Vdc-3M-Zh3" firstAttribute="top" secondItem="G0X-l8-cvA" secondAttribute="bottom" id="ssH-8B-Div"/>
                             <constraint firstItem="ms9-62-32q" firstAttribute="top" secondItem="Vdc-3M-Zh3" secondAttribute="bottom" constant="20" id="z1r-Hn-ITC"/>
                         </constraints>
                     </view>

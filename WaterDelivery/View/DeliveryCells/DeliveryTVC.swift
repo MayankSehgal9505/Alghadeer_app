@@ -9,6 +9,7 @@ import UIKit
 
 class DeliveryTVC: UITableViewCell {
 
+    @IBOutlet weak var parentView: UIView!
     @IBOutlet weak var deliveryTypeLbl: UILabel!
     @IBOutlet weak var deliveryDate: UILabel!
     @IBOutlet weak var orderID: UILabel!
@@ -27,7 +28,7 @@ class DeliveryTVC: UITableViewCell {
     }
     
     func setupCell(deliveryProductObj:DeliveredProductsModel) {
-        deliveryBaseView.setCornerRadiusOfView(cornerRadiusValue:10)
+        deliveryBaseView.setCornerRadiusOfView(cornerRadiusValue: 10, setBorder: true, borderColor: .lightGray, width: 1.0)
         deliveryTypeLbl.text = deliveryProductObj.deliveredProductType.deliveredProductStr
         orderID.text = deliveryProductObj.orderID
         deliveryDate.text = convertDateFormater(deliveryProductObj.created_date)

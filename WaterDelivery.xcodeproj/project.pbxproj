@@ -41,8 +41,6 @@
 		4E550FF226525366008C0A11 /* ContactUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E550FF126525366008C0A11 /* ContactUsModel.swift */; };
 		4E5B282E2656382600F15E68 /* WalletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5B282C2656382600F15E68 /* WalletVC.swift */; };
 		4E5B282F2656382600F15E68 /* WalletVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E5B282D2656382600F15E68 /* WalletVC.xib */; };
-		4E5B283526564B9000F15E68 /* WalletStatusTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5B283326564B9000F15E68 /* WalletStatusTVC.swift */; };
-		4E5B283626564B9000F15E68 /* WalletStatusTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E5B283426564B9000F15E68 /* WalletStatusTVC.xib */; };
 		4E5B283A26564ECE00F15E68 /* WalletHistoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5B283826564ECE00F15E68 /* WalletHistoryTVC.swift */; };
 		4E5B283B26564ECE00F15E68 /* WalletHistoryTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E5B283926564ECE00F15E68 /* WalletHistoryTVC.xib */; };
 		4E5B28432656609C00F15E68 /* DeliveryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5B28412656609C00F15E68 /* DeliveryVC.swift */; };
@@ -51,6 +49,8 @@
 		4E6134862682887E004C6CB4 /* MapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6134842682887D004C6CB4 /* MapVC.xib */; };
 		4E66980D2645592E008DCA11 /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E66980B2645592E008DCA11 /* UserProfileVC.swift */; };
 		4E66980E2645592E008DCA11 /* UserProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E66980C2645592E008DCA11 /* UserProfileVC.xib */; };
+		4E66E4972699A1A5003DF808 /* AddAmountManuallyTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E66E4952699A1A5003DF808 /* AddAmountManuallyTVC.swift */; };
+		4E66E4982699A1A5003DF808 /* AddAmountManuallyTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E66E4962699A1A5003DF808 /* AddAmountManuallyTVC.xib */; };
 		4E69C4392650025100FF098E /* SubscriptionSlotTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C4372650025100FF098E /* SubscriptionSlotTVC.swift */; };
 		4E69C43A2650025100FF098E /* SubscriptionSlotTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E69C4382650025100FF098E /* SubscriptionSlotTVC.xib */; };
 		4E69C44F26500C7F00FF098E /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69C44E26500C7E00FF098E /* NetworkReachabilityManager.swift */; };
@@ -189,8 +189,6 @@
 		4E550FF126525366008C0A11 /* ContactUsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsModel.swift; sourceTree = "<group>"; };
 		4E5B282C2656382600F15E68 /* WalletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletVC.swift; sourceTree = "<group>"; };
 		4E5B282D2656382600F15E68 /* WalletVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletVC.xib; sourceTree = "<group>"; };
-		4E5B283326564B9000F15E68 /* WalletStatusTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStatusTVC.swift; sourceTree = "<group>"; };
-		4E5B283426564B9000F15E68 /* WalletStatusTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStatusTVC.xib; sourceTree = "<group>"; };
 		4E5B283826564ECE00F15E68 /* WalletHistoryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHistoryTVC.swift; sourceTree = "<group>"; };
 		4E5B283926564ECE00F15E68 /* WalletHistoryTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletHistoryTVC.xib; sourceTree = "<group>"; };
 		4E5B28412656609C00F15E68 /* DeliveryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryVC.swift; sourceTree = "<group>"; };
@@ -199,6 +197,8 @@
 		4E6134842682887D004C6CB4 /* MapVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapVC.xib; sourceTree = "<group>"; };
 		4E66980B2645592E008DCA11 /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
 		4E66980C2645592E008DCA11 /* UserProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileVC.xib; sourceTree = "<group>"; };
+		4E66E4952699A1A5003DF808 /* AddAmountManuallyTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAmountManuallyTVC.swift; sourceTree = "<group>"; };
+		4E66E4962699A1A5003DF808 /* AddAmountManuallyTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAmountManuallyTVC.xib; sourceTree = "<group>"; };
 		4E69C4372650025100FF098E /* SubscriptionSlotTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSlotTVC.swift; sourceTree = "<group>"; };
 		4E69C4382650025100FF098E /* SubscriptionSlotTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubscriptionSlotTVC.xib; sourceTree = "<group>"; };
 		4E69C44E26500C7E00FF098E /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
@@ -408,8 +408,6 @@
 		4E5B283D2656573600F15E68 /* WalletCells */ = {
 			isa = PBXGroup;
 			children = (
-				4E5B283326564B9000F15E68 /* WalletStatusTVC.swift */,
-				4E5B283426564B9000F15E68 /* WalletStatusTVC.xib */,
 				4E5B283826564ECE00F15E68 /* WalletHistoryTVC.swift */,
 				4E5B283926564ECE00F15E68 /* WalletHistoryTVC.xib */,
 			);
@@ -439,6 +437,8 @@
 			children = (
 				4E71B9B0264493A20094F72B /* SelectAmountTVC.swift */,
 				4E71B9B1264493A20094F72B /* SelectAmountTVC.xib */,
+				4E66E4952699A1A5003DF808 /* AddAmountManuallyTVC.swift */,
+				4E66E4962699A1A5003DF808 /* AddAmountManuallyTVC.xib */,
 			);
 			path = SelectAmountCells;
 			sourceTree = "<group>";
@@ -881,6 +881,9 @@
 		990A2547262E864800C96165 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
@@ -918,6 +921,7 @@
 				4E8FF64D2653DD7B00C8FCAA /* SubscriptionHeaderTVC.xib in Resources */,
 				4E71B97E264435260094F72B /* ShippingTitleTVC.xib in Resources */,
 				4E71B98D264477A80094F72B /* ScheduleTimeTVC.xib in Resources */,
+				4E66E4982699A1A5003DF808 /* AddAmountManuallyTVC.xib in Resources */,
 				4E66980E2645592E008DCA11 /* UserProfileVC.xib in Resources */,
 				4EFCF87D263BF65E00F08AA7 /* CategoryProductsVC.xib in Resources */,
 				4E5B28442656609C00F15E68 /* DeliveryVC.xib in Resources */,
@@ -948,7 +952,6 @@
 				4E3A41242656E68200D4A61A /* DeliveryHeaderTVC.xib in Resources */,
 				4EB2CC96264EEF45006BB4C9 /* SubscriptionTVC.xib in Resources */,
 				990A255A262E864800C96165 /* Main.storyboard in Resources */,
-				4E5B283626564B9000F15E68 /* WalletStatusTVC.xib in Resources */,
 				4EE783972667D5250055EF91 /* PaymentVC.xib in Resources */,
 				4E71B994264479470094F72B /* PaymentTVC.xib in Resources */,
 				4E4C439D26388AD5002C4609 /* BannerCollectionViewCell.xib in Resources */,
@@ -1064,7 +1067,6 @@
 				4E66980D2645592E008DCA11 /* UserProfileVC.swift in Sources */,
 				4E13B62A265BCA2B0086925A /* DeliveredProductsModel.swift in Sources */,
 				4E71B98226443C220094F72B /* ShippingAddressTVC.swift in Sources */,
-				4E5B283526564B9000F15E68 /* WalletStatusTVC.swift in Sources */,
 				4E71B9B2264493A20094F72B /* SelectAmountTVC.swift in Sources */,
 				4E69C453265109BA00FF098E /* SubscriptionProductsTVC.swift in Sources */,
 				4E5B283A26564ECE00F15E68 /* WalletHistoryTVC.swift in Sources */,
@@ -1096,6 +1098,7 @@
 				4E133925263D2BA70060597E /* CartVC.swift in Sources */,
 				4E69C4982651B33900FF098E /* ContactUsVC.swift in Sources */,
 				4E5B282E2656382600F15E68 /* WalletVC.swift in Sources */,
+				4E66E4972699A1A5003DF808 /* AddAmountManuallyTVC.swift in Sources */,
 				4EE783A12667F75D0055EF91 /* WalletBalance.swift in Sources */,
 				4E4C43C1263979C8002C4609 /* CategoryModel.swift in Sources */,
 				9965FB282631663800946AB6 /* DashboardVC.swift in Sources */,

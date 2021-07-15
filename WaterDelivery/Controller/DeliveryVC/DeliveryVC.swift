@@ -31,7 +31,7 @@ class DeliveryVC: UIViewController {
         deliveryTBView.register(UINib(nibName: DeliveryTVC.className(), bundle: nil), forCellReuseIdentifier: DeliveryTVC.className())
         deliveryTBView.register(UINib(nibName: DeliveryHeaderTVC.className(), bundle: nil), forCellReuseIdentifier: DeliveryHeaderTVC.className())
         deliveryTBView.tableFooterView = UIView()
-        deliveryTBView.estimatedRowHeight = 150
+        deliveryTBView.estimatedRowHeight = 50
         deliveryTBView.rowHeight = UITableView.automaticDimension
     }
     

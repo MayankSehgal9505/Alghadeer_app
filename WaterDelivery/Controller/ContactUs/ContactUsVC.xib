@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactUsVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
                 <outlet property="emailValue" destination="Sdk-eF-2Ep" id="DTu-zS-R1H"/>
+                <outlet property="greyView" destination="wz9-I1-355" id="pvB-P5-2bh"/>
                 <outlet property="msgTxtFld" destination="hfD-r0-yaP" id="bEB-f0-X3m"/>
                 <outlet property="nameValue" destination="uEf-iR-Y8j" id="O2d-J8-1ee"/>
                 <outlet property="numberValue" destination="Xhc-4L-1cj" id="fvR-tg-9Tl"/>
@@ -60,7 +61,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="HPN-FN-dKl"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ri0-tx-RxG">
@@ -75,7 +76,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="FsE-fZ-BfJ"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exL-mc-svV">
@@ -98,7 +99,7 @@
                                                 <constraint firstAttribute="height" constant="80" id="neo-4B-3Iw"/>
                                             </constraints>
                                             <color key="textColor" systemColor="labelColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FuB-eH-lUC">

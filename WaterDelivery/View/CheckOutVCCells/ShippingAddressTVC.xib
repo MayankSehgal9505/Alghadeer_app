@@ -38,7 +38,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1X-To-IWl">
                                                 <rect key="frame" x="0.0" y="0.0" width="249" height="50"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Shipping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxC-Sz-X75">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Address 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxC-Sz-X75">
                                                         <rect key="frame" x="0.0" y="0.0" width="249" height="50"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -175,6 +175,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="adddressSelectionBtn" destination="Lfe-9K-NbK" id="Af7-cY-OjT"/>
+                <outlet property="addressTitle" destination="UxC-Sz-X75" id="8FH-65-mom"/>
                 <outlet property="deleteBtn" destination="Abe-24-WON" id="wkC-Lt-kFW"/>
                 <outlet property="editBtn" destination="Kwc-i6-Pz4" id="gVv-Mw-1mD"/>
                 <outlet property="greyView" destination="o9c-Yo-ShW" id="w6Z-gH-mWR"/>

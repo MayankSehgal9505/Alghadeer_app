@@ -19,6 +19,7 @@
                 <outlet property="checkOutTBView" destination="d7z-OJ-aIB" id="JYx-DZ-lTu"/>
                 <outlet property="continueToPaymentBtn" destination="zG0-WE-phW" id="eMO-Kp-VEF"/>
                 <outlet property="scheduleTimeView" destination="vAm-9S-WMR" id="kra-Qt-tmv"/>
+                <outlet property="timePickerView" destination="7zX-hC-gMM" id="Qid-48-WRi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -39,7 +40,7 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="FSd-hI-lWY"/>
-                                <outlet property="delegate" destination="-1" id="pnd-02-Brl"/>
+                                <outlet property="delegate" destination="-1" id="T4g-xw-PGE"/>
                             </connections>
                         </tableView>
                     </subviews>
@@ -73,8 +74,8 @@
                                 <action selector="backBtnAction:" destination="-1" eventType="touchUpInside" id="7Iq-wL-qG3"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cart" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQl-dg-Y4m">
-                            <rect key="frame" x="191.5" y="22.5" width="31" height="19"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checkout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQl-dg-Y4m">
+                            <rect key="frame" x="172.5" y="22.5" width="69.5" height="19"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -94,6 +95,13 @@
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vAm-9S-WMR">
                     <rect key="frame" x="0.0" y="638" width="414" height="258"/>
                     <subviews>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zX-hC-gMM">
+                            <rect key="frame" x="0.0" y="48" width="414" height="162"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="aay-KX-JQR"/>
+                                <outlet property="delegate" destination="-1" id="PPh-rO-tkk"/>
+                            </connections>
+                        </pickerView>
                         <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tme-rH-i8F">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <constraints>
@@ -113,13 +121,6 @@
                                 </barButtonItem>
                             </items>
                         </toolbar>
-                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="e4A-sY-LU9">
-                            <rect key="frame" x="0.0" y="48" width="414" height="162"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
-                                <!--1970-01-01 11:00:00 +0000-->
-                            </date>
-                        </datePicker>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="254" placeholderIntrinsicHeight="21" text="Schedule Time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJD-kF-zRD" customClass="LocalisedLabel">
                             <rect key="frame" x="80" y="11.5" width="254" height="21"/>
                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
@@ -134,7 +135,11 @@
                         <constraint firstItem="Tme-rH-i8F" firstAttribute="leading" secondItem="vAm-9S-WMR" secondAttribute="leading" id="C9s-Ku-2oh"/>
                         <constraint firstItem="HJD-kF-zRD" firstAttribute="centerX" secondItem="Tme-rH-i8F" secondAttribute="centerX" id="KOD-nv-6B4"/>
                         <constraint firstAttribute="height" constant="258" id="Rd0-af-t8F"/>
+                        <constraint firstItem="7zX-hC-gMM" firstAttribute="leading" secondItem="B7W-MZ-K4n" secondAttribute="leading" id="We3-eG-4eJ"/>
                         <constraint firstAttribute="trailing" secondItem="Tme-rH-i8F" secondAttribute="trailing" id="da4-eM-mIO"/>
+                        <constraint firstItem="B7W-MZ-K4n" firstAttribute="bottom" secondItem="7zX-hC-gMM" secondAttribute="bottom" constant="14" id="hir-nm-JJL"/>
+                        <constraint firstItem="7zX-hC-gMM" firstAttribute="top" secondItem="Tme-rH-i8F" secondAttribute="bottom" constant="4" id="izi-GO-2Hd"/>
+                        <constraint firstItem="7zX-hC-gMM" firstAttribute="trailing" secondItem="B7W-MZ-K4n" secondAttribute="trailing" id="s2Y-UN-51G"/>
                         <constraint firstItem="Tme-rH-i8F" firstAttribute="top" secondItem="vAm-9S-WMR" secondAttribute="top" id="sqE-Mj-vYL"/>
                     </constraints>
                 </view>

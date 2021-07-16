@@ -22,6 +22,7 @@ class CheckoutVC: UIViewController {
     @IBOutlet weak var checkOutTBView: UITableView!
     @IBOutlet weak var continueToPaymentBtn: UIButton!
     @IBOutlet weak var scheduleTimeView: UIView!
+    @IBOutlet weak var timePickerView: UIPickerView!
     
     //MARK:- Local Variables
     
@@ -32,7 +33,10 @@ class CheckoutVC: UIViewController {
     private var walletBallance = WalletBalance()
     private var orderSummaryObj = OrderSummary()
     private var addedMoneyModel = AddMoneyModel()
-    
+    var timeArray = Array<TimeModel>()
+    var deliveryTime = Date().dateStringWith(strFormat: "hh:mm a")
+    private var dispatchGp = DispatchGroup()
+
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -42,12 +46,29 @@ class CheckoutVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getWalletDetails()
-        getAddress()
-        getSummaryData()
+        apiCalls()
+    }
+    private func apiCalls(){
+        func dispatchGpAPIS() {
+            self.showHUD(progressLabel: AlertField.loaderString)
+            self.dispatchGp.enter()
+            self.dispatchGp.enter()
+            self.dispatchGp.enter()
+            self.dispatchGp.enter()
+            getWalletDetails()
+            getAddress()
+            getTimeList()
+            getSummaryData()
+        }
+        dispatchGpAPIS()
+        dispatchGp.notify(queue: .main) {
+            self.dismissHUD(isAnimated: true)
+            self.checkOutTBView.reloadData()
+        }
     }
     //MARK:- Internal Methods
     func setUpTBView(){
+        
         /// Register Cells
         self.checkOutTBView.register(UINib(nibName: ShippingTitleTVC.className(), bundle: nil), forCellReuseIdentifier: ShippingTitleTVC.className())
         self.checkOutTBView.register(UINib(nibName: ShippingAddressTVC.className(), bundle: nil), forCellReuseIdentifier: ShippingAddressTVC.className())
@@ -55,7 +76,8 @@ class CheckoutVC: UIViewController {
         self.checkOutTBView.register(UINib(nibName: ScheduleTimeTVC.className(), bundle: nil), forCellReuseIdentifier: ScheduleTimeTVC.className())
         self.checkOutTBView.register(UINib(nibName: PaymentTVC.className(), bundle: nil), forCellReuseIdentifier: PaymentTVC.className())
         self.checkOutTBView.register(UINib(nibName: SummaryTVC.className(), bundle: nil), forCellReuseIdentifier: SummaryTVC.className())
-        
+        checkOutTBView.dataSource = self
+        checkOutTBView.delegate = self
         checkOutTBView.tableFooterView = UIView()
         checkOutTBView.estimatedRowHeight = 150
         checkOutTBView.rowHeight = UITableView.automaticDimension
@@ -85,6 +107,9 @@ class CheckoutVC: UIViewController {
     }
     @IBAction func scheduleTimeSetBtnActn(_ sender: UIBarButtonItem) {
         hidePickerView()
+        if let cell = checkOutTBView.cellForRow(at: IndexPath.init(row: 0, section:SectionType.scheduleTime.rawValue)) as? ScheduleTimeTVC {
+                cell.deliveryTimeTxtFld.text = deliveryTime
+        }
     }
     @IBAction func backBtnAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -96,7 +121,15 @@ class CheckoutVC: UIViewController {
             cartCheckout()
         }
     }
-    
+    // Payment Mthods
+    @objc func openDeliverOptions(sender:UIButton) {
+        let viewArray = CommonMethods.showPopUpWithVibrancyView(on : self)
+        self.view.window?.addSubview(scheduleTimeView)
+        vibrantView = viewArray.first as? UIVisualEffectView
+        effectView = (viewArray.last as? UIVisualEffectView)
+        self.scheduleTimeView.isHidden = false
+        CommonMethods.setPickerConstraintAccordingToDevice(pickerView: scheduleTimeView, view: self.view)
+    }
     // Payment Mthods
     @objc func cardOptionChoosen(sender:UIButton) {
         if !sender.isSelected {
@@ -174,7 +207,7 @@ extension CheckoutVC: SelectedAmountDelegate{
     }
 }
 //MARK:-UItableViewDataSource & UITableViewDelegate Methods
-extension CheckoutVC: UITableViewDataSource{
+extension CheckoutVC: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
         return SectionType.allCases.count
     }
@@ -203,9 +236,10 @@ extension CheckoutVC: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: ShippingAddressTVC.className(), for: indexPath) as! ShippingAddressTVC
             cell.editBtn.tag = indexPath.row
             cell.deleteBtn.tag = indexPath.row
+            cell.addressTitle.text = "Address \(indexPath.row)"
             cell.editBtn.addTarget(self, action: #selector(editBtnAction(sender:)), for: .touchUpInside)
             cell.deleteBtn.addTarget(self, action: #selector(deleteBtnAction(sender:)), for: .touchUpInside)
-            cell.adddressSelectionBtn.isHidden = shippingAddressArray.count == 1
+            //cell.adddressSelectionBtn.isHidden = shippingAddressArray.count == 1
             if indexPath.row < shippingAddressArray.count {
                 cell.adddressSelectionBtn.tag = indexPath.row
                 cell.adddressSelectionBtn.addTarget(self, action: #selector(shippingAddrress(sender:)), for: .touchUpInside)
@@ -217,7 +251,7 @@ extension CheckoutVC: UITableViewDataSource{
             return cell
         case .scheduleTime:
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTVC.className(), for: indexPath) as! ScheduleTimeTVC
-            cell.setupCell()
+            cell.deliveryBtn.addTarget(self, action: #selector(openDeliverOptions), for: .touchUpInside)
             return cell
         case .payment:
             let cell = tableView.dequeueReusableCell(withIdentifier: PaymentTVC.className(), for: indexPath) as! PaymentTVC
@@ -238,20 +272,6 @@ extension CheckoutVC: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: SummaryTVC.className(), for: indexPath) as! SummaryTVC
             cell.setupCell(orderSummaryObj: orderSummaryObj)
             return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let sectionType = SectionType.init(rawValue: indexPath.section) else {return}
-        switch sectionType {
-        case .scheduleTime:
-            let viewArray = CommonMethods.showPopUpWithVibrancyView(on : self)
-            self.view.window?.addSubview(scheduleTimeView)
-            vibrantView = viewArray.first as? UIVisualEffectView
-            effectView = (viewArray.last as? UIVisualEffectView)
-            self.scheduleTimeView.isHidden = false
-            CommonMethods.setPickerConstraintAccordingToDevice(pickerView: scheduleTimeView, view: self.view)
-        default: break
         }
     }
 }
@@ -279,12 +299,53 @@ extension CheckoutVC: AddressProtocol {
         }
     }
     private func getAddress() {
-        getAddressList { [weak self] in  self?.reloadAddressListSection()  }
+        getAddressList(loaderRequired: false) { [weak self] in
+            self?.dispatchGp.leave()
+            self?.reloadAddressListSection()  }
     }
     
     private func deleteAddress(addressID: String) {
         deleteAddress(addressID: addressID){ [weak self] in  self?.reloadAddressListSection()  }
     }
+    func getTimeList() {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            let bannerListURL : String = UrlName.baseUrl + UrlName.deliveryTimeUrl
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
+                guard let jsonValue = json?.dictionaryValue else {
+                    DispatchQueue.main.async {
+                        self.dispatchGp.leave()
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    return
+                }
+                
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                    if let timeList = jsonValue[APIField.dataKey]?.array {
+                        var timesArray = Array<TimeModel>()
+                        for time in timeList {
+                            let timeModel = TimeModel.init(json: time)
+                            timesArray.append(timeModel)
+                        }
+                        self.timeArray = timesArray
+                        DispatchQueue.main.async {
+                            self.timePickerView.reloadAllComponents()
+                        }
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
+                }
+                self.dispatchGp.leave()
+            })
+        }else{
+            self.dispatchGp.leave()
+            self.showNoInternetAlert()
+        }
+    }
+
 }
 //MARK:- API Call Methods
 extension CheckoutVC: WalletAPI{
@@ -325,18 +386,18 @@ extension CheckoutVC: WalletAPI{
         }
     }
     private func getWalletDetails() {
-        getWalletDetails { (walletBalance) in
+        getWalletDetails(dismissHud: false) { (walletBalance) in
+            self.dispatchGp.leave()
             self.walletBallance = walletBalance
-            DispatchQueue.main.async {
-                self.checkOutTBView.beginUpdates()
-                self.checkOutTBView.reloadSections(IndexSet.init(integer: SectionType.payment.rawValue), with: .none)
-                self.checkOutTBView.endUpdates()
-            }
+//            DispatchQueue.main.async {
+//                self.checkOutTBView.beginUpdates()
+//                self.checkOutTBView.reloadSections(IndexSet.init(integer: SectionType.payment.rawValue), with: .none)
+//                self.checkOutTBView.endUpdates()
+//            }
         }
     }
     private func getSummaryData() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
-            self.showHUD(progressLabel: AlertField.loaderString)
             let orderTotalUrl : String = UrlName.baseUrl + UrlName.orderTotalUrl
             let parameters = [
                 "customer_id": Defaults.getUserID(),
@@ -345,7 +406,7 @@ extension CheckoutVC: WalletAPI{
             NetworkManager.sharedInstance.commonApiCall(url: orderTotalUrl, method: .post, jsonObject: false,parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
                     DispatchQueue.main.async {
-                        self.dismissHUD(isAnimated: true)
+                        self.dispatchGp.leave()
                         self.view.makeToast(status, duration: 3.0, position: .bottom)
                     }
                     return
@@ -354,11 +415,11 @@ extension CheckoutVC: WalletAPI{
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let _ = jsonValue[APIField.dataKey]?.dictionary {
                         self.orderSummaryObj = OrderSummary.init(json: jsonValue[APIField.dataKey]!)
-                        DispatchQueue.main.async {
-                            self.checkOutTBView.beginUpdates()
-                            self.checkOutTBView.reloadSections(IndexSet.init(integer: SectionType.summary.rawValue), with: .none)
-                            self.checkOutTBView.endUpdates()
-                        }
+//                        DispatchQueue.main.async {
+//                            self.checkOutTBView.beginUpdates()
+//                            self.checkOutTBView.reloadSections(IndexSet.init(integer: SectionType.summary.rawValue), with: .none)
+//                            self.checkOutTBView.endUpdates()
+//                        }
                     }
                 }
                 else {
@@ -367,10 +428,12 @@ extension CheckoutVC: WalletAPI{
                     }
                 }
                 DispatchQueue.main.async {
+                    self.dispatchGp.leave()
                     self.dismissHUD(isAnimated: true)
                 }
             })
         }else{
+            self.dispatchGp.leave()
             self.showNoInternetAlert()
         }
     }
@@ -427,3 +490,22 @@ extension CheckoutVC: WalletAPI{
     }
 }
 
+
+//MARK:- Get Address List Methods
+extension CheckoutVC: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.timeArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.timeArray[row].deliveryTime
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        deliveryTime = timeArray[row].deliveryTime
+    }
+}

@@ -9,6 +9,7 @@ import UIKit
 
 class ShippingAddressTVC: UITableViewCell {
 
+    @IBOutlet weak var addressTitle: UILabel!
     @IBOutlet weak var manageAddressView: UIView!
     @IBOutlet weak var shippingTxtView: UIView!
     @IBOutlet weak var greyView: UIView!

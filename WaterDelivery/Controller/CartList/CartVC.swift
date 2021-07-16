@@ -34,6 +34,10 @@ class CartVC: UIViewController {
     @IBOutlet weak var subscribeBtn: UIButton! {    didSet {    self.subscribeBtn.setCornerRadiusOfView(cornerRadiusValue: 15)  }   }
     @IBOutlet weak var checkOutBtn: UIButton! {    didSet {    self.checkOutBtn.setCornerRadiusOfView(cornerRadiusValue: 15)  }   }
     @IBOutlet weak var cartEmptyView: UIView!
+    @IBOutlet weak var discountView: UIView!
+    @IBOutlet weak var percentageOffLbl: UILabel!
+    @IBOutlet weak var couponAmount: UILabel!
+    @IBOutlet weak var finalAmountLbll: UILabel!
     
     //MARK:- Local Variables
 
@@ -144,7 +148,14 @@ extension CartVC {
                     return
                 }
                 print(jsonValue)
-                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
+                if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true,let data = jsonValue[APIField.dataKey]?.dictionaryValue {
+                    DispatchQueue.main.async {
+                        self.discountView.isHidden = false
+                        self.percentageOffLbl.text = "\(data["coupon_value"]?.stringValue ?? "0") % Off"
+                        let totalPriceDouble = (Double(self.cartModel.totalPrice) ?? 0.0 ) * (Double(data["coupon_value"]?.stringValue ?? "0") ?? 0.0 )
+                        self.couponAmount.text = "Coupon Amount \(totalPriceDouble/100)"
+                        self.finalAmountLbll.text = "Final Amount \((Double(self.cartModel.totalPrice) ?? 0.0 )-(totalPriceDouble/100))"
+                    }
                 }else {
                     DispatchQueue.main.async {
                         self.view.makeToast("Coupon code not valid", duration: 3.0, position: .bottom)

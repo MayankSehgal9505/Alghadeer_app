@@ -9,7 +9,8 @@ import UIKit
 
 class ScheduleTimeTVC: UITableViewCell {
 
-    @IBOutlet weak var greyView: UIView!
+    @IBOutlet weak var deliveryTimeTxtFld: UITextField!
+    @IBOutlet weak var deliveryBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,9 +20,5 @@ class ScheduleTimeTVC: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    func setupCell() {
-        greyView.setCornerRadiusOfView(cornerRadiusValue:13)
     }
 }

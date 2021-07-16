@@ -11,7 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OTPVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
+                <outlet property="resendOtp" destination="Lc5-M8-GlJ" id="aoa-hz-esP"/>
                 <outlet property="submitButton" destination="mGa-m8-3sH" id="PfR-2a-pKO"/>
+                <outlet property="tiimerField" destination="JPf-OE-TAX" id="lnr-fr-EuM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="otpTxtFldViews" destination="rBw-uA-yAO" collectionClass="NSMutableArray" id="8bE-bk-VR6"/>
                 <outletCollection property="otpTxtFldViews" destination="FON-Ff-X4u" collectionClass="NSMutableArray" id="VKe-KI-G53"/>
@@ -201,7 +203,7 @@
                         <action selector="submitBtnClicked:" destination="-1" eventType="touchUpInside" id="Dhp-nG-O9w"/>
                     </connections>
                 </button>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:15 min(s)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPf-OE-TAX">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:15 min(s)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPf-OE-TAX">
                     <rect key="frame" x="143" y="575" width="89" height="19.5"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

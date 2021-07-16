@@ -342,9 +342,13 @@ extension AddAddressVC : UIPickerViewDataSource,UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch pickerType {
         case .state:
-            selectedState = stateList[row]
+            if row < stateList.count {
+                selectedState = stateList[row]
+            }
         default:
-            selectedCity = cityList[row]
+            if row < cityList.count {
+                selectedCity = cityList[row]
+            }
         }
     }
     

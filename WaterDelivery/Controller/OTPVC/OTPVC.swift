@@ -12,7 +12,9 @@ class OTPVC: UIViewController {
 
     //MARK:- IBOutlet
     @IBOutlet weak var otpTextField: UITextField!
+    @IBOutlet weak var tiimerField: UILabel!
     @IBOutlet var otpTxtFlds: [OtpTextfield]!
+    @IBOutlet weak var resendOtp: UIButton!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet var otpTxtFldViews: [UIView]! {
         didSet {
@@ -29,10 +31,12 @@ class OTPVC: UIViewController {
     var otp = ""
     var otpRecieved = ""
     var userType: UserType = .signup
-
+    private var timer : Timer?
+    private var timelimit = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        resendOtp.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,9 +48,26 @@ class OTPVC: UIViewController {
         submitButton.isEnabled = true
         self.submitButton.setCornerRadiusOfView(cornerRadiusValue: 25)
         setupTextfields()
-
+        initializeTimer()
     }
-    
+    private func initializeTimer() {
+        timelimit = 59
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer!, forMode: RunLoop.Mode.common)
+        timer?.fire()
+    }
+    @objc private func startTimer() {
+        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
+        if timelimit == 0 {
+            timer?.invalidate()
+            timer = nil
+            tiimerField.attributedText = NSAttributedString(string: "Send Again OTP", attributes: underlineAttribute)
+            resendOtp.isEnabled = true
+        } else {
+            timelimit = timelimit-1
+            tiimerField.attributedText = NSAttributedString(string: String(format: "Send Again OTP (%@s)", "\(timelimit)"), attributes: underlineAttribute)
+        }
+    }
     //gives the OTP text
     final func getOTP() -> String{
         for textField in otpTxtFlds{
@@ -63,9 +84,9 @@ class OTPVC: UIViewController {
             index != 0 ? (otpTxtFlds[index-1].nextTextField = otpTxtFlds[index]) : ()
         }
         
-        for (otpChar,textfield) in zip(otpRecieved, otpTxtFlds) {
-            textfield.text = String.init(otpChar)
-        }
+//        for (otpChar,textfield) in zip(otpRecieved, otpTxtFlds) {
+//            textfield.text = String.init(otpChar)
+//        }
     }
     @IBAction func submitBtnClicked(_ sender: Any) {
         self.view.endEditing(true)

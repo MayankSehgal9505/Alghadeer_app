@@ -305,7 +305,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FjK-4O-lUn" userLabel="AddressView">
                                                     <rect key="frame" x="30" y="122" width="354" height="53"/>
                                                     <subviews>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select/Add Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rzk-js-m12">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rzk-js-m12">
                                                             <rect key="frame" x="0.0" y="15" width="354" height="35"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="35" id="cPe-1Q-ejg"/>
@@ -334,6 +334,12 @@
                                                                 <action selector="addAddressBtn:" destination="-1" eventType="touchUpInside" id="JQ2-vT-2zD"/>
                                                             </connections>
                                                         </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8K-ZL-rea">
+                                                            <rect key="frame" x="0.0" y="0.0" width="354" height="53"/>
+                                                            <connections>
+                                                                <action selector="addAddressBtn:" destination="-1" eventType="touchUpInside" id="50i-4K-1gd"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.83529411764705885" green="0.83529411764705885" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -342,9 +348,13 @@
                                                         <constraint firstItem="hDV-XB-enq" firstAttribute="centerY" secondItem="rzk-js-m12" secondAttribute="centerY" id="3u3-1h-S87"/>
                                                         <constraint firstItem="H8H-1D-3zI" firstAttribute="leading" secondItem="FjK-4O-lUn" secondAttribute="leading" id="D5n-AI-DgA"/>
                                                         <constraint firstAttribute="trailing" secondItem="H8H-1D-3zI" secondAttribute="trailing" id="JRa-jg-JSh"/>
+                                                        <constraint firstItem="v8K-ZL-rea" firstAttribute="leading" secondItem="FjK-4O-lUn" secondAttribute="leading" id="Kh0-sN-Fdi"/>
+                                                        <constraint firstAttribute="bottom" secondItem="v8K-ZL-rea" secondAttribute="bottom" id="OzJ-fP-FRV"/>
+                                                        <constraint firstItem="v8K-ZL-rea" firstAttribute="top" secondItem="FjK-4O-lUn" secondAttribute="top" id="ZaN-G8-QeC"/>
                                                         <constraint firstItem="H8H-1D-3zI" firstAttribute="top" secondItem="rzk-js-m12" secondAttribute="bottom" constant="2" id="cce-ID-hwT"/>
                                                         <constraint firstAttribute="trailing" secondItem="rzk-js-m12" secondAttribute="trailing" id="hjR-BU-Zlb"/>
                                                         <constraint firstAttribute="trailing" secondItem="hDV-XB-enq" secondAttribute="trailing" constant="10" id="lry-FI-Z8b"/>
+                                                        <constraint firstAttribute="trailing" secondItem="v8K-ZL-rea" secondAttribute="trailing" id="qAL-tM-0cE"/>
                                                         <constraint firstItem="rzk-js-m12" firstAttribute="top" secondItem="FjK-4O-lUn" secondAttribute="top" constant="15" id="tIb-NP-RzF"/>
                                                     </constraints>
                                                 </view>

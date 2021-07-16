@@ -38,6 +38,5 @@ class ShippingAddressTVC: UITableViewCell {
         self.shipperstreetAddress.text = "\(shipperAddress.shippingAddress), \(shipperAddress.shippingCity), \(shipperAddress.shippingState) \(shipperAddress.shippingPostCode) \n \(shipperAddress.shippingCountry)"
         self.shipperCountry.text = "Phone Number: \(shipperAddress.shippingPhoneNumber)"
         self.adddressSelectionBtn.isSelected = shipperAddress.addressSelected
-        shippingTxtView.isHidden = !shipperAddress.addressSelected
     }
 }

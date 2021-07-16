@@ -34,7 +34,7 @@ class CheckoutVC: UIViewController {
     private var orderSummaryObj = OrderSummary()
     private var addedMoneyModel = AddMoneyModel()
     var timeArray = Array<TimeModel>()
-    var deliveryTime = Date().dateStringWith(strFormat: "hh:mm a")
+    var deliveryTime = ""
     private var dispatchGp = DispatchGroup()
 
     //MARK:- Life Cycle Methods
@@ -115,7 +115,10 @@ class CheckoutVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func continueToPaymentAction(_ sender: UIButton) {
-        if (selectedAddress.addressID.isEmpty) {
+        if (deliveryTime.isEmpty) {
+            self.view.makeToast("Select Delivery Time", duration: 3.0, position: .center)
+        }
+         else if (selectedAddress.addressID.isEmpty) {
             self.view.makeToast("Select delivery Address", duration: 3.0, position: .center)
         } else {
             cartCheckout()
@@ -445,7 +448,8 @@ extension CheckoutVC: WalletAPI{
                 "customer_id": Defaults.getUserID(),
                 "address_id":selectedAddress.addressID,
                 "wallet": "\(paymentType.rawValue)",
-                "grandtotal": orderSummaryObj.orderGrandTotal
+                "grandtotal": orderSummaryObj.orderGrandTotal,
+                "delivery_time":deliveryTime,
             ] as [String : Any]
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: checkOutURL, method: .post, jsonObject: true,parameters: parameters, completionHandler: { (json, status) in

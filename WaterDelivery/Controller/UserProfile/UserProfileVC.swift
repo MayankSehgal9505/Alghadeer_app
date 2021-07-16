@@ -359,7 +359,6 @@ extension UserProfileVC: UITableViewDataSource{
         cell.deleteBtn.tag = indexPath.row
         cell.editBtn.addTarget(self, action: #selector(editBtnAction(sender:)), for: .touchUpInside)
         cell.deleteBtn.addTarget(self, action: #selector(deleteBtnAction(sender:)), for: .touchUpInside)
-        cell.adddressSelectionBtn.isHidden = shippingAddressArray.count == 1
         if indexPath.row < shippingAddressArray.count {
             cell.adddressSelectionBtn.tag = indexPath.row
             cell.adddressSelectionBtn.addTarget(self, action: #selector(shippingAddrress(sender:)), for: .touchUpInside)

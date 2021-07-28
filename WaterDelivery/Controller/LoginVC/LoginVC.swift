@@ -66,6 +66,7 @@ extension LoginVC {
             let loginURL : String = UrlName.baseUrl + UrlName.loginOtpUrl
             let parameters = [
             "mobile_number":self.phoneTextField.text!,
+                "fcm_token":Defaults.getDeviceToken() ?? ""
             ] as [String : Any]
             NetworkManager.sharedInstance.commonApiCall(url: loginURL, method: .post, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {

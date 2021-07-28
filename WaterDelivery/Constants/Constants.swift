@@ -41,7 +41,7 @@ struct UrlName {
     //Dasshboard urls
     static let getBannerUrl = "Master/GetBanner"
     static let getCategoryListUrl = "Category/CategoryList/0"
-    static let getProductListUrl = "Product/productList/0"
+    static let getProductListUrl = "Product/productList/0/1"
     static let getProductDetailUrl = "Product/productDetails/"
     static let getCartQuantityUrl = "cart/getquantity"
     static let getCategoryDetailUrl = "Category/categoryDetails/"   // Un used api

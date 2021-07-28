@@ -154,7 +154,7 @@ extension DetailVC {
     private func getProductDetail(){
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
-            let productDetailUrl : String = UrlName.baseUrl + UrlName.getProductDetailUrl + productID
+            let productDetailUrl : String = UrlName.baseUrl + UrlName.getProductDetailUrl + productID + "/1"
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: productDetailUrl, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {

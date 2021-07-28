@@ -41,6 +41,12 @@ class Defaults {
     static func getUserPhoneNumber()-> String {
         defaults.string(forKey: "userNumber") ?? ""
     }
+    static func setDeviceToken(token:String) {
+        defaults.set(token, forKey: "deviceToken")
+    }
+    static func getDeviceToken()-> String? {
+        defaults.string(forKey: "deviceToken")
+    }
     static func setToken(token:String) {
         defaults.set(token, forKey: "token")
     }

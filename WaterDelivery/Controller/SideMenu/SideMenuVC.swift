@@ -189,6 +189,8 @@ extension SideMenuVC : UITableViewDelegate {
             controllerToMove = ContactUsVC(nibName: ContactUsVC.className(), bundle: nil)
             moveToController(controllerToMove)
         case 8:
+            break
+        case 9:
             self.showLogoutAlert()
         default:
             break

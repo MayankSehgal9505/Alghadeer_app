@@ -230,8 +230,15 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwd-je-D2f">
                                                     <rect key="frame" x="0.0" y="10" width="394" height="40"/>
                                                     <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="37Z-OK-zen">
+                                                            <rect key="frame" x="369" y="0.0" width="15" height="40"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="15" id="HEJ-7R-Abd"/>
+                                                            </constraints>
+                                                        </imageView>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GmG-rB-W2B">
-                                                            <rect key="frame" x="10" y="0.0" width="384" height="40"/>
+                                                            <rect key="frame" x="10" y="0.0" width="354" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="ZBF-3N-iAt"/>
                                                             </constraints>
@@ -248,13 +255,16 @@
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="Pvh-3U-H3D" secondAttribute="trailing" id="3Eg-Ne-emU"/>
+                                                        <constraint firstItem="37Z-OK-zen" firstAttribute="top" secondItem="GmG-rB-W2B" secondAttribute="top" id="FXd-cF-mIc"/>
                                                         <constraint firstItem="Pvh-3U-H3D" firstAttribute="leading" secondItem="Zwd-je-D2f" secondAttribute="leading" id="GQ3-O1-Hfg"/>
                                                         <constraint firstItem="GmG-rB-W2B" firstAttribute="leading" secondItem="Zwd-je-D2f" secondAttribute="leading" constant="10" id="Y47-FI-t7s"/>
                                                         <constraint firstAttribute="bottom" secondItem="GmG-rB-W2B" secondAttribute="bottom" id="a9N-GM-RJs"/>
                                                         <constraint firstItem="GmG-rB-W2B" firstAttribute="top" secondItem="Zwd-je-D2f" secondAttribute="top" id="b4Z-hM-QDd"/>
                                                         <constraint firstItem="Pvh-3U-H3D" firstAttribute="top" secondItem="Zwd-je-D2f" secondAttribute="top" id="jDt-8m-RCu"/>
+                                                        <constraint firstItem="37Z-OK-zen" firstAttribute="bottom" secondItem="GmG-rB-W2B" secondAttribute="bottom" id="mkd-gD-JDb"/>
+                                                        <constraint firstAttribute="trailing" secondItem="37Z-OK-zen" secondAttribute="trailing" constant="10" id="nFT-I1-nFT"/>
                                                         <constraint firstAttribute="bottom" secondItem="Pvh-3U-H3D" secondAttribute="bottom" id="qdi-mR-d2W"/>
-                                                        <constraint firstAttribute="trailing" secondItem="GmG-rB-W2B" secondAttribute="trailing" id="zjP-df-TR6"/>
+                                                        <constraint firstItem="37Z-OK-zen" firstAttribute="leading" secondItem="GmG-rB-W2B" secondAttribute="trailing" constant="5" id="vh6-k0-579"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -412,6 +422,7 @@
     <resources>
         <image name="back-arrow" width="100" height="100"/>
         <image name="down-angle" width="16" height="16"/>
+        <image name="map" width="32" height="32"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

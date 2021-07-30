@@ -30,7 +30,6 @@ class OTPVC: UIViewController {
     var mobile = ""
     var otp = ""
     var otpRecieved = ""
-    var userType: UserType = .signup
     private var timer : Timer?
     private var timelimit = 0
     override func viewDidLoad() {
@@ -178,14 +177,8 @@ extension OTPVC {
                 }
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
-                        switch self.userType {
-                        case .existing:
-                            Defaults.setUserLoggedIn(userLoggedIn: true)
-                            self.makeRootViewController()
-                        case .signup:
-                            let obj = CategoryVC.init(nibName: CategoryVC.className(), bundle: nil)
-                            self.navigationController?.pushViewController(obj, animated: true)
-                        }
+                        Defaults.setUserLoggedIn(userLoggedIn: true)
+                        self.makeRootViewController()
                     }
                 }else {
                     DispatchQueue.main.async {

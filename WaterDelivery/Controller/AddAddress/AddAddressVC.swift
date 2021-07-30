@@ -220,7 +220,8 @@ extension AddAddressVC {
                 "phone_no":phoneNumberTxtFld.text!,
                 "latitude":self.lat,
                 "longitude":self.long,
-                "customer_id":Defaults.getUserID()
+                "customer_id":Defaults.getUserID(),
+                "location_address": "dcfvfv"
             ] as [String : Any]
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addAddressUrl, method: .put, parameters: parameters, completionHandler: { (json, status) in
@@ -273,7 +274,8 @@ extension AddAddressVC {
                 "phone_no":phoneNumberTxtFld.text!,
                 "latitude":self.lat,
                 "longitude":self.long,
-                "customer_id":Defaults.getUserID()
+                "customer_id":Defaults.getUserID(),
+                "location_address": "dcfvfv"
             ] as [String : Any]
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addAddressUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in

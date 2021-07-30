@@ -178,8 +178,8 @@ struct AlertField {
 
 struct SideMenu {
     //MARK:- SideMenu Controller
-    static let sideMenuOptionslabel = ["Home","My Profile","Wallet","Subscriptions","My Deliveries","Refer a Friend","FAQ","Contact Us","Logout"]
-    static let sideMenuOptionImage = ["home","user","wallet","subscription","delivery","refer-friend","faq","contact-icon","logout"]
+    static let sideMenuOptionslabel = ["Home","My Profile","Wallet","Subscriptions","My Deliveries","Refer a Friend","FAQ","Contact Us","Select Language","Logout"]
+    static let sideMenuOptionImage = ["home","user","wallet","subscription","delivery","refer-friend","faq","contact-icon","language","logout"]
 }
 
 

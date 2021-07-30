@@ -103,7 +103,7 @@ class UserProfileVC: UIViewController {
             return businessModel.businessID == user.businessID
         }).first
         selectedBusinessType = business ?? BusinessModel()
-        categoryValue.text = business?.businessName ?? ""
+        categoryValue.text = business?.businessName ?? "Search Category"
         cusstomerID.text = "\(Defaults.getUserID())"
     }
     func showOptions(){

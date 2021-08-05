@@ -100,6 +100,11 @@
 		4E8FF6532653E3D800C8FCAA /* ShareVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E8FF6512653E3D800C8FCAA /* ShareVC.xib */; };
 		4E9AC58E264DB64400C2B6A8 /* SubscriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AC58C264DB64400C2B6A8 /* SubscriptionVC.swift */; };
 		4E9AC58F264DB64400C2B6A8 /* SubscriptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9AC58D264DB64400C2B6A8 /* SubscriptionVC.xib */; };
+		4EA59E7726BB0B5800E4535D /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA59E7526BB0B5800E4535D /* NotificationVC.swift */; };
+		4EA59E7826BB0B5800E4535D /* NotificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA59E7626BB0B5800E4535D /* NotificationVC.xib */; };
+		4EA59E7C26BB101200E4535D /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA59E7A26BB101200E4535D /* NotificationCell.swift */; };
+		4EA59E7D26BB101200E4535D /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA59E7B26BB101200E4535D /* NotificationCell.xib */; };
+		4EA59E8026BB140B00E4535D /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA59E7F26BB140B00E4535D /* NotificationModel.swift */; };
 		4EA9B501266BE36F0089E23E /* SummaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9B500266BE36F0089E23E /* SummaryModel.swift */; };
 		4EA9B504266BF3410089E23E /* WalletTransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9B503266BF3410089E23E /* WalletTransactionModel.swift */; };
 		4EA9B508266C126C0089E23E /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9B507266C126C0089E23E /* BaseVC.swift */; };
@@ -250,6 +255,11 @@
 		4E8FF6512653E3D800C8FCAA /* ShareVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareVC.xib; sourceTree = "<group>"; };
 		4E9AC58C264DB64400C2B6A8 /* SubscriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionVC.swift; sourceTree = "<group>"; };
 		4E9AC58D264DB64400C2B6A8 /* SubscriptionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubscriptionVC.xib; sourceTree = "<group>"; };
+		4EA59E7526BB0B5800E4535D /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
+		4EA59E7626BB0B5800E4535D /* NotificationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationVC.xib; sourceTree = "<group>"; };
+		4EA59E7A26BB101200E4535D /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		4EA59E7B26BB101200E4535D /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
+		4EA59E7F26BB140B00E4535D /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		4EA9B500266BE36F0089E23E /* SummaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryModel.swift; sourceTree = "<group>"; };
 		4EA9B503266BF3410089E23E /* WalletTransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionModel.swift; sourceTree = "<group>"; };
 		4EA9B507266C126C0089E23E /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
@@ -777,6 +787,7 @@
 				4EA9B500266BE36F0089E23E /* SummaryModel.swift */,
 				4EA9B503266BF3410089E23E /* WalletTransactionModel.swift */,
 				4E34CC21268210C600383187 /* StateModel.swift */,
+				4EA59E7F26BB140B00E4535D /* NotificationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -802,6 +813,8 @@
 				4E69C4782651289F00FF098E /* AddSubscriptionCells */,
 				4E69C4922651AEE300FF098E /* FaqCells */,
 				4E5B283D2656573600F15E68 /* WalletCells */,
+				4EA59E7A26BB101200E4535D /* NotificationCell.swift */,
+				4EA59E7B26BB101200E4535D /* NotificationCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -837,6 +850,8 @@
 				4E6134842682887D004C6CB4 /* MapVC.xib */,
 				4EF5A2512683487F001C256A /* PlaceAutoComplete.swift */,
 				4EF5A2522683487F001C256A /* PlaceAutoComplete.xib */,
+				4EA59E7526BB0B5800E4535D /* NotificationVC.swift */,
+				4EA59E7626BB0B5800E4535D /* NotificationVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -954,6 +969,7 @@
 				4E1FEED72639ABC2009010A6 /* CategoryTVC.xib in Resources */,
 				4E71B9B3264493A20094F72B /* SelectAmountTVC.xib in Resources */,
 				4E133926263D2BA70060597E /* CartVC.xib in Resources */,
+				4EA59E7D26BB101200E4535D /* NotificationCell.xib in Resources */,
 				9965FB292631663800946AB6 /* LoginVC.xib in Resources */,
 				4E3A41262656E68200D4A61A /* DeliveryTVC.xib in Resources */,
 				4E3A41242656E68200D4A61A /* DeliveryHeaderTVC.xib in Resources */,
@@ -968,6 +984,7 @@
 				4E69C48F2651A7A500FF098E /* FAQTVC.xib in Resources */,
 				4E9AC58F264DB64400C2B6A8 /* SubscriptionVC.xib in Resources */,
 				9965FB5F2631725100946AB6 /* DetailVC.xib in Resources */,
+				4EA59E7826BB0B5800E4535D /* NotificationVC.xib in Resources */,
 				4E69C45926510B7800FF098E /* SubscriptionProductCollectionCell.xib in Resources */,
 				4E1FEEDC2639AC2C009010A6 /* CategoryCollectionCell.xib in Resources */,
 				4E13392B263D3CB90060597E /* CartTVC.xib in Resources */,
@@ -1073,6 +1090,7 @@
 				4EE783A42667FFC30055EF91 /* BusinessModel.swift in Sources */,
 				4E69C4852651724300FF098E /* FAQVC.swift in Sources */,
 				4E66980D2645592E008DCA11 /* UserProfileVC.swift in Sources */,
+				4EA59E8026BB140B00E4535D /* NotificationModel.swift in Sources */,
 				4E13B62A265BCA2B0086925A /* DeliveredProductsModel.swift in Sources */,
 				4E71B98226443C220094F72B /* ShippingAddressTVC.swift in Sources */,
 				4E71B9B2264493A20094F72B /* SelectAmountTVC.swift in Sources */,
@@ -1091,6 +1109,7 @@
 				4EFCF87C263BF65E00F08AA7 /* CategoryProductsVC.swift in Sources */,
 				4E69C45826510B7800FF098E /* SubscriptionProductCollectionCell.swift in Sources */,
 				4E71B97D264435260094F72B /* ShippingTitleTVC.swift in Sources */,
+				4EA59E7C26BB101200E4535D /* NotificationCell.swift in Sources */,
 				4E550FF226525366008C0A11 /* ContactUsModel.swift in Sources */,
 				4EA9B504266BF3410089E23E /* WalletTransactionModel.swift in Sources */,
 				4EF5A2532683487F001C256A /* PlaceAutoComplete.swift in Sources */,
@@ -1119,6 +1138,7 @@
 				4EA9B508266C126C0089E23E /* BaseVC.swift in Sources */,
 				4E71B99826447E840094F72B /* CardTVC.swift in Sources */,
 				9965FB242631663800946AB6 /* SideMenuVC.swift in Sources */,
+				4EA59E7726BB0B5800E4535D /* NotificationVC.swift in Sources */,
 				4E029235263C81CD0092C741 /* OtpTextfield.swift in Sources */,
 				9965FB5E2631725100946AB6 /* DetailVC.swift in Sources */,
 				4E1FEED12639A6B0009010A6 /* ProductModel.swift in Sources */,

@@ -64,6 +64,9 @@
                                 <constraint firstAttribute="width" constant="25" id="yiE-fc-yzo"/>
                             </constraints>
                             <state key="normal" image="notification"/>
+                            <connections>
+                                <action selector="goToNotiifiications:" destination="-1" eventType="touchUpInside" id="Cdg-HV-Z8v"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0u-YB-yKV">
                             <rect key="frame" x="10" y="17" width="30" height="30"/>
@@ -103,7 +106,7 @@
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="h8a-Bk-eHV">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="g3j-w2-IBe">
                                 <size key="itemSize" width="128" height="128"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -116,7 +119,7 @@
                             </connections>
                         </collectionView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" red="0.86274509803921573" green="0.94901960784313721" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="h8a-Bk-eHV" firstAttribute="top" secondItem="Zxg-Bq-gG8" secondAttribute="top" id="0cy-St-AfM"/>
                         <constraint firstItem="h8a-Bk-eHV" firstAttribute="leading" secondItem="Zxg-Bq-gG8" secondAttribute="leading" id="DTx-1j-3aE"/>

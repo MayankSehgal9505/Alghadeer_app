@@ -65,9 +65,14 @@ extension CategoryTVC: UICollectionViewDataSource, UICollectionViewDelegateFlowL
         cell.categoryBtn.addTarget(self, action: #selector(categoryBtnTapped(sender:)), for: .touchUpInside)
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        let size = CGSize(width: self.contentView.frame.width/2-60, height: 280)
+        let size = CGSize(width: self.contentView.frame.width/2-40, height: 240)
         return size
     }
+    
 }

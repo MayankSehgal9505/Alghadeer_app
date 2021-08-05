@@ -63,6 +63,9 @@
                                 <constraint firstAttribute="width" constant="25" id="w6Z-hb-KIg"/>
                             </constraints>
                             <state key="normal" image="notification"/>
+                            <connections>
+                                <action selector="goToNotiifiications:" destination="-1" eventType="touchUpInside" id="ISV-gh-GvB"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iTk-8z-TDF">
                             <rect key="frame" x="10" y="17" width="30" height="30"/>

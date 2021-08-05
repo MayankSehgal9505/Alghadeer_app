@@ -94,9 +94,13 @@ struct UrlName {
     static let orderTotalUrl = "Payment/OrderTotal"
     //wallet urls
     static let walletBalance = "Common/walletBalance/"
-    static let walletTransactions = "Common/walletTransaction/"
+    static let walletTransactionsDebit = "Common/walletTransactionDebit/"
+    static let walletTransactionsCredit = "Common/walletTransactionCredit/"
     static let addMoneyInWallet = "Payment/WalletCheckouts"
     static let paymentStatusUrl = "Payment/checkouts/"
+    
+    
+    static let notifications = "Customer/getNotification/"
 }
 
 struct WalletCallBacks {

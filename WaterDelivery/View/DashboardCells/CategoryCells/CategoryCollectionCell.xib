@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,18 +21,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="260" height="294"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B8R-Ym-dDf">
-                                <rect key="frame" x="20" y="20" width="220" height="180"/>
+                                <rect key="frame" x="20" y="20" width="220" height="140"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="Zhn-pt-lZf"/>
+                                    <constraint firstAttribute="height" constant="140" id="Zhn-pt-lZf"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="inD-kL-CH9">
-                                <rect key="frame" x="20" y="220" width="220" height="38.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="inD-kL-CH9">
+                                <rect key="frame" x="20" y="180" width="220" height="78.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.64999997615814209" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gy1-qU-09b">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.64999997615814209" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gy1-qU-09b">
                                 <rect key="frame" x="20" y="263.5" width="220" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -43,7 +42,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="260" height="294"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="inD-kL-CH9" firstAttribute="top" secondItem="B8R-Ym-dDf" secondAttribute="bottom" constant="20" id="1Vp-Nv-BkC"/>
                             <constraint firstItem="gy1-qU-09b" firstAttribute="leading" secondItem="Rzp-PK-ssH" secondAttribute="leading" constant="20" id="2Y4-st-Wuo"/>
@@ -80,9 +79,4 @@
             <point key="canvasLocation" x="92.753623188405811" y="188.16964285714286"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

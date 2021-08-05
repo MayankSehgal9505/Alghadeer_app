@@ -28,7 +28,7 @@ class DeliveryTVC: UITableViewCell {
     }
     
     func setupCell(deliveryProductObj:DeliveredProductsModel) {
-        deliveryBaseView.setCornerRadiusOfView(cornerRadiusValue: 10, setBorder: true, borderColor: .lightGray, width: 1.0)
+        deliveryBaseView.setCornerRadiusOfView(cornerRadiusValue: 10, setBorder: false, borderColor: .lightGray, width: 1.0)
         deliveryTypeLbl.text = deliveryProductObj.deliveredProductType.deliveredProductStr
         orderID.text = deliveryProductObj.orderID
         deliveryDate.text = convertDateFormater(deliveryProductObj.created_date)

@@ -10,6 +10,7 @@ import Kingfisher
 
 class ProductsCollectionCell: UICollectionViewCell {
 
+    @IBOutlet weak var productView: UIView!
     @IBOutlet weak var imageBaseView: UIView!
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var productName: UILabel!
@@ -42,5 +43,6 @@ class ProductsCollectionCell: UICollectionViewCell {
         } else {
             productImage.image = UIImage(named: "placeholder")
         }
+        productView.setCornerRadiusOfView(cornerRadiusValue: 10)
     }
 }

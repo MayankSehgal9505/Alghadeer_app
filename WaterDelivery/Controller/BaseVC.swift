@@ -57,11 +57,14 @@ class CartBaseVC: UIViewController,CartListAPI {
     
     private func moveToCartsVC() {
         let cartVC = CartVC()
-        self.navigationController?.pushViewController(cartVC, animated: true)
+        self.navigationController?.pushViewController(cartVC, animated: false)
     }
     
     // MARK:- IBActions 
-
+    @IBAction func goToNotiifiications(_ sender: UIButton) {
+        let notificationVC = NotificationVC()
+        self.navigationController?.pushViewController(notificationVC, animated: false)
+    }
     @IBAction func goToCartBtnAction(_ sender: UIButton) {
         if Defaults.getSkipLogin() {
             let alert = UIAlertController(title: "", message: "Please signup/login to continue further", preferredStyle: .alert)

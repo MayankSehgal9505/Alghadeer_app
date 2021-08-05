@@ -132,7 +132,7 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
         case .banner:       return bannerArray.count > 0 ? 290 : 0
         case .cartBalance:  return 100
         case .products:     return productArray.count > 0 ? 320 : 0
-        case .category:     return CGFloat((categoryArray.count/2 + categoryArray.count%2) * 300)
+        case .category:     return CGFloat((categoryArray.count/2 + categoryArray.count%2) * 260)
         }
     }
 }

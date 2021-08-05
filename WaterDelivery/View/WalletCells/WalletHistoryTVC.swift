@@ -21,9 +21,22 @@ class WalletHistoryTVC: UITableViewCell {
     }
     
     func setupCell(walletTransactionObj:WalletTransactionModel) {
-        productItem.text = walletTransactionObj.comment
-        productPurchaseDate.text = ""
-        productAmount.text = "AED \(walletTransactionObj.amt)"
+        productItem.text = "Order Id: \(walletTransactionObj.comment)"
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "MMM dd yyyy"
+
+        let date: Date? = dateFormatterGet.date(from: walletTransactionObj.transactionDate)
+        productPurchaseDate.text = dateFormatterPrint.string(from: date!)
+        if walletTransactionObj.trans_type == "1" {
+            productAmount.text = "AED -\(walletTransactionObj.amt)"
+            productAmount.textColor = .red
+        } else {
+            productAmount.text = "AED \(walletTransactionObj.amt)"
+            productAmount.textColor = .blue     
+        }
     }
     
 }

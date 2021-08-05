@@ -63,7 +63,6 @@ extension DeliveryVC: UITableViewDataSource, UITableViewDelegate{
             cell.setupCell(deliveryProductObj: orderList[indexPath.section].deliveredProducts[indexPath.row-1])
             return cell
         }
-
     }
 }
 

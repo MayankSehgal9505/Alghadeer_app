@@ -36,8 +36,8 @@ class CategoryProductsVC: CartBaseVC {
         self.categoryProductCollectionView.delegate = self
         self.categoryProductCollectionView.dataSource = self
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
-        collectionViewFlowLayout.minimumLineSpacing = 20.0
-        collectionViewFlowLayout.minimumInteritemSpacing = 2.0
+        collectionViewFlowLayout.minimumLineSpacing = 0.0
+        collectionViewFlowLayout.minimumInteritemSpacing = 0.0
         collectionViewFlowLayout.scrollDirection = .vertical
         self.categoryProductCollectionView.collectionViewLayout = collectionViewFlowLayout
     }
@@ -113,7 +113,7 @@ extension CategoryProductsVC: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        let size = CGSize(width: self.view.frame.width/2-20, height: 350)
+        let size = CGSize(width: self.view.frame.width/2, height: 300)
         return size
     }
 }

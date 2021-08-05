@@ -46,10 +46,15 @@ extension WalletAPI where Self: UIViewController {
 
 class WalletVC: UIViewController{
     //MARK:- Enums
-    enum SectionType: Int, CaseIterable {
-        case walletHistory = 0
+    enum RowType: Int, CaseIterable {
+        case monthType = 0
+        case walletHistory = 1
     }
 
+    enum WalletHistoryType{
+        case debited
+        case credited
+    }
     //MARK:- IBOutlets
     @IBOutlet weak var walletTBView: UITableView!
     @IBOutlet weak var netWalletView: UIView! {didSet {netWalletView.setCornerRadiusOfView(cornerRadiusValue: 13.0)}}
@@ -61,12 +66,14 @@ class WalletVC: UIViewController{
     @IBOutlet weak var underLineView: UIView!
     @IBOutlet weak var debitedBtn: UIButton!
     @IBOutlet weak var underLineViewleading: NSLayoutConstraint!
+    @IBOutlet weak var noHistoryView: UIView!
     //MARK:- Local Variables
     private var walletBallance = WalletBalance()
-    private var walletTransactions = [WalletTransactionModel]()
+    private var walletTransactions = [WalletTransaction]()
     private var dispatchGp = DispatchGroup()
     var selectedTextColor = UIColor.init(red: 40/255, green: 63/255, blue: 82/255, alpha: 1.0)
     var unSelectedTextColor = UIColor.black
+    var walletHistoryType:WalletHistoryType = .debited
     //MARK:- Life Cycle Methods
 
     override func viewDidLoad() {
@@ -105,27 +112,45 @@ class WalletVC: UIViewController{
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func crediedAction(_ sender: UIButton) {
-        debitedBtn.setTitleColor(unSelectedTextColor, for: [])
-        creditBtn.setTitleColor(selectedTextColor, for: [])
-        UIView.animate(withDuration: 0.25) {
-            self.underLineViewleading.constant = self.creditBtn.frame.minX
+        if (walletHistoryType == .credited) {
+            return
+        } else {
+            self.showHUD(progressLabel: AlertField.loaderString)
+            walletTransactions.removeAll()
+            self.walletTBView.reloadData()
+            walletHistoryType = .credited
+            debitedBtn.setTitleColor(unSelectedTextColor, for: [])
+            creditBtn.setTitleColor(selectedTextColor, for: [])
+            UIView.animate(withDuration: 0.25) {
+                self.underLineViewleading.constant = self.creditBtn.frame.minX
+            }
+            getAllWlalletTransactions(showLoder: true)
         }
     }
     @IBAction func debitedAction(_ sender: UIButton) {
-        debitedBtn.setTitleColor(selectedTextColor, for: [])
-        creditBtn.setTitleColor(unSelectedTextColor, for: [])
-        UIView.animate(withDuration: 0.25) {
-            self.underLineViewleading.constant = self.debitedBtn.frame.minX
+        if (walletHistoryType == .debited) {
+            return
+        } else {
+            self.showHUD(progressLabel: AlertField.loaderString)
+            walletTransactions.removeAll()
+            self.walletTBView.reloadData()
+            walletHistoryType = .debited
+            debitedBtn.setTitleColor(selectedTextColor, for: [])
+            creditBtn.setTitleColor(unSelectedTextColor, for: [])
+            UIView.animate(withDuration: 0.25) {
+                self.underLineViewleading.constant = self.debitedBtn.frame.minX
+            }
+            getAllWlalletTransactions(showLoder: true)
         }
     }
 }
 //MARK:- API Methods
 
 extension WalletVC: WalletAPI {
-    private func getAllWlalletTransactions() {
+    private func getAllWlalletTransactions(showLoder:Bool = false) {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             dispatchGp.enter()
-            let walletBalanceUrl : String = UrlName.baseUrl + UrlName.walletTransactions + Defaults.getUserID()
+            let walletBalanceUrl : String = UrlName.baseUrl + (walletHistoryType == .debited ? UrlName.walletTransactionsDebit : UrlName.walletTransactionsCredit) + Defaults.getUserID()
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: walletBalanceUrl, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
@@ -136,16 +161,24 @@ extension WalletVC: WalletAPI {
                 
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     if let transactions = jsonValue[APIField.dataKey]?.array {
-                        var walletTransactions = [WalletTransactionModel]()
+                        var walletTransactions = [WalletTransaction]()
                         for walletTransaction in transactions {
-                            let walletTransactionModel = WalletTransactionModel.init(json: walletTransaction)
+                            let walletTransactionModel = WalletTransaction.init(json: walletTransaction)
                             walletTransactions.append(walletTransactionModel)
                         }
                         self.walletTransactions = walletTransactions
                         DispatchQueue.main.async {
-                            self.walletTBView.beginUpdates()
-                            self.walletTBView.reloadSections(IndexSet.init(integer: SectionType.walletHistory.rawValue), with: .none)
-                            self.walletTBView.endUpdates()
+                            if showLoder {
+                                self.dismissHUD(isAnimated: true)
+                            }
+                            if walletTransactions.count == 0 {
+                                self.noHistoryView.isHidden = false
+                                self.walletTBView.isHidden = true
+                            } else {
+                                self.noHistoryView.isHidden = true
+                                self.walletTBView.isHidden = false
+                            }
+                            self.walletTBView.reloadData()
                         }
                     }
                 }
@@ -170,29 +203,31 @@ extension WalletVC: WalletAPI {
 //MARK:- UITableViewDataSource & UITableViewDelegate Methods
 extension WalletVC: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return SectionType.allCases.count
+        return walletTransactions.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = SectionType.init(rawValue: section) else {
-            return 0
-        }
-        switch section {
-            case .walletHistory:  return walletTransactions.count
-        }
+        return 1 + walletTransactions[section].walletTransactions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let section = SectionType.init(rawValue: indexPath.section) else {
-            return UITableViewCell()
-        }
-        
-        switch section {
-        case .walletHistory:
+        switch indexPath.row {
+        case 0:
+            let cell: UITableViewCell = {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
+                return UITableViewCell(style: .default, reuseIdentifier: "cell")
+                }
+                return cell
+            }()
+            cell.backgroundColor = .clear
+            cell.textLabel?.text = walletTransactions[indexPath.section].date
+            cell.textLabel?.lineBreakMode = .byWordWrapping
+            cell.textLabel?.numberOfLines = 0
+            return cell
+        default:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletHistoryTVC.className(), for: indexPath) as! WalletHistoryTVC
-            cell.setupCell(walletTransactionObj:walletTransactions[indexPath.row])
+            cell.setupCell(walletTransactionObj:walletTransactions[indexPath.section].walletTransactions[indexPath.row-1])
             return cell
         }
-
     }
 }

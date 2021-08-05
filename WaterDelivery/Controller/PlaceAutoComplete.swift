@@ -31,7 +31,7 @@ class PlaceAutoComplete: UIViewController {
     var primaryAddressArray = [String]()
     var searchResults = [String]()
     var searhPlacesName = [String]()
-    let googleAPIKey = "AIzaSyDWK2zFda82S7Dgg0vo1u7ybjpfJcQY6q8"
+    let googleAPIKey = "AIzaSyD2VWt9eD4Md-PKIPae9Ov1Mp-VYxgYbYE"
     var delegate: LocateOnTheMap?
   
     //search Controller implementations
@@ -140,12 +140,15 @@ extension PlaceAutoComplete:UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell: UITableViewCell = {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
+            return UITableViewCell(style: .default, reuseIdentifier: "cell")
+            }
+            return cell
+        }()
         cell.textLabel?.text = searchResults[indexPath.row]
         cell.textLabel?.lineBreakMode = .byWordWrapping
         cell.textLabel?.numberOfLines = 0
-        
-
         return cell
     }
     

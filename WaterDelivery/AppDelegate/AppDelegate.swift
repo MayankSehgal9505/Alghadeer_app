@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.initialSetup()
-        GMSServices.provideAPIKey("AIzaSyDWK2zFda82S7Dgg0vo1u7ybjpfJcQY6q8")
-        GMSPlacesClient.provideAPIKey("AIzaSyDWK2zFda82S7Dgg0vo1u7ybjpfJcQY6q8")
+        GMSServices.provideAPIKey("AIzaSyDtB5sgvGxdLTOK3kAJJ8xvCtElO87pchI")
+        GMSPlacesClient.provideAPIKey("AIzaSyDtB5sgvGxdLTOK3kAJJ8xvCtElO87pchI")
         registerForPushNotifications()
         return true
     }

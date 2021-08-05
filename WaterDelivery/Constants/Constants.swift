@@ -38,6 +38,7 @@ struct UrlName {
     static let loginOtpUrl = "Auth/otp"
     static let resendOtpUrl = "User_registration/resendotp"
     static let verifyOTPUrl = "User_registration/verification"
+    
     //Dasshboard urls
     static let getBannerUrl = "Master/GetBanner"
     static let getCategoryListUrl = "Category/CategoryList/0"

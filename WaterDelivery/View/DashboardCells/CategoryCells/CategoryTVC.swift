@@ -24,7 +24,7 @@ class CategoryTVC: UITableViewCell {
         self.collectionView.dataSource = self
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.minimumLineSpacing = 0.0
-        collectionViewFlowLayout.minimumInteritemSpacing = 0.0
+        collectionViewFlowLayout.minimumInteritemSpacing = 00.0
         collectionViewFlowLayout.scrollDirection = .vertical
         self.collectionView.collectionViewLayout = collectionViewFlowLayout
     }
@@ -71,7 +71,7 @@ extension CategoryTVC: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        let size = CGSize(width: self.contentView.frame.width/2-40, height: 240)
+        let size = CGSize(width: self.collectionView.frame.width/2, height: 240)
         return size
     }
     

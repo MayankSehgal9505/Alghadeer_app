@@ -24,7 +24,7 @@ extension CartListAPI where Self : CartBaseVC{
                         if let cartCountString = jsonValue["TotalCount"]?.stringValue, let cartCount = Int(cartCountString), cartCount > 0 {
                             self.cartView(hidden: false, count: cartCountString)
                         } else {
-                            self.cartView(hidden: true, count: "0")
+                            self.cartView(hidden: false, count: "0")
                         }
                     }
                 }

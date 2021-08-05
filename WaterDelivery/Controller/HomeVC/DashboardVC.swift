@@ -131,7 +131,7 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
         switch section {
         case .banner:       return bannerArray.count > 0 ? 290 : 0
         case .cartBalance:  return 100
-        case .products:     return productArray.count > 0 ? 320 : 0
+        case .products:     return productArray.count > 0 ? 340 : 0
         case .category:     return CGFloat((categoryArray.count/2 + categoryArray.count%2) * 260)
         }
     }
@@ -159,6 +159,7 @@ extension DashboardVC: CategoryProtocol{
 extension DashboardVC: WalletAPI {
     private func getWalletDetails() {
         getWalletDetails(dismissHud: false) { (walletBalance) in
+            print("wallet  api response it was iin dispatch gp")
             self.dispatchGp.leave()
             self.walletBallance = walletBalance
         }
@@ -188,6 +189,7 @@ extension DashboardVC: WalletAPI {
                     self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
                     }
                 }
+                print("banner list api response it was iin dispatch gp")
                 self.dispatchGp.leave()
             })
         }else{
@@ -221,6 +223,7 @@ extension DashboardVC: WalletAPI {
                         self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
                     }
                 }
+                print("product list api response it was iin dispatch gp")
                 self.dispatchGp.leave()
             })
         }else{
@@ -254,6 +257,7 @@ extension DashboardVC: WalletAPI {
                         self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
                     }
                 }
+                print("Category api response it was iin dispatch gp")
                 self.dispatchGp.leave()
             })
         }else{

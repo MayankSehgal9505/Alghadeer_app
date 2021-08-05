@@ -19,7 +19,7 @@ class OTPVC: UIViewController {
     @IBOutlet var otpTxtFldViews: [UIView]! {
         didSet {
             for otpView in otpTxtFldViews {
-                self.setCornerWithColor(aView: otpView, radius: 8,color: UIColor.init(red: 59/255, green: 112/255, blue: 229/255, alpha: 1.0))
+                self.setCornerWithColor(aView: otpView, radius: 3,color: UIColor.black)
             }
         }
     }
@@ -50,21 +50,24 @@ class OTPVC: UIViewController {
         initializeTimer()
     }
     private func initializeTimer() {
-        timelimit = 59
+        timelimit = 119
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
         RunLoop.current.add(timer!, forMode: RunLoop.Mode.common)
         timer?.fire()
     }
     @objc private func startTimer() {
-        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
         if timelimit == 0 {
             timer?.invalidate()
             timer = nil
-            tiimerField.attributedText = NSAttributedString(string: "Send Again OTP", attributes: underlineAttribute)
+            tiimerField.attributedText = NSAttributedString(string: "00:00", attributes: nil)
             resendOtp.isEnabled = true
         } else {
             timelimit = timelimit-1
-            tiimerField.attributedText = NSAttributedString(string: String(format: "Send Again OTP (%@s)", "\(timelimit)"), attributes: underlineAttribute)
+            if timelimit > 60 {
+                tiimerField.attributedText = NSAttributedString(string: String(format: "1 min, %@ sec", "\(timelimit-60)"), attributes: nil)
+            } else {
+                tiimerField.attributedText = NSAttributedString(string: String(format: "0 min, %@ sec", "\(timelimit)"), attributes: nil)
+            }
         }
     }
     //gives the OTP text
@@ -86,6 +89,9 @@ class OTPVC: UIViewController {
 //        for (otpChar,textfield) in zip(otpRecieved, otpTxtFlds) {
 //            textfield.text = String.init(otpChar)
 //        }
+    }
+    @IBAction func backBtn(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: false)
     }
     @IBAction func submitBtnClicked(_ sender: Any) {
         self.view.endEditing(true)
@@ -204,16 +210,26 @@ extension OTPVC {
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: loginURL, method: .post, parameters: parameters, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
-                    self.dismissHUD(isAnimated: true)
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                    }
                     return
                 }
                 if let apiSuccess = jsonValue[APIField.successKey], apiSuccess == "true" {
-                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    DispatchQueue.main.async {
+                        self.resendOtp.isEnabled = false
+                        self.initializeTimer()
+                        self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
                 }
                 else {
-                    self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    DispatchQueue.main.async {
+                        self.view.makeToast(jsonValue[APIField.messageKey]?.stringValue, duration: 3.0, position: .bottom)
+                    }
                 }
-                self.dismissHUD(isAnimated: true)
+                DispatchQueue.main.async {
+                    self.dismissHUD(isAnimated: true)
+                }
             })
         }else{
             self.showNoInternetAlert()

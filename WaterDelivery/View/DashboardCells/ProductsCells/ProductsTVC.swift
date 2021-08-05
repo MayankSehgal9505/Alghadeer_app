@@ -67,7 +67,7 @@ extension ProductsTVC: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        let size = CGSize(width: self.contentView.frame.width/2, height: 240)
+        let size = CGSize(width: self.contentView.frame.width/2, height: 280)
         return size
     }
 }

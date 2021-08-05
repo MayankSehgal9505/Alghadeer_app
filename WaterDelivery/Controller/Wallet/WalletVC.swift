@@ -30,6 +30,8 @@ extension WalletAPI where Self: UIViewController {
                         let walletBallance = WalletBalance.init(json: wallet)
                         obtainedResult(walletBallance)
                     }
+                } else {
+                    obtainedResult(WalletBalance.init())
                 }
                 DispatchQueue.main.async {
                     if (dismissHud) {

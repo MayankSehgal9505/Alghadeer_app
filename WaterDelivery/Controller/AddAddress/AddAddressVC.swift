@@ -63,13 +63,51 @@ class AddAddressVC: UIViewController,SelectedLoc {
         default: break
         }
     }
+    func getAddress(lat: Double,long: Double) {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let faqURL : String = "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(lat),\(long)&key=AIzaSyDtB5sgvGxdLTOK3kAJJ8xvCtElO87pchI"
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: faqURL, method: .get, parameters: nil, completionHandler: { (json, status) in
+                if let jsonValue = json?.dictionaryValue {
+                    if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == "OK" {
+                        if let addressList = jsonValue["results"]?.array {
+                            if addressList.count > 0 {
+                                if let addressDict = addressList.first?.dictionaryValue {
+                                    DispatchQueue.main.async {
+                                        self.dismissHUD(isAnimated: true)
+                                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                                        self.locationTxtFld.text = addressDict["formatted_address"]?.string ?? ""
+                                    }
+                                } else {
+                                    DispatchQueue.main.async {
+                                        self.dismissHUD(isAnimated: true)
+                                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                                        self.locationTxtFld.text = ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                        self.locationTxtFld.text = ""
+                    }
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
+    }
     
     func setUpUIData() {
         self.addressTxtFld.text = addressModel.shippingAddress
         self.phoneNumberTxtFld.text = addressModel.shippingPhoneNumber
         self.stateTxtFld.text = addressModel.shippingState
         self.cityTxtFld.text = addressModel.shippingCity
-        self.locationTxtFld.text = addressModel.shippingAddress
+        getAddress(lat: Double(addressModel.latitude) ?? 0.0, long: Double(addressModel.longitude) ?? 0.0)
     }
     /// Hiding Picker View
     private func hidePickerView(){
@@ -90,7 +128,9 @@ class AddAddressVC: UIViewController,SelectedLoc {
     }
     
     func locationData(locString: String, lat: Double, long: Double) {
-        self.locationTxtFld.text = locString
+        DispatchQueue.main.async {
+            self.locationTxtFld.text = locString
+        }
         self.lat = lat
         self.long = long
     }
@@ -98,6 +138,7 @@ class AddAddressVC: UIViewController,SelectedLoc {
     @IBAction func locationBtnTapped(_ sender: UIButton) {
         let mapVC = MapVC.init()
         mapVC.modalPresentationStyle = .fullScreen
+        mapVC.locationDelegate = self
         self.present(mapVC, animated: true, completion: nil)
         
     }
@@ -221,7 +262,7 @@ extension AddAddressVC {
                 "latitude":self.lat,
                 "longitude":self.long,
                 "customer_id":Defaults.getUserID(),
-                "location_address": "dcfvfv"
+                "location_address": locationTxtFld.text!
             ] as [String : Any]
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addAddressUrl, method: .put, parameters: parameters, completionHandler: { (json, status) in
@@ -275,7 +316,7 @@ extension AddAddressVC {
                 "latitude":self.lat,
                 "longitude":self.long,
                 "customer_id":Defaults.getUserID(),
-                "location_address": "dcfvfv"
+                "location_address": locationTxtFld.text!
             ] as [String : Any]
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: addAddressUrl, method: .post, parameters: parameters, completionHandler: { (json, status) in

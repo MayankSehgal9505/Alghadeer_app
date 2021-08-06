@@ -128,7 +128,11 @@ class MapVC: UIViewController {
         marker.map = mapViewObject
         marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
     }
-    func latLong(lat: Double,long: Double)  -> String {
+
+        
+
+
+    /*func latLong(lat: Double,long: Double)  -> String {
         var address = ""
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
@@ -156,6 +160,45 @@ class MapVC: UIViewController {
             })
         }
         return address
+    }*/
+    
+    func getAddress(lat: Double,long: Double,completionHandler:@escaping (String)-> Void) {
+        if NetworkManager.sharedInstance.isInternetAvailable(){
+            self.showHUD(progressLabel: AlertField.loaderString)
+            let faqURL : String = "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(lat),\(long)&key=AIzaSyDtB5sgvGxdLTOK3kAJJ8xvCtElO87pchI"
+            NetworkManager.viewControler = self
+            NetworkManager.sharedInstance.commonApiCall(url: faqURL, method: .get, parameters: nil, completionHandler: { (json, status) in
+                if let jsonValue = json?.dictionaryValue {
+                    if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == "OK" {
+                        if let addressList = jsonValue["results"]?.array {
+                            if addressList.count > 0 {
+                                if let addressDict = addressList.first?.dictionaryValue {
+                                    DispatchQueue.main.async {
+                                        self.dismissHUD(isAnimated: true)
+                                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                                    }
+                                    completionHandler(addressDict["formatted_address"]?.string ?? "")
+                                } else {
+                                    DispatchQueue.main.async {
+                                        self.dismissHUD(isAnimated: true)
+                                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                                    }
+                                    completionHandler("")
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.dismissHUD(isAnimated: true)
+                        self.view.makeToast(status, duration: 3.0, position: .bottom)
+                    }
+                    completionHandler("")
+                }
+            })
+        }else{
+            self.showNoInternetAlert()
+        }
     }
     //MARK:- IBActions
     @IBAction func location(_ sender: UIButton) {
@@ -165,7 +208,12 @@ class MapVC: UIViewController {
 
     }
     @IBAction func saveBtnAction(_ sender: UIButton) {
-        locationDelegate?.locationData(locString: latLong(lat: marker.position.latitude, long: marker.position.longitude), lat: marker.position.latitude, long: marker.position.longitude)
+        getAddress(lat: marker.position.latitude, long: marker.position.longitude) { str in
+            self.locationDelegate?.locationData(locString: str , lat: self.marker.position.latitude, long: self.marker.position.longitude)
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
     @IBAction func backAction(_ sender: UIButton) {
@@ -189,6 +237,7 @@ extension MapVC:CLLocationManagerDelegate {
         guard let userLocation = locations.last else { return }
         currentLocation = userLocation.coordinate
         setupMapView(currentLocation: currentLocation)
+        manager.stopUpdatingLocation()
     }
 }
 // MARK: - CoreLocation Delegate Methods

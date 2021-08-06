@@ -64,16 +64,14 @@ class UserProfileVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        addresssParentView.setShadow()
+        print(addressTBView.contentSize.height)
+        self.taableHeight.constant = self.addressTBView.contentSize.height
+        addresssParentView.frame = CGRect.init(x: addresssParentView.frame.minX, y: addresssParentView.frame.minY, width: addresssParentView.frame.size.width, height: addresssParentView.frame.size.height + self.taableHeight.constant - 120)
+        //addresssParentView.setShadow()
         generalnfoView.setShadow()
          
          //isScrollEnabled of table view  should be dissable because our table is inside scrollview.
         addressTBView.isScrollEnabled = false
-         
-         
-         //if above tableView.contentSize.height   not zero and giving acurate value then proceed further and update our parent scroll view contentsize height for height.
-         print(addressTBView.contentSize.height)
-        self.taableHeight.constant = self.addressTBView.contentSize.height
     }
     //MARK:- Internal Methods
     func setupUI() {
@@ -338,7 +336,9 @@ extension UserProfileVC: AddressProtocol{
         DispatchQueue.main.async {
             self.addressTBView.reloadData()
             self.taableHeight.constant = self.addressTBView.contentSize.height
-        }
+            self.addresssParentView.frame = CGRect.init(x: self.addresssParentView.frame.minX, y: self.addresssParentView.frame.minY, width: self.addresssParentView.frame.size.width, height: self.addresssParentView.frame.size.height + self.taableHeight.constant - 120)
+            self.view.layoutIfNeeded()
+            }
     }
     
     private func deleteAddress(addressID: String) {
@@ -362,6 +362,7 @@ extension UserProfileVC: UITableViewDataSource{
         if indexPath.row < shippingAddressArray.count {
             cell.adddressSelectionBtn.tag = indexPath.row
             cell.adddressSelectionBtn.addTarget(self, action: #selector(shippingAddrress(sender:)), for: .touchUpInside)
+            cell.addressTitle.text = "Address \(indexPath.row + 1)"
             cell.setupCell(shipperAddress: shippingAddressArray[indexPath.row])
         }
         return cell

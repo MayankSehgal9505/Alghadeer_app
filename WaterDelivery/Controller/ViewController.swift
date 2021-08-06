@@ -13,17 +13,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    
-    /// If user is already logged in
-    func checkIfAlreadyLogin() {
-        if Defaults.isUserLoggedIn() {
-            makeRootViewController()
-        } else {
-            let obj = LoginVC.init(nibName: LoginVC.className(), bundle: nil)
-            self.navigationController?.pushViewController(obj, animated: true)
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)

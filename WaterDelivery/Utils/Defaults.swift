@@ -41,11 +41,23 @@ class Defaults {
     static func getUserPhoneNumber()-> String {
         defaults.string(forKey: "userNumber") ?? ""
     }
+    static func setDeviceToken(token:String) {
+        defaults.set(token, forKey: "deviceToken")
+    }
+    static func getDeviceToken()-> String? {
+        defaults.string(forKey: "deviceToken")
+    }
     static func setToken(token:String) {
         defaults.set(token, forKey: "token")
     }
     static func getToken()-> String? {
         defaults.string(forKey: "token")
+    }
+    static func setSkipLogin(_ skipLogin:Bool) {
+        defaults.set(skipLogin, forKey: "skippedLogin")
+    }
+    static func getSkipLogin()-> Bool {
+        defaults.bool(forKey: "skippedLogin") 
     }
     static func resetDefaults() {
         let dictionary = defaults.dictionaryRepresentation()

@@ -22,10 +22,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="421" height="303"/>
                         <subviews>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="Y28-Eg-7hp">
-                                <rect key="frame" x="149" y="275" width="123" height="28"/>
+                                <rect key="frame" x="149" y="260" width="123" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="123" id="ZE6-Pz-OIO"/>
-                                    <constraint firstAttribute="height" constant="28" id="pMy-Ko-Bqo"/>
+                                    <constraint firstAttribute="height" constant="20" id="pMy-Ko-Bqo"/>
                                 </constraints>
                                 <color key="pageIndicatorTintColor" systemColor="systemGray2Color"/>
                                 <color key="currentPageIndicatorTintColor" red="0.052348959299999998" green="0.028049802759999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -43,38 +43,14 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="982-X2-JWz">
-                                <rect key="frame" x="10" y="10" width="401" height="39.5"/>
-                                <attributedString key="attributedText">
-                                    <fragment>
-                                        <string key="content">Welcome to a New World of Safe 
-</string>
-                                        <attributes>
-                                            <font key="NSFont" metaFont="system" size="17"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="Clean Water!">
-                                        <attributes>
-                                            <font key="NSFont" metaFont="systemBold" size="17"/>
-                                            <font key="NSOriginalFont" metaFont="systemBold" size="17"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="982-X2-JWz" secondAttribute="trailing" constant="10" id="4go-U5-Icc"/>
-                            <constraint firstItem="982-X2-JWz" firstAttribute="leading" secondItem="bNe-oG-rOW" secondAttribute="leading" constant="10" id="746-WV-qAn"/>
                             <constraint firstAttribute="trailing" secondItem="qsw-b4-Chl" secondAttribute="trailing" id="7l4-3b-Q90"/>
                             <constraint firstItem="qsw-b4-Chl" firstAttribute="top" secondItem="bNe-oG-rOW" secondAttribute="top" id="CLQ-ab-m4S"/>
-                            <constraint firstAttribute="bottom" secondItem="Y28-Eg-7hp" secondAttribute="bottom" id="GQJ-0J-x2i"/>
-                            <constraint firstItem="982-X2-JWz" firstAttribute="top" secondItem="bNe-oG-rOW" secondAttribute="top" constant="10" id="IBM-Gd-qgp"/>
                             <constraint firstItem="Y28-Eg-7hp" firstAttribute="centerX" secondItem="bNe-oG-rOW" secondAttribute="centerX" id="InA-gn-PS9"/>
                             <constraint firstItem="qsw-b4-Chl" firstAttribute="leading" secondItem="bNe-oG-rOW" secondAttribute="leading" id="auh-rG-NQF"/>
+                            <constraint firstItem="Y28-Eg-7hp" firstAttribute="top" secondItem="qsw-b4-Chl" secondAttribute="bottom" constant="10" id="tQn-14-HLg"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -86,6 +62,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="collectionView" destination="qsw-b4-Chl" id="8gm-nf-7sF"/>
                 <outlet property="pageControl" destination="Y28-Eg-7hp" id="hZX-gF-tF4"/>
@@ -94,9 +71,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

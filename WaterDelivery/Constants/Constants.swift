@@ -30,19 +30,84 @@ struct Color {
 
 //MARK: - URL
 struct UrlName {
+    // base url
     static let baseUrl = "http://demo.equalinfotech.com/Waterdelivery/api/"
+    
+    //SSO URLS
     static let loginUrl = "Auth/login"
     static let loginOtpUrl = "Auth/otp"
     static let resendOtpUrl = "User_registration/resendotp"
     static let verifyOTPUrl = "User_registration/verification"
-    static let getBusinessTypeUrl = "Master/GetBusinessType"
-    static let getProductListUrl = "Product/productList/0"
-    static let getProductDetailUrl = "Product/productDetails/"
+    
+    //Dasshboard urls
     static let getBannerUrl = "Master/GetBanner"
     static let getCategoryListUrl = "Category/CategoryList/0"
-    static let getCategoryDetailUrl = "Category/categoryDetails/"
+    static let getProductListUrl = "Product/productList/0/1"
+    static let getProductDetailUrl = "Product/productDetails/"
+    static let getCartQuantityUrl = "cart/getquantity"
+    static let getCategoryDetailUrl = "Category/categoryDetails/"   // Un used api
     static let getProductListByCategoryID = "Category/ByCcategoryIdGetProductList/"
 
+    //Cart Items Url
+    static let addToCartUrl = "Cart/addToCart"
+    static let getCartItemsUrl = "Cart/cartList/"
+    static let getCartCountUrl = "Cart/cartTotalCount/"
+    static let promoCodeUrl = "Coupon/couponCode"
+
+    // Address URLs
+    static let getAddressListUrl = "Address/getAddressList/"
+    static let addAddressUrl = "Address/add"
+    static let addAddressNewUrl = "Address/addAddress_post"
+    static let updateAddressUrl = "Address/update/"
+    static let deleteAddressUrl = "Address/deleteAddress/"
+    static let getStates = "Address/getCityList"
+    static let getCities = "Address/getDistrictList/"
+    // User Profile URLS
+    static let getUserDetailUrl = "User_registration/getUser/"
+    static let updateUserDetailUrl = "User_registration/userUpdate/"
+    static let updateUserImgUrl = "User_registration/profile"
+    
+    // businesss urls
+    static let getBusinessUrl = "Master/GetBusinessType"
+    static let setBusinessUrl = "User_registration/businessTypesUpdate/"
+    // FAQ URL
+    static let faqUrl = "Common/faqContact/faq"
+    
+    // CONTACT US URL
+    static let contactUrl = "Common/faqContact/contactus"
+    static let enquiryUrl = "Address/contactus"
+    // LogOut Url
+    static let logOutUrl = "Auth/logout"
+
+    // Subscription apis
+    static let addSubscriptionUrl = "SubscriptionOrder/addSubscriptionOrder"
+    static let getSubscriptionUrl = "SubscriptionOrder/SubscriptionOrderList/"
+    static let updateSubscriptionUrl = "SubscriptionOrder/subscriptionUpdate/"
+    static let deliveryTimeUrl = "SubscriptionOrder/DeliveryTimeslot"
+
+    
+    // My Deliveries Urls
+    static let orderListUrl = "Order/OrderList"
+
+    // Order Checkout
+    static let cartCheckOutUrl = "Order/checkout"
+    static let orderCheckOutUrl = "Payment/Ordercheckout"
+    static let orderTotalUrl = "Payment/OrderTotal"
+    //wallet urls
+    static let walletBalance = "Common/walletBalance/"
+    static let walletTransactionsDebit = "Common/walletTransactionDebit/"
+    static let walletTransactionsCredit = "Common/walletTransactionCredit/"
+    static let addMoneyInWallet = "Payment/WalletCheckouts"
+    static let paymentStatusUrl = "Payment/checkouts/"
+    
+    
+    static let notifications = "Customer/getNotification/"
+}
+
+struct WalletCallBacks {
+    static let successURLS = "https://pay.test.pointcheckout.com/hosted/payment-confirmation"
+    static let cancelURLS = "https://pay.test.pointcheckout.com/hosted/cancel"
+    static let completionUrls = [successURLS,cancelURLS]
 }
 
 // MARK:- Web Service Params
@@ -59,6 +124,7 @@ struct APIField {
     static let successKey = "success"
     static let statusKey = "status"
     static let tokenKey = "token"
+    static let expiredToken = "Expired token"
 }
 
 // MARK: - User Defaults
@@ -66,6 +132,7 @@ struct UserDefaultsKey {
     static let isAlreadyLoginString = "isAlreadyLogin"
     static let loginData = "loginData"
     static let userId = "userId"
+    static let defaultToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIzMCIsImVtYWlsIjoic3ByYiIsImlhdCI6MTYyNDI4MTY4MiwiZXhwIjo0Nzc3ODgxNjgyfQ.32Gv4qxC6dttp4sbMKmFh1i-Ku69WUgsAoDVzQcRIyg"
 }
 
 // MARK: - AlertField Names
@@ -116,8 +183,8 @@ struct AlertField {
 
 struct SideMenu {
     //MARK:- SideMenu Controller
-    static let sideMenuOptionslabel = ["Home","My Profile","Wallet","Subscriptions","My Deliveries","Refer a Friend","FAQ","Scanner","Contact Us","Logout"]
-    static let sideMenuOptionImage = ["home","watch","wallet","subscription","delivery","refer-friend","faq","scaner","contact-icon","logout"]
+    static let sideMenuOptionslabel = ["Home","My Profile","Wallet","Subscriptions","My Deliveries","Refer a Friend","FAQ","Contact Us","Select Language","Logout"]
+    static let sideMenuOptionImage = ["home","user","wallet","subscription","delivery","refer-friend","faq","contact-icon","language","logout"]
 }
 
 

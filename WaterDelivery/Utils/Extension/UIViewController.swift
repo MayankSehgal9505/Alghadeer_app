@@ -26,6 +26,17 @@ extension UIViewController {
     func dismissHUD(isAnimated:Bool) {
         MBProgressHUD.hide(for: self.view, animated: isAnimated)
     }
+    /// Method to show alert when no internet connection
+    func showSessionExpiredAlert(){
+        let alertView = UIAlertController(title: "Session Expired", message: "Your session has been expired, logging out from app", preferredStyle: .alert)
+        let action = UIAlertAction(title: AlertField.okString, style: .default, handler: { (alert) in
+            //Sign out action
+            Defaults.resetDefaults()
+            Utility.checkIfAlreadyLogin(vc: self)
+        })
+        alertView.addAction(action)
+        self.present(alertView, animated: true, completion: nil)
+    }
     
     /// Method to show alert when no internet connection
     func showNoInternetAlert(){
@@ -125,6 +136,7 @@ extension UIViewController {
     
     func makeRootViewController(){
             let homeVcObj = DashboardVC.init(nibName: DashboardVC.className(), bundle: nil)
+            //let homeVcObj = CheckoutVC.init(nibName: CheckoutVC.className(), bundle: nil)
             let centrenav  = UINavigationController(rootViewController:homeVcObj)
             let sideMenuVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: SideMenuVC.className()) as! SideMenuVC
             let container = REFrostedViewController(contentViewController: centrenav, menuViewController: sideMenuVc)

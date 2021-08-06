@@ -11,6 +11,8 @@ protocol ProductDetailProtocol: class {
 }
 class ProductsTVC: UITableViewCell {
     
+    @IBOutlet weak var parentView: UIView!
+    @IBOutlet weak var favouriteProductsLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     var productArray = Array<ProductModel>()
     weak var productDelegate: ProductDetailProtocol?
@@ -27,8 +29,9 @@ class ProductsTVC: UITableViewCell {
     }
 
     
-    func setupCell(productList: Array<ProductModel>) {
-        productArray = productList
+    func setupCell() {
+        parentView.setCornerRadiusOfView(cornerRadiusValue:15)
+        parentView.setShadow()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -64,7 +67,7 @@ extension ProductsTVC: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        let size = CGSize(width: self.contentView.frame.width/2, height: 320)
+        let size = CGSize(width: self.contentView.frame.width/2, height: 280)
         return size
     }
 }

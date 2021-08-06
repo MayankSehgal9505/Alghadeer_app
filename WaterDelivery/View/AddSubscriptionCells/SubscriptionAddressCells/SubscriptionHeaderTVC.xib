@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SubscriptionHeaderTVC" rowHeight="149" id="KGk-i7-Jjw" customClass="SubscriptionHeaderTVC" customModule="WaterDelivery" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Addrees" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOU-zL-rhc">
+                        <rect key="frame" x="20" y="20" width="116" height="109"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.082352941176470587" green="0.33725490196078434" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgD-qg-0Rx">
+                        <rect key="frame" x="200" y="59.5" width="100" height="30"/>
+                        <color key="backgroundColor" red="0.090196078430000007" green="0.33333333329999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="JOi-bD-nAQ"/>
+                            <constraint firstAttribute="height" constant="30" id="hg8-h7-srA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <state key="normal" title="ADD ADDRESS">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUz-Jc-tob">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="5"/>
+                        <color key="backgroundColor" systemColor="systemGray3Color"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="5" id="cC4-3g-8My"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="nUz-Jc-tob" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7gc-EF-H3F"/>
+                    <constraint firstAttribute="bottom" secondItem="xOU-zL-rhc" secondAttribute="bottom" constant="20" id="7mc-0t-h3J"/>
+                    <constraint firstItem="xgD-qg-0Rx" firstAttribute="centerY" secondItem="xOU-zL-rhc" secondAttribute="centerY" id="IdA-Nf-MLL"/>
+                    <constraint firstItem="xOU-zL-rhc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="J9y-QQ-Ccz"/>
+                    <constraint firstAttribute="trailing" secondItem="nUz-Jc-tob" secondAttribute="trailing" id="QAb-AU-VfY"/>
+                    <constraint firstItem="xOU-zL-rhc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="YVu-pd-N5n"/>
+                    <constraint firstAttribute="trailing" secondItem="xgD-qg-0Rx" secondAttribute="trailing" constant="20" id="vRA-fn-qPB"/>
+                    <constraint firstItem="nUz-Jc-tob" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vgf-vv-ipm"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="addAddressBtn" destination="xgD-qg-0Rx" id="YFA-qy-lYZ"/>
+            </connections>
+            <point key="canvasLocation" x="105.79710144927537" y="122.87946428571428"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

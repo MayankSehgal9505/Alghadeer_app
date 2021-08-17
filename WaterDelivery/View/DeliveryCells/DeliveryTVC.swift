@@ -18,6 +18,8 @@ class DeliveryTVC: UITableViewCell {
     @IBOutlet weak var deliveryBaseView: UIView!
     @IBOutlet weak var deliveryStatus: UILabel!
     @IBOutlet weak var deliveryView: UIView!
+    @IBOutlet weak var orderIdLbl: UILabel!
+    @IBOutlet weak var deliveryAddressLbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,6 +30,8 @@ class DeliveryTVC: UITableViewCell {
     }
     
     func setupCell(deliveryProductObj:DeliveredProductsModel) {
+        orderIdLbl.text = Bundle.main.localizedString(forKey: "Order Id:", value: nil, table: nil)
+        deliveryAddressLbl.text = Bundle.main.localizedString(forKey: "Delivery Address", value: nil, table: nil)
         deliveryBaseView.setCornerRadiusOfView(cornerRadiusValue: 10, setBorder: false, borderColor: .lightGray, width: 1.0)
         deliveryTypeLbl.text = deliveryProductObj.deliveredProductType.deliveredProductStr
         orderID.text = deliveryProductObj.orderID
@@ -39,6 +43,11 @@ class DeliveryTVC: UITableViewCell {
             deliveryView.isHidden = true
         }
         deliveryAddress.text = "\(deliveryProductObj.address.shippingAddress), \(deliveryProductObj.address.shippingCity), \(deliveryProductObj.address.shippingState) \(deliveryProductObj.address.shippingCountry)"
+        if Defaults.getEnglishLangauge() == "ar" {
+            deliveyPrice.textAlignment = .left
+        } else {
+            deliveyPrice.textAlignment = .right
+        }
         deliveyPrice.text = "AED \(deliveryProductObj.totalAmount)"
         deliveryStatus.text = deliveryProductObj.status
     }

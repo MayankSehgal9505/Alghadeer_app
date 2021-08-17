@@ -22,6 +22,9 @@ class SubscriptionTVC: UITableViewCell {
     @IBOutlet weak var unitPriceValue: UILabel!
     @IBOutlet weak var deliveryTime: UILabel!
     @IBOutlet weak var quantityLbl: UILabel!
+    @IBOutlet weak var deliveryAddressLbl: UILabel!
+    @IBOutlet weak var subscriptionDatesLbl: UILabel!
+    @IBOutlet weak var deliveryTimeLbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,13 +39,17 @@ class SubscriptionTVC: UITableViewCell {
     func setupCell(index:Int,tabType:SubscriptionTab) {
         pauseReactivateBtn.tag = index
         cancelBtn.tag = index
-        pauseReactivateBtn.setTitle(tabType == .active ? "Pause" : "Reactivate", for: [])
+        pauseReactivateBtn.setTitle((Bundle.main.localizedString(forKey: tabType == .active ? "Pause" : "Reactivate", value: "", table: "")), for: [])
         baseView.setCornerRadiusOfView(cornerRadiusValue:10)
         imageBGView.setCornerRadiusOfView(cornerRadiusValue:10)
         imageBGView.setShadow()
         cancelBtn.setCornerRadiusOfView(cornerRadiusValue:20)
         pauseReactivateBtn.setCornerRadiusOfView(cornerRadiusValue:20)
         buttonsView.isHidden = tabType == .cancelled
+        cancelBtn.setTitle((Bundle.main.localizedString(forKey: "Cancel", value: "", table: "")), for: [])
+        deliveryAddressLbl.text = (Bundle.main.localizedString(forKey: "عنوان التسليم -", value: "", table: ""))
+        subscriptionDatesLbl.text = (Bundle.main.localizedString(forKey: "تواريخ الاشتراك", value: "", table: ""))
+        deliveryTimeLbl.text = (Bundle.main.localizedString(forKey: "موعد التسليم", value: "", table: ""))
     }
     
     func setupCellData(subscriptionModel:SubscriptionModel) {
@@ -52,11 +59,13 @@ class SubscriptionTVC: UITableViewCell {
             subscribedProductImg.image = UIImage(named: "placeholder")
         }
         productName.text = subscriptionModel.productName
-        unitPriceValue.text = "price of Unit: \(subscriptionModel.productUnitPrice)"
+        unitPriceValue.text = "\(Bundle.main.localizedString(forKey: "price of Unit:", value: "", table: "")) \(subscriptionModel.productUnitPrice)"
         produuctAddress.text = "\(subscriptionModel.address.shippingAddress) \(subscriptionModel.address.shippingCity) \(subscriptionModel.address.shippingPostCode) \(subscriptionModel.address.shippingCountry)"
         subscriptionDatesValue.text = "\(subscriptionModel.subscriptionStartDate) - \(subscriptionModel.subscriptionEndDate)"
         deliveryTime.text = subscriptionModel.productDeliveryTime
-        totalPriceValue.text = "Total AED:\(subscriptionModel.totalAmount)"
-        quantityLbl.text = "QTY +\(subscriptionModel.productQuantity)"
+        subscriptionDatesValue.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .left : .right
+        deliveryTime.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .left : .right
+        totalPriceValue.text = "\(Bundle.main.localizedString(forKey: "Total", value: "", table: "")) AED:\(subscriptionModel.totalAmount)"
+        quantityLbl.text = "\(Bundle.main.localizedString(forKey: "QTY +", value: "", table: "")) \(subscriptionModel.productQuantity)"
     }
 }

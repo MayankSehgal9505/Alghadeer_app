@@ -141,9 +141,13 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="grandTotal" destination="jgl-af-kYN" id="l2g-sm-n1d"/>
+                <outlet property="grandTotalLbl" destination="4ye-8e-gCX" id="xcq-bh-lsS"/>
                 <outlet property="greyView" destination="x31-DY-CgB" id="MdR-Hl-9Xe"/>
+                <outlet property="subTotalLbl" destination="MEi-Ek-2VG" id="lO3-9F-dUY"/>
                 <outlet property="subtotal" destination="VUt-UQ-ZHN" id="GL1-m6-Ejf"/>
+                <outlet property="summaryLbl" destination="1Ie-vv-apE" id="pxV-QK-i0a"/>
                 <outlet property="vatAmount" destination="tc2-uD-hrf" id="koN-GD-D4l"/>
+                <outlet property="vatLbl" destination="FB4-gR-XaH" id="Muk-sf-G4n"/>
             </connections>
             <point key="canvasLocation" x="-1.4492753623188408" y="146.31696428571428"/>
         </tableViewCell>

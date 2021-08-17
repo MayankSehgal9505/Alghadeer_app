@@ -151,6 +151,10 @@
             <connections>
                 <outlet property="cardBtnChoosen" destination="hqH-5g-BQM" id="rrY-0a-mbL"/>
                 <outlet property="cardView" destination="dqb-Qa-p0b" id="vSB-PS-Fe5"/>
+                <outlet property="creditDebitCardLbl" destination="D4T-a2-Zik" id="3oa-c9-MDx"/>
+                <outlet property="paymentLbl" destination="OjD-vT-T5g" id="uAr-ek-7YQ"/>
+                <outlet property="useMyWalletLbl" destination="eUc-FL-aXk" id="TjS-Tw-x9d"/>
+                <outlet property="walletBalanceLbl" destination="oal-Iw-SC9" id="NLB-eO-03V"/>
                 <outlet property="walletBtnChoosen" destination="buR-D3-aA8" id="Fl9-9p-Kbe"/>
                 <outlet property="walletMoney" destination="sXI-TW-AM7" id="1LO-7X-Plj"/>
                 <outlet property="walletPaymentView" destination="jxR-SV-4G5" id="ymE-EL-eKc"/>

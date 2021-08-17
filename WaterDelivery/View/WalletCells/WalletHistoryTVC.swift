@@ -21,7 +21,7 @@ class WalletHistoryTVC: UITableViewCell {
     }
     
     func setupCell(walletTransactionObj:WalletTransactionModel) {
-        productItem.text = "Order Id: \(walletTransactionObj.comment)"
+        productItem.text = "\(Bundle.main.localizedString(forKey: "Order Id:", value: "", table: "")) \(walletTransactionObj.comment)"
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
 
@@ -37,6 +37,7 @@ class WalletHistoryTVC: UITableViewCell {
             productAmount.text = "AED \(walletTransactionObj.amt)"
             productAmount.textColor = .blue     
         }
+        productAmount.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .left : .right
     }
     
 }

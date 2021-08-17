@@ -69,6 +69,12 @@ class WalletVC: UIViewController{
     @IBOutlet weak var debitedBtn: UIButton!
     @IBOutlet weak var underLineViewleading: NSLayoutConstraint!
     @IBOutlet weak var noHistoryView: UIView!
+    @IBOutlet weak var netAvailableBalanceLbl: UILabel!
+    @IBOutlet weak var yourAccountBalanceLbl: UILabel!
+    @IBOutlet weak var totalWalletMoneyLbl: UILabel!
+    @IBOutlet weak var noteLbl: UILabel!
+
+    
     //MARK:- Local Variables
     private var walletBallance = WalletBalance()
     private var walletTransactions = [WalletTransaction]()
@@ -81,6 +87,13 @@ class WalletVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTBView()
+        netAvailableBalanceLbl.text = Bundle.main.localizedString(forKey: "Net Available Balance", value: "", table: "")
+        yourAccountBalanceLbl.text = Bundle.main.localizedString(forKey: "Your Account Balance", value: "", table: "")
+        totalWalletMoneyLbl.text = Bundle.main.localizedString(forKey: "Total Wallet Money", value: "", table: "")
+        noteLbl.text = Bundle.main.localizedString(forKey: "Notes: Wallet balance will be deducted at the time of delivery of order", value: "", table: "")
+        creditBtn.setTitle(Bundle.main.localizedString(forKey: "Credited", value: "", table: ""), for: [])
+        debitedBtn.setTitle(Bundle.main.localizedString(forKey: "Debited", value: "", table: ""), for: [])
+        addMoneyBtn.setTitle(Bundle.main.localizedString(forKey: "Add Money", value: "", table: ""), for: [])
     }
     
     override func viewWillAppear(_ animated: Bool) {

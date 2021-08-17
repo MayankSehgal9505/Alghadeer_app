@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeliveryVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
                 <outlet property="deliveryTBView" destination="LPW-2u-dhJ" id="eyv-5H-0zY"/>
+                <outlet property="myDeliveriesLbl" destination="lKa-BA-0Bm" id="Obg-yB-78E"/>
                 <outlet property="noDeliveryProduct" destination="0rw-HD-yqJ" id="mVS-Tw-dgv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

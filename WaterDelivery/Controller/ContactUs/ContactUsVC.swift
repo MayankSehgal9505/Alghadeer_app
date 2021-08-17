@@ -18,6 +18,11 @@ class ContactUsVC: UIViewController {
     @IBOutlet weak var msgTxtFld: UITextView!
     @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var greyView: UIView!
+    @IBOutlet weak var contactUsLbl: UILabel!
+    @IBOutlet weak var youurMsgLbl: UILabel!
+    @IBOutlet weak var emailLbl: UILabel!
+    @IBOutlet weak var phoneNumberLbl: UILabel!
+    @IBOutlet weak var addressLbl: UILabel!
     
     //MARK:- Local Variables
     var contactUsModel = ContactUsModel()
@@ -25,7 +30,23 @@ class ContactUsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.submitBtn.setCornerRadiusOfView(cornerRadiusValue: 20)
-        getContactUs()
+        contactUsLbl.text = Bundle.main.localizedString(forKey: "Contact Us", value: nil, table: nil)
+        subjectTextFld.placeholder = Bundle.main.localizedString(forKey: "Subject", value: nil, table: nil)
+        titleTxtFld.placeholder = Bundle.main.localizedString(forKey: "Title", value: nil, table: nil)
+        youurMsgLbl.text = Bundle.main.localizedString(forKey: "Your Message", value: nil, table: nil)
+        emailLbl.text = Bundle.main.localizedString(forKey: "Email:", value: nil, table: nil)
+        phoneNumberLbl.text = Bundle.main.localizedString(forKey: "Phone Number", value: nil, table: nil)
+        addressLbl.text = Bundle.main.localizedString(forKey: "Address", value: nil, table: nil)
+        submitBtn.setTitle(Bundle.main.localizedString(forKey: "Submit", value: nil, table: nil), for: [])
+        if Defaults.getEnglishLangauge() == "ar" {
+            subjectTextFld.textAlignment = .right
+            titleTxtFld.textAlignment = .right
+            msgTxtFld.textAlignment = .right
+        } else {
+            subjectTextFld.textAlignment = .left
+            titleTxtFld.textAlignment = .left
+            msgTxtFld.textAlignment = .left
+        }
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()

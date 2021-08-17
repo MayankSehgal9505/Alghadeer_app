@@ -11,15 +11,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactUsVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
+                <outlet property="addressLbl" destination="pv3-LH-MME" id="SYb-U5-Fxl"/>
+                <outlet property="contactUsLbl" destination="jwm-z6-Naq" id="ASX-wc-5WL"/>
+                <outlet property="emailLbl" destination="9qt-tP-6Su" id="PZy-kk-jXB"/>
                 <outlet property="emailValue" destination="Sdk-eF-2Ep" id="DTu-zS-R1H"/>
                 <outlet property="greyView" destination="wz9-I1-355" id="pvB-P5-2bh"/>
                 <outlet property="msgTxtFld" destination="hfD-r0-yaP" id="bEB-f0-X3m"/>
                 <outlet property="nameValue" destination="uEf-iR-Y8j" id="O2d-J8-1ee"/>
                 <outlet property="numberValue" destination="Xhc-4L-1cj" id="fvR-tg-9Tl"/>
+                <outlet property="phoneNumberLbl" destination="7Wp-s5-FiN" id="GZM-UD-fPq"/>
                 <outlet property="subjectTextFld" destination="oXb-Wa-K87" id="fBp-NB-k9I"/>
                 <outlet property="submitBtn" destination="JS7-Hg-ZCe" id="FxP-2K-giz"/>
                 <outlet property="titleTxtFld" destination="S2l-u3-fqR" id="OR7-Wb-3B8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="youurMsgLbl" destination="1Wr-xn-Y0U" id="kda-fk-p86"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

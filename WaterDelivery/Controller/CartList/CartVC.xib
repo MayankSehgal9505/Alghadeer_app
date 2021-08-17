@@ -19,6 +19,7 @@
                 <outlet property="couponAmount" destination="UYk-cr-fly" id="wd4-66-QUY"/>
                 <outlet property="discountView" destination="gaF-iW-o4Q" id="1QT-g9-ljd"/>
                 <outlet property="finalAmountLbll" destination="Jh2-Qn-jcb" id="Ert-X3-qUS"/>
+                <outlet property="noDataInCartText" destination="ga9-i0-3X2" id="lun-V8-8wl"/>
                 <outlet property="percentageOffLbl" destination="MxZ-Z0-Kbo" id="QAS-WO-0Nz"/>
                 <outlet property="promoTxtFld" destination="YHV-Ey-eXY" id="8g5-Rj-75l"/>
                 <outlet property="promocodeView" destination="tmd-Cd-uIF" id="NcT-uI-JrP"/>
@@ -129,7 +130,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOv-f9-2fH">
-                                    <rect key="frame" x="57.5" y="9" width="306.5" height="19.5"/>
+                                    <rect key="frame" x="97.5" y="9" width="266.5" height="19.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -192,7 +193,7 @@
                                 <constraint firstItem="Pqd-Uo-gRz" firstAttribute="top" secondItem="zOv-f9-2fH" secondAttribute="bottom" constant="5" id="QRp-r6-MNu"/>
                                 <constraint firstAttribute="bottom" secondItem="Pqd-Uo-gRz" secondAttribute="bottom" constant="10" id="Ro8-pW-9az"/>
                                 <constraint firstItem="Pqd-Uo-gRz" firstAttribute="trailing" secondItem="zOv-f9-2fH" secondAttribute="trailing" id="c3U-SZ-GoT"/>
-                                <constraint firstItem="zOv-f9-2fH" firstAttribute="leading" secondItem="2qx-dF-IXH" secondAttribute="trailing" constant="10" id="fJf-WU-b8F"/>
+                                <constraint firstItem="zOv-f9-2fH" firstAttribute="leading" secondItem="2qx-dF-IXH" secondAttribute="trailing" constant="50" id="fJf-WU-b8F"/>
                                 <constraint firstItem="Pqd-Uo-gRz" firstAttribute="leading" secondItem="2qx-dF-IXH" secondAttribute="leading" id="gUT-1I-pU7"/>
                                 <constraint firstItem="zOv-f9-2fH" firstAttribute="centerY" secondItem="2qx-dF-IXH" secondAttribute="centerY" id="qmM-Zu-qLV"/>
                                 <constraint firstAttribute="trailing" secondItem="zOv-f9-2fH" secondAttribute="trailing" constant="10" id="v6t-6J-tuC"/>

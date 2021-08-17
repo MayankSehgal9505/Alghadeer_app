@@ -34,9 +34,11 @@ class ShippingAddressTVC: UITableViewCell {
         editBtn.setCornerRadiusOfView(cornerRadiusValue:15)
         deleteBtn.setCornerRadiusOfView(cornerRadiusValue:15)
         greyView.setCornerRadiusOfView(cornerRadiusValue:28)
+        editBtn.setTitle(Bundle.main.localizedString(forKey: "Edit", value: nil, table: nil), for: [])
+        deleteBtn.setTitle(Bundle.main.localizedString(forKey: "Delete", value: nil, table: nil), for: [])
         self.shipperName.text = "\(shipperAddress.shippingFname) \(shipperAddress.shippingLname)"
         self.shipperstreetAddress.text = "\(shipperAddress.shippingAddress), \(shipperAddress.shippingCity), \(shipperAddress.shippingState) \(shipperAddress.shippingPostCode) \n \(shipperAddress.shippingCountry)"
-        self.shipperCountry.text = "Phone Number: \(shipperAddress.shippingPhoneNumber)"
+        self.shipperCountry.text = "\(Bundle.main.localizedString(forKey: "Phone Number:", value: nil, table: nil)) \(shipperAddress.shippingPhoneNumber)"
         self.adddressSelectionBtn.isSelected = shipperAddress.addressSelected
     }
 }

@@ -16,9 +16,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckoutVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
+                <outlet property="cancelBtn" destination="VTu-h9-bUW" id="lcc-cc-ET0"/>
                 <outlet property="checkOutTBView" destination="d7z-OJ-aIB" id="JYx-DZ-lTu"/>
+                <outlet property="checkOutText" destination="yQl-dg-Y4m" id="THt-aI-BNA"/>
                 <outlet property="continueToPaymentBtn" destination="zG0-WE-phW" id="eMO-Kp-VEF"/>
+                <outlet property="scheduleTimeLbl" destination="HJD-kF-zRD" id="jNv-cT-YMy"/>
                 <outlet property="scheduleTimeView" destination="vAm-9S-WMR" id="kra-Qt-tmv"/>
+                <outlet property="setBtn" destination="JEc-zA-Aw9" id="pqP-ED-bmx"/>
                 <outlet property="timePickerView" destination="7zX-hC-gMM" id="Qid-48-WRi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -121,7 +125,7 @@
                                 </barButtonItem>
                             </items>
                         </toolbar>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="254" placeholderIntrinsicHeight="21" text="Schedule Time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJD-kF-zRD" customClass="LocalisedLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="254" placeholderIntrinsicHeight="21" text="Schedule Time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJD-kF-zRD">
                             <rect key="frame" x="80" y="11.5" width="254" height="21"/>
                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

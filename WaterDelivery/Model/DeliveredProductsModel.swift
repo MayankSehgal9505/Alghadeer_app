@@ -35,9 +35,9 @@ struct DeliveredProductsModel {
         var deliveredProductStr: String {
             switch self {
             case .oneTime:
-                return "One Time Order"
+                return Bundle.main.localizedString(forKey: "One Time Order", value: nil, table: nil)
             default:
-                return "Subscription Order"
+                return Bundle.main.localizedString(forKey: "Subscription Order", value: nil, table: nil)
             }
         }
     }

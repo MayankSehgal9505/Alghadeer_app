@@ -286,13 +286,16 @@
                 <outlet property="baseView" destination="2kg-xO-ufX" id="kx8-VQ-pzc"/>
                 <outlet property="buttonsView" destination="ZIb-EC-6t3" id="LbW-2G-OwO"/>
                 <outlet property="cancelBtn" destination="tM0-hA-FBG" id="1bF-4S-M2M"/>
+                <outlet property="deliveryAddressLbl" destination="Yhu-9n-kDm" id="p7E-mf-ovl"/>
                 <outlet property="deliveryTime" destination="JWY-kR-Nak" id="M5P-aI-ndn"/>
+                <outlet property="deliveryTimeLbl" destination="Q42-hH-2Ai" id="sUH-Vk-Fx9"/>
                 <outlet property="imageBGView" destination="PEu-iY-WeH" id="uV9-vp-gTg"/>
                 <outlet property="pauseReactivateBtn" destination="HuE-OV-6HC" id="Vwd-yo-zE7"/>
                 <outlet property="productName" destination="VBj-u7-Mvh" id="p8f-4K-ONw"/>
                 <outlet property="produuctAddress" destination="dNs-nO-6CF" id="GO9-0c-d7g"/>
                 <outlet property="quantityLbl" destination="F1Q-4L-Gc0" id="DoW-bV-fkU"/>
                 <outlet property="subscribedProductImg" destination="NK6-e8-ysi" id="bDV-Rp-xwM"/>
+                <outlet property="subscriptionDatesLbl" destination="125-OM-PVN" id="eqQ-Oc-PIF"/>
                 <outlet property="subscriptionDatesValue" destination="1Lw-V9-7zc" id="hIx-kY-aAw"/>
                 <outlet property="totalPriceValue" destination="eja-ju-DRu" id="06Z-XT-AgZ"/>
                 <outlet property="unitPriceValue" destination="n2b-ND-ToK" id="zYP-DR-clx"/>

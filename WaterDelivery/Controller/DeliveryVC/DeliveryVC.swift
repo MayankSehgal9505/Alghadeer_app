@@ -15,8 +15,10 @@ class DeliveryVC: UIViewController {
     }
     //MARK:- IBOutlets
 
+    @IBOutlet weak var myDeliveriesLbl: UILabel!
     @IBOutlet weak var deliveryTBView: UITableView!
     @IBOutlet weak var noDeliveryProduct: UILabel!
+    
     //MARK:- Local Variables
     var orderList = [Order]()
     //MARK:- Life Cycle Methods
@@ -24,6 +26,8 @@ class DeliveryVC: UIViewController {
         super.viewDidLoad()
         setUpTBView()
         getDeliveredProductList()
+        myDeliveriesLbl.text = Bundle.main.localizedString(forKey: "My Deliveries", value: nil, table: nil)
+        noDeliveryProduct.text = Bundle.main.localizedString(forKey: "No product has been delivered yet", value: nil, table: nil)
     }
     //MARK:- Internal Methods
     private func setUpTBView(){

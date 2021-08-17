@@ -14,14 +14,18 @@
                 <outlet property="addMoneyBtn" destination="Xar-CC-l0E" id="pgP-Wc-E0P"/>
                 <outlet property="creditBtn" destination="elt-d8-dYa" id="6BF-IW-VXh"/>
                 <outlet property="debitedBtn" destination="sNC-Zi-DZa" id="BPz-7c-AAB"/>
+                <outlet property="netAvailableBalanceLbl" destination="kVq-hg-GDJ" id="ieq-Np-0Yk"/>
                 <outlet property="netAvailableBalanceLblValue" destination="TIN-yi-JFp" id="O7p-VE-uhS"/>
                 <outlet property="netWalletView" destination="6Zv-lu-K7E" id="4kU-Wi-h3i"/>
                 <outlet property="noHistoryView" destination="64F-lO-Srn" id="lgr-HQ-yjP"/>
+                <outlet property="noteLbl" destination="2gc-Ew-7G4" id="4ha-a5-bC0"/>
+                <outlet property="totalWalletMoneyLbl" destination="bT6-cF-Uep" id="NgX-wi-eJB"/>
                 <outlet property="totalWalletMoneyValue" destination="q74-lc-GLT" id="UfA-ms-rJy"/>
                 <outlet property="underLineView" destination="RYB-b9-JYJ" id="OI9-XH-URW"/>
                 <outlet property="underLineViewleading" destination="wqx-fD-7bW" id="aCw-EJ-HPY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="walletTBView" destination="wxf-YY-luX" id="Wzh-RV-b4d"/>
+                <outlet property="yourAccountBalanceLbl" destination="3WT-9P-aou" id="DqP-Vl-fX2"/>
                 <outlet property="youraccountBalanceLblValue" destination="sKh-Ks-i6F" id="lDw-Sz-ov6"/>
             </connections>
         </placeholder>

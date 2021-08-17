@@ -60,6 +60,7 @@
             <connections>
                 <outlet property="addAddressBtn" destination="E7z-GT-VJQ" id="SIo-em-kR5"/>
                 <outlet property="greyView" destination="f2z-dg-fwn" id="9k0-yt-SDk"/>
+                <outlet property="selectDeliveryAddressText" destination="Wx7-C6-bid" id="Xy6-lA-bYN"/>
             </connections>
             <point key="canvasLocation" x="69.565217391304358" y="92.410714285714278"/>
         </tableViewCell>

@@ -15,6 +15,7 @@
                 <outlet property="cartCountView" destination="iq7-vB-2oe" id="vLO-qT-a43"/>
                 <outlet property="cartCountlbl" destination="ooF-aR-OxE" id="pap-Wu-nxX"/>
                 <outlet property="noSubscriptionTxt" destination="4O5-FS-9Ne" id="soV-V9-x0Q"/>
+                <outlet property="subscriptionLbl" destination="OfY-SC-SQx" id="WDK-A3-s7c"/>
                 <outlet property="subscriptionTBView" destination="YrZ-Jd-Yop" id="qjW-1G-ue9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="subscriptionBtns" destination="btC-Iz-Vri" collectionClass="NSMutableArray" id="fXI-ah-CM8"/>

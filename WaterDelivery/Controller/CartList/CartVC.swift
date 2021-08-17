@@ -40,6 +40,7 @@ class CartVC: UIViewController {
     @IBOutlet weak var finalAmountLbll: UILabel!
     @IBOutlet weak var cartText: UILabel!
     @IBOutlet weak var applyBtn: UIButton!
+    @IBOutlet weak var noDataInCartText: UILabel!
     
     //MARK:- Local Variables
 
@@ -60,6 +61,12 @@ class CartVC: UIViewController {
         subscribeBtn.setTitle(Bundle.main.localizedString(forKey: "Subscribe", value: nil, table: nil), for: [])
         applyBtn.setTitle(Bundle.main.localizedString(forKey: "Apply", value: nil, table: nil), for: [])
         checkOutBtn.setTitle(Bundle.main.localizedString(forKey: "Checkout", value: nil, table: nil), for: [])
+        noDataInCartText.text = Bundle.main.localizedString(forKey: "No Data in Cart", value: nil, table: nil)
+        if Defaults.getEnglishLangauge() == "ar"{
+            totalAmount.textAlignment = .left
+        } else {
+            totalAmount.textAlignment = .right
+        }
     }
     
     private func setupTextfields() {

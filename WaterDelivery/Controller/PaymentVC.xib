@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
+                <outlet property="makePaymentLbl" destination="cdG-JU-XKV" id="1H8-vV-edt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="exj-Hq-tZu" id="5jw-Y3-eqf"/>
             </connections>

@@ -11,6 +11,7 @@ class ShippingTitleTVC: UITableViewCell {
 
     @IBOutlet weak var greyView: UIView!
     @IBOutlet weak var addAddressBtn: UIButton!
+    @IBOutlet weak var selectDeliveryAddressText: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,6 +24,7 @@ class ShippingTitleTVC: UITableViewCell {
     }
     
     func setupCellUI(){
+        selectDeliveryAddressText.text = Bundle.main.localizedString(forKey: "Select Delivery Address", value: nil, table: nil)
         addAddressBtn.setCornerRadiusOfView(cornerRadiusValue:13)
         greyView.setCornerRadiusOfView(cornerRadiusValue:28)
     }

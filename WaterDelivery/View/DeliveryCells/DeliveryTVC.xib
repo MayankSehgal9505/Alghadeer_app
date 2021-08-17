@@ -137,6 +137,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="deliveryAddress" destination="Ite-Ia-WLF" id="GiE-Ps-mnd"/>
+                <outlet property="deliveryAddressLbl" destination="gPh-dk-8L2" id="hzl-53-vm6"/>
                 <outlet property="deliveryBaseView" destination="xRX-1l-B8v" id="4pJ-C9-RxV"/>
                 <outlet property="deliveryDate" destination="5S0-2W-opM" id="pER-5g-6MB"/>
                 <outlet property="deliveryStatus" destination="RWY-ML-QEy" id="iX4-A9-Bih"/>
@@ -144,6 +145,7 @@
                 <outlet property="deliveryView" destination="fXD-a7-Dni" id="ZOR-DF-DT5"/>
                 <outlet property="deliveyPrice" destination="ky2-Zw-jSJ" id="BFa-jg-juH"/>
                 <outlet property="orderID" destination="N8a-bf-kWu" id="YTs-lK-aPx"/>
+                <outlet property="orderIdLbl" destination="vDf-9t-hlp" id="4vA-gU-bed"/>
                 <outlet property="parentView" destination="xRX-1l-B8v" id="b08-No-PSf"/>
             </connections>
             <point key="canvasLocation" x="-207.24637681159422" y="151.00446428571428"/>

@@ -18,6 +18,7 @@ class PaymentVC: UIViewController,WKNavigationDelegate {
 
     //MARK:- IBOutlets
     @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var makePaymentLbl: UILabel!
     //MARK:- Properties
     weak var delegate: PaymentVCProtocol?
     var urlString = ""
@@ -26,6 +27,7 @@ class PaymentVC: UIViewController,WKNavigationDelegate {
     //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        makePaymentLbl.text = Bundle.main.localizedString(forKey: "Make Payment", value: nil, table: nil)
         loadWebView()
     }
     //MARK:- Internal  Methods

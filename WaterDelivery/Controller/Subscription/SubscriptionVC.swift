@@ -21,18 +21,20 @@ enum SubscriptionTab: Int {
     
     var noSubscriptionMsg:String {
         switch self {
-            case .active: return "No Data found"
-            case .paused: return "No Data found"
-            default: return "No Data found"
+            case .active: return Bundle.main.localizedString(forKey: "No Data found", value: "", table: "")
+            case .paused: return Bundle.main.localizedString(forKey: "No Data found", value: "", table: "")
+            default: return Bundle.main.localizedString(forKey: "No Data found", value: "", table: "")
         }
     }
 }
 class SubscriptionVC: CartBaseVC{
 
     //MARK:- IBOutlets
+    @IBOutlet weak var subscriptionLbl: UILabel!
     @IBOutlet weak var addBtn: UIButton! {
         didSet {
             addBtn.setCornerRadiusOfView(cornerRadiusValue: 7)
+            addBtn.setTitle(Bundle.main.localizedString(forKey: "Add", value: "", table: ""), for: [])
         }
     }
     @IBOutlet weak var subscriptionTBView: UITableView!
@@ -40,6 +42,7 @@ class SubscriptionVC: CartBaseVC{
     @IBOutlet var subscriptionBtns: [UIButton]! {
         didSet {
             subscriptionBtns.forEach { $0.setCornerRadiusOfView(cornerRadiusValue: 10)
+                $0.setTitle(Bundle.main.localizedString(forKey: $0.currentTitle!, value: "", table: ""), for: [])
             }
         }
     }
@@ -71,6 +74,7 @@ class SubscriptionVC: CartBaseVC{
         setUpTBView()
         setupTabs()
         setSubscriptionBtnTag()
+        subscriptionLbl.text = Bundle.main.localizedString(forKey: "Subscriptions", value: "", table: "")
     }
     
     private func setSubscriptionBtnTag() {

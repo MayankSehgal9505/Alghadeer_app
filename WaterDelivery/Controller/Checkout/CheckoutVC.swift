@@ -23,6 +23,10 @@ class CheckoutVC: UIViewController {
     @IBOutlet weak var continueToPaymentBtn: UIButton!
     @IBOutlet weak var scheduleTimeView: UIView!
     @IBOutlet weak var timePickerView: UIPickerView!
+    @IBOutlet weak var checkOutText: UILabel!
+    @IBOutlet weak var scheduleTimeLbl: UILabel!
+    @IBOutlet weak var cancelBtn: UIBarButtonItem!
+    @IBOutlet weak var setBtn: UIBarButtonItem!
     
     //MARK:- Local Variables
     
@@ -85,6 +89,12 @@ class CheckoutVC: UIViewController {
     func setupUI() {
         setUpTBView()
         continueToPaymentBtn.setCornerRadiusOfView(cornerRadiusValue:30)
+        checkOutText.text = Bundle.main.localizedString(forKey: "Checkout", value: nil, table: nil)
+        continueToPaymentBtn.setTitle(Bundle.main.localizedString(forKey: "Proceed", value: nil, table: nil), for: [])
+        scheduleTimeLbl.text = Bundle.main.localizedString(forKey: "Schedule Time", value: nil, table: nil)
+        cancelBtn.title = Bundle.main.localizedString(forKey: "Cancel", value: nil, table: nil)
+        setBtn.title = Bundle.main.localizedString(forKey: "Set", value: nil, table: nil)
+        
     }
     
     /// Hiding Picker View
@@ -116,10 +126,10 @@ class CheckoutVC: UIViewController {
     }
     @IBAction func continueToPaymentAction(_ sender: UIButton) {
         if (deliveryTime.isEmpty) {
-            self.view.makeToast("Select Delivery Time", duration: 3.0, position: .center)
+            self.view.makeToast(Bundle.main.localizedString(forKey: "Select Delivery Time", value: nil, table: nil), duration: 3.0, position: .center)
         }
          else if (selectedAddress.addressID.isEmpty) {
-            self.view.makeToast("Select delivery Address", duration: 3.0, position: .center)
+            self.view.makeToast(Bundle.main.localizedString(forKey: "Select delivery Address", value: nil, table: nil), duration: 3.0, position: .center)
         } else {
             cartCheckout()
         }
@@ -239,7 +249,7 @@ extension CheckoutVC: UITableViewDataSource, UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: ShippingAddressTVC.className(), for: indexPath) as! ShippingAddressTVC
             cell.editBtn.tag = indexPath.row
             cell.deleteBtn.tag = indexPath.row
-            cell.addressTitle.text = "Address \(indexPath.row)"
+            cell.addressTitle.text = "\(Bundle.main.localizedString(forKey: "Address", value: nil, table: nil)) \(indexPath.row)"
             cell.editBtn.addTarget(self, action: #selector(editBtnAction(sender:)), for: .touchUpInside)
             cell.deleteBtn.addTarget(self, action: #selector(deleteBtnAction(sender:)), for: .touchUpInside)
             //cell.adddressSelectionBtn.isHidden = shippingAddressArray.count == 1
@@ -251,10 +261,12 @@ extension CheckoutVC: UITableViewDataSource, UITableViewDelegate{
             return cell
         case .info:
             let cell = tableView.dequeueReusableCell(withIdentifier: InfoTVC.className(), for: indexPath) as! InfoTVC
+            cell.setupCell()
             return cell
         case .scheduleTime:
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTVC.className(), for: indexPath) as! ScheduleTimeTVC
             cell.deliveryBtn.addTarget(self, action: #selector(openDeliverOptions), for: .touchUpInside)
+            cell.setupCell()
             return cell
         case .payment:
             let cell = tableView.dequeueReusableCell(withIdentifier: PaymentTVC.className(), for: indexPath) as! PaymentTVC
@@ -369,7 +381,7 @@ extension CheckoutVC: WalletAPI{
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true , let data = jsonValue[APIField.dataKey]?.dictionaryValue, let _ = data["result"]?.dictionaryValue{
                     self.addedMoneyModel = AddMoneyModel.init(json:data["result"]!)
                     DispatchQueue.main.async {
-                        self.view.makeToast("Checkout successfull", duration: 0.5, position: .center)
+                        self.view.makeToast(Bundle.main.localizedString(forKey: "Checkout successful", value: nil, table: nil), duration: 0.5, position: .center)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             Utility.makeRootViewController()
                         }
@@ -465,7 +477,7 @@ extension CheckoutVC: WalletAPI{
                     switch self.paymentType {
                     case .wallet:
                         DispatchQueue.main.async {
-                            self.view.makeToast("Checkout successfull", duration: 0.5, position: .center)
+                            self.view.makeToast(Bundle.main.localizedString(forKey: "Checkout successful", value: nil, table: nil), duration: 0.5, position: .center)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 Utility.makeRootViewController()
                             }

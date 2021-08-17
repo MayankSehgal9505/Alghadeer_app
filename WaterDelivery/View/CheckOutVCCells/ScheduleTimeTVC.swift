@@ -21,4 +21,9 @@ class ScheduleTimeTVC: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func setupCell() {
+        deliveryTimeTxtFld.placeholder = Bundle.main.localizedString(forKey: "Select Delivery Time", value: nil, table: nil)
+    }
+    
 }

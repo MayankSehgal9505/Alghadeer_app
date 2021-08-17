@@ -18,6 +18,7 @@ class CartTVC: UITableViewCell {
     @IBOutlet weak var decreasequantitybtn: UIButton!
     @IBOutlet weak var addquantityBtn: UIButton!
     @IBOutlet weak var crossBtn: UIButton!
+    @IBOutlet weak var qtyText: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -43,7 +44,8 @@ class CartTVC: UITableViewCell {
     func setUpCellData(cartItemObj:CartItemModel) {
         productname.text = cartItemObj.productName
         quantitylbl.text = cartItemObj.cartQuantity
-        priceLbl.text = "AED \(cartItemObj.price) (incl. VAT)"
+        priceLbl.text = "AED \(cartItemObj.price) \(Bundle.main.localizedString(forKey: "(incl. VAT)", value: nil, table: nil))"
+        qtyText.text = Bundle.main.localizedString(forKey: "QTY", value: nil, table: nil)
         if let imageURL = URL.init(string: cartItemObj.productImage) {
             productImg.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
         } else {

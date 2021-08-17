@@ -16,6 +16,9 @@
                 <outlet property="cartCountView" destination="PJo-7x-QkT" id="tQd-1P-WMG"/>
                 <outlet property="cartCountlbl" destination="FmL-bm-Fpz" id="BhE-0S-H2o"/>
                 <outlet property="decreaseQuantityBtn" destination="0vr-VE-kvy" id="MPq-Dl-ipx"/>
+                <outlet property="descriptionText" destination="KGw-7L-Euj" id="jj1-bZ-oTi"/>
+                <outlet property="inclusiveVatText" destination="LHM-w7-rrR" id="VBf-8A-6E8"/>
+                <outlet property="inclusiveVatText2" destination="Jmd-8Y-7P4" id="b1y-Ys-70Y"/>
                 <outlet property="increaseQuantityBtn" destination="2v3-Zy-ZOW" id="DRU-eX-PA1"/>
                 <outlet property="navTitle" destination="CkI-1h-Elt" id="8hg-px-poA"/>
                 <outlet property="productDescription" destination="hu6-Zc-CD4" id="LoG-Q9-CLC"/>
@@ -24,6 +27,8 @@
                 <outlet property="productPrice" destination="hCl-BN-cy1" id="uzU-FA-GRP"/>
                 <outlet property="quantityLbl" destination="hyU-Ed-t48" id="F5Z-Ry-40O"/>
                 <outlet property="quantityParentView" destination="x75-Ye-7Tn" id="Vb2-vX-fj9"/>
+                <outlet property="quantityText" destination="BHl-kt-Yzm" id="8tP-c4-GfT"/>
+                <outlet property="totalAmountTxt" destination="eix-Ss-Djo" id="bH7-Gg-mOG"/>
                 <outlet property="totalPriceLbl" destination="V9K-Zt-oGq" id="a1A-BW-LWV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="curveViews" destination="gew-CX-Dek" collectionClass="NSMutableArray" id="x3Y-Jn-Jlb"/>

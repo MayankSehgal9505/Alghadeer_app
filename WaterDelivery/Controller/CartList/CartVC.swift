@@ -38,6 +38,8 @@ class CartVC: UIViewController {
     @IBOutlet weak var percentageOffLbl: UILabel!
     @IBOutlet weak var couponAmount: UILabel!
     @IBOutlet weak var finalAmountLbll: UILabel!
+    @IBOutlet weak var cartText: UILabel!
+    @IBOutlet weak var applyBtn: UIButton!
     
     //MARK:- Local Variables
 
@@ -53,6 +55,11 @@ class CartVC: UIViewController {
     private func setupView(){
         setupTextfields()
         setUpTBView()
+        promoTxtFld.placeholder = Bundle.main.localizedString(forKey: "Promo code", value: nil, table: nil)
+        cartText.text = Bundle.main.localizedString(forKey: "Cart", value: nil, table: nil)
+        subscribeBtn.setTitle(Bundle.main.localizedString(forKey: "Subscribe", value: nil, table: nil), for: [])
+        applyBtn.setTitle(Bundle.main.localizedString(forKey: "Apply", value: nil, table: nil), for: [])
+        checkOutBtn.setTitle(Bundle.main.localizedString(forKey: "Checkout", value: nil, table: nil), for: [])
     }
     
     private func setupTextfields() {
@@ -198,9 +205,9 @@ extension CartVC {
                     DispatchQueue.main.async {
                         self.cartEmptyView.isHidden = self.cartModel.cartItems.count > 0
                         self.cartTBView.reloadData()
-                        let text = self.cartModel.cartItems.count == 1 ? "Item": "Items"
-                        self.totalItemCount.text = "\(self.cartModel.cartItems.count) \(text)"
-                        self.totalAmount.text = "Total AED \(self.cartModel.totalPrice)"
+                        let text = self.cartModel.cartItems.count == 1 ? Bundle.main.localizedString(forKey: "Item", value: nil, table: nil): Bundle.main.localizedString(forKey: "Items", value: nil, table: nil)
+                        self.totalItemCount.text =  "\(self.cartModel.cartItems.count) \(text)"
+                        self.totalAmount.text = "\(Bundle.main.localizedString(forKey: "Total", value: nil, table: nil)) AED \(self.cartModel.totalPrice)"
                     }
                 }else {
                     DispatchQueue.main.async {

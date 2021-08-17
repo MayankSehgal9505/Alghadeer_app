@@ -22,14 +22,12 @@ class SideMenuTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     //MARK:- Internal methods
 
     func setUpCell(index: Int){
-        self.sideMenuOptionLabel.text = SideMenu.sideMenuOptionslabel[index]
+        self.sideMenuOptionLabel.text = Bundle.main.localizedString(forKey: SideMenu.sideMenuOptionslabel[index], value: nil, table: nil)
         self.sideImage.image = UIImage(named:SideMenu.sideMenuOptionImage[index])
         //https://storage.googleapis.com/innoprolife-9582d.appspot.com/Profile/LKIN-101-20181216_114514
     }

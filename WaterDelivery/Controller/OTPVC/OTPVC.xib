@@ -11,7 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OTPVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
+                <outlet property="enterOTPNumberText" destination="yh0-gy-Ema" id="Eho-kM-Vjf"/>
+                <outlet property="enterOtpText" destination="idt-VR-JTp" id="D27-zX-e6C"/>
                 <outlet property="resendOtp" destination="Lc5-M8-GlJ" id="aoa-hz-esP"/>
+                <outlet property="resendOtpBtn" destination="Lc5-M8-GlJ" id="eRO-JP-GJn"/>
                 <outlet property="submitButton" destination="mGa-m8-3sH" id="PfR-2a-pKO"/>
                 <outlet property="tiimerField" destination="JPf-OE-TAX" id="lnr-fr-EuM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

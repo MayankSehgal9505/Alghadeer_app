@@ -85,7 +85,9 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="currentWalletBalanceText" destination="vb0-47-uwI" id="NHD-Om-bef"/>
                 <outlet property="price" destination="ohd-FN-M8u" id="mzi-Nc-1cV"/>
+                <outlet property="refreshText" destination="6Fu-UQ-V32" id="QiM-P7-oqP"/>
             </connections>
             <point key="canvasLocation" x="124.6376811594203" y="124.21875"/>
         </tableViewCell>

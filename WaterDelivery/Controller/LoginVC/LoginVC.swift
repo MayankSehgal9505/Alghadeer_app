@@ -15,6 +15,12 @@ class LoginVC: UIViewController {
     @IBOutlet weak var phoneView: UIView!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    //Labels
+    @IBOutlet weak var loginTextLbl: UILabel!
+    @IBOutlet weak var enterPhnNumberLbl: UILabel!
+    @IBOutlet weak var otpText: UILabel!
+    @IBOutlet weak var skipBtn: UIButton!
+    @IBOutlet weak var helpText: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +33,24 @@ class LoginVC: UIViewController {
     }
     
     private func setupView(){
+        changeOfLanguage()
         self.loginButton.setCornerRadiusOfView(cornerRadiusValue: 25)
         self.setCornerWithColor(aView: self.phoneView, radius: 2)
+        loginTextLbl.text = Bundle.main.localizedString(forKey: "Login", value: nil, table: nil)
+        enterPhnNumberLbl.text = Bundle.main.localizedString(forKey: "Enter your Phone Number", value: nil, table: nil)
+        otpText.text = Bundle.main.localizedString(forKey: "We will send you on OTP to verify your number \n Existing customer can login using their registered number", value: nil, table: nil)
+        loginButton.setTitle(Bundle.main.localizedString(forKey: "Submit", value: nil, table: nil), for: [])
+        skipBtn.setTitle(Bundle.main.localizedString(forKey: "Skip >>", value: nil, table: nil), for: [])
+        helpText.text = Bundle.main.localizedString(forKey: "In case of any issues, please contact us of", value: nil, table: nil)
+    }
+    @objc func changeOfLanguage(){
+        if Defaults.getEnglishLangauge() == "en" {
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            self.view.layoutIfNeeded()
+        } else {
+            UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            self.view.layoutIfNeeded()
+        }
     }
     
     @IBAction func submitBtnClicked(_ sender: Any) {

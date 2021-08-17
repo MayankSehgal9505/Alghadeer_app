@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4E029235263C81CD0092C741 /* OtpTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E029234263C81CD0092C741 /* OtpTextfield.swift */; };
+		4E0B1C5026C031720022CA10 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E0B1C4E26C031720022CA10 /* Localizable.strings */; };
 		4E133925263D2BA70060597E /* CartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E133923263D2BA70060597E /* CartVC.swift */; };
 		4E133926263D2BA70060597E /* CartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E133924263D2BA70060597E /* CartVC.xib */; };
 		4E13392A263D3CB90060597E /* CartTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E133928263D3CB90060597E /* CartTVC.swift */; };
@@ -163,6 +164,11 @@
 		3AB853FAFCFFDAE95B5DA991 /* Pods-WaterDelivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterDelivery.release.xcconfig"; path = "Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery.release.xcconfig"; sourceTree = "<group>"; };
 		3EAEDCC622514D2CA4606735 /* Pods_WaterDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaterDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E029234263C81CD0092C741 /* OtpTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpTextfield.swift; sourceTree = "<group>"; };
+		4E05C31026C5524900B91DA0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = WaterDelivery/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4E0B1C4B26C031080022CA10 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
+		4E0B1C4C26C031090022CA10 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		4E0B1C4F26C031720022CA10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = WaterDelivery/Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4E0B1C5426C031A90022CA10 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = WaterDelivery/ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E133923263D2BA70060597E /* CartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
 		4E133924263D2BA70060597E /* CartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartVC.xib; sourceTree = "<group>"; };
 		4E133928263D3CB90060597E /* CartTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTVC.swift; sourceTree = "<group>"; };
@@ -705,6 +711,7 @@
 		990A2546262E864800C96165 = {
 			isa = PBXGroup;
 			children = (
+				4E0B1C4E26C031720022CA10 /* Localizable.strings */,
 				990A2551262E864800C96165 /* WaterDelivery */,
 				990A2550262E864800C96165 /* Products */,
 				6FAECEE13156F477AD8D6B60 /* Pods */,
@@ -920,6 +927,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 990A2546262E864800C96165;
 			productRefGroup = 990A2550262E864800C96165 /* Products */;
@@ -981,6 +989,7 @@
 				4E71B988264473E60094F72B /* SummaryTVC.xib in Resources */,
 				4EF5A2542683487F001C256A /* PlaceAutoComplete.xib in Resources */,
 				4E5B283B26564ECE00F15E68 /* WalletHistoryTVC.xib in Resources */,
+				4E0B1C5026C031720022CA10 /* Localizable.strings in Resources */,
 				4E69C48F2651A7A500FF098E /* FAQTVC.xib in Resources */,
 				4E9AC58F264DB64400C2B6A8 /* SubscriptionVC.xib in Resources */,
 				9965FB5F2631725100946AB6 /* DetailVC.xib in Resources */,
@@ -1159,10 +1168,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		4E0B1C4E26C031720022CA10 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4E0B1C4F26C031720022CA10 /* Base */,
+				4E0B1C5426C031A90022CA10 /* ar */,
+				4E05C31026C5524900B91DA0 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		990A2558262E864800C96165 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				990A2559262E864800C96165 /* Base */,
+				4E0B1C4B26C031080022CA10 /* ar */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1171,6 +1191,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				990A255E262E864A00C96165 /* Base */,
+				4E0B1C4C26C031090022CA10 /* ar */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1182,6 +1203,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1243,6 +1265,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

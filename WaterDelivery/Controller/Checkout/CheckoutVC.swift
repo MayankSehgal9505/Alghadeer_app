@@ -371,7 +371,7 @@ extension CheckoutVC: WalletAPI{
                     DispatchQueue.main.async {
                         self.view.makeToast("Checkout successfull", duration: 0.5, position: .center)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            Utility.makeRootViewController(vc: self)
+                            Utility.makeRootViewController()
                         }
                     }
                 }
@@ -467,7 +467,7 @@ extension CheckoutVC: WalletAPI{
                         DispatchQueue.main.async {
                             self.view.makeToast("Checkout successfull", duration: 0.5, position: .center)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                Utility.makeRootViewController(vc: self)
+                                Utility.makeRootViewController()
                             }
                         }
                     default:

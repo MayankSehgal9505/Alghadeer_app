@@ -59,12 +59,25 @@ class Defaults {
     static func getSkipLogin()-> Bool {
         defaults.bool(forKey: "skippedLogin") 
     }
+    static func setEnglishLangauge(_ english:String) {
+        defaults.set(english, forKey: "selectedLanguageEnglish")
+    }
+    static func getEnglishLangauge()-> String? {
+        if defaults.value(forKey: "selectedLanguageEnglish") != nil {
+            return defaults.string(forKey: "selectedLanguageEnglish")
+        } else {
+            return "en"
+        }
+    }
     static func resetDefaults() {
         let dictionary = defaults.dictionaryRepresentation()
+        print("dictionary is \(dictionary)")
         dictionary.keys.forEach { key in
-            if key != "isAppAlreadyLaunchedOnce" {
+            if key == "selectedLanguageEnglish" {
+            } else {
                 defaults.removeObject(forKey: key)
             }
         }
+        print("updted dict \(defaults.dictionaryRepresentation())")
     }
 }

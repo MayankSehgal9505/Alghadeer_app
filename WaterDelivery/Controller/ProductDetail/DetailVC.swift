@@ -36,6 +36,11 @@ class DetailVC: CartBaseVC {
     @IBOutlet weak var quantityLbl: UILabel!
     @IBOutlet weak var totalPriceLbl: UILabel!
     @IBOutlet weak var quantityParentView: UIView!
+    @IBOutlet weak var descriptionText: UILabel!
+    @IBOutlet weak var quantityText: UILabel!
+    @IBOutlet weak var totalAmountTxt: UILabel!
+    @IBOutlet weak var inclusiveVatText: UILabel!
+    @IBOutlet weak var inclusiveVatText2: UILabel!
     
     //MARK:- Properties
     var product = ProductModel()
@@ -46,6 +51,7 @@ class DetailVC: CartBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         getProductDetail()
+        self.addToCartBTn.setTitle(self.productCurrentQuantity == 0 ? Bundle.main.localizedString(forKey: "Add to Cart", value: nil, table: nil) :  Bundle.main.localizedString(forKey: "view Cart", value: nil, table: nil), for: [])
     }
     
     override func viewDidLayoutSubviews() {
@@ -63,6 +69,11 @@ class DetailVC: CartBaseVC {
         } else {
             productImg.image = UIImage(named: "placeholder")
         }
+        descriptionText.text = Bundle.main.localizedString(forKey: "Description", value: nil, table: nil)
+        quantityText.text = Bundle.main.localizedString(forKey: "QTY", value: nil, table: nil)
+        totalAmountTxt.text = Bundle.main.localizedString(forKey: "Total Amount", value: nil, table: nil)
+        inclusiveVatText.text = Bundle.main.localizedString(forKey: "(incl. VAT)", value: nil, table: nil)
+        inclusiveVatText2.text = Bundle.main.localizedString(forKey: "(incl. VAT)", value: nil, table: nil)
     }
 
     //MARK:- IBActions
@@ -85,7 +96,7 @@ class DetailVC: CartBaseVC {
             }))
             alert.addAction(UIAlertAction(title: "Signup/login",style: .default,handler: {(_: UIAlertAction!) in
                 Defaults.resetDefaults()
-                Utility.checkIfAlreadyLogin(vc: self)
+                Utility.checkIfAlreadyLogin()
             }))
             self.present(alert, animated: true, completion: nil)
         } else {
@@ -124,7 +135,10 @@ extension DetailVC {
                         self.quantityParentView.isHidden = self.productCurrentQuantity == 0
                         self.quantityLbl.text = "\(self.productCurrentQuantity)"
                         self.totalPriceLbl.text = self.productCurrentQuantity == 0 ? "AED \(Double(self.product.sellingPrice) ?? 0.0)" : "AED \(Double(self.productCurrentQuantity) * (Double(self.product.sellingPrice) ?? 0.0))"
-                        self.addToCartBTn.setTitle(self.productCurrentQuantity == 0 ? "Add to Cart" : "view Cart", for: [])
+                        self.addToCartBTn.setTitle(self.productCurrentQuantity == 0 ? Bundle.main.localizedString(forKey: "Add to Cart", value: nil, table: nil) :  Bundle.main.localizedString(forKey: "view Cart", value: nil, table: nil), for: [])
+                        
+                       
+
                     }
                 } else {
                     DispatchQueue.main.async {
@@ -154,7 +168,7 @@ extension DetailVC {
     private func getProductDetail(){
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
-            let productDetailUrl : String = UrlName.baseUrl + UrlName.getProductDetailUrl + productID + "/1"
+            let productDetailUrl : String = UrlName.baseUrl + UrlName.getProductDetailUrl + productID + "/\(Defaults.getEnglishLangauge() == "en" ? 1 : 2)"
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: productDetailUrl, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
@@ -225,7 +239,7 @@ extension DetailVC {
                         self.getProductQuantity()
                         self.quantityLbl.text = "\(self.productCurrentQuantity)"
                         self.totalPriceLbl.text = "AED \(Double(self.productCurrentQuantity) * (Double(self.product.sellingPrice) ?? 0.0))"
-                        self.addToCartBTn.setTitle(self.productCurrentQuantity == 0 ? "Add to Cart" : "view Cart", for: [])
+                        self.addToCartBTn.setTitle(self.productCurrentQuantity == 0 ? Bundle.main.localizedString(forKey: "Add to Cart", value: nil, table: nil) :  Bundle.main.localizedString(forKey: "view Cart", value: nil, table: nil), for: [])
                         self.actionPerformed = self.productCurrentQuantity == 0 ? .addToCart : .goToCart
                     }
                 } else {

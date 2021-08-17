@@ -105,15 +105,12 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QTY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8L-4g-kPt">
                                 <rect key="frame" x="130" y="82" width="28" height="17"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="28" id="vG8-f6-Lya"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="AED 9.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O02-X1-3u9">
-                                <rect key="frame" x="130" y="120" width="267" height="17"/>
+                                <rect key="frame" x="130" y="120" width="312" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -123,6 +120,7 @@
                         <constraints>
                             <constraint firstItem="l8L-4g-kPt" firstAttribute="leading" secondItem="ME8-Zo-Irr" secondAttribute="leading" id="0aP-is-ktP"/>
                             <constraint firstItem="O02-X1-3u9" firstAttribute="top" secondItem="xjv-wm-WpH" secondAttribute="bottom" constant="12" id="0ra-F2-8Kr"/>
+                            <constraint firstAttribute="trailing" secondItem="O02-X1-3u9" secondAttribute="trailing" constant="5" id="2Qo-JC-C6u"/>
                             <constraint firstItem="xjv-wm-WpH" firstAttribute="top" secondItem="ME8-Zo-Irr" secondAttribute="bottom" constant="5" id="BGM-A1-5Me"/>
                             <constraint firstAttribute="bottom" secondItem="O02-X1-3u9" secondAttribute="bottom" constant="10" id="IwE-2F-G4P"/>
                             <constraint firstItem="ME8-Zo-Irr" firstAttribute="leading" secondItem="Z3z-z7-r9E" secondAttribute="trailing" constant="15" id="Pg6-2r-Qmi"/>
@@ -131,7 +129,6 @@
                             <constraint firstAttribute="trailing" secondItem="KDD-2c-UZi" secondAttribute="trailing" constant="10" id="i8Y-FJ-fzx"/>
                             <constraint firstItem="Z3z-z7-r9E" firstAttribute="leading" secondItem="ir3-fP-mia" secondAttribute="leading" constant="15" id="jCp-bj-ScC"/>
                             <constraint firstItem="ME8-Zo-Irr" firstAttribute="top" secondItem="ir3-fP-mia" secondAttribute="top" constant="20" id="lqa-C2-gca"/>
-                            <constraint firstItem="O02-X1-3u9" firstAttribute="trailing" secondItem="ME8-Zo-Irr" secondAttribute="trailing" id="maW-Wc-wlL"/>
                             <constraint firstItem="KDD-2c-UZi" firstAttribute="top" secondItem="ir3-fP-mia" secondAttribute="top" constant="15" id="n8y-ia-YoM"/>
                             <constraint firstItem="KDD-2c-UZi" firstAttribute="leading" secondItem="ME8-Zo-Irr" secondAttribute="trailing" constant="10" id="sew-s8-j2A"/>
                             <constraint firstItem="Z3z-z7-r9E" firstAttribute="top" secondItem="ir3-fP-mia" secondAttribute="top" constant="20" id="tHK-5A-EeJ"/>
@@ -158,6 +155,7 @@
                 <outlet property="priceLbl" destination="O02-X1-3u9" id="BUd-7u-2r6"/>
                 <outlet property="productImg" destination="Uhj-1h-3oK" id="1Gs-CG-eMt"/>
                 <outlet property="productname" destination="ME8-Zo-Irr" id="ksi-rj-CJp"/>
+                <outlet property="qtyText" destination="l8L-4g-kPt" id="JK0-Up-rbJ"/>
                 <outlet property="quantityView" destination="xjv-wm-WpH" id="H8s-mc-fVZ"/>
                 <outlet property="quantitylbl" destination="JSb-i1-T61" id="Khs-cS-gdS"/>
             </connections>

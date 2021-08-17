@@ -16,9 +16,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
+                <outlet property="enterPhnNumberLbl" destination="537-gP-DnI" id="c4s-Fo-2sd"/>
+                <outlet property="helpText" destination="Ybj-PO-MDh" id="hxw-YT-xc3"/>
                 <outlet property="loginButton" destination="iTJ-kZ-7wA" id="RaG-0e-RCi"/>
+                <outlet property="loginTextLbl" destination="Koe-Sh-He4" id="SKg-BR-yfB"/>
+                <outlet property="otpText" destination="mbe-GV-IgH" id="UAm-aL-tvk"/>
                 <outlet property="phoneTextField" destination="KJz-uY-ywu" id="bOz-gm-67d"/>
                 <outlet property="phoneView" destination="MMr-lK-P01" id="CC1-VO-Jmp"/>
+                <outlet property="skipBtn" destination="LUC-Dx-Y1H" id="Qdy-Os-4rc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

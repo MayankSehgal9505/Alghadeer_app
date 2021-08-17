@@ -27,6 +27,8 @@ class DashboardVC: CartBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTBView()
+        changeOfLanguage()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeOfLanguage), name: NSNotification.Name(rawValue: "LanguageChange"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,7 +44,15 @@ class DashboardVC: CartBaseVC {
         productArray.removeAll()
         tbView.reloadData()
     }
-    
+    @objc func changeOfLanguage(){
+        if Defaults.getEnglishLangauge() == "en" {
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            self.view.layoutIfNeeded()
+        } else {
+            UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            self.view.layoutIfNeeded()
+        }
+    }
     // MARK:- Internal Methods
     /// Set Table View
     private func setUpTBView(){
@@ -74,6 +84,7 @@ class DashboardVC: CartBaseVC {
     }
     // MARK:- IBActions
     @IBAction func sideMenuButtonPressed(_ sender: Any) {
+        self.frostedViewController.direction = Defaults.getEnglishLangauge() == "en" ? .left : .right
         self.frostedViewController.presentMenuViewController()
     }
 }
@@ -105,6 +116,7 @@ extension DashboardVC : UITableViewDataSource, UITableViewDelegate {
             return cell
         case .cartBalance:
             let cell = tableView.dequeueReusableCell(withIdentifier: CurrentBalanceCell.className(), for: indexPath) as! CurrentBalanceCell
+            cell.setupCellUI()
             cell.price.text = "AED \(self.walletBallance.walletAmount)"
             return cell
         case .products:

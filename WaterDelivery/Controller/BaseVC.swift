@@ -73,7 +73,7 @@ class CartBaseVC: UIViewController,CartListAPI {
             }))
             alert.addAction(UIAlertAction(title: "Signup/login",style: .default,handler: {(_: UIAlertAction!) in
                 Defaults.resetDefaults()
-                Utility.checkIfAlreadyLogin(vc: self)
+                Utility.checkIfAlreadyLogin()
             }))
             self.present(alert, animated: true, completion: nil)
         } else {

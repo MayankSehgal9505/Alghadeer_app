@@ -23,6 +23,9 @@ class OTPVC: UIViewController {
             }
         }
     }
+    @IBOutlet weak var enterOtpText: UILabel!
+    @IBOutlet weak var enterOTPNumberText: UILabel!
+    @IBOutlet weak var resendOtpBtn: UIButton!
     
     var remainingStrStack: [String] = []
     
@@ -48,6 +51,10 @@ class OTPVC: UIViewController {
         self.submitButton.setCornerRadiusOfView(cornerRadiusValue: 25)
         setupTextfields()
         initializeTimer()
+        self.enterOtpText.text = Bundle.main.localizedString(forKey: "Enter OTP", value: nil, table: nil)
+        self.enterOTPNumberText.text = Bundle.main.localizedString(forKey: "Enter OTP Number", value: nil, table: nil)
+        submitButton.setTitle(Bundle.main.localizedString(forKey: "Submit", value: nil, table: nil), for: [])
+        resendOtpBtn.setTitle(Bundle.main.localizedString(forKey: "Resend OTP", value: nil, table: nil), for: [])
     }
     private func initializeTimer() {
         timelimit = 119

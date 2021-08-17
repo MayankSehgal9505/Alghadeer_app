@@ -17,7 +17,7 @@ extension UIViewController {
     /// - Parameter progressLabel: Loader message
     func showHUD(progressLabel:String){
         let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-        progressHUD.label.text = progressLabel
+        progressHUD.label.text = Bundle.main.localizedString(forKey: progressLabel, value: nil, table: nil)
     }
 
      ///Dismiss loader after API response
@@ -32,7 +32,7 @@ extension UIViewController {
         let action = UIAlertAction(title: AlertField.okString, style: .default, handler: { (alert) in
             //Sign out action
             Defaults.resetDefaults()
-            Utility.checkIfAlreadyLogin(vc: self)
+            Utility.checkIfAlreadyLogin()
         })
         alertView.addAction(action)
         self.present(alertView, animated: true, completion: nil)

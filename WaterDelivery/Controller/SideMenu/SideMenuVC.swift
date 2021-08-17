@@ -51,16 +51,25 @@ class SideMenuVC: UIViewController {
             nav.pushViewController(controllerToMove, animated: false)
         }
     }
+    @objc func changeOfLanguage(){
+        if Defaults.getEnglishLangauge() == "en"{
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            self.view.layoutIfNeeded()
+        } else {
+            UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            self.view.layoutIfNeeded()
+        }
+    }
     /**
      Simple Alert
      - Show alert with title and alert message and basic two actions
      */
     func showLogoutAlert() {
-        let alert = UIAlertController(title: "Logout?", message: "You can always access your content by signing back in", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
+        let alert = UIAlertController(title: Bundle.main.localizedString(forKey: "Logout?", value: nil, table: nil), message: Bundle.main.localizedString(forKey: "You can always access your content by signing back in", value: nil, table: nil), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Bundle.main.localizedString(forKey: "Cancel", value: nil, table: nil), style: .default, handler: { _ in
             //Cancel Action
         }))
-        alert.addAction(UIAlertAction(title: "Logout",style: .default,handler: {(_: UIAlertAction!) in
+        alert.addAction(UIAlertAction(title: Bundle.main.localizedString(forKey: "Logout", value: nil, table: nil),style: .default,handler: {(_: UIAlertAction!) in
             self.callLogOut()
         }))
         self.present(alert, animated: true, completion: nil)
@@ -77,7 +86,7 @@ class SideMenuVC: UIViewController {
         }))
         alert.addAction(UIAlertAction(title: "Signup/login",style: .default,handler: {(_: UIAlertAction!) in
             Defaults.resetDefaults()
-            Utility.checkIfAlreadyLogin(vc: self)
+            Utility.checkIfAlreadyLogin()
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -110,7 +119,7 @@ extension SideMenuVC {
             //Sign out action
             DispatchQueue.main.async {
                 self.resetData()
-                self.makeInitialViewController()
+                Utility.checkIfAlreadyLogin()
             }
         })
     }
@@ -189,8 +198,10 @@ extension SideMenuVC : UITableViewDelegate {
             controllerToMove = ContactUsVC(nibName: ContactUsVC.className(), bundle: nil)
             moveToController(controllerToMove)
         case 8:
-            break
+            self.frostedViewController.hideMenuViewController()
+            showOptions()
         case 9:
+            self.frostedViewController.hideMenuViewController()
             self.showLogoutAlert()
         default:
             break
@@ -208,4 +219,23 @@ extension SideMenuVC : UITableViewDelegate {
     }
     
 }
+
+extension SideMenuVC {
+    func showOptions(){
+        let alert = UIAlertController(title: "Select Language", message: "", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "English", style: .default , handler:{ (UIAlertAction)in
+            Defaults.setEnglishLangauge("en")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LanguageChange"), object: nil)
+            Utility.makeRootViewController()
+
+        }))
+        alert.addAction(UIAlertAction(title: "Arabic", style: .default , handler:{ (UIAlertAction)in
+            Defaults.setEnglishLangauge("ar")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LanguageChange"), object: nil)
+            Utility.makeRootViewController()
+           }))
+        self.present(alert, animated: true, completion:nil)
+    }
+}
+
 

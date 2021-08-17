@@ -11,8 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CartVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
+                <outlet property="applyBtn" destination="SzJ-8z-2rx" id="lsb-zs-F2E"/>
                 <outlet property="cartEmptyView" destination="2yX-Do-KNZ" id="khV-xh-Qxk"/>
                 <outlet property="cartTBView" destination="jg4-Jn-xEk" id="kN5-9l-aig"/>
+                <outlet property="cartText" destination="8Xt-nf-6UH" id="c6v-Fm-cSE"/>
                 <outlet property="checkOutBtn" destination="QhQ-7t-UWy" id="Mr6-e3-rs6"/>
                 <outlet property="couponAmount" destination="UYk-cr-fly" id="wd4-66-QUY"/>
                 <outlet property="discountView" destination="gaF-iW-o4Q" id="1QT-g9-ljd"/>

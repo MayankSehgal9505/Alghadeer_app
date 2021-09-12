@@ -62,16 +62,28 @@ class CartBaseVC: UIViewController,CartListAPI {
     
     // MARK:- IBActions 
     @IBAction func goToNotiifiications(_ sender: UIButton) {
-        let notificationVC = NotificationVC()
-        self.navigationController?.pushViewController(notificationVC, animated: false)
-    }
-    @IBAction func goToCartBtnAction(_ sender: UIButton) {
         if Defaults.getSkipLogin() {
-            let alert = UIAlertController(title: "", message: "Please signup/login to continue further", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Guest Login", message: "Please Login/Signup to continue further", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
                 //Cancel Action
             }))
-            alert.addAction(UIAlertAction(title: "Signup/login",style: .default,handler: {(_: UIAlertAction!) in
+            alert.addAction(UIAlertAction(title: "Ok",style: .default,handler: {(_: UIAlertAction!) in
+                Defaults.resetDefaults()
+                Utility.checkIfAlreadyLogin()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            let notificationVC = NotificationVC()
+            self.navigationController?.pushViewController(notificationVC, animated: false)
+        }
+    }
+    @IBAction func goToCartBtnAction(_ sender: UIButton) {
+        if Defaults.getSkipLogin() {
+            let alert = UIAlertController(title: "Guest Login", message: "Please Login/Signup to continue further", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
+                //Cancel Action
+            }))
+            alert.addAction(UIAlertAction(title: "Ok",style: .default,handler: {(_: UIAlertAction!) in
                 Defaults.resetDefaults()
                 Utility.checkIfAlreadyLogin()
             }))

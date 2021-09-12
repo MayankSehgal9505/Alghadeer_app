@@ -79,7 +79,7 @@
                             </constraints>
                         </view>
                         <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KJz-uY-ywu">
-                            <rect key="frame" x="60" y="0.0" width="235" height="50"/>
+                            <rect key="frame" x="50" y="0.0" width="245" height="50"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="15"/>
                             <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
@@ -89,7 +89,7 @@
                     <constraints>
                         <constraint firstItem="yMH-71-dcK" firstAttribute="leading" secondItem="MMr-lK-P01" secondAttribute="leading" id="Sey-o9-412"/>
                         <constraint firstItem="yMH-71-dcK" firstAttribute="top" secondItem="MMr-lK-P01" secondAttribute="top" id="TTs-ER-kWM"/>
-                        <constraint firstItem="KJz-uY-ywu" firstAttribute="leading" secondItem="yMH-71-dcK" secondAttribute="trailing" constant="20" id="aki-yP-xll"/>
+                        <constraint firstItem="KJz-uY-ywu" firstAttribute="leading" secondItem="MMr-lK-P01" secondAttribute="leading" constant="50" id="WGd-q2-Wlb"/>
                         <constraint firstItem="KJz-uY-ywu" firstAttribute="top" secondItem="MMr-lK-P01" secondAttribute="top" id="cH3-HH-iSD"/>
                         <constraint firstAttribute="trailing" secondItem="KJz-uY-ywu" secondAttribute="trailing" id="hOw-Bs-aRa"/>
                         <constraint firstAttribute="bottom" secondItem="yMH-71-dcK" secondAttribute="bottom" id="jGN-NA-N2S"/>

@@ -10,6 +10,7 @@ import UIKit
 class SubscriptionHeaderTVC: UITableViewCell {
 
     @IBOutlet weak var addAddressBtn: UIButton!
+    @IBOutlet weak var selectAddressLbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +22,8 @@ class SubscriptionHeaderTVC: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupCell() {
+        selectAddressLbl.text = Bundle.main.localizedString(forKey: "Select Addrees", value: "", table: "")
+        addAddressBtn.setTitle(Bundle.main.localizedString(forKey: "ADD ADDRESS", value: "", table: ""), for: [])
+    }
 }

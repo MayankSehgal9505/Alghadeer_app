@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectAmountVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
                 <outlet property="addMoneyBtn" destination="2mb-9m-dNu" id="crw-81-Ccd"/>
+                <outlet property="selectAmountLbl" destination="Jqj-mx-Ics" id="V5I-t0-dYn"/>
                 <outlet property="selectAmountTBView" destination="WfB-Ga-5LX" id="XPp-3M-UFo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

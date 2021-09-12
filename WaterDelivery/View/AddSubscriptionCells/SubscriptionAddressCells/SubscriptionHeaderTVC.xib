@@ -58,6 +58,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="addAddressBtn" destination="xgD-qg-0Rx" id="YFA-qy-lYZ"/>
+                <outlet property="selectAddressLbl" destination="xOU-zL-rhc" id="k8D-fR-A3c"/>
             </connections>
             <point key="canvasLocation" x="105.79710144927537" y="122.87946428571428"/>
         </tableViewCell>

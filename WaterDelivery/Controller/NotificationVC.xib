@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotificationVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
                 <outlet property="noData" destination="iN1-i9-hpv" id="rbj-1d-Yo3"/>
+                <outlet property="notificationLbl" destination="89L-Rt-5FM" id="BuK-Gh-s5m"/>
                 <outlet property="notificationTBView" destination="Sjw-ct-mCA" id="Joc-XM-gre"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

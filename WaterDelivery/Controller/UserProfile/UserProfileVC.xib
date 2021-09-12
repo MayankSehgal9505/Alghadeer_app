@@ -11,16 +11,23 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserProfileVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
+                <outlet property="addressLbl" destination="rzk-js-m12" id="qup-a7-8N7"/>
                 <outlet property="addressTBView" destination="MWa-RR-oku" id="N7K-7g-qtT"/>
                 <outlet property="addressTxtfld" destination="rzk-js-m12" id="PSg-Ds-idf"/>
                 <outlet property="addresssParentView" destination="L1R-VZ-VvO" id="hG2-VM-vR1"/>
                 <outlet property="cameraBtn" destination="f3Y-Ui-dJI" id="cTF-3h-2ZF"/>
                 <outlet property="categoryBtn" destination="Gxs-oB-EUq" id="x5D-Ts-PiG"/>
+                <outlet property="categoryLbl" destination="TeC-Ln-UjZ" id="dRq-dU-RfF"/>
                 <outlet property="categoryValue" destination="KeG-T0-PaY" id="zNu-Ve-g66"/>
                 <outlet property="cusstomerID" destination="d5b-Tg-sme" id="kOz-X7-1Sx"/>
+                <outlet property="customerIdLbl" destination="9LJ-k4-EgT" id="uS2-0h-5o4"/>
+                <outlet property="editProfileLbl" destination="yVm-hZ-rgS" id="Zc6-Wg-HFG"/>
+                <outlet property="emailLbl" destination="X7Y-TH-RUN" id="5P2-jM-l5D"/>
                 <outlet property="emailTxtfld" destination="rKe-5B-7PU" id="Til-Ct-92F"/>
                 <outlet property="generalnfoView" destination="Ayw-20-qoo" id="QQb-xu-rXS"/>
+                <outlet property="nameLbl" destination="nDg-gG-a5c" id="aUY-HP-bqf"/>
                 <outlet property="nameTxtfld" destination="Jfa-6t-Uha" id="Zj2-BQ-ZSc"/>
+                <outlet property="phoneNoLbl" destination="mqi-p3-ulS" id="gZy-6n-mgF"/>
                 <outlet property="phoneNumberTxtFld" destination="zDD-ed-8S3" id="Q1v-2y-45M"/>
                 <outlet property="saveBtn" destination="V6b-a8-Apg" id="P2G-iQ-n8x"/>
                 <outlet property="taableHeight" destination="o4Y-24-u7f" id="xKK-Fo-rO0"/>

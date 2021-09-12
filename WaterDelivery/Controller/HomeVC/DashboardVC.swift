@@ -84,8 +84,20 @@ class DashboardVC: CartBaseVC {
     }
     // MARK:- IBActions
     @IBAction func sideMenuButtonPressed(_ sender: Any) {
-        self.frostedViewController.direction = Defaults.getEnglishLangauge() == "en" ? .left : .right
-        self.frostedViewController.presentMenuViewController()
+        if Defaults.getSkipLogin() {
+            let alert = UIAlertController(title: "Guest Login", message: "Please Login/Signup to continue further", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
+                //Cancel Action
+            }))
+            alert.addAction(UIAlertAction(title: "Ok",style: .default,handler: {(_: UIAlertAction!) in
+                Defaults.resetDefaults()
+                Utility.checkIfAlreadyLogin()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            self.frostedViewController.direction = Defaults.getEnglishLangauge() == "en" ? .left : .right
+            self.frostedViewController.presentMenuViewController()
+        }
     }
 }
 
@@ -212,7 +224,7 @@ extension DashboardVC: WalletAPI {
     
     func getProductsList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
-            let bannerListURL : String = UrlName.baseUrl + UrlName.getProductListUrl
+            let bannerListURL : String = UrlName.baseUrl + UrlName.getProductListUrl + "/\(Defaults.getEnglishLangauge() == "en" ? 1 : 2)"
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {
@@ -246,7 +258,7 @@ extension DashboardVC: WalletAPI {
     
     func getCategorysList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
-            let bannerListURL : String = UrlName.baseUrl + UrlName.getCategoryListUrl
+            let bannerListURL : String = UrlName.baseUrl + UrlName.getCategoryListUrl + "/\(Defaults.getEnglishLangauge() == "en" ? 1 : 2)"
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {

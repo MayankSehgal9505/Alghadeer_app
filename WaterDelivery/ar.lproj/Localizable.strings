@@ -184,3 +184,39 @@
 "Delivery Time" = "موعد التسليم";
 "Pause" = "وقفة";
 "Reactivate" = "اعادة تفعيل";
+
+"Add Subscriptions" = "إضافة اشتراكات";
+"Enter start date" = "أدخل تاريخ البدء";
+"Enter end date" = "أدخل تاريخ الانتهاء";
+"Select Time of Delivery" = "حدد وقت التسليم";
+"Select Addrees" = "حدد الإضافات";
+"ADD ADDRESS" = "اضف عنوان";
+"Qty:" = "الكمية:";
+
+"Add Money" = "إضافة المال";
+"Select Amount" = "حدد المبلغ";
+"Please select/ enter amount which you want to add in you wallet" = "الرجاء تحديد / إدخال المبلغ الذي تريد إضافته في محفظتك";
+
+"Please enter mobile number" = "الرجاء إدخال رقم الهاتف المحمول";
+"Enter Phone Number" = "أدخل رقم الهاتف";
+
+"Edit Profile" = "تعديل الملف الشخصي";
+"Customer Id" = "هوية الزبون";
+"Name" = "اسم";
+"Email" = "بريد إلكتروني";
+"Phone No" = "رقم الهاتف";
+"Category" = "فئة";
+"Update Profile" = "تحديث الملف";
+
+"Add new Address" = "إضافة عنوان جديد";
+"Update Address" = "تحديث العنوان";
+"Address can't be empty" = "لا يمكن أن يكون العنوان فارغًا";
+"Phone number can't be empty" = "لا يمكن ترك رقم الهاتف فارغًا";
+"State can't be empty" = "لا يمكن أن تكون الحالة فارغة";
+"City can't be empty" = "لا يمكن أن تكون المدينة فارغة";
+"Address Updated successfully" = "تم تحديث العنوان بنجاح";
+"Contact Number" = "رقم الاتصال";
+"City" = "مدينة";
+"District" = "يصرف";
+"Location" = "موقع";
+"Notification" = "نوٹیفکیشن";

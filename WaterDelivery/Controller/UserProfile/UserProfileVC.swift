@@ -10,6 +10,15 @@ import Kingfisher
 class UserProfileVC: UIViewController {
 
     //MARK:- IBOutlets
+    
+    @IBOutlet weak var editProfileLbl: UILabel!
+    @IBOutlet weak var customerIdLbl: UILabel!
+    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var emailLbl: UILabel!
+    @IBOutlet weak var phoneNoLbl: UILabel!
+    @IBOutlet weak var categoryLbl: UILabel!
+    @IBOutlet weak var addressLbl: UITextField!
+
     @IBOutlet weak var userImg: UIImageView!
     @IBOutlet weak var cameraBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
@@ -77,6 +86,18 @@ class UserProfileVC: UIViewController {
     func setupUI() {
         userImg.setCornerRadiusOfView(cornerRadiusValue: 75.00, setBorder: true, borderColor: .white, width: 2.0)
         saveBtn.setCornerRadiusOfView(cornerRadiusValue:30)
+        nameTxtfld.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .right : .left
+        emailTxtfld.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .right : .left
+        phoneNumberTxtFld.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .right : .left
+        addressTxtfld.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .right : .left
+        editProfileLbl.text = Bundle.main.localizedString(forKey: "Edit Profile", value: "", table: "")
+        customerIdLbl.text = Bundle.main.localizedString(forKey: "Customer Id", value: "", table: "")
+        nameLbl.text = Bundle.main.localizedString(forKey: "Name", value: "", table: "")
+        emailLbl.text = Bundle.main.localizedString(forKey: "Email", value: "", table: "")
+        phoneNoLbl.text = Bundle.main.localizedString(forKey: "Phone No", value: "", table: "")
+        categoryLbl.text = Bundle.main.localizedString(forKey: "Category", value: "", table: "")
+        addressLbl.placeholder = Bundle.main.localizedString(forKey: "Address", value: "", table: "")
+        saveBtn.setTitle(Bundle.main.localizedString(forKey: "Update Profile", value: "", table: ""), for: [])
         setUpTBView()
     }
     func setUpTBView(){
@@ -159,7 +180,7 @@ class UserProfileVC: UIViewController {
             self.view.makeToast("Email can't be empty", duration: 3.0, position: .center)
         } else if (!CommonMethods.isValidEmail(emailTxtfld.text!)) {
             self.view.makeToast("Email should be valid", duration: 3.0, position: .center)
-        }else if (addressTxtfld.text?.isEmpty ??  true) {
+        }else if (selectedAddress.shippingAddress.isEmpty) {
             self.view.makeToast("Address name can't be empty", duration: 3.0, position: .center)
         } else if (phoneNumberTxtFld.text?.isEmpty ??  true) {
             self.view.makeToast("Phone Number can't be empty", duration: 3.0, position: .center)
@@ -277,7 +298,7 @@ extension UserProfileVC: CategoryAPI {
             let setUserDetailsUrl : String = UrlName.baseUrl + UrlName.updateUserDetailUrl + Defaults.getUserID()
             let parameters = [
                 "name":nameTxtfld.text!,
-                "address":addressTxtfld.text!,
+                "address":selectedAddress.shippingAddress,
                 "gender":"M",
                 "dob":"2017-3-2",
                 "country":"",
@@ -330,7 +351,8 @@ extension UserProfileVC: CategoryAPI {
 
 extension UserProfileVC: AddressProtocol{
     private func getAddress() {
-        getAddressList(loaderRequired: false){ [weak self] in  self?.reloadAddressListSection()  }
+        getAddressList(loaderRequired: false){ [weak self] in
+            self?.reloadAddressListSection()  }
     }
     private func reloadAddressListSection() {
         DispatchQueue.main.async {
@@ -362,7 +384,7 @@ extension UserProfileVC: UITableViewDataSource{
         if indexPath.row < shippingAddressArray.count {
             cell.adddressSelectionBtn.tag = indexPath.row
             cell.adddressSelectionBtn.addTarget(self, action: #selector(shippingAddrress(sender:)), for: .touchUpInside)
-            cell.addressTitle.text = "Address \(indexPath.row + 1)"
+            cell.addressTitle.text = "\(Bundle.main.localizedString(forKey: "Address", value: "", table: "")) \(indexPath.row + 1)"
             cell.setupCell(shipperAddress: shippingAddressArray[indexPath.row])
         }
         return cell

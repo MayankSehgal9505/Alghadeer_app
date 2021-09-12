@@ -186,7 +186,7 @@ extension CartVC {
     func getCartList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
-            let getCartListUrl : String = UrlName.baseUrl + UrlName.getCartItemsUrl + Defaults.getUserID()
+            let getCartListUrl : String = UrlName.baseUrl + UrlName.getCartItemsUrl + Defaults.getUserID() + "/\(Defaults.getEnglishLangauge() == "en" ? 1 : 2)"
             let parameters = [
                 "customer_id":Defaults.getUserID(),
             ] as [String : Any]

@@ -243,7 +243,10 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="addSubscriptionBtn" destination="1Rz-pf-KU7" id="413-vz-5yD"/>
+                <outlet property="deliveryTimeLbl" destination="oAz-eo-Cib" id="WGz-o9-YM5"/>
                 <outlet property="endDateTxtFld" destination="rCG-LB-dwj" id="B9t-Ze-etH"/>
+                <outlet property="enterEndDateLbl" destination="G2O-hV-rZV" id="LnH-wN-SbZ"/>
+                <outlet property="enterStartDateLbl" destination="leT-LF-7bO" id="Dqi-E5-3CN"/>
                 <outlet property="selectEndDateBtn" destination="ijs-Nt-A51" id="VQf-LS-kzj"/>
                 <outlet property="selectStartDateBtn" destination="Tlf-Aj-XyS" id="tfy-uz-QVj"/>
                 <outlet property="selectTimeBtn" destination="atY-iR-Ujc" id="vgo-qI-jyS"/>

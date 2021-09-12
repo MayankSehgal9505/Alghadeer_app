@@ -15,8 +15,11 @@ class SelectAmountVC: UIViewController {
         case manual
     }
     //MARK:-IBOutlets
+    @IBOutlet weak var selectAmountLbl: UILabel!
     @IBOutlet weak var selectAmountTBView: UITableView!
-    @IBOutlet weak var addMoneyBtn: UIButton! {didSet {addMoneyBtn.setCornerRadiusOfView(cornerRadiusValue: 25.0)}}
+    @IBOutlet weak var addMoneyBtn: UIButton! {didSet {addMoneyBtn.setCornerRadiusOfView(cornerRadiusValue: 25.0)
+        addMoneyBtn.setTitle(Bundle.main.localizedString(forKey: "Add Money", value: "", table: ""), for: [])
+    }}
     //MARK:- Local Variables
     var availableAmounts = [WalletAmount(amount: "100", amountSelected: false),WalletAmount(amount: "200", amountSelected: false),WalletAmount(amount: "400", amountSelected: false),WalletAmount(amount: "600", amountSelected: false),WalletAmount(amount: "700", amountSelected: false),WalletAmount(amount: "1000", amountSelected: false),WalletAmount(amount: "1200", amountSelected: false),WalletAmount(amount: "1300", amountSelected: false), WalletAmount(amount: "", amountSelected: false)]
     var delegate: SelectedAmountDelegate?
@@ -40,6 +43,7 @@ class SelectAmountVC: UIViewController {
     }
     func setupUI() {
         setUpTBView()
+        selectAmountLbl.text = Bundle.main.localizedString(forKey: "Select Amount", value: "", table: "")
     }
     
     private func moveToPaymentPage(){
@@ -59,7 +63,7 @@ class SelectAmountVC: UIViewController {
 
     @objc func addMmoneyAct(sender:UIButton) {
         if selectedAmount.amount.isEmpty {
-            self.view.makeToast("Please select/ enter amount which you want to add in you wallet", duration: 3.0, position: .center)
+            self.view.makeToast(Bundle.main.localizedString(forKey: "Please select/ enter amount which you want to add in you wallet", value: "", table: ""), duration: 3.0, position: .center)
         } else {
             addMoneyInWallet()
         }
@@ -217,6 +221,8 @@ extension SelectAmountVC: UITableViewDataSource{
                 cell.manualParentView.setCornerRadiusOfView(cornerRadiusValue: 15.0)
                 cell.addMoneyBtn.setCornerRadiusOfView(cornerRadiusValue: 15.0)
                 cell.amountTxtFld.tag = indexPath.row
+                cell.amountTxtFld.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .left : .right
+                cell.addMoneyBtn.setTitle(Bundle.main.localizedString(forKey: "Add Money", value: "", table: ""), for: [])
                 cell.amountTxtFld.addTarget(self, action: #selector(enteringAmount(sender:)), for: .editingChanged)
                 cell.addMoneyBtn.addTarget(self, action: #selector(addMmoneyAct(sender:)), for: .touchUpInside)
                 return cell

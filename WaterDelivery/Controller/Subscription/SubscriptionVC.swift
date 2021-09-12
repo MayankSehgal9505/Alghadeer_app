@@ -129,7 +129,7 @@ extension SubscriptionVC{
     func getSubscriptionList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
-            let subscriptionURL : String = UrlName.baseUrl + UrlName.getSubscriptionUrl + Defaults.getUserID() + "/\(selectedSubscriptionTab.subscriptionName)"
+            let subscriptionURL : String = UrlName.baseUrl + UrlName.getSubscriptionUrl + Defaults.getUserID() + "/\(selectedSubscriptionTab.subscriptionName)" + "/\(Defaults.getEnglishLangauge() == "en" ? 1 : 2)"
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: subscriptionURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {

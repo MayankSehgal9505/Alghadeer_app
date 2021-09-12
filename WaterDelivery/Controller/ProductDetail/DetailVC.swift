@@ -41,6 +41,7 @@ class DetailVC: CartBaseVC {
     @IBOutlet weak var totalAmountTxt: UILabel!
     @IBOutlet weak var inclusiveVatText: UILabel!
     @IBOutlet weak var inclusiveVatText2: UILabel!
+    @IBOutlet weak var notificationview: UIButton!
     
     //MARK:- Properties
     var product = ProductModel()
@@ -52,6 +53,7 @@ class DetailVC: CartBaseVC {
         super.viewDidLoad()
         getProductDetail()
         self.addToCartBTn.setTitle(self.productCurrentQuantity == 0 ? Bundle.main.localizedString(forKey: "Add to Cart", value: nil, table: nil) :  Bundle.main.localizedString(forKey: "view Cart", value: nil, table: nil), for: [])
+        self.notificationview.isHidden = Defaults.getSkipLogin()
     }
     
     override func viewDidLayoutSubviews() {
@@ -90,11 +92,10 @@ class DetailVC: CartBaseVC {
     }
     @IBAction func addToCartBtnTapped(_ sender: UIButton) {
         if Defaults.getSkipLogin() {
-            let alert = UIAlertController(title: "", message: "Please signup/login to continue further", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Guest Login", message: "Please Login/Signup to continue further", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
-                //Cancel Action
             }))
-            alert.addAction(UIAlertAction(title: "Signup/login",style: .default,handler: {(_: UIAlertAction!) in
+            alert.addAction(UIAlertAction(title: "Ok",style: .default,handler: {(_: UIAlertAction!) in
                 Defaults.resetDefaults()
                 Utility.checkIfAlreadyLogin()
             }))
@@ -182,7 +183,12 @@ extension DetailVC {
                     self.product = ProductModel.init(json: data)
                     DispatchQueue.main.async {
                         self.setupView()
-                        self.getProductQuantity()
+                        if Defaults.getSkipLogin() {
+                            self.quantityParentView.isHidden = true
+                            self.totalPriceLbl.text = "AED \(Double(1.0) * (Double(self.product.sellingPrice) ?? 0.0))"
+                        } else {
+                            self.getProductQuantity()
+                        }
                     }
                 } else {
                     DispatchQueue.main.async {

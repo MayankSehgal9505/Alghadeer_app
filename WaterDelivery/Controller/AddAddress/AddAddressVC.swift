@@ -26,7 +26,9 @@ class AddAddressVC: UIViewController,SelectedLoc {
     @IBOutlet weak var addressTxtFld: UITextField!
     @IBOutlet weak var phoneNumberTxtFld: UITextField!
     @IBOutlet weak var stateBtn: UIButton!
-    @IBOutlet weak var saveBtn: UIButton! {didSet{self.saveBtn.setCornerRadiusOfView(cornerRadiusValue: 20)}}
+    @IBOutlet weak var saveBtn: UIButton! {didSet{self.saveBtn.setCornerRadiusOfView(cornerRadiusValue: 20)
+        saveBtn.setTitle(Bundle.main.localizedString(forKey: "Submit", value: "", table: ""), for: [])
+    }}
     @IBOutlet weak var cityBtn: UIButton!
     @IBOutlet weak var addressTypeTitle: UILabel!
     @IBOutlet weak var pickerLbl: UILabel!
@@ -35,6 +37,7 @@ class AddAddressVC: UIViewController,SelectedLoc {
     @IBOutlet weak var stateTxtFld: UITextField!
     @IBOutlet weak var cityTxtFld: UITextField!
     @IBOutlet weak var locationTxtFld: UITextField!
+    @IBOutlet weak var addAddressLbl: UILabel!
     
     //MARK:- Properties
     var addressScreenType: AddressScreenType = .addAddress
@@ -57,7 +60,17 @@ class AddAddressVC: UIViewController,SelectedLoc {
     //MARK:- Internal Methods
     func setupUI() {
         getStatesCities(cities: false)
-        addressTypeTitle.text = addressScreenType == .addAddress ? "Add new Address" : "Update Address"
+        addressTypeTitle.text = addressScreenType == .addAddress ? Bundle.main.localizedString(forKey: "Add new Address", value: "", table: "") : Bundle.main.localizedString(forKey: "Update Address", value: "", table: "")
+        addressTxtFld.placeholder = Bundle.main.localizedString(forKey: "Address", value: "", table: "")
+        phoneNumberTxtFld.placeholder = Bundle.main.localizedString(forKey: "Contact Number", value: "", table: "")
+        stateTxtFld.placeholder = Bundle.main.localizedString(forKey: "City", value: "", table: "")
+        cityTxtFld.placeholder = Bundle.main.localizedString(forKey: "District", value: "", table: "")
+        locationTxtFld.placeholder = Bundle.main.localizedString(forKey: "Location", value: "", table: "")
+        addressTxtFld.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .right : .left
+        phoneNumberTxtFld.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .right : .left
+        stateTxtFld.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .right : .left
+        cityTxtFld.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .right : .left
+        locationTxtFld.textAlignment = Defaults.getEnglishLangauge() == "ar" ? .right : .left
         switch addressScreenType {
         case .updateAddress: setUpUIData()
         default: break
@@ -166,15 +179,16 @@ class AddAddressVC: UIViewController,SelectedLoc {
     }
     @IBAction func saveBtnAction(_ sender: UIButton) {
         if (addressTxtFld.text?.isEmpty ??  true) {
-            self.view.makeToast("Address can't be empty", duration: 3.0, position: .center)
+            self.view.makeToast(Bundle.main.localizedString(forKey: "Address can't be empty", value: "", table: "")
+, duration: 3.0, position: .center)
         } else if (phoneNumberTxtFld.text?.isEmpty ??  true) {
-            self.view.makeToast("Phone number can't be empty", duration: 3.0, position: .center)
+            self.view.makeToast(Bundle.main.localizedString(forKey: "Phone number can't be empty", value: "", table: ""), duration: 3.0, position: .center)
         } /*else if (locationTxtFld.text?.isEmpty ??  true) {
             self.view.makeToast("Location can't be empty", duration: 3.0, position: .center)
         }*/ else if (stateTxtFld.text?.isEmpty ??  true) {
-            self.view.makeToast("State can't be empty", duration: 3.0, position: .center)
+            self.view.makeToast(Bundle.main.localizedString(forKey: "State can't be empty", value: "", table: ""), duration: 3.0, position: .center)
         } else if (cityTxtFld.text?.isEmpty ??  true) {
-            self.view.makeToast("City can't be empty", duration: 3.0, position: .center)
+            self.view.makeToast(Bundle.main.localizedString(forKey: "City can't be empty", value: "", table: ""), duration: 3.0, position: .center)
         } else {
             switch addressScreenType {
             case .addAddress:
@@ -276,7 +290,7 @@ extension AddAddressVC {
                 
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
-                        self.view.makeToast("Address Updated successfully", duration: 0.5, position: .center)
+                        self.view.makeToast(Bundle.main.localizedString(forKey: "Address added successfully", value: "", table: ""), duration: 0.5, position: .center)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             self.navigationController?.popViewController(animated: true)
                         }
@@ -330,7 +344,7 @@ extension AddAddressVC {
                 
                 if let apiSuccess = jsonValue[APIField.statusKey], apiSuccess == true {
                     DispatchQueue.main.async {
-                        self.view.makeToast("Address added successfully", duration: 0.5, position: .center)
+                        self.view.makeToast(Bundle.main.localizedString(forKey: "Address added successfully", value: "", table: ""), duration: 0.5, position: .center)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             self.delegate?.addressAdded()
                             self.navigationController?.popViewController(animated: true)

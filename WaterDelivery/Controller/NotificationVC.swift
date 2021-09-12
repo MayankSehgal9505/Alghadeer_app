@@ -11,12 +11,14 @@ class NotificationVC: UIViewController {
 
     @IBOutlet weak var notificationTBView: UITableView!
     @IBOutlet weak var noData: UIView!
+    @IBOutlet weak var notificationLbl: UILabel!
     
     //MARK:- Local Variables
     var notifications = [NotificationModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        notificationLbl.text = Bundle.main.localizedString(forKey: "Notification", value: "", table: "")
         setUpTBView()
         getNotificationList()
     }
@@ -55,7 +57,7 @@ extension NotificationVC {
     func getNotificationList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
             self.showHUD(progressLabel: AlertField.loaderString)
-            let notificationListUrl : String = UrlName.baseUrl + UrlName.notifications + "\(Defaults.getUserID())/\(1)"
+            let notificationListUrl : String = UrlName.baseUrl + UrlName.notifications + "\(Defaults.getUserID())/\(1)" + "/\(Defaults.getEnglishLangauge() == "en" ? 1 : 2)"
             NetworkManager.viewControler = self
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 NetworkManager.sharedInstance.commonApiCall(url: notificationListUrl, method: .get, parameters: nil, completionHandler: { (json, status) in

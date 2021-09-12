@@ -16,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddSubscriptionVC" customModule="WaterDelivery" customModuleProvider="target">
             <connections>
+                <outlet property="addSubscriptionLbl" destination="agX-ci-rP4" id="NFG-oA-nhZ"/>
                 <outlet property="addSubscriptionTBView" destination="hfx-WK-dMF" id="65D-Zv-7e0"/>
                 <outlet property="cartCountView" destination="bcO-u6-rCt" id="Ien-Ra-jzO"/>
                 <outlet property="cartCountlbl" destination="3P2-qq-Bj3" id="DS2-qe-LpH"/>

@@ -184,3 +184,41 @@
 "Delivery Time" = "Delivery Time";
 "Pause" = "Pause";
 "Reactivate" = "Reactivate";
+
+
+"Add Subscriptions" = "Add Subscriptions";
+"Enter start date" = "Enter start date";
+"Enter end date" = "Enter end date";
+"Select Time of Delivery" = "Select Time of Delivery";
+"Select Addrees" = "Select Addrees";
+"ADD ADDRESS" = "ADD ADDRESS";
+"Qty:" = "Qty:";
+
+"Add Money" = "Add Money";
+"Select Amount" = "Select Amount";
+"Please select/ enter amount which you want to add in you wallet" = "Please select/ enter amount which you want to add in you wallet";
+
+"Please enter mobile number" = "Please enter mobile number";
+"Enter Phone Number" = "Enter Phone Number";
+
+
+"Edit Profile" = "Edit Profile";
+"Customer Id" = "Customer Id";
+"Name" = "Name";
+"Email" = "Email";
+"Phone No" = "Phone No";
+"Category" = "Category";
+"Update Profile" = "Update Profile";
+
+"Add new Address" = "Add new Address";
+"Update Address" = "Update Address";
+"Address can't be empty" = "Address can't be empty";
+"Phone number can't be empty" = "Phone number can't be empty";
+"State can't be empty" = "State can't be empty";
+"City can't be empty" = "City can't be empty";
+"Address Updated successfully" = "Address Updated successfully";
+"Contact Number" = "Contact Number";
+"City" = "City";
+"District" = "District";
+"Location" = "Location";
+"Notification" = "Notification";

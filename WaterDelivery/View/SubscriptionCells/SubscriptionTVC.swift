@@ -47,9 +47,9 @@ class SubscriptionTVC: UITableViewCell {
         pauseReactivateBtn.setCornerRadiusOfView(cornerRadiusValue:20)
         buttonsView.isHidden = tabType == .cancelled
         cancelBtn.setTitle((Bundle.main.localizedString(forKey: "Cancel", value: "", table: "")), for: [])
-        deliveryAddressLbl.text = (Bundle.main.localizedString(forKey: "عنوان التسليم -", value: "", table: ""))
-        subscriptionDatesLbl.text = (Bundle.main.localizedString(forKey: "تواريخ الاشتراك", value: "", table: ""))
-        deliveryTimeLbl.text = (Bundle.main.localizedString(forKey: "موعد التسليم", value: "", table: ""))
+        deliveryAddressLbl.text = (Bundle.main.localizedString(forKey: "Delivery Address -", value: "", table: ""))
+        subscriptionDatesLbl.text = (Bundle.main.localizedString(forKey: "Subscription Dates", value: "", table: ""))
+        deliveryTimeLbl.text = (Bundle.main.localizedString(forKey: "Delivery Time", value: "", table: ""))
     }
     
     func setupCellData(subscriptionModel:SubscriptionModel) {

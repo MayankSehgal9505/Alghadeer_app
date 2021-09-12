@@ -17,6 +17,7 @@ class SelectProductTVC: UITableViewCell {
     @IBOutlet weak var reduceQuantityBtn: UIButton!
     @IBOutlet weak var incQuantityBtn: UIButton!
     @IBOutlet weak var quanittyLbl: UILabel!
+    @IBOutlet weak var quantityText: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +30,7 @@ class SelectProductTVC: UITableViewCell {
         // Configure the view for the selected state
     }
     func setupCellUI(index: Int) {
+        quantityText.text = Bundle.main.localizedString(forKey: "Qty:", value: "", table: "")
         reduceQuantityBtn.tag = index
         incQuantityBtn.tag = index
         baseView.setCornerRadiusOfView(cornerRadiusValue: 12)

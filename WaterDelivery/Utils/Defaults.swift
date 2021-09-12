@@ -73,10 +73,7 @@ class Defaults {
         let dictionary = defaults.dictionaryRepresentation()
         print("dictionary is \(dictionary)")
         dictionary.keys.forEach { key in
-            if key == "selectedLanguageEnglish" {
-            } else {
-                defaults.removeObject(forKey: key)
-            }
+            defaults.removeObject(forKey: key)
         }
         print("updted dict \(defaults.dictionaryRepresentation())")
     }

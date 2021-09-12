@@ -36,6 +36,8 @@ class LoginVC: UIViewController {
         changeOfLanguage()
         self.loginButton.setCornerRadiusOfView(cornerRadiusValue: 25)
         self.setCornerWithColor(aView: self.phoneView, radius: 2)
+        phoneTextField.textAlignment = Defaults.getEnglishLangauge() == "en" ? .left : .right
+        phoneTextField.placeholder = Bundle.main.localizedString(forKey: "Enter Phone Number", value: nil, table: nil)
         loginTextLbl.text = Bundle.main.localizedString(forKey: "Login", value: nil, table: nil)
         enterPhnNumberLbl.text = Bundle.main.localizedString(forKey: "Enter your Phone Number", value: nil, table: nil)
         otpText.text = Bundle.main.localizedString(forKey: "We will send you on OTP to verify your number \n Existing customer can login using their registered number", value: nil, table: nil)
@@ -56,7 +58,7 @@ class LoginVC: UIViewController {
     @IBAction func submitBtnClicked(_ sender: Any) {
         self.view.endEditing(true)
          if (self.phoneTextField.text?.isEmpty)! {
-            self.view.makeToast(AlertField.emptyMobileString, duration: 3.0, position: .bottom)
+            self.view.makeToast(Bundle.main.localizedString(forKey: AlertField.emptyMobileString, value: "", table: "") , duration: 3.0, position: .bottom)
             return
         }
          else {

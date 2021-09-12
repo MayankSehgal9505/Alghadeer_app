@@ -22,6 +22,7 @@ class AddSubscriptionVC: CartBaseVC,AddAddressProtocol {
         case genericSubscription,singleProduct
     }
     //MARK:- IBOutlets
+    @IBOutlet weak var addSubscriptionLbl: UILabel!
     @IBOutlet weak var addSubscriptionTBView: UITableView!
     @IBOutlet weak var timeView: UIView!
     @IBOutlet weak var pickerView: UIDatePicker!
@@ -74,6 +75,7 @@ class AddSubscriptionVC: CartBaseVC,AddAddressProtocol {
     
     private func setupUI() {
         setUpTBView()
+        addSubscriptionLbl.text = Bundle.main.localizedString(forKey: "Add Subscriptions", value: "", table: "")
     }
     
     private func setUpTBView(){
@@ -317,6 +319,7 @@ extension AddSubscriptionVC: UITableViewDataSource, UITableViewDelegate{
                 let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionHeaderTVC.className(), for: indexPath) as! SubscriptionHeaderTVC
                 cell.addAddressBtn.setCornerRadiusOfView(cornerRadiusValue:13)
                 cell.addAddressBtn.addTarget(self, action: #selector(addAddressBtnTapped), for: .touchUpInside)
+                cell.setupCell()
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionAddressTVC.className(), for: indexPath) as! SubscriptionAddressTVC
@@ -446,7 +449,7 @@ extension AddSubscriptionVC{
 
     func getProductsList() {
         if NetworkManager.sharedInstance.isInternetAvailable(){
-            let bannerListURL : String = UrlName.baseUrl + UrlName.getProductListUrl
+            let bannerListURL : String = UrlName.baseUrl + UrlName.getProductListUrl + "/\(Defaults.getEnglishLangauge() == "en" ? 1 : 2)"
             NetworkManager.viewControler = self
             NetworkManager.sharedInstance.commonApiCall(url: bannerListURL, method: .get, parameters: nil, completionHandler: { (json, status) in
                 guard let jsonValue = json?.dictionaryValue else {

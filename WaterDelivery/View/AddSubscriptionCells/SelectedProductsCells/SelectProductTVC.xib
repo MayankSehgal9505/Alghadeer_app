@@ -130,6 +130,7 @@
                 <outlet property="productImg" destination="MCq-wR-eg2" id="UwD-ZE-s6y"/>
                 <outlet property="productName" destination="py4-fb-Qy1" id="NP8-W8-7bv"/>
                 <outlet property="quanittyLbl" destination="0JK-Yu-gV8" id="NGk-Wn-Egt"/>
+                <outlet property="quantityText" destination="ou9-Vs-Klr" id="aGS-HQ-jhO"/>
                 <outlet property="quantityView" destination="7aH-O7-AFg" id="1qj-C4-Sjz"/>
                 <outlet property="reduceQuantityBtn" destination="n6W-vd-n95" id="vOo-V3-sxT"/>
             </connections>

@@ -21,6 +21,7 @@
                 <outlet property="inclusiveVatText2" destination="Jmd-8Y-7P4" id="b1y-Ys-70Y"/>
                 <outlet property="increaseQuantityBtn" destination="2v3-Zy-ZOW" id="DRU-eX-PA1"/>
                 <outlet property="navTitle" destination="CkI-1h-Elt" id="8hg-px-poA"/>
+                <outlet property="notificationview" destination="Hu3-ts-Pxq" id="yVm-eS-Txf"/>
                 <outlet property="productDescription" destination="hu6-Zc-CD4" id="LoG-Q9-CLC"/>
                 <outlet property="productImg" destination="A7e-03-6zT" id="ylt-6C-nl0"/>
                 <outlet property="productName" destination="wNl-1g-iaG" id="sWc-pw-Yfm"/>

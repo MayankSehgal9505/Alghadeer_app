@@ -33,7 +33,7 @@ class CategoryTVC: UITableViewCell {
     func setupCell() {
         shopByCategoryLbl.text = Bundle.main.localizedString(forKey: "Shop By Category", value: nil, table: nil)
         shopByCategoryView.setCornerRadiusOfView(cornerRadiusValue:6)
-        parentView.setCornerRadiusOfView(cornerRadiusValue:15)
+        parentView.setCornerRadiusOfView(cornerRadiusValue:10)
         parentView.setShadow()
     }
 

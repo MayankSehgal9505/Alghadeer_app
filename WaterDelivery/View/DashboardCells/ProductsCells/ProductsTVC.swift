@@ -31,7 +31,7 @@ class ProductsTVC: UITableViewCell {
     
     func setupCell() {
         favouriteProductsLbl.text = Bundle.main.localizedString(forKey: "Favourite Products", value: nil, table: nil)
-        parentView.setCornerRadiusOfView(cornerRadiusValue:15)
+        parentView.setCornerRadiusOfView(cornerRadiusValue:10)
         parentView.setShadow()
     }
 

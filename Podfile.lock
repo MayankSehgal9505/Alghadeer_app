@@ -5,11 +5,9 @@ PODS:
   - GoogleMaps/Base (5.0.0)
   - GoogleMaps/Maps (5.0.0):
     - GoogleMaps/Base
-  - GooglePlaces (5.0.0)
-  - IQKeyboardManagerSwift (6.5.6)
-  - Kingfisher (5.15.7):
-    - Kingfisher/Core (= 5.15.7)
-  - Kingfisher/Core (5.15.7)
+  - GooglePlaces (6.0.0)
+  - IQKeyboardManagerSwift (6.5.9)
+  - Kingfisher (7.1.2)
   - MBProgressHUD (1.2.0)
   - REFrostedViewController (2.4.8)
   - SwiftyJSON (4.3.0)
@@ -41,9 +39,9 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   GoogleMaps: 600e5e69bdf7f4ed7cac4d6aa96c7ec08a5aa254
-  GooglePlaces: 5d87ca13ed98b7a937e0d8bc7026f718c7263271
-  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
+  GooglePlaces: c97d96ae68594acb64035c9ca9f26fbfc1d23af1
+  IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   REFrostedViewController: a893b4979ba1f200c547aef9ff4c3fd5a18f5923
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
@@ -51,4 +49,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 63472ced762cf03a441376635e9fd3692185db46
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

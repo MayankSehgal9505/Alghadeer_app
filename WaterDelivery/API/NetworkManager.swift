@@ -61,7 +61,7 @@ public class NetworkManager {
         }
 
         if let token = Defaults.getToken() {
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authapikey")
         }
         let sessionConfig = URLSessionConfiguration.default
         sessionConfig.timeoutIntervalForRequest = 45.0

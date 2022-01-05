@@ -128,7 +128,6 @@
 		4EFCF87C263BF65E00F08AA7 /* CategoryProductsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCF87A263BF65E00F08AA7 /* CategoryProductsVC.swift */; };
 		4EFCF87D263BF65E00F08AA7 /* CategoryProductsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCF87B263BF65E00F08AA7 /* CategoryProductsVC.xib */; };
 		4EFCF892263C45C500F08AA7 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCF891263C45C500F08AA7 /* Utility.swift */; };
-		6D7D4EE375835337FFC25BC7 /* Pods_WaterDelivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAEDCC622514D2CA4606735 /* Pods_WaterDelivery.framework */; };
 		990A255A262E864800C96165 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 990A2558262E864800C96165 /* Main.storyboard */; };
 		990A255C262E864A00C96165 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 990A255B262E864A00C96165 /* Assets.xcassets */; };
 		990A255F262E864A00C96165 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 990A255D262E864A00C96165 /* LaunchScreen.storyboard */; };
@@ -158,11 +157,17 @@
 		9965FB332631666D00946AB6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9965FB322631666D00946AB6 /* NetworkManager.swift */; };
 		9965FB5E2631725100946AB6 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9965FB5C2631725100946AB6 /* DetailVC.swift */; };
 		9965FB5F2631725100946AB6 /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9965FB5D2631725100946AB6 /* DetailVC.xib */; };
+		AB2DF1DA97D73CCB7F498201 /* Pods_WaterDelivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5335DCCEF50AE97C78B9CCBB /* Pods_WaterDelivery.framework */; };
+		B32CC4E3277A236500D4C3AE /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32CC4E2277A236500D4C3AE /* Kingfisher.framework */; };
+		B32CC4E5277A236F00D4C3AE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32CC4E4277A236F00D4C3AE /* Alamofire.framework */; };
+		B32CC4E7277A236F00D4C3AE /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32CC4E6277A236F00D4C3AE /* IQKeyboardManagerSwift.framework */; };
+		B32CC4E9277A237C00D4C3AE /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32CC4E8277A237C00D4C3AE /* MBProgressHUD.framework */; };
+		B32CC4EB277A238000D4C3AE /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32CC4EA277A238000D4C3AE /* SwiftyJSON.framework */; };
+		B32CC4ED277A238000D4C3AE /* Toast_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32CC4EC277A238000D4C3AE /* Toast_Swift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3AB853FAFCFFDAE95B5DA991 /* Pods-WaterDelivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterDelivery.release.xcconfig"; path = "Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery.release.xcconfig"; sourceTree = "<group>"; };
-		3EAEDCC622514D2CA4606735 /* Pods_WaterDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaterDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		313EBC8C576E4439F7158B70 /* Pods-WaterDelivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterDelivery.release.xcconfig"; path = "Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery.release.xcconfig"; sourceTree = "<group>"; };
 		4E029234263C81CD0092C741 /* OtpTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpTextfield.swift; sourceTree = "<group>"; };
 		4E05C31026C5524900B91DA0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = WaterDelivery/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E0B1C4B26C031080022CA10 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
@@ -288,7 +293,7 @@
 		4EFCF87A263BF65E00F08AA7 /* CategoryProductsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryProductsVC.swift; sourceTree = "<group>"; };
 		4EFCF87B263BF65E00F08AA7 /* CategoryProductsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryProductsVC.xib; sourceTree = "<group>"; };
 		4EFCF891263C45C500F08AA7 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
-		7318A3AE866B534213503793 /* Pods-WaterDelivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterDelivery.debug.xcconfig"; path = "Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery.debug.xcconfig"; sourceTree = "<group>"; };
+		5335DCCEF50AE97C78B9CCBB /* Pods_WaterDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaterDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		990A254F262E864800C96165 /* WaterDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterDelivery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		990A2559262E864800C96165 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		990A255B262E864A00C96165 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -320,6 +325,13 @@
 		9965FB322631666D00946AB6 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9965FB5C2631725100946AB6 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		9965FB5D2631725100946AB6 /* DetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
+		B32CC4E2277A236500D4C3AE /* Kingfisher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B32CC4E4277A236F00D4C3AE /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B32CC4E6277A236F00D4C3AE /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IQKeyboardManagerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B32CC4E8277A237C00D4C3AE /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B32CC4EA277A238000D4C3AE /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B32CC4EC277A238000D4C3AE /* Toast_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Toast_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D39F8A1F111A2FAEBB046797 /* Pods-WaterDelivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterDelivery.debug.xcconfig"; path = "Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,8 +339,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B32CC4EB277A238000D4C3AE /* SwiftyJSON.framework in Frameworks */,
+				B32CC4ED277A238000D4C3AE /* Toast_Swift.framework in Frameworks */,
+				B32CC4E9277A237C00D4C3AE /* MBProgressHUD.framework in Frameworks */,
+				B32CC4E5277A236F00D4C3AE /* Alamofire.framework in Frameworks */,
+				B32CC4E7277A236F00D4C3AE /* IQKeyboardManagerSwift.framework in Frameworks */,
+				B32CC4E3277A236500D4C3AE /* Kingfisher.framework in Frameworks */,
 				4EE7839B2667DC3C0055EF91 /* WebKit.framework in Frameworks */,
-				6D7D4EE375835337FFC25BC7 /* Pods_WaterDelivery.framework in Frameworks */,
+				AB2DF1DA97D73CCB7F498201 /* Pods_WaterDelivery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,8 +356,14 @@
 		128D6FB58DEBF4A1B4A8BE46 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B32CC4EA277A238000D4C3AE /* SwiftyJSON.framework */,
+				B32CC4EC277A238000D4C3AE /* Toast_Swift.framework */,
+				B32CC4E8277A237C00D4C3AE /* MBProgressHUD.framework */,
+				B32CC4E4277A236F00D4C3AE /* Alamofire.framework */,
+				B32CC4E6277A236F00D4C3AE /* IQKeyboardManagerSwift.framework */,
+				B32CC4E2277A236500D4C3AE /* Kingfisher.framework */,
 				4EE7839A2667DC3B0055EF91 /* WebKit.framework */,
-				3EAEDCC622514D2CA4606735 /* Pods_WaterDelivery.framework */,
+				5335DCCEF50AE97C78B9CCBB /* Pods_WaterDelivery.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -702,8 +726,8 @@
 		6FAECEE13156F477AD8D6B60 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7318A3AE866B534213503793 /* Pods-WaterDelivery.debug.xcconfig */,
-				3AB853FAFCFFDAE95B5DA991 /* Pods-WaterDelivery.release.xcconfig */,
+				D39F8A1F111A2FAEBB046797 /* Pods-WaterDelivery.debug.xcconfig */,
+				313EBC8C576E4439F7158B70 /* Pods-WaterDelivery.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -887,12 +911,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 990A2563262E864A00C96165 /* Build configuration list for PBXNativeTarget "WaterDelivery" */;
 			buildPhases = (
-				99C01EA29AFBB5F31E18A60E /* [CP] Check Pods Manifest.lock */,
+				11338C48FC50D8D3391D2E16 /* [CP] Check Pods Manifest.lock */,
 				990A254B262E864800C96165 /* Sources */,
 				990A254C262E864800C96165 /* Frameworks */,
 				990A254D262E864800C96165 /* Resources */,
-				82DC13F2D75984A3708FC494 /* [CP] Embed Pods Frameworks */,
-				FD126AE4D76C0D51FA12DF59 /* [CP] Copy Pods Resources */,
+				B6F37380980E325BD5586598 /* [CP] Embed Pods Frameworks */,
+				55417F60B62BF2EF13E5F7AC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1006,24 +1030,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		82DC13F2D75984A3708FC494 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		99C01EA29AFBB5F31E18A60E /* [CP] Check Pods Manifest.lock */ = {
+		11338C48FC50D8D3391D2E16 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1045,7 +1052,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FD126AE4D76C0D51FA12DF59 /* [CP] Copy Pods Resources */ = {
+		55417F60B62BF2EF13E5F7AC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1060,6 +1067,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B6F37380980E325BD5586598 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WaterDelivery/Pods-WaterDelivery-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1319,17 +1343,30 @@
 		};
 		990A2564262E864A00C96165 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7318A3AE866B534213503793 /* Pods-WaterDelivery.debug.xcconfig */;
+			baseConfigurationReference = D39F8A1F111A2FAEBB046797 /* Pods-WaterDelivery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XT6D3A3626;
+				DEVELOPMENT_TEAM = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Pods/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/REFrostedViewController\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Toast-Swift\"",
+					"\"${PODS_ROOT}/GoogleMaps/Base/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleMaps/Maps/Frameworks\"",
+					"\"${PODS_ROOT}/GooglePlaces/Frameworks\"",
+				);
 				INFOPLIST_FILE = WaterDelivery/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1349,16 +1386,16 @@
 		};
 		990A2565262E864A00C96165 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3AB853FAFCFFDAE95B5DA991 /* Pods-WaterDelivery.release.xcconfig */;
+			baseConfigurationReference = 313EBC8C576E4439F7158B70 /* Pods-WaterDelivery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XT6D3A3626;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WaterDelivery/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
